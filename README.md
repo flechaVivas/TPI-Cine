@@ -32,7 +32,7 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 |Requerimiento|cant. mín.<br>1 o 2 integ|cant. máx.<br>3 o 4 integ|Detalle/Listado de casos incluidos|
 |:-|-:|-:|:-|
 |ABMC|todos|todos|
-|CU "Complejo"(nivel resumen)|1|2|Buy Tickets, 
+|CU "Complejo"(nivel resumen)|1|2|Buy Tickets, Cancel|
 |Listado complejo|1|2|Movies By Genre, Today Tickets|
 |Nivel de acceso|2|2|Admin, Advanced User, Client|
 |Manejo de errores|obligatorio|obligatorio|no requiere detalle|
