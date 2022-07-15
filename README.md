@@ -50,7 +50,5 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 
 ## Modelo de Datos
 
-![DominioCine](https://user-images.githubusercontent.com/83438929/179276336-719185e8-b506-43de-9424-985153198a5b.jpg)
-
 ![DER-CINE](https://user-images.githubusercontent.com/83438929/179287976-7ab9c358-c0c5-4cdb-9bf6-51015364ebc8.png)
 
