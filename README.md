@@ -6,7 +6,7 @@
 | 47844  | Vivas Facundo |
 | 48056  | Hernandez Juan Pablo  |
 
-## 1 - Enunciado 7
+## 1 - Enunciado
 
 Desarrollar una sistema/aplicación web cliente-servidor en Java.
 
