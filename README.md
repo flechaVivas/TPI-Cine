@@ -8,12 +8,11 @@
 
 ## 1 - Idea inicial
 
-Aplicación web cliente-servidor desarrollada Java.
-
-El mismo deberá cumplir con los requerimientos técnicos, alcance funcional y requisitos de entrega propuestos a continuación
+Aplicación web cliente-servidor desarrollada Java para la gestión de entradas de un Cine.
 
 ### 2.1 - Alcance Funcional
-Desde que el usuario se loguea en la aplicación, selecciona una película y compra el ticket hasta que lo recibe por correo electrónico
+Desde que el usuario se loguea en la aplicación, selecciona una película y compra el ticket hasta que recibe el comprobante por correo electrónico.
+
 
 #### 3.2.1 Checklist
 
@@ -50,5 +49,5 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 
 ## Modelo de Datos
 
-![DER-CINE](https://user-images.githubusercontent.com/83438929/179287976-7ab9c358-c0c5-4cdb-9bf6-51015364ebc8.png)
+![DER-CINE](https://user-images.githubusercontent.com/83438929/179292814-5edbe56d-108d-4746-80af-e43b2fb5a6d7.png)
 
