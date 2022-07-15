@@ -24,7 +24,7 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 |ABMC simple|1 x integ|1 x integ|Client, Movie, Ticket, Ubication|
 |ABMC dependiente|1|2|Restriction, Genre|
 |CU NO-ABMC|1|2|Login, Logout |
-|Listado simple|1|3(*)|
+|Listado simple|1||
 |Listado complejo|0|1(*)|Movies by Title|
 
 ##### Aprobación Directa
@@ -47,3 +47,8 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 |Custom exceptions|---|
 |Log de errores|---|
 |Envio de emails|Al enviar tickets al cliente.|
+
+## Modelo de Datos
+
+![DominioCine](https://user-images.githubusercontent.com/83438929/179276336-719185e8-b506-43de-9424-985153198a5b.jpg)
+
