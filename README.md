@@ -3,12 +3,12 @@
 | ------------- | ------------- |
 | 48271  | Buschittari Nahuel  |
 | 48059  | Taborra Facundo  |
-| 47844  | Vivas Facundo |
+| 47844  | Vivas Facundo Ignacio |
 | 48056  | Hernandez Juan Pablo  |
 
-## 1 - Enunciado
+## 1 - Idea inicial
 
-Desarrollar una sistema/aplicación web cliente-servidor en Java.
+Aplicación web cliente-servidor desarrollada Java.
 
 El mismo deberá cumplir con los requerimientos técnicos, alcance funcional y requisitos de entrega propuestos a continuación
 
