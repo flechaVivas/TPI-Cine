@@ -22,7 +22,7 @@ public class Genre {
 	
 	@Override
 	public String toString() {
-		return "Genre [idGenre=" + idGenre + ", description=" + description + "]";
+		return  "Genre [idGenre=" + idGenre + ", description=" + description + "]";
 	}
 	
 }
