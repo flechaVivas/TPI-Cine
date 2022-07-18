@@ -20,4 +20,9 @@ public class Genre {
 	
 	public Genre() {}
 	
+	@Override
+	public String toString() {
+		return "Genre [idGenre=" + idGenre + ", description=" + description + "]";
+	}
+	
 }
