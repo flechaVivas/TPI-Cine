@@ -52,7 +52,7 @@ public class DataUser {
 			}
 		}
 		return u;
-	}
+	} // getByUser
 
 	public User getById(User user) {
 		User u = null;
@@ -91,7 +91,7 @@ public class DataUser {
 			}
 		}
 		return u;
-	}
+	}// getById
 	
 	public LinkedList<User> getAll(){
 
@@ -105,7 +105,7 @@ public class DataUser {
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
 			rs = stmt.executeQuery(
-					"SELECT idUser, idRole, surname, name, password, birthDate, adress, phoneNumber FROM user");
+					"SELECT * FROM user");
 			
 			if (rs != null) {
 				while (rs.next()) {
@@ -137,7 +137,7 @@ public class DataUser {
 		}
 		
 		return users;
-	}
+	} // getAll
 	
 	public void add(User u) {
 		PreparedStatement stmt = null;
@@ -146,7 +146,24 @@ public class DataUser {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"INSERT INTO user()");
+					"INSERT INTO user(idUser, idRole, surname, name, email, password, birthDate, adress, phoneNumber) VALUES(?,?,?,?,?,?,?,?,?)");
+			stmt.setInt(1, u.getIdUser());
+			stmt.setInt(2, u.getRole().getIdRole());
+			stmt.setString(3, u.getSurname());
+			stmt.setString(4, u.getName());
+			stmt.setString(5, u.getEmail());
+			stmt.setString(6, u.getPassword());
+			stmt.setString(7, u.getBirthDate());
+			stmt.setString(8, u.getAdress());
+			stmt.setString(9, u.getPhoneNumber());
+			
+			stmt.executeUpdate();
+			
+			keyResultSet = stmt.getGeneratedKeys();
+            if(keyResultSet != null && keyResultSet.next()){
+                u.setIdUser(keyResultSet.getInt(1));
+            }
+			
 			
 		} catch (SQLException e) {
             e.printStackTrace();
@@ -159,9 +176,7 @@ public class DataUser {
             	e.printStackTrace();
             }
 		}
-		
-		
-	}
+	} // add
 	
 	
 	

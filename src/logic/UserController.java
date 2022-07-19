@@ -26,6 +26,10 @@ public class UserController {
 		return du.getAll();
 	}
 	
+	public void add(User u) {
+		du.add(u);
+	}
+	
 	
 	
 	
