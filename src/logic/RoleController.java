@@ -7,7 +7,7 @@ public class RoleController {
 
 	private DataRole dr;
 
-	public RoleController(DataRole dr) {
+	public RoleController() {
 		dr = new DataRole();
 	}
 	
