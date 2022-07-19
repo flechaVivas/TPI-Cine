@@ -142,6 +142,25 @@ public class DataUser {
 	public void add(User u) {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
+		
+		try {
+			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"INSERT INTO user()");
+			
+		} catch (SQLException e) {
+            e.printStackTrace();
+		} finally {
+            try {
+                if(keyResultSet!=null)keyResultSet.close();
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+		
+		
 	}
 	
 	

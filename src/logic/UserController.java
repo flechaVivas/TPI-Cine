@@ -1,7 +1,10 @@
 package logic;
 
+import java.util.LinkedList;
+
 import data.DataUser;
 import entities.*;
+import sun.java2d.marlin.DPathConsumer2D;
 
 public class UserController {
 
@@ -17,6 +20,10 @@ public class UserController {
 	
 	public User getOne(User u) {
 		return du.getById(u);
+	}
+	
+	public LinkedList<User> getAll(){
+		return du.getAll();
 	}
 	
 	
