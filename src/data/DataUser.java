@@ -121,10 +121,8 @@ public class DataUser {
 					u.setRole(ctrRole.getOne(r));
 					
 					users.add(u);
-					
 				}
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
@@ -139,8 +137,13 @@ public class DataUser {
 		}
 		
 		return users;
-		
 	}
+	
+	public void add(User u) {
+		PreparedStatement stmt = null;
+		ResultSet keyResultSet = null;
+	}
+	
 	
 	
 	
