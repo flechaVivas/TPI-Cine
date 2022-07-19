@@ -5,15 +5,8 @@ public class Ubication {
 	private String row;
 	private int col;
 	private Boolean status;
-	private int roomNumber;
+	private MovieRoom room;
 	
-
-	public int getRoomNumber() {
-		return roomNumber;
-	}
-	public void setRoomNumber(int roomNumber) {
-		this.roomNumber = roomNumber;
-	}
 	public String getRow() {
 		return row;
 	}
@@ -33,9 +26,16 @@ public class Ubication {
 	public void setStatus(Boolean status) {
 		this.status = status;
 	}
+	public MovieRoom getRoom() {
+		return room;
+	}
+	public void setRoom(MovieRoom room) {
+		this.room = room;
+	}
+	
 	@Override
 	public String toString() {
-		return "Ubication [row=" + row + ", col=" + col + ", status=" + status + ", roomNumber=" + roomNumber + "]";
+		return "Ubication [row=" + row + ", col=" + col + ", status=" + status + ", room=" + room + "]";
 	}
 	
 	

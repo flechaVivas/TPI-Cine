@@ -1,11 +1,15 @@
 package entities;
 
 public class Ticket {
-	int idTicket;
-	String operationCode;
-	String dateFormat = "dd/MM/yyyy";
-	String timeFormat = "HH:mm:ss";
-	int totalAmmount;
+	private int idTicket;
+	private String operationCode;
+	private String dateFormat = "dd/MM/yyyy";
+	private String timeFormat = "HH:mm:ss";
+	private int totalAmmount;
+	private User user;
+	private Movie movie;
+	
+	
 	public int getIdTicket() {
 		return idTicket;
 	}
@@ -36,8 +40,27 @@ public class Ticket {
 	public void setTotalAmmount(int totalAmmount) {
 		this.totalAmmount = totalAmmount;
 	}
-	
-	public Ticket(){
-		
+	public User getUser() {
+		return user;
 	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Movie getMovie() {
+		return movie;
+	}
+	public void setMovie(Movie movie) {
+		this.movie = movie;
+	}
+	
+	@Override
+	public String toString() {
+		return "Ticket [idTicket=" + idTicket + ", operationCode=" + operationCode + ", dateFormat=" + dateFormat
+				+ ", timeFormat=" + timeFormat + ", totalAmmount=" + totalAmmount + ", user=" + user + ", movie="
+				+ movie + "]";
+	}
+	
+	
+	
+	
 }

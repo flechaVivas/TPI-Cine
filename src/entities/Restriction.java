@@ -17,5 +17,14 @@ public class Restriction {
 		this.description = description;
 	}
 	
+	@Override
+	public String toString() {
+		return "Restriction [idRestriction=" + idRestriction + ", description=" + description + "]";
+	}
+	
+	
+	
+	
+	
 	
 }

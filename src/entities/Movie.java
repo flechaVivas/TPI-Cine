@@ -8,6 +8,8 @@ public class Movie {
 	private String cast;
 	private String director;
 	private int Duration;
+	private Restriction restriction;
+	private Genre genre;
 	
 	public int getIdMovie() {
 		return idMovie;
@@ -51,6 +53,29 @@ public class Movie {
 	public void setDuration(int duration) {
 		Duration = duration;
 	}
+	public Restriction getRestriction() {
+		return restriction;
+	}
+	public void setRestriction(Restriction restriction) {
+		this.restriction = restriction;
+	}
+	public Genre getGenre() {
+		return genre;
+	}
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+	
+	@Override
+	public String toString() {
+		return "Movie [idMovie=" + idMovie + ", title=" + title + ", image=" + image + ", releaseDate=" + releaseDate
+				+ ", cast=" + cast + ", director=" + director + ", Duration=" + Duration + ", restriction="
+				+ restriction + ", genre=" + genre + "]";
+	}
+	
+	
+	
+	
 	
 	
 	

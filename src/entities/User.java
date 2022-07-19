@@ -10,6 +10,7 @@ public class User {
 	private String birthDate = "dd/MM/yyyy";
 	private String adress;
 	private int phoneNumber;
+	private Role role;
 	
 	public int getIdUser(){
 		return idUser;
@@ -59,8 +60,21 @@ public class User {
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	public User() {
-		
+	public Role getRole() {
+		return role;
 	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
+	@Override
+	public String toString() {
+		return "User [idUser=" + idUser + ", surname=" + surname + ", name=" + name + ", email=" + email + ", password="
+				+ password + ", birthDate=" + birthDate + ", adress=" + adress + ", phoneNumber=" + phoneNumber
+				+ ", role=" + role + "]";
+	}
+	
+	
+	
+	
 }

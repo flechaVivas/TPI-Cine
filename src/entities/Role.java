@@ -1,6 +1,6 @@
 package entities;
 
-public class Roles {
+public class Role {
 
 	private int idRole;
 	private String description;
