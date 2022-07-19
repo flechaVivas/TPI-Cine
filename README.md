@@ -6,7 +6,7 @@
 | 47844  | Vivas Facundo Ignacio |
 | 48056  | Hernandez Juan Pablo  |
 
-## 1 - Idea inicialaa
+## 1 - Idea inicial
 
 Aplicación web cliente-servidor desarrollada Java para la gestión de entradas de un Cine.
 
