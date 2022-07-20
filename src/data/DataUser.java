@@ -92,7 +92,8 @@ public class DataUser {
 			}
 		}
 		return u;
-	}// getById
+		
+	} // getById
 	
 	public LinkedList<User> getAll(){
 
@@ -138,6 +139,7 @@ public class DataUser {
 		}
 		
 		return users;
+		
 	} // getAll
 	
 	public void add(User u) {
@@ -177,6 +179,7 @@ public class DataUser {
             	e.printStackTrace();
             }
 		}
+		
 	} // add
 	
 	public void update(User u) {
@@ -212,7 +215,7 @@ public class DataUser {
 			}
 		}
 		
-	}
+	} // update
 	
 	public void delete(User u) {
 		
@@ -220,12 +223,12 @@ public class DataUser {
 		ResultSet rs = null;
 		
 		try {
-			
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"");
+					"DELETE FROM user WHERE idUser=?");
+			stmt.setInt(1, u.getIdUser());
 			
-			
-			
+			stmt.executeUpdate();
+
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -238,8 +241,7 @@ public class DataUser {
 			}
 		}
 		
-		
-	}
+	} // delete
 	
 	
 	
