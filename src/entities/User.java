@@ -1,5 +1,7 @@
 package entities;
 
+import java.time.LocalDate;
+
 public class User {
 	
 	private int idUser;
@@ -7,12 +9,13 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
-	private String birthDate = "dd/MM/yyyy";
+	private LocalDate birthDate;
 	private String adress;
 	private String phoneNumber;
 	private Role role;
 	
-	public int getIdUser(){
+	
+	public int getIdUser() {
 		return idUser;
 	}
 	public void setIdUser(int idUser) {
@@ -42,10 +45,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getBirthDate() {
+	public LocalDate getBirthDate() {
 		return birthDate;
 	}
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
 	}
 	public String getAdress() {
@@ -66,7 +69,7 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "User [idUser=" + idUser + ", surname=" + surname + ", name=" + name + ", email=" + email + ", password="

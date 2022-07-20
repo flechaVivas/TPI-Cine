@@ -178,7 +178,40 @@ public class DataUser {
 		}
 	} // add
 	
-	
+	public void update(User u) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"UPDATE user set idRole=?, surname=?, name=?, email=?, password=?, birthDate=?, adress=?, phoneNumber=? where idUser=?");
+			stmt.setInt(1, u.getRole().getIdRole());
+			stmt.setString(2, u.getSurname());
+			stmt.setString(3, u.getName());
+			stmt.setString(4, u.getEmail());
+			stmt.setString(5, u.getPassword());
+			stmt.setString(6, u.getBirthDate());
+			stmt.setString(7, u.getAdress());
+			stmt.setString(8, u.getPhoneNumber());
+			stmt.setInt(9, u.getIdUser());
+			
+			stmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 	
 	
 	
