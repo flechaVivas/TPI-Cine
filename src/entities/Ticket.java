@@ -11,6 +11,7 @@ public class Ticket {
 	private int totalAmmount;
 	private User user;
 	private Movie movie;
+	private MovieRoom room;
 	
 	
 	public int getIdTicket() {
@@ -55,11 +56,17 @@ public class Ticket {
 	public void setMovie(Movie movie) {
 		this.movie = movie;
 	}
-
+	public MovieRoom getRoom() {
+		return room;
+	}
+	public void setRoom(MovieRoom room) {
+		this.room = room;
+	}
+	
 	@Override
 	public String toString() {
 		return "Ticket [idTicket=" + idTicket + ", operationCode=" + operationCode + ", date=" + date + ", time=" + time
-				+ ", totalAmmount=" + totalAmmount + ", user=" + user + ", movie=" + movie + "]\n";
+				+ ", totalAmmount=" + totalAmmount + ", user=" + user + ", movie=" + movie + ", room=" + room + "]";
 	}
 	
 	

@@ -11,8 +11,8 @@ public class TicketController {
 		dt = new DataTicket();
 	}
 	
-	public Ticket getOne() {
-		return dt.getOne();
+	public Ticket getOne(Ticket t) {
+		return dt.getOne(t);
 	}
 	
 	

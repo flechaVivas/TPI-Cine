@@ -6,7 +6,7 @@ import entities.Movie;
 public class MovieController {
 	private DataMovie dm;
 	
-	public MovieController(DataMovie dm) {dm= new DataMovie();}
+	public MovieController() {dm= new DataMovie();}
 	
 	public LinkedList<Movie> getAll() {return dm.list();}
 	
