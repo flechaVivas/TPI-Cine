@@ -1,12 +1,12 @@
 package entities;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Movie {
 	private int idMovie;
 	private String title;
 	private String image;
-	private String releaseDate;
+	private LocalDate releaseDate;
 	private String cast;
 	private String director;
 	private int Duration;

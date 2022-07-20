@@ -21,7 +21,7 @@ public class DataRole {
 			rs=stmt.executeQuery();
 			
 			if(rs!=null && rs.next()) {
-				r=new Role();
+				r = new Role();
 				r.setIdRole(rs.getInt("idRole"));
 				r.setDescription(rs.getString("description"));
 			}

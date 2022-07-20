@@ -1,10 +1,13 @@
 package entities;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Ticket {
 	private int idTicket;
 	private String operationCode;
-	private String dateFormat = "dd/MM/yyyy";
-	private String timeFormat = "HH:mm:ss";
+	private LocalDate date;
+	private LocalTime time;
 	private int totalAmmount;
 	private User user;
 	private Movie movie;
@@ -22,17 +25,17 @@ public class Ticket {
 	public void setOperationCode(String operationCode) {
 		this.operationCode = operationCode;
 	}
-	public String getDateFormat() {
-		return dateFormat;
+	public LocalDate getDate() {
+		return date;
 	}
-	public void setDateFormat(String dateFormat) {
-		this.dateFormat = dateFormat;
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
-	public String getTimeFormat() {
-		return timeFormat;
+	public LocalTime getTime() {
+		return time;
 	}
-	public void setTimeFormat(String timeFormat) {
-		this.timeFormat = timeFormat;
+	public void setTime(LocalTime time) {
+		this.time = time;
 	}
 	public int getTotalAmmount() {
 		return totalAmmount;
@@ -52,12 +55,11 @@ public class Ticket {
 	public void setMovie(Movie movie) {
 		this.movie = movie;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Ticket [idTicket=" + idTicket + ", operationCode=" + operationCode + ", dateFormat=" + dateFormat
-				+ ", timeFormat=" + timeFormat + ", totalAmmount=" + totalAmmount + ", user=" + user + ", movie="
-				+ movie + "]";
+		return "Ticket [idTicket=" + idTicket + ", operationCode=" + operationCode + ", date=" + date + ", time=" + time
+				+ ", totalAmmount=" + totalAmmount + ", user=" + user + ", movie=" + movie + "]\n";
 	}
 	
 	
