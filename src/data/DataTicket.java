@@ -3,8 +3,10 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.LinkedList;
 
 import entities.Movie;
 import entities.MovieRoom;
@@ -78,6 +80,18 @@ public class DataTicket {
 		return t;
 	
 	} // getOne
+	
+	public LinkedList<Ticket> getAll(){
+		
+		Statement stmt = null;
+		
+		LinkedList<Ticket> tickets = new LinkedList<Ticket>();
+		
+		
+		return tickets;
+	}
+	
+	
 	
 	
 	

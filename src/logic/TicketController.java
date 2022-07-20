@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.LinkedList;
+
 import data.DataTicket;
 import entities.Ticket;
 
@@ -15,6 +17,9 @@ public class TicketController {
 		return dt.getOne(t);
 	}
 	
+	public LinkedList<Ticket> getAll(){
+		return dt.getAll();
+	}
 	
 	
 }
