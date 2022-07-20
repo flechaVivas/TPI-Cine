@@ -106,8 +106,7 @@ public class DataUser {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery(
-					"SELECT * FROM user");
+			rs = stmt.executeQuery("SELECT * FROM user");
 			
 			if (rs != null) {
 				while (rs.next()) {
@@ -149,7 +148,9 @@ public class DataUser {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"INSERT INTO user(idUser, idRole, surname, name, email, password, birthDate, adress, phoneNumber) VALUES(?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO user(idUser, idRole, surname, name, email, password, birthDate, adress, phoneNumber) VALUES(?,?,?,?,?,?,?,?,?)",
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			
 			stmt.setInt(1, u.getIdUser());
 			stmt.setInt(2, u.getRole().getIdRole());
 			stmt.setString(3, u.getSurname());
