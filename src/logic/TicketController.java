@@ -21,5 +21,9 @@ public class TicketController {
 		return dt.getAll();
 	}
 	
+	public void add(Ticket t) {
+		dt.add(t);
+	}
+	
 	
 }

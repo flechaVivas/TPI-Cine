@@ -84,12 +84,102 @@ public class DataTicket {
 	public LinkedList<Ticket> getAll(){
 		
 		Statement stmt = null;
-		
+		ResultSet rs = null;
 		LinkedList<Ticket> tickets = new LinkedList<Ticket>();
+		MovieController ctrlMovie = new MovieController(); 
+		UserController ctrlUser = new UserController();
+		MovieRoomController ctrlRoom = new MovieRoomController();
 		
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().createStatement();
+			rs = stmt.executeQuery("SELECT * FROM ticket");
+			
+			if (rs != null) {
+				while (rs.next()) {
+					Ticket t = new Ticket();
+					User u = new User();
+					Movie m = new Movie();
+					MovieRoom r = new MovieRoom();
+					
+					t.setIdTicket(rs.getInt("idTicket"));
+					
+					u.setIdUser(rs.getInt("idUser"));
+					t.setUser(ctrlUser.getOne(u));
+					
+					m.setIdMovie(rs.getInt("idMovie"));
+					t.setMovie(ctrlMovie.getOne(m));
+					
+					r.setRoomNumber(rs.getInt("roomNumber"));
+					t.setRoom(ctrlRoom.getOne(r));
+					
+					t.setOperationCode(rs.getString("operationCode"));
+					t.setDate(rs.getObject("date",LocalDate.class));
+					t.setTime(rs.getObject("time",LocalTime.class));
+					
+					t.setTotalAmmount(rs.getBigDecimal("totalAmmount"));
+					
+					tickets.add(t);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		return tickets;
-	}
+	
+	} // getAll
+	
+	public void add(Ticket t) {
+		
+		PreparedStatement stmt = null;
+		ResultSet keyResultSet = null;
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"INSERT INTO ticket(idUser, idMovie, roomNumber, operationCode, date, time, totalAmmount) VALUES(?,?,?,?,?,?,?)",
+					PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, t.getUser().getIdUser());
+			stmt.setInt(2, t.getMovie().getIdMovie());
+			stmt.setInt(3, t.getRoom().getRoomNumber());
+			stmt.setString(4, t.getOperationCode());
+			stmt.setObject(5, t.getDate());
+			stmt.setObject(6, t.getTime());
+			stmt.setObject(7, t.getTotalAmmount());
+			
+			stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+            e.printStackTrace();
+		} finally {
+            try {
+                if(keyResultSet!=null)keyResultSet.close();
+                if(stmt!=null)stmt.close();
+                DbConnector.getInstancia().releaseConn();
+            } catch (SQLException e) {
+            	e.printStackTrace();
+            }
+		}
+		
+	}  // add
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
