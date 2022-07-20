@@ -29,5 +29,9 @@ public class TicketController {
 		dt.update(t);
 	}
 	
+	public void delete(Ticket t) {
+		dt.delete(t);
+	}
+	
 	
 }
