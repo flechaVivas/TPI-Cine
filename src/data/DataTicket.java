@@ -2,6 +2,7 @@ package data;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -61,20 +62,22 @@ public class DataTicket {
 				
 				t.setTotalAmmount(rs.getBigDecimal("totalAmmount"));
 				
-				
-				
-				
-				
-				
 			}
 			
-		} catch (Exception e) {
-			// TODO: handle exception
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		
-		
 		return t;
-	}
+	
+	} // getOne
 	
 	
 	

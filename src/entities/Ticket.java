@@ -1,5 +1,6 @@
 package entities;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -8,7 +9,7 @@ public class Ticket {
 	private String operationCode;
 	private LocalDate date;
 	private LocalTime time;
-	private int totalAmmount;
+	private BigDecimal totalAmmount;
 	private User user;
 	private Movie movie;
 	private MovieRoom room;
@@ -38,10 +39,10 @@ public class Ticket {
 	public void setTime(LocalTime time) {
 		this.time = time;
 	}
-	public int getTotalAmmount() {
+	public BigDecimal getTotalAmmount() {
 		return totalAmmount;
 	}
-	public void setTotalAmmount(int totalAmmount) {
+	public void setTotalAmmount(BigDecimal totalAmmount) {
 		this.totalAmmount = totalAmmount;
 	}
 	public User getUser() {
