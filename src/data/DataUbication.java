@@ -100,15 +100,13 @@ public class DataUbication {
 	
 	public Ubication createUbication(Ubication u) {
 		PreparedStatement stmt = null;
-		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(roomNumber, row, col, status)");
+		try{
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(roomNumber, row, col, status) values(?,?,?,?)");
 			stmt.setInt(1, u.getRoomNumber());
 			stmt.setString(2, u.getRow());
 			stmt.setInt(3, u.getCol());
-			stmt.setBoolean(4, u.getStatus());
-			//Preguntar como se crearia esto
-						
-		}catch (SQLException e) {
+			stmt.setBoolean(4, u.getStatus());			
+		}catch (SQLException e){
 			e.printStackTrace();
 		}finally {
 			try {
@@ -120,7 +118,4 @@ public class DataUbication {
 		}
 		return u;
 	}
-	
-	
-	
 }
