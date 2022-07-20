@@ -22,7 +22,7 @@ public class DataUser {
 		
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"SELECT idUser, idRol, surname, name, birthDate, email, adress, phoneNumber FROM user WHERE email=? and password=?"
+					"SELECT idUser, idRole, surname, name, birthDate, email, adress, phoneNumber FROM user WHERE email=? and password=?"
 					);
 			stmt.setString(1, user.getEmail());
 			stmt.setString(2, user.getPassword());
