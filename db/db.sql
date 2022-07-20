@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `cine_tpjava` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `cine_tpjava`;
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: cine_tpjava
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.29-0ubuntu0.22.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -72,7 +72,7 @@ CREATE TABLE `movie` (
 
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` VALUES (1,'Relatos Salvajes',NULL,'2014-08-21','Ricardo DarÃ­n, Oscar MartÃ­nez, Leonardo Sbaraglia, Ã‰rica Rivas, Rita Cortese, Julieta Zylberberg, DarÃ­o Grandinetti','DamiÃ¡n Szifron',122,4,1),(2,'The pianist',NULL,'2003-03-06','Adrien Brody, Thomas Kretschmann, Frank Finlay, Maureen Lipman, Emilia Fox, Ed Stoppard, Julia Rayner, Jessica Kate Meyer','RomÃ¡n Polanski',151,4,1),(3,'Inglourious Basterds',NULL,'2009-08-31','Brad Pitt, Christoph Waltz, MÃ©lanie Laurent, Eli Roth, Diane Kruger, Daniel BrÃ¼hl, Til Schweiger, Michael Fassbender','Quentin Tarantino',153,3,2),(4,'Thor: Love and thunder',NULL,'2022-07-07','Chris Hemsworth, Christian Bale, Tessa Thompson, Jaimie Alexander, Taika Waititi, Russell Crowe,Natalie Portman','Taika Waititi',119,1,3),(5,'The godfather',NULL,'1972-08-10','Marlon Brando, Al Pacino, Robert Duvall, James Caan, Richard Castellano, Diane Keaton','Francis Ford Coppola',177,5,1),(6,'Deadpool',NULL,'2016-02-11','Ryan Reynolds, Morena Baccarin, Ed Skrein, T. J. Miller, Gina Carano, Leslie Uggams, Brianna Hildebrand, Stefan KapiÄiÄ‡','Tim Miller',109,4,2),(7,'The Hangover',NULL,'2009-06-05','Bradley Cooper, Ed Helms, Zach Galifianakis, Heather Graham, Mike Epps, Justin Bartha, Jeffrey Tambor','Todd Philips',100,4,3),(8,'Shrek 2',NULL,'2004-06-17','Mike Myers, Cameron Diaz, Eddie Murphy, Antonio Banderas, Julie Andrews, John Cleese, Rupert Everett, Jennifer Saunders, Larry King','Andrew Adamson',93,1,4),(9,'Transformers: Revenge of the Fallen',NULL,'2009-06-25','Shia LaBeouf, Megan Fox, Josh Duhamel, Tyrese Gibson, John Turturro','Michael Bay',150,3,2),(10,'8 mile',NULL,'2002-01-23','Eminem, Kim Basinger, Brittany Murphy, Mekhi Phifer, Evan Jones, Omar Benson Miller, Eugene Byrd, De\'Angelo Wilson, Anthony Mackie, Michael Shannon','Curtis Hanson',106,5,1);
+INSERT INTO `movie` VALUES (1,'Relatos Salvajes',NULL,'2014-08-21','Ricardo DarÃ­n, Oscar MartÃ­nez, Leonardo Sbaraglia, Ã‰rica Rivas, Rita Cortese, Julieta Zylberberg, DarÃ­o Grandinetti','DamiÃ¡n Szifron',122,4,1),(2,'The pianist',NULL,'2003-03-06','Adrien Brody, Thomas Kretschmann, Frank Finlay, Maureen Lipman, Emilia Fox, Ed Stoppard, Julia Rayner, Jessica Kate Meyer','RomÃ¡n Polanski',151,4,1),(3,'Inglourious Basterds',NULL,'2009-08-31','Brad Pitt, Christoph Waltz, MÃ©lanie Laurent, Eli Roth, Diane Kruger, Daniel BrÃ¼hl, Til Schweiger, Michael Fassbender','Quentin Tarantino',153,3,2),(4,'Thor: Love and thunder',NULL,'2022-07-07','Chris Hemsworth, Christian Bale, Tessa Thompson, Jaimie Alexander, Taika Waititi, Russell Crowe,Natalie Portman','Taika Waititi',119,1,3),(5,'The godfather',NULL,'1972-08-10','Marlon Brando, Al Pacino, Robert Duvall, James Caan, Richard Castellano, Diane Keaton','Francis Ford Coppola',177,5,1),(6,'Deadpool',NULL,'2016-02-11','Ryan Reynolds, Morena Baccarin, Ed Skrein, T. J. Miller, Gina Carano, Leslie Uggams, Brianna Hildebrand, Stefan KapiÄ�iÄ‡','Tim Miller',109,4,2),(7,'The Hangover',NULL,'2009-06-05','Bradley Cooper, Ed Helms, Zach Galifianakis, Heather Graham, Mike Epps, Justin Bartha, Jeffrey Tambor','Todd Philips',100,4,3),(8,'Shrek 2',NULL,'2004-06-17','Mike Myers, Cameron Diaz, Eddie Murphy, Antonio Banderas, Julie Andrews, John Cleese, Rupert Everett, Jennifer Saunders, Larry King','Andrew Adamson',93,1,4),(9,'Transformers: Revenge of the Fallen',NULL,'2009-06-25','Shia LaBeouf, Megan Fox, Josh Duhamel, Tyrese Gibson, John Turturro','Michael Bay',150,3,2),(10,'8 mile',NULL,'2002-01-23','Eminem, Kim Basinger, Brittany Murphy, Mekhi Phifer, Evan Jones, Omar Benson Miller, Eugene Byrd, De\'Angelo Wilson, Anthony Mackie, Michael Shannon','Curtis Hanson',106,5,1);
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,14 +157,20 @@ DROP TABLE IF EXISTS `ticket`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ticket` (
   `idTicket` int NOT NULL AUTO_INCREMENT,
+  `idUser` int DEFAULT NULL,
   `idMovie` int NOT NULL,
+  `roomNumber` int NOT NULL,
   `operationCode` varchar(45) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
-  `totalAmmount` decimal(10,0) NOT NULL,
+  `totalAmmount` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`idTicket`),
   KEY `fk_Ticket_Movie_idx` (`idMovie`),
-  CONSTRAINT `fk_Ticket_Movie` FOREIGN KEY (`idMovie`) REFERENCES `movie` (`idMovie`) ON DELETE RESTRICT ON UPDATE CASCADE
+  KEY `fk_ticket_Room_idx` (`roomNumber`),
+  KEY `fk_Ticket_User_idx` (`idUser`),
+  CONSTRAINT `fk_Ticket_Movie` FOREIGN KEY (`idMovie`) REFERENCES `movie` (`idMovie`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_ticket_room` FOREIGN KEY (`roomNumber`) REFERENCES `movieroom` (`roomNumber`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_ticket_user` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -174,7 +180,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,7,'123456','2022-07-18','00:22:30',875),(2,6,'123457','2022-07-17','00:21:33',650),(3,5,'123458','2022-07-18','00:08:17',900),(4,4,'123459','2022-07-16','00:09:47',455),(5,3,'123460','2022-07-18','00:20:40',800),(6,9,'123461','2022-07-16','00:16:53',600),(7,8,'123462','2022-07-18','00:18:55',560),(8,8,'123463','2022-07-17','00:19:32',550);
+INSERT INTO `ticket` VALUES (1,48271,7,1,'123456','2022-07-18','00:22:30',NULL),(2,48272,6,1,'123457','2022-07-17','00:21:33',NULL),(3,48273,5,2,'123458','2022-07-18','00:08:17',NULL),(4,48274,4,2,'123459','2022-07-16','00:09:47',NULL),(5,48274,3,3,'123460','2022-07-18','00:20:40',NULL),(6,48273,9,4,'123461','2022-07-16','00:16:53',NULL),(7,48272,8,5,'123462','2022-07-18','00:18:55',NULL),(8,48271,8,5,'123463','2022-07-17','00:19:32',NULL);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,7 +226,7 @@ CREATE TABLE `user` (
   `password` varchar(45) NOT NULL,
   `birthDate` date NOT NULL,
   `adress` varchar(45) NOT NULL,
-  `phoneNumber` int NOT NULL,
+  `phoneNumber` varchar(45) NOT NULL,
   `mail` varchar(45) NOT NULL,
   PRIMARY KEY (`idUser`),
   KEY `fk_User_Rol_idx` (`idRole`),
@@ -234,7 +240,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (48271,3,'Buschittari','Nahuel','Nahu123','2000-10-03','Balcarce 1201, ChabÃ¡s, Santa FÃ©',690571,'nahu_buschittari@hotmail.com'),(48272,1,'Messi','Lionel AndrÃ©s','7balones','1987-06-24','Mitre 1235, Rosario, Santa FÃ©',123456,'liomessi123@hotmail.com'),(48273,2,'Perez','Juan Cruz','taq456','2004-10-10','Batlle y OrdoÃ±es 300, Rosario, Santa FÃ©',534786,'perezJC10@gmail.com'),(48274,1,'Biglia','Lucas Rodrigo','pesimo5','1986-01-30','Mendoza 3657, Rosario, Santa FÃ©',987654,'Biglia5@outlook.com'),(48275,1,'Almendra','Agustin','5deBoca','2000-02-11','Bv SeguÃ­ 5327, Rosario, Santa FÃ©',453761,'Pipahdp@gmail.com'),(48276,1,'Sosa','Santiago','5deAtlanta','1999-05-03','Av Presidente PerÃ³n 2758, Rosario, Santa FÃ©',198274,'SSusa@gmail.com'),(48277,1,'Rossi','Agustin','penales123','1995-08-25','Rosas 755, Rosario, Santa FÃ©',321012,'tukiLentes@outlook.com');
+INSERT INTO `user` VALUES (48271,3,'Buschittari','Nahuel','Nahu123','2000-10-03','Balcarce 1201, ChabÃ¡s, Santa FÃ©','690571','nahu_buschittari@hotmail.com'),(48272,1,'Messi','Lionel AndrÃ©s','7balones','1987-06-24','Mitre 1235, Rosario, Santa FÃ©','123456','liomessi123@hotmail.com'),(48273,2,'Perez','Juan Cruz','taq456','2004-10-10','Batlle y OrdoÃ±es 300, Rosario, Santa FÃ©','534786','perezJC10@gmail.com'),(48274,1,'Biglia','Lucas Rodrigo','pesimo5','1986-01-30','Mendoza 3657, Rosario, Santa FÃ©','987654','Biglia5@outlook.com'),(48275,1,'Almendra','Agustin','5deBoca','2000-02-11','Bv SeguÃ­ 5327, Rosario, Santa FÃ©','453761','Pipahdp@gmail.com'),(48276,1,'Sosa','Santiago','5deAtlanta','1999-05-03','Av Presidente PerÃ³n 2758, Rosario, Santa FÃ©','198274','SSusa@gmail.com'),(48277,1,'Rossi','Agustin','penales123','1995-08-25','Rosas 755, Rosario, Santa FÃ©','321012','tukiLentes@outlook.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -247,4 +253,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-19 18:09:14
+-- Dump completed on 2022-07-20 12:54:32
