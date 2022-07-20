@@ -159,6 +159,11 @@ public class DataTicket {
 			
 			stmt.executeUpdate();
 			
+			keyResultSet = stmt.getGeneratedKeys();
+            if(keyResultSet != null && keyResultSet.next()){
+                t.setIdTicket(keyResultSet.getInt(1));
+            }
+			
 		} catch (SQLException e) {
             e.printStackTrace();
 		} finally {
@@ -172,6 +177,41 @@ public class DataTicket {
 		}
 		
 	}  // add
+	
+	public void update(Ticket t) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"UPDATE ticket SET idUser=?, idMovie=?, roomNumber=?, operationCode=?, date=?, time=?, totalAmmount=? WHERE idTicket=?");
+			stmt.setInt(1, t.getUser().getIdUser());
+			stmt.setInt(2, t.getMovie().getIdMovie());
+			stmt.setInt(3, t.getRoom().getRoomNumber());
+			stmt.setString(4, t.getOperationCode());
+			stmt.setObject(5, t.getDate());
+			stmt.setObject(6, t.getTime());
+			stmt.setObject(7, t.getTotalAmmount());
+			stmt.setInt(8, t.getIdTicket());
+			
+			stmt.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	} // update
+	
 	
 	
 	

@@ -25,5 +25,9 @@ public class TicketController {
 		dt.add(t);
 	}
 	
+	public void update(Ticket t) {
+		dt.update(t);
+	}
+	
 	
 }
