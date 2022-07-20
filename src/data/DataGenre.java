@@ -19,13 +19,13 @@ public class DataGenre {
 			
 			stmt=DbConnector.getInstancia().getConn().createStatement();
 			rs=stmt.executeQuery("select * from genre");
-		while(rs.next()) {
-			Genre g=new Genre();
-			g.setDescription(rs.getString("description"));
-			gnrs.add(g);
-		}
-		if(rs!=null) {rs.close();}
-		if(stmt!=null) {stmt.close();}
+			while(rs.next()) {
+				Genre g=new Genre();
+				g.setDescription(rs.getString("description"));
+				gnrs.add(g);
+			}
+			if(rs!=null) {rs.close();}
+			if(stmt!=null) {stmt.close();}
 		}catch(SQLException ex) {
 			System.out.println("SQLException: "+ ex.getMessage());
 			System.out.println("SQLState: "+ ex.getSQLState());
