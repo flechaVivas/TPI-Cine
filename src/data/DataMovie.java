@@ -6,7 +6,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.LinkedList;
+
+import entities.Genre;
+import entities.Restriction;
 import entities.Movie;
+
+
+import logic.GenreController;
+import logic.RestrictionController;
 
 public class DataMovie {
 
@@ -15,7 +22,11 @@ public class DataMovie {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Movie mo = null;
+		Genre ge=null;
+		Restriction re=null;
 		
+		GenreController ctrlGenre=null;
+		RestrictionController ctrlRest=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE idMovie=?");
 			stmt.setInt(1, m.getIdMovie());
@@ -24,8 +35,26 @@ public class DataMovie {
 			
 			if(rs!=null && rs.next()) {
 				mo=new Movie();
+				ge=new Genre();
+				re=new Restriction();
+				
+				ctrlGenre= new GenreController();
+				ctrlRest= new RestrictionController();
+				
 				mo.setIdMovie(rs.getInt("idMovie"));
+				
 				mo.setTitle(rs.getString("title"));
+				mo.setImage(rs.getString("image"));
+				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				mo.setCast(rs.getString("cast"));
+				mo.setDirector(rs.getString("director"));
+				mo.setDuration(rs.getInt("duration"));
+				
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				mo.setRestriction(ctrlRest.getOne(re));
+				
+				ge.setIdGenre(rs.getInt("idGenre"));
+				mo.setGenre(ctrlGenre.getOne(ge));
 			}
 			
 		} catch (SQLException e) {
@@ -104,7 +133,7 @@ public class DataMovie {
 	public void delete(Movie m) {
 		PreparedStatement stmt=null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE * FROM movie WHERE idMovie=? ");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM movie WHERE idMovie=? ");
 			stmt.setInt(1, m.getIdMovie());
 			stmt.executeUpdate();
 			if(stmt!=null) {stmt.close();}

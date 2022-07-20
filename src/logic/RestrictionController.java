@@ -8,7 +8,7 @@ import entities.Restriction;
 public class RestrictionController {
 private DataRestriction dr;
 	
-	public RestrictionController(DataRestriction dr) {dr= new DataRestriction();}
+	public RestrictionController() {dr= new DataRestriction();}
 	
 	public LinkedList<Restriction> getAll() {return dr.list();}
 	

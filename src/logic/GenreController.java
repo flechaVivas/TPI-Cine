@@ -8,7 +8,7 @@ import entities.Genre;
 public class GenreController {
 private DataGenre dg;
 	
-	public GenreController(DataGenre dg) {dg= new DataGenre();}
+	public GenreController() {dg= new DataGenre();}
 	
 	public LinkedList<Genre> getAll() {return dg.list();}
 	
