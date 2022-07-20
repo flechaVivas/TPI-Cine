@@ -76,30 +76,49 @@ public class DataMovie {
 		Statement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Movie> movs=new LinkedList<Movie>();
+		Genre ge=null;
+		Restriction re=null;
+		GenreController ctrlGenre=null;
+		RestrictionController ctrlRest=null;	
 		try {
-			
+					
 			stmt=DbConnector.getInstancia().getConn().createStatement();
-			rs=stmt.executeQuery("select * from Movie");
-		while(rs.next()) {
-			Movie m=new Movie();
-			m.setIdMovie(rs.getInt("idMovie"));
-			m.setTitle(rs.getString("title"));
-			m.setImage(rs.getString("image"));
-			m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
-			m.setCast(rs.getString("cast"));
-			m.setDirector(rs.getString("director"));
-			m.setDuration(rs.getInt("duration"));
-			//m.setRestriction(Invocar al controlador de restriccion y getOne);
-			//m.setGenre(Invocar al controlador de genero y getOne);
-			movs.add(m);
-		}
-		if(rs!=null) {rs.close();}
-		if(stmt!=null) {stmt.close();}
-		}catch(SQLException ex) {
-			System.out.println("SQLException: "+ ex.getMessage());
-			System.out.println("SQLState: "+ ex.getSQLState());
-			System.out.println("VendorError"+ ex.getErrorCode());
-		
+			rs=stmt.executeQuery("SELECT * FROM Movie");
+			
+			while(rs.next()) {
+				Movie m=new Movie();
+				ge=new Genre();
+				re=new Restriction();
+			
+				ctrlGenre= new GenreController();
+				ctrlRest= new RestrictionController();
+			
+				m.setIdMovie(rs.getInt("idMovie"));
+				m.setTitle(rs.getString("title"));
+				m.setImage(rs.getString("image"));
+				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				m.setCast(rs.getString("cast"));
+				m.setDirector(rs.getString("director"));
+				m.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				m.setRestriction(ctrlRest.getOne(re));
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				m.setGenre(ctrlGenre.getOne(ge));
+			
+				movs.add(m);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 			return movs;
 		}
@@ -108,14 +127,17 @@ public class DataMovie {
 	PreparedStatement stmt= null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
-					prepareStatement(
-							"update movie set title=?,image=?,releaseDate=? ,cast=? ,director=? ,duration=?  where id=?");
+			prepareStatement("update movie set title=?, image=?, releaseDate=?, cast=?, director=?, "
+			+ "duration=?, idRestriction=?, idGenre=?   where idMovie=?");
 			stmt.setString(1,m.getTitle());
 			stmt.setString(2,m.getImage());
 			stmt.setObject(3,m.getReleaseDate());
 			stmt.setString(4,m.getCast());
 			stmt.setString(5,m.getDirector());
 			stmt.setInt(6, m.getDuration());
+			stmt.setInt(7, m.getRestriction().getIdRestriction());
+			stmt.setInt(8, m.getGenre().getIdGenre());
+			stmt.setInt(10, m.getIdMovie());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
             e.printStackTrace();
@@ -136,15 +158,24 @@ public class DataMovie {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM movie WHERE idMovie=? ");
 			stmt.setInt(1, m.getIdMovie());
 			stmt.executeUpdate();
-			if(stmt!=null) {stmt.close();}
-		} catch (Exception e) {e.printStackTrace();}
+			} catch (SQLException e) {
+			e.printStackTrace();
+			} finally {
+				try {
+					if(stmt!=null) {stmt.close();}
+					DbConnector.getInstancia().releaseConn();
+					} catch (SQLException e) {
+					e.printStackTrace();
+					}
+			}
 	}
 	
 	public Movie createOne(Movie m){
 		PreparedStatement stmt=null;
+		ResultSet keyResultSet = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO movie(title,image,releaseDate,cast,director,duration) values (?,?,?,?,?,?)"
+			"INSERT INTO movie(title,image,releaseDate,cast,director,duration,idRestriction,idGenre) values (?,?,?,?,?,?,?,?)"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1,m.getTitle());
@@ -153,22 +184,27 @@ public class DataMovie {
 			stmt.setString(4,m.getCast());
 			stmt.setString(5,m.getDirector());
 			stmt.setInt(6, m.getDuration());
-			ResultSet keyResultSet=stmt.getGeneratedKeys();
+			stmt.setInt(7, m.getRestriction().getIdRestriction());
+			stmt.setInt(8, m.getGenre().getIdGenre());
+			
+			stmt.executeUpdate();
+			keyResultSet=stmt.getGeneratedKeys();
+			
 			if (keyResultSet!=null && keyResultSet.next()) {
 				int id=keyResultSet.getInt(1);
 				m.setIdMovie(id);
-			}
-			
-			if(keyResultSet!=null){keyResultSet.close();}
-		    if(stmt!=null){stmt.close();}
-		    
-		
-	} catch (SQLException ex) {
-		System.out.println("SQLException: "+ ex.getMessage());
-		System.out.println("SQLState: "+ ex.getSQLState());
-		System.out.println("VendorError"+ ex.getErrorCode());}
-	return m;
-	}
+				}	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+					try {
+						if(stmt!=null) {stmt.close();}
+						if(keyResultSet!=null) {keyResultSet.close();}
+						DbConnector.getInstancia().releaseConn();
+						} catch (SQLException e) {e.printStackTrace();}
+						}
+			return m;
+		}
 	
 }
 
