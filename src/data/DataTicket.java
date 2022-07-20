@@ -10,6 +10,7 @@ import entities.MovieRoom;
 import entities.Ticket;
 import entities.User;
 import logic.MovieController;
+import logic.MovieRoomController;
 import logic.UserController;
 
 public class DataTicket {
@@ -41,6 +42,7 @@ public class DataTicket {
 				
 				ctrlMovie = new MovieController(); 
 				ctrlUser = new UserController();
+				ctrlRoom = new MovieRoomController();
 				
 				t.setIdTicket(rs.getInt("idTicket"));
 				
@@ -57,6 +59,7 @@ public class DataTicket {
 				t.setDate(rs.getObject("date",LocalDate.class));
 				t.setTime(rs.getObject("time",LocalTime.class));
 				
+				t.setTotalAmmount(rs.getBigDecimal("totalAmmount"));
 				
 				
 				

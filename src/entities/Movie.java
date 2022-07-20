@@ -9,7 +9,7 @@ public class Movie {
 	private LocalDate releaseDate;
 	private String cast;
 	private String director;
-	private int Duration;
+	private int duration;
 	private Restriction restriction;
 	private Genre genre;
 	
@@ -50,10 +50,10 @@ public class Movie {
 		this.director = director;
 	}
 	public int getDuration() {
-		return Duration;
+		return duration;
 	}
 	public void setDuration(int duration) {
-		Duration = duration;
+		this.duration = duration;
 	}
 	public Restriction getRestriction() {
 		return restriction;

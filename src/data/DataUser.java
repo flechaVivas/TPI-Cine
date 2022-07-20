@@ -101,7 +101,7 @@ public class DataUser {
 		ResultSet rs = null;
 		LinkedList<User> users = new LinkedList<User>();
 		Role r = null;
-		RoleController ctrRole = new RoleController();
+		RoleController ctrlRole = new RoleController();
 		
 		
 		try {
@@ -111,6 +111,8 @@ public class DataUser {
 			if (rs != null) {
 				while (rs.next()) {
 					User u = new User();
+					r = new Role();
+					
 					u.setIdUser(rs.getInt("idUser"));
 					u.setName(rs.getString("name"));
 					u.setSurname(rs.getString("surname"));
@@ -119,7 +121,7 @@ public class DataUser {
 					u.setAdress(rs.getString("adress"));
 					u.setPhoneNumber(rs.getString("phoneNumber"));
 					r.setIdRole(rs.getInt("idRole"));
-					u.setRole(ctrRole.getOne(r));
+					u.setRole(ctrlRole.getOne(r));
 					
 					users.add(u);
 				}
