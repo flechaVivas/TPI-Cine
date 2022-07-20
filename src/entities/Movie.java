@@ -1,10 +1,12 @@
 package entities;
 
+import java.sql.Date;
+
 public class Movie {
 	private int idMovie;
 	private String title;
 	private String image;
-	private String releaseDate = "dd/MM/yyyy";
+	private String releaseDate;
 	private String cast;
 	private String director;
 	private int Duration;
