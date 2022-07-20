@@ -29,6 +29,13 @@ public class UserController {
 		du.add(u);
 	}
 	
+	public void update(User u) {
+		du.update(u);
+	}
+	
+	public void delete(User u) {
+		du.delete(u);
+	}
 	
 	
 	
