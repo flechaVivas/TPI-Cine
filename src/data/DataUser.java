@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.LinkedList;
 
 import entities.Role;
@@ -34,7 +35,7 @@ public class DataUser {
 				u.setName(rs.getString("name"));
 				u.setSurname(rs.getString("surname"));
 				u.setEmail(rs.getString("email"));
-				u.setBirthDate(rs.getString("birthDate"));
+				u.setBirthDate(rs.getObject("birthDate",LocalDate.class));
 				u.setAdress(rs.getString("adress"));
 				u.setPhoneNumber(rs.getString("phoneNumber"));
 				r.setIdRole(rs.getInt("idRole"));
@@ -73,7 +74,7 @@ public class DataUser {
 				u.setName(rs.getString("name"));
 				u.setSurname(rs.getString("surname"));
 				u.setEmail(rs.getString("email"));
-				u.setBirthDate(rs.getString("birthDate"));
+				u.setBirthDate(rs.getObject("birthDate",LocalDate.class));
 				u.setAdress(rs.getString("adress"));
 				u.setPhoneNumber(rs.getString("phoneNumber"));
 				r.setIdRole(rs.getInt("idRole"));
@@ -114,7 +115,7 @@ public class DataUser {
 					u.setName(rs.getString("name"));
 					u.setSurname(rs.getString("surname"));
 					u.setEmail(rs.getString("email"));
-					u.setBirthDate(rs.getString("birthDate"));
+					u.setBirthDate(rs.getObject("birthDate",LocalDate.class));
 					u.setAdress(rs.getString("adress"));
 					u.setPhoneNumber(rs.getString("phoneNumber"));
 					r.setIdRole(rs.getInt("idRole"));
@@ -153,7 +154,7 @@ public class DataUser {
 			stmt.setString(4, u.getName());
 			stmt.setString(5, u.getEmail());
 			stmt.setString(6, u.getPassword());
-			stmt.setString(7, u.getBirthDate());
+			stmt.setObject(7, u.getBirthDate());
 			stmt.setString(8, u.getAdress());
 			stmt.setString(9, u.getPhoneNumber());
 			
@@ -192,7 +193,7 @@ public class DataUser {
 			stmt.setString(3, u.getName());
 			stmt.setString(4, u.getEmail());
 			stmt.setString(5, u.getPassword());
-			stmt.setString(6, u.getBirthDate());
+			stmt.setObject(6, u.getBirthDate());
 			stmt.setString(7, u.getAdress());
 			stmt.setString(8, u.getPhoneNumber());
 			stmt.setInt(9, u.getIdUser());
@@ -210,6 +211,33 @@ public class DataUser {
 				e.printStackTrace();
 			}
 		}
+		
+	}
+	
+	public void delete(User u) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"");
+			
+			
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 	}
 	

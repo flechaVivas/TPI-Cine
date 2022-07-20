@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import entities.Movie;
 
@@ -55,7 +56,7 @@ public class DataMovie {
 			m.setIdMovie(rs.getInt("idMovie"));
 			m.setTitle(rs.getString("title"));
 			m.setImage(rs.getString("image"));
-			m.setReleaseDate(rs.getString("releaseDate"));
+			m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 			m.setCast(rs.getString("cast"));
 			m.setDirector(rs.getString("director"));
 			m.setDuration(rs.getInt("duration"));
@@ -82,7 +83,7 @@ public class DataMovie {
 							"update movie set title=?,image=?,releaseDate=? ,cast=? ,director=? ,duration=?  where id=?");
 			stmt.setString(1,m.getTitle());
 			stmt.setString(2,m.getImage());
-			stmt.setString(3,m.getReleaseDate());
+			stmt.setObject(3,m.getReleaseDate());
 			stmt.setString(4,m.getCast());
 			stmt.setString(5,m.getDirector());
 			stmt.setInt(6, m.getDuration());
@@ -119,7 +120,7 @@ public class DataMovie {
 			
 			stmt.setString(1,m.getTitle());
 			stmt.setString(2,m.getImage());
-			stmt.setString(3,m.getReleaseDate());
+			stmt.setObject(3,m.getReleaseDate());
 			stmt.setString(4,m.getCast());
 			stmt.setString(5,m.getDirector());
 			stmt.setInt(6, m.getDuration());

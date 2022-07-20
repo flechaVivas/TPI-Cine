@@ -31,10 +31,10 @@ public class Movie {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getReleaseDate() {
+	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}
-	public void setReleaseDate(String releaseDate) {
+	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 	public String getCast() {
@@ -67,18 +67,13 @@ public class Movie {
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Movie [idMovie=" + idMovie + ", title=" + title + ", image=" + image + ", releaseDate=" + releaseDate
 				+ ", cast=" + cast + ", director=" + director + ", Duration=" + Duration + ", restriction="
 				+ restriction + ", genre=" + genre + "]";
 	}
-	
-	
-	
-	
-	
 	
 	
 }
