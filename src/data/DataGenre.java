@@ -21,6 +21,7 @@ public class DataGenre {
 			rs=stmt.executeQuery("select * from genre");
 			while(rs.next()) {
 				Genre g=new Genre();
+				g.setIdGenre(rs.getInt("idGenre"));
 				g.setDescription(rs.getString("description"));
 				gnrs.add(g);
 			}
@@ -41,13 +42,14 @@ public class DataGenre {
 		Genre ge = null;
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM restriction WHERE idRestriction=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM genre WHERE idGenre=?");
 			stmt.setInt(1, g.getIdGenre());
 
 			rs=stmt.executeQuery();
 			
 			if(rs!=null && rs.next()) {
 				ge=new Genre();
+				ge.setIdGenre(rs.getInt("idGenre"));
 				ge.setDescription(rs.getString("description"));
 			}
 			

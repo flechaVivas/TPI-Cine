@@ -42,7 +42,6 @@ public class DataTicket {
 				m = new Movie();
 				u = new User();
 				r = new MovieRoom();
-				
 				ctrlMovie = new MovieController(); 
 				ctrlUser = new UserController();
 				ctrlRoom = new MovieRoomController();
@@ -53,7 +52,7 @@ public class DataTicket {
 				t.setUser(ctrlUser.getOne(u));
 				
 				m.setIdMovie(rs.getInt("idMovie"));
-				t.setMovie(ctrlMovie.getOne(m));
+				t.setMovie(ctrlMovie.getbyIdMovie(m));
 				
 				r.setRoomNumber(rs.getInt("roomNumber"));
 				t.setRoom(ctrlRoom.getOne(r));
@@ -101,14 +100,13 @@ public class DataTicket {
 					User u = new User();
 					Movie m = new Movie();
 					MovieRoom r = new MovieRoom();
-					
 					t.setIdTicket(rs.getInt("idTicket"));
 					
 					u.setIdUser(rs.getInt("idUser"));
 					t.setUser(ctrlUser.getOne(u));
 					
 					m.setIdMovie(rs.getInt("idMovie"));
-					t.setMovie(ctrlMovie.getOne(m));
+					t.setMovie(ctrlMovie.getbyIdMovie(m));
 					
 					r.setRoomNumber(rs.getInt("roomNumber"));
 					t.setRoom(ctrlRoom.getOne(r));
