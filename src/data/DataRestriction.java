@@ -20,6 +20,7 @@ public class DataRestriction {
 			rs=stmt.executeQuery("select * from restriction");
 		while(rs.next()) {
 			Restriction r=new Restriction();
+			r.setIdRestriction(rs.getInt("idRestriction"));
 			r.setDescription(rs.getString("description"));
 			rtts.add(r);
 		}
@@ -47,6 +48,7 @@ public class DataRestriction {
 			
 			if(rs!=null && rs.next()) {
 				re=new Restriction();
+				re.setIdRestriction(rs.getInt("idRestriction"));
 				re.setDescription(rs.getString("description"));
 			}
 			

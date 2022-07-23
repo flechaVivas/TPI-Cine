@@ -17,7 +17,7 @@ import logic.RestrictionController;
 
 public class DataMovie {
 
-	public Movie getOne(Movie m) {
+	public Movie getbyId(Movie m) {
 		
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -72,44 +72,47 @@ public class DataMovie {
 		return mo;
 	}
 	
-	public LinkedList<Movie> list(){
-		Statement stmt=null;
+	public Movie getbyTitle(Movie m) {
+		
+		PreparedStatement stmt=null;
 		ResultSet rs=null;
-		LinkedList<Movie> movs=new LinkedList<Movie>();
+		Movie mo = null;
 		Genre ge=null;
 		Restriction re=null;
+		
 		GenreController ctrlGenre=null;
-		RestrictionController ctrlRest=null;	
+		RestrictionController ctrlRest=null;
 		try {
-					
-			stmt=DbConnector.getInstancia().getConn().createStatement();
-			rs=stmt.executeQuery("SELECT * FROM Movie");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE title=?");
+			stmt.setString(1, m.getTitle());
+
+			rs=stmt.executeQuery();
 			
-			while(rs.next()) {
-				Movie m=new Movie();
+			if(rs!=null && rs.next()) {
+				mo=new Movie();
 				ge=new Genre();
 				re=new Restriction();
-			
+				
 				ctrlGenre= new GenreController();
 				ctrlRest= new RestrictionController();
-			
-				m.setIdMovie(rs.getInt("idMovie"));
-				m.setTitle(rs.getString("title"));
-				m.setImage(rs.getString("image"));
-				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
-				m.setCast(rs.getString("cast"));
-				m.setDirector(rs.getString("director"));
-				m.setDuration(rs.getInt("duration"));
-			
+				
+				mo.setIdMovie(rs.getInt("idMovie"));
+				
+				mo.setTitle(rs.getString("title"));
+				mo.setImage(rs.getString("image"));
+				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				mo.setCast(rs.getString("cast"));
+				mo.setDirector(rs.getString("director"));
+				mo.setDuration(rs.getInt("duration"));
+				
 				re.setIdRestriction(rs.getInt("idRestriction"));
-				m.setRestriction(ctrlRest.getOne(re));
-			
+				mo.setRestriction(ctrlRest.getOne(re));
+				
 				ge.setIdGenre(rs.getInt("idGenre"));
-				m.setGenre(ctrlGenre.getOne(ge));
-			
-				movs.add(m);
+				mo.setGenre(ctrlGenre.getOne(ge));
 			}
-		}catch (SQLException e) {
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
@@ -120,8 +123,9 @@ public class DataMovie {
 				e.printStackTrace();
 			}
 		}
-			return movs;
-		}
+		
+		return mo;
+	}
 	
 	public Movie update(Movie m) {	
 	PreparedStatement stmt= null;
@@ -137,7 +141,7 @@ public class DataMovie {
 			stmt.setInt(6, m.getDuration());
 			stmt.setInt(7, m.getRestriction().getIdRestriction());
 			stmt.setInt(8, m.getGenre().getIdGenre());
-			stmt.setInt(10, m.getIdMovie());
+			stmt.setInt(9, m.getIdMovie());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
             e.printStackTrace();
@@ -206,6 +210,315 @@ public class DataMovie {
 			return m;
 		}
 	
+	public LinkedList<Movie> list(){
+		Statement stmt=null;
+		ResultSet rs=null;
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		Genre ge=null;
+		Restriction re=null;
+		GenreController ctrlGenre=null;
+		RestrictionController ctrlRest=null;	
+		try {
+					
+			stmt=DbConnector.getInstancia().getConn().createStatement();
+			rs=stmt.executeQuery("SELECT * FROM Movie");
+			
+			while(rs.next()) {
+				Movie m=new Movie();
+				ge=new Genre();
+				re=new Restriction();
+			
+				ctrlGenre= new GenreController();
+				ctrlRest= new RestrictionController();
+			
+				m.setIdMovie(rs.getInt("idMovie"));
+				m.setTitle(rs.getString("title"));
+				m.setImage(rs.getString("image"));
+				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				m.setCast(rs.getString("cast"));
+				m.setDirector(rs.getString("director"));
+				m.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				m.setRestriction(ctrlRest.getOne(re));
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				m.setGenre(ctrlGenre.getOne(ge));
+			
+				movs.add(m);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+		}
+	
+	public LinkedList<Movie> getEntreFechas(Movie d,Movie h){
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Genre ge=null;
+		Restriction re=null;
+		GenreController ctrlGenre=null;
+		RestrictionController ctrlRest=null;	
+		try {
+					
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where releaseDate between cast(? as date) and cast(? as date)");
+			stmt.setObject(1,d.getReleaseDate());
+			stmt.setObject(2,h.getReleaseDate());
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie m=new Movie();
+				ge=new Genre();
+				re=new Restriction();
+			
+				ctrlGenre= new GenreController();
+				ctrlRest= new RestrictionController();
+			
+				m.setIdMovie(rs.getInt("idMovie"));
+				m.setTitle(rs.getString("title"));
+				m.setImage(rs.getString("image"));
+				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				m.setCast(rs.getString("cast"));
+				m.setDirector(rs.getString("director"));
+				m.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				m.setRestriction(ctrlRest.getOne(re));
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				m.setGenre(ctrlGenre.getOne(ge));
+			
+				movs.add(m);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
+	
+	public LinkedList<Movie> getByGenre(Genre g){
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Genre ge=null;
+		Restriction re=null;
+		GenreController ctrlGenre=null;
+		RestrictionController ctrlRest=null;	
+		try {
+					
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where idGenre=?");
+			stmt.setInt(1, g.getIdGenre());
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie m=new Movie();
+				ge=new Genre();
+				re=new Restriction();
+			
+				ctrlGenre= new GenreController();
+				ctrlRest= new RestrictionController();
+			
+				m.setIdMovie(rs.getInt("idMovie"));
+				m.setTitle(rs.getString("title"));
+				m.setImage(rs.getString("image"));
+				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				m.setCast(rs.getString("cast"));
+				m.setDirector(rs.getString("director"));
+				m.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				m.setRestriction(ctrlRest.getOne(re));
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				m.setGenre(ctrlGenre.getOne(ge));
+			
+				movs.add(m);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
+	
+	public LinkedList<Movie> getByRest(Restriction r){
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Genre ge=null;
+		Restriction re=null;
+		GenreController ctrlGenre=null;
+		RestrictionController ctrlRest=null;	
+		try {
+					
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where idRestriction>=?");
+			stmt.setInt(1, r.getIdRestriction());
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie m=new Movie();
+				ge=new Genre();
+				re=new Restriction();
+			
+				ctrlGenre= new GenreController();
+				ctrlRest= new RestrictionController();
+			
+				m.setIdMovie(rs.getInt("idMovie"));
+				m.setTitle(rs.getString("title"));
+				m.setImage(rs.getString("image"));
+				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				m.setCast(rs.getString("cast"));
+				m.setDirector(rs.getString("director"));
+				m.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				m.setRestriction(ctrlRest.getOne(re));
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				m.setGenre(ctrlGenre.getOne(ge));
+			
+				movs.add(m);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
+	
+	public LinkedList<Movie> getByDirector(Movie mo){
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Genre ge=null;
+		Restriction re=null;
+		GenreController ctrlGenre=null;
+		RestrictionController ctrlRest=null;	
+		try {		
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where director=?");
+			stmt.setString(1, mo.getDirector());
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie m=new Movie();
+				ge=new Genre();
+				re=new Restriction();
+			
+				ctrlGenre= new GenreController();
+				ctrlRest= new RestrictionController();
+			
+				m.setIdMovie(rs.getInt("idMovie"));
+				m.setTitle(rs.getString("title"));
+				m.setImage(rs.getString("image"));
+				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				m.setCast(rs.getString("cast"));
+				m.setDirector(rs.getString("director"));
+				m.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				m.setRestriction(ctrlRest.getOne(re));
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				m.setGenre(ctrlGenre.getOne(ge));
+			
+				movs.add(m);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
+	
+	public LinkedList<Movie> getByDuration(Movie tm){
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Genre ge=null;
+		Restriction re=null;
+		GenreController ctrlGenre=null;
+		RestrictionController ctrlRest=null;	
+		try {		
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where duration<=?");
+			stmt.setInt(1, tm.getDuration());
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie m=new Movie();
+				ge=new Genre();
+				re=new Restriction();
+			
+				ctrlGenre= new GenreController();
+				ctrlRest= new RestrictionController();
+			
+				m.setIdMovie(rs.getInt("idMovie"));
+				m.setTitle(rs.getString("title"));
+				m.setImage(rs.getString("image"));
+				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				m.setCast(rs.getString("cast"));
+				m.setDirector(rs.getString("director"));
+				m.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				m.setRestriction(ctrlRest.getOne(re));
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				m.setGenre(ctrlGenre.getOne(ge));
+			
+				movs.add(m);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
 }
 
 	
