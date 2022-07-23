@@ -74,7 +74,7 @@ public class User {
 	public String toString() {
 		return "User [idUser=" + idUser + ", surname=" + surname + ", name=" + name + ", email=" + email + ", password="
 				+ password + ", birthDate=" + birthDate + ", adress=" + adress + ", phoneNumber=" + phoneNumber
-				+ ", role=" + role + "]";
+				+ ", role=" + role + "]\n";
 	}
 	
 	

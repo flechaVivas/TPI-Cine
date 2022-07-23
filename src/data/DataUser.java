@@ -74,6 +74,7 @@ public class DataUser {
 				u.setName(rs.getString("name"));
 				u.setSurname(rs.getString("surname"));
 				u.setEmail(rs.getString("email"));
+				u.setPassword(rs.getString("password"));
 				u.setBirthDate(rs.getObject("birthDate",LocalDate.class));
 				u.setAdress(rs.getString("adress"));
 				u.setPhoneNumber(rs.getString("phoneNumber"));
@@ -117,6 +118,7 @@ public class DataUser {
 					u.setName(rs.getString("name"));
 					u.setSurname(rs.getString("surname"));
 					u.setEmail(rs.getString("email"));
+					u.setPassword(rs.getString("password"));
 					u.setBirthDate(rs.getObject("birthDate",LocalDate.class));
 					u.setAdress(rs.getString("adress"));
 					u.setPhoneNumber(rs.getString("phoneNumber"));

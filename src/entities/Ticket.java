@@ -67,7 +67,7 @@ public class Ticket {
 	@Override
 	public String toString() {
 		return "Ticket [idTicket=" + idTicket + ", operationCode=" + operationCode + ", date=" + date + ", time=" + time
-				+ ", totalAmmount=" + totalAmmount + ", user=" + user + ", movie=" + movie + ", room=" + room + "]";
+				+ ", totalAmmount=" + totalAmmount + ", user=" + user + ", movie=" + movie + ", room=" + room + "]\n";
 	}
 	
 	
