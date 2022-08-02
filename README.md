@@ -20,22 +20,22 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 
 |Requerimiento|cant. mín.<br>1 o 2 integ|cant. máx.<br>3 o 4 integ|Detalle/Listado de casos incluidos|
 |:-|-:|-:|:-|
-|ABMC simple|1 x integ|1 x integ|Client, Movie, Ticket, Ubication|
-|ABMC dependiente|1|2|Restriction, Genre|
-|CU NO-ABMC|1|2|¿¿¿Login, Logout???|
+|ABMC simple|1 x integ|1 x integ|Restriction, Genre, roomType o Actors|
+|ABMC dependiente|1|2|Movie, MovieRoom|
+|CU NO-ABMC|1|2|Crear Funcion, Venta|
 |Listado simple|1|-|-|
-|Listado complejo|0|1(*)|Movies by Title|
+|Listado complejo|0|1(*)|Movies and Function|
 
 ##### Aprobación Directa
 
 |Requerimiento|cant. mín.<br>1 o 2 integ|cant. máx.<br>3 o 4 integ|Detalle/Listado de casos incluidos|
 |:-|-:|-:|:-|
 |ABMC|todos|todos|
-|CU "Complejo"(nivel resumen)|1|2|Buy Tickets, Cancel|
-|Listado complejo|1|2|Movies By Genre, Today Tickets|
+|CU "Complejo"(nivel resumen)|1|2|Buy Tickets (crear funcion venta de entrada, retirar y cancelar)|
+|Listado complejo|1|2|Movies and Function, Today Tickets|
 |Nivel de acceso|2|2|Admin, Advanced User, Client|
 |Manejo de errores|obligatorio|obligatorio|no requiere detalle|
-|requerimiento extra obligatorio (**)|0|1|Envío de mail, manejo de archivos|
+|requerimiento extra obligatorio (**)|0|1|Envío de mail o manejo de archivos|
 |publicar el sitio|olbigatorio|obligatorio|no requiere detalle|
 
 
