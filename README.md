@@ -49,7 +49,7 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 
 ## Modelo de Datos
 
-![DER-CINE](https://user-images.githubusercontent.com/78052165/185676320-e512fec0-2951-44d1-943a-a5671b91ebca.png)
+![DER-CINE](https://user-images.githubusercontent.com/78052165/185677445-6fbbc559-06af-4536-9860-edf7a5bd0540.png)
 
 
 
