@@ -49,6 +49,7 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 
 ## Modelo de Datos
 
+![DER-CINE](https://user-images.githubusercontent.com/78052165/185676320-e512fec0-2951-44d1-943a-a5671b91ebca.png)
 
-[DER-CINE.pdf](https://github.com/flechaVivas/TPI-Cine/files/9384287/DER-CINE.pdf)
+
 
