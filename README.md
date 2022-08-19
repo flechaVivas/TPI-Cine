@@ -22,7 +22,7 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 |:-|-:|-:|:-|
 |ABMC simple|1 x integ|1 x integ|Restriction, Genre, roomType o Actors|
 |ABMC dependiente|1|2|Movie, MovieRoom|
-|CU NO-ABMC|1|2|Crear Funcion, Venta|
+|CU NO-ABMC|1|2|Crear Funcion, Reserva|
 |Listado simple|1|-|-|
 |Listado complejo|0|1(*)|Movies and Function|
 
