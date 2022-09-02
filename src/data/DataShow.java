@@ -41,13 +41,48 @@ public class DataShow {
 		
 	}
 
-	public void delete(Show s) {	
+	public void delete(Show s) {
+		PreparedStatement stmt=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM Show WHERE idMovie=? ");
+			stmt.setInt(1, s.getMovie().getIdMovie());
+			stmt.executeUpdate();
+			} catch (SQLException e) {
+			e.printStackTrace();
+			} finally {
+				try {
+					if(stmt!=null) {stmt.close();}
+					DbConnector.getInstancia().releaseConn();
+					} catch (SQLException e) {
+					e.printStackTrace();
+					}
+			}
 	}
 
 	public Show createOne(Show s) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		PreparedStatement stmt=null;
+		ResultSet keyResultSet = null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+			"INSERT INTO movie(idMovie,roomNumber,date_time) values (?,?,?)"
+					,PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, s.getMovie().getIdMovie());
+			stmt.setInt(2, s.getMovieroom().getRoomNumber());
+			stmt.setObject(3,s.getDt());
+			
+			stmt.executeUpdate();	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+					try {
+						if(stmt!=null) {stmt.close();}
+						if(keyResultSet!=null) {keyResultSet.close();}
+						DbConnector.getInstancia().releaseConn();
+						} catch (SQLException e) {e.printStackTrace();}
+						}
+			return s;
+		}
+
 
 	public Show update(Show s) {
 		PreparedStatement stmt= null;
