@@ -31,7 +31,7 @@ public class Menu {
 	private void executeCommand(String command) {
 		switch (command) {
 		case "list":
-			System.out.println(ctrlMovie.getAll());
+			System.out.println(list());
 			break;
 		case "filt":
 			System.out.println(filt());
@@ -66,7 +66,14 @@ public class Menu {
 		return s.nextLine();
 	}
 	
-		
+	private LinkedList<Movie> list(){
+		LinkedList<Movie> mvs= ctrlMovie.getAll();
+		for (Movie mo : mvs) {
+			mo.setGenre(ctrlGenre.getOne(mo.getGenre()));
+			mo.setRestriction(ctrlRest.getOne(mo.getRestriction()));
+		}
+		return mvs;
+	}
 	private LinkedList<Movie> filt() {
 		LinkedList<Movie> pels=new LinkedList<Movie>();
 		System.out.println("Ingrese el tipo de filtro que desea utilizar");
@@ -86,6 +93,10 @@ public class Menu {
 			System.out.println("Ingrese fecha hasta: ");
 			mHasta.setReleaseDate(LocalDate.parse(s.nextLine()));
 			pels.addAll(ctrlMovie.getByRango(mDesde,mHasta));
+			for (Movie mo : pels) {
+				mo.setGenre(ctrlGenre.getOne(mo.getGenre()));
+				mo.setRestriction(ctrlRest.getOne(mo.getRestriction()));
+			}
 			break;
 			
 		case 2:
@@ -94,6 +105,10 @@ public class Menu {
 			System.out.print("Ingrese Género: ");
 			g.setIdGenre(Integer.parseInt(s.nextLine()));
 			pels.addAll(ctrlMovie.getByGen(ctrlGenre.getOne(g)));
+			for (Movie mo : pels) {
+				mo.setGenre(ctrlGenre.getOne(mo.getGenre()));
+				mo.setRestriction(ctrlRest.getOne(mo.getRestriction()));
+			}
 			break;
 			
 		case 3:
@@ -102,6 +117,10 @@ public class Menu {
 			System.out.print("Ingrese Restriccion de edad: ");
 			r.setIdRestriction(Integer.parseInt(s.nextLine()));
 			pels.addAll(ctrlMovie.getByRestri(ctrlRest.getOne(r)));
+			for (Movie mo : pels) {
+				mo.setGenre(ctrlGenre.getOne(mo.getGenre()));
+				mo.setRestriction(ctrlRest.getOne(mo.getRestriction()));
+			}
 			break;
 			
 		case 4:
@@ -109,6 +128,10 @@ public class Menu {
 			System.out.print("Ingrese El nombre del director: ");
 			m.setDirector(s.nextLine());
 			pels.addAll(ctrlMovie.getByDir(m));
+			for (Movie mo : pels) {
+				mo.setGenre(ctrlGenre.getOne(mo.getGenre()));
+				mo.setRestriction(ctrlRest.getOne(mo.getRestriction()));
+			}
 			break;
 			
 		case 5:
@@ -116,6 +139,10 @@ public class Menu {
 			System.out.println("Ingrese un tope de duracion (En minutos)");
 			mtope.setDuration(Integer.parseInt(s.nextLine()));
 			pels.addAll(ctrlMovie.getByDur(mtope));
+			for (Movie mo : pels) {
+				mo.setGenre(ctrlGenre.getOne(mo.getGenre()));
+				mo.setRestriction(ctrlRest.getOne(mo.getRestriction()));
+			}
 			break;
 
 		default:
@@ -135,11 +162,15 @@ public class Menu {
 			System.out.println("Ingrese el Id");
 			mo.setIdMovie(Integer.parseInt(s.nextLine()));
 			mo=ctrlMovie.getbyIdMovie(mo);
+			mo.setGenre(ctrlGenre.getOne(mo.getGenre()));
+			mo.setRestriction(ctrlRest.getOne(mo.getRestriction()));
 			break;
 		case 2:
 			System.out.println("Ingrese el titulo");
 			mo.setTitle(s.nextLine());
 			mo=ctrlMovie.getbyTitle(mo);
+			mo.setGenre(ctrlGenre.getOne(mo.getGenre()));
+			mo.setRestriction(ctrlRest.getOne(mo.getRestriction()));
 			break;
 		default:
 			break;

@@ -11,12 +11,8 @@ import entities.Genre;
 import entities.Restriction;
 import entities.Movie;
 
-
-import logic.GenreController;
-import logic.RestrictionController;
-
 public class DataMovie {
-
+	
 	public Movie getbyId(Movie m) {
 		
 		PreparedStatement stmt=null;
@@ -24,9 +20,6 @@ public class DataMovie {
 		Movie mo = null;
 		Genre ge=null;
 		Restriction re=null;
-		
-		GenreController ctrlGenre=null;
-		RestrictionController ctrlRest=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE idMovie=?");
 			stmt.setInt(1, m.getIdMovie());
@@ -37,10 +30,7 @@ public class DataMovie {
 				mo=new Movie();
 				ge=new Genre();
 				re=new Restriction();
-				
-				ctrlGenre= new GenreController();
-				ctrlRest= new RestrictionController();
-				
+		
 				mo.setIdMovie(rs.getInt("idMovie"));
 				
 				mo.setTitle(rs.getString("title"));
@@ -51,10 +41,10 @@ public class DataMovie {
 				mo.setDuration(rs.getInt("duration"));
 				
 				re.setIdRestriction(rs.getInt("idRestriction"));
-				mo.setRestriction(ctrlRest.getOne(re));
+				mo.setRestriction(re);
 				
 				ge.setIdGenre(rs.getInt("idGenre"));
-				mo.setGenre(ctrlGenre.getOne(ge));
+				mo.setGenre(ge);
 			}
 			
 		} catch (SQLException e) {
@@ -80,8 +70,6 @@ public class DataMovie {
 		Genre ge=null;
 		Restriction re=null;
 		
-		GenreController ctrlGenre=null;
-		RestrictionController ctrlRest=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE title=?");
 			stmt.setString(1, m.getTitle());
@@ -93,8 +81,6 @@ public class DataMovie {
 				ge=new Genre();
 				re=new Restriction();
 				
-				ctrlGenre= new GenreController();
-				ctrlRest= new RestrictionController();
 				
 				mo.setIdMovie(rs.getInt("idMovie"));
 				
@@ -106,10 +92,10 @@ public class DataMovie {
 				mo.setDuration(rs.getInt("duration"));
 				
 				re.setIdRestriction(rs.getInt("idRestriction"));
-				mo.setRestriction(ctrlRest.getOne(re));
+				mo.setRestriction(re);
 				
 				ge.setIdGenre(rs.getInt("idGenre"));
-				mo.setGenre(ctrlGenre.getOne(ge));
+				mo.setGenre(ge);
 			}
 			
 		} catch (SQLException e) {
@@ -215,9 +201,7 @@ public class DataMovie {
 		ResultSet rs=null;
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		Genre ge=null;
-		Restriction re=null;
-		GenreController ctrlGenre=null;
-		RestrictionController ctrlRest=null;	
+		Restriction re=null;	
 		try {
 					
 			stmt=DbConnector.getInstancia().getConn().createStatement();
@@ -228,9 +212,6 @@ public class DataMovie {
 				ge=new Genre();
 				re=new Restriction();
 			
-				ctrlGenre= new GenreController();
-				ctrlRest= new RestrictionController();
-			
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
@@ -240,10 +221,10 @@ public class DataMovie {
 				m.setDuration(rs.getInt("duration"));
 			
 				re.setIdRestriction(rs.getInt("idRestriction"));
-				m.setRestriction(ctrlRest.getOne(re));
+				m.setRestriction(re);
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
-				m.setGenre(ctrlGenre.getOne(ge));
+				m.setGenre(ge);
 			
 				movs.add(m);
 			}
@@ -266,9 +247,7 @@ public class DataMovie {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Genre ge=null;
-		Restriction re=null;
-		GenreController ctrlGenre=null;
-		RestrictionController ctrlRest=null;	
+		Restriction re=null;	
 		try {
 					
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where releaseDate between cast(? as date) and cast(? as date)");
@@ -281,9 +260,6 @@ public class DataMovie {
 				ge=new Genre();
 				re=new Restriction();
 			
-				ctrlGenre= new GenreController();
-				ctrlRest= new RestrictionController();
-			
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
@@ -293,10 +269,10 @@ public class DataMovie {
 				m.setDuration(rs.getInt("duration"));
 			
 				re.setIdRestriction(rs.getInt("idRestriction"));
-				m.setRestriction(ctrlRest.getOne(re));
+				m.setRestriction(re);
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
-				m.setGenre(ctrlGenre.getOne(ge));
+				m.setGenre(ge);
 			
 				movs.add(m);
 			}
@@ -319,9 +295,7 @@ public class DataMovie {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Genre ge=null;
-		Restriction re=null;
-		GenreController ctrlGenre=null;
-		RestrictionController ctrlRest=null;	
+		Restriction re=null;	
 		try {
 					
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where idGenre=?");
@@ -333,9 +307,6 @@ public class DataMovie {
 				ge=new Genre();
 				re=new Restriction();
 			
-				ctrlGenre= new GenreController();
-				ctrlRest= new RestrictionController();
-			
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
@@ -345,10 +316,10 @@ public class DataMovie {
 				m.setDuration(rs.getInt("duration"));
 			
 				re.setIdRestriction(rs.getInt("idRestriction"));
-				m.setRestriction(ctrlRest.getOne(re));
+				m.setRestriction(re);
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
-				m.setGenre(ctrlGenre.getOne(ge));
+				m.setGenre(ge);
 			
 				movs.add(m);
 			}
@@ -371,9 +342,7 @@ public class DataMovie {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Genre ge=null;
-		Restriction re=null;
-		GenreController ctrlGenre=null;
-		RestrictionController ctrlRest=null;	
+		Restriction re=null;	
 		try {
 					
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where idRestriction>=?");
@@ -385,9 +354,6 @@ public class DataMovie {
 				ge=new Genre();
 				re=new Restriction();
 			
-				ctrlGenre= new GenreController();
-				ctrlRest= new RestrictionController();
-			
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
@@ -397,10 +363,10 @@ public class DataMovie {
 				m.setDuration(rs.getInt("duration"));
 			
 				re.setIdRestriction(rs.getInt("idRestriction"));
-				m.setRestriction(ctrlRest.getOne(re));
+				m.setRestriction(re);
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
-				m.setGenre(ctrlGenre.getOne(ge));
+				m.setGenre(ge);
 			
 				movs.add(m);
 			}
@@ -423,9 +389,7 @@ public class DataMovie {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Genre ge=null;
-		Restriction re=null;
-		GenreController ctrlGenre=null;
-		RestrictionController ctrlRest=null;	
+		Restriction re=null;	
 		try {		
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where director=?");
 			stmt.setString(1, mo.getDirector());
@@ -436,9 +400,6 @@ public class DataMovie {
 				ge=new Genre();
 				re=new Restriction();
 			
-				ctrlGenre= new GenreController();
-				ctrlRest= new RestrictionController();
-			
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
@@ -448,10 +409,10 @@ public class DataMovie {
 				m.setDuration(rs.getInt("duration"));
 			
 				re.setIdRestriction(rs.getInt("idRestriction"));
-				m.setRestriction(ctrlRest.getOne(re));
+				m.setRestriction(re);
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
-				m.setGenre(ctrlGenre.getOne(ge));
+				m.setGenre(ge);
 			
 				movs.add(m);
 			}
@@ -474,9 +435,7 @@ public class DataMovie {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Genre ge=null;
-		Restriction re=null;
-		GenreController ctrlGenre=null;
-		RestrictionController ctrlRest=null;	
+		Restriction re=null;	
 		try {		
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where duration<=?");
 			stmt.setInt(1, tm.getDuration());
@@ -487,9 +446,6 @@ public class DataMovie {
 				ge=new Genre();
 				re=new Restriction();
 			
-				ctrlGenre= new GenreController();
-				ctrlRest= new RestrictionController();
-			
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
@@ -499,10 +455,10 @@ public class DataMovie {
 				m.setDuration(rs.getInt("duration"));
 			
 				re.setIdRestriction(rs.getInt("idRestriction"));
-				m.setRestriction(ctrlRest.getOne(re));
+				m.setRestriction(re);
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
-				m.setGenre(ctrlGenre.getOne(ge));
+				m.setGenre(ge);
 			
 				movs.add(m);
 			}
