@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import entities.MovieRoom;
 
@@ -112,7 +111,7 @@ public class DataMovieRoom {
 	public void deleteMovieRoom(MovieRoom mr) {
 		PreparedStatement stmt = null;
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM movieroom WHERE roomNumber ");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM movieroom WHERE roomNumber=?");
 			stmt.setInt(1, mr.getRoomNumber());
 			stmt.executeUpdate();
 		}catch (SQLException e) {

@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `cine_tpjava` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `cine_tpjava`;
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.30, for Linux (x86_64)
 --
 -- Host: localhost    Database: cine_tpjava
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.30-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -59,11 +59,11 @@ CREATE TABLE `movie` (
   `idRestriction` int NOT NULL,
   `idGenre` int NOT NULL,
   PRIMARY KEY (`idMovie`),
-  KEY `fk_Movie_Restriction_idx` (`idRestriction`),
-  KEY `fk_Movie_Genre_idx` (`idGenre`),
-  CONSTRAINT `fk_Movie_Genre` FOREIGN KEY (`idGenre`) REFERENCES `genre` (`idGenre`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_Movie_Restriction` FOREIGN KEY (`idRestriction`) REFERENCES `restriction` (`idRestriction`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_movie_restriction_idx` (`idRestriction`),
+  KEY `fk_movie_genre_idx` (`idGenre`),
+  CONSTRAINT `fk_movie_genre` FOREIGN KEY (`idGenre`) REFERENCES `genre` (`idGenre`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_movie_restriction` FOREIGN KEY (`idRestriction`) REFERENCES `restriction` (`idRestriction`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,8 +85,10 @@ DROP TABLE IF EXISTS `movieroom`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `movieroom` (
   `roomNumber` int NOT NULL,
-  `capacity` int NOT NULL,
-  PRIMARY KEY (`roomNumber`)
+  `idRoomType` int NOT NULL,
+  PRIMARY KEY (`roomNumber`),
+  KEY `fk_room_type_1_idx` (`idRoomType`),
+  CONSTRAINT `fk_movieroom_type` FOREIGN KEY (`idRoomType`) REFERENCES `room_type` (`idRoomType`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,7 +98,7 @@ CREATE TABLE `movieroom` (
 
 LOCK TABLES `movieroom` WRITE;
 /*!40000 ALTER TABLE `movieroom` DISABLE KEYS */;
-INSERT INTO `movieroom` VALUES (1,9),(2,9),(3,9),(4,9),(5,9);
+INSERT INTO `movieroom` VALUES (1,1),(2,1),(3,1),(8,1),(5,2),(6,2),(4,3),(7,4);
 /*!40000 ALTER TABLE `movieroom` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,6 +151,60 @@ INSERT INTO `role` VALUES (1,'cliente'),(2,'taquillero'),(3,'admin');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `room_type`
+--
+
+DROP TABLE IF EXISTS `room_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `room_type` (
+  `idRoomType` int NOT NULL,
+  `description` varchar(45) NOT NULL,
+  `rowQuantity` int NOT NULL,
+  `colQuantity` int NOT NULL,
+  PRIMARY KEY (`idRoomType`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `room_type`
+--
+
+LOCK TABLES `room_type` WRITE;
+/*!40000 ALTER TABLE `room_type` DISABLE KEYS */;
+INSERT INTO `room_type` VALUES (1,'IMAX',14,14),(2,'3D',10,10),(3,'2D',15,12),(4,'IMAX',10,10),(5,'4D',14,14),(6,'2D',15,15);
+/*!40000 ALTER TABLE `room_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `show`
+--
+
+DROP TABLE IF EXISTS `show`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `show` (
+  `idMovie` int NOT NULL,
+  `roomNumber` int NOT NULL,
+  `date_time` datetime NOT NULL,
+  PRIMARY KEY (`idMovie`,`roomNumber`,`date_time`),
+  KEY `fk_show_room_idx` (`roomNumber`),
+  CONSTRAINT `fk_show_movie` FOREIGN KEY (`idMovie`) REFERENCES `movie` (`idMovie`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_show_room` FOREIGN KEY (`roomNumber`) REFERENCES `movieroom` (`roomNumber`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `show`
+--
+
+LOCK TABLES `show` WRITE;
+/*!40000 ALTER TABLE `show` DISABLE KEYS */;
+INSERT INTO `show` VALUES (3,1,'2022-09-03 22:00:00'),(1,2,'2022-09-01 13:30:00'),(4,2,'2022-09-05 21:30:00'),(2,3,'2022-09-01 16:30:00'),(2,3,'2022-09-02 19:45:00'),(6,4,'2022-09-02 18:00:00');
+/*!40000 ALTER TABLE `show` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ticket`
 --
 
@@ -157,21 +213,14 @@ DROP TABLE IF EXISTS `ticket`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ticket` (
   `idTicket` int NOT NULL AUTO_INCREMENT,
-  `idUser` int DEFAULT NULL,
-  `idMovie` int NOT NULL,
-  `roomNumber` int NOT NULL,
   `operationCode` varchar(45) NOT NULL,
-  `date` date NOT NULL,
-  `time` time NOT NULL,
-  `totalAmmount` decimal(10,2) DEFAULT NULL,
+  `dateTime` datetime NOT NULL,
+  `price` decimal(10,0) NOT NULL,
+  `idUser` int DEFAULT NULL,
   PRIMARY KEY (`idTicket`),
-  KEY `fk_Ticket_Movie_idx` (`idMovie`),
-  KEY `fk_ticket_Room_idx` (`roomNumber`),
-  KEY `fk_Ticket_User_idx` (`idUser`),
-  CONSTRAINT `fk_Ticket_Movie` FOREIGN KEY (`idMovie`) REFERENCES `movie` (`idMovie`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_ticket_room` FOREIGN KEY (`roomNumber`) REFERENCES `movieroom` (`roomNumber`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  KEY `fk_ticket_user_idx` (`idUser`),
   CONSTRAINT `fk_ticket_user` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +229,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,48271,7,1,'123456','2022-07-18','00:22:30',NULL),(2,48272,6,1,'123457','2022-07-17','00:21:33',NULL),(3,48273,5,2,'123458','2022-07-18','00:08:17',NULL),(4,48274,4,2,'123459','2022-07-16','00:09:47',NULL),(5,48274,3,3,'123460','2022-07-18','00:20:40',NULL),(6,48273,9,4,'123461','2022-07-16','00:16:53',NULL),(7,48272,8,5,'123462','2022-07-18','00:18:55',NULL),(8,48271,8,5,'123463','2022-07-17','00:19:32',NULL);
+INSERT INTO `ticket` VALUES (1,'123456','2022-07-18 22:30:00',900,48274),(2,'123457','2022-09-18 22:30:00',900,48271),(3,'123458','2022-09-12 00:00:00',1100,48275),(4,'123459','2022-09-10 00:00:00',1000,48277),(5,'123460','2022-09-03 22:30:00',900,48272);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -192,12 +241,17 @@ DROP TABLE IF EXISTS `ubication`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ubication` (
-  `roomNumber` int NOT NULL,
-  `row` char(1) NOT NULL,
+  `row` varchar(5) NOT NULL,
   `col` int NOT NULL,
-  `status` tinyint NOT NULL DEFAULT '0',
-  PRIMARY KEY (`roomNumber`,`row`,`col`),
-  CONSTRAINT `fk_Ubication_Room` FOREIGN KEY (`roomNumber`) REFERENCES `movieroom` (`roomNumber`) ON DELETE RESTRICT ON UPDATE CASCADE
+  `roomNumber` int NOT NULL,
+  `idMovie` int NOT NULL,
+  `show_date_time` datetime NOT NULL,
+  `idTicket` int NOT NULL,
+  PRIMARY KEY (`row`,`col`,`roomNumber`,`idMovie`,`show_date_time`),
+  KEY `fk_ubication_show_idx` (`roomNumber`,`idMovie`,`show_date_time`),
+  KEY `fk_ubication_ticket_idx` (`idTicket`),
+  CONSTRAINT `fk_ubication_show` FOREIGN KEY (`roomNumber`, `idMovie`, `show_date_time`) REFERENCES `show` (`roomNumber`, `idMovie`, `date_time`),
+  CONSTRAINT `fk_ubication_ticket` FOREIGN KEY (`idTicket`) REFERENCES `ticket` (`idTicket`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -207,7 +261,7 @@ CREATE TABLE `ubication` (
 
 LOCK TABLES `ubication` WRITE;
 /*!40000 ALTER TABLE `ubication` DISABLE KEYS */;
-INSERT INTO `ubication` VALUES (1,'A',1,0),(1,'A',2,0),(1,'A',3,0),(1,'B',1,0),(1,'B',2,0),(1,'B',3,0),(1,'C',1,0),(1,'C',2,0),(1,'C',3,0),(2,'A',1,0),(2,'A',2,0),(2,'A',3,0),(2,'B',1,0),(2,'B',2,0),(2,'B',3,0),(2,'C',1,0),(2,'C',2,0),(2,'C',3,0),(3,'A',1,0),(3,'A',2,0),(3,'A',3,0),(3,'B',1,0),(3,'B',2,0),(3,'B',3,0),(3,'C',1,0),(3,'C',2,0),(3,'C',3,0),(4,'A',1,0),(4,'A',2,0),(4,'A',3,0),(4,'B',1,0),(4,'B',2,0),(4,'B',3,0),(4,'C',1,0),(4,'C',2,0),(4,'C',3,0),(5,'A',1,0),(5,'A',2,0),(5,'A',3,0),(5,'B',1,0),(5,'B',2,0),(5,'B',3,0),(5,'C',1,0),(5,'C',2,0),(5,'C',3,0);
+INSERT INTO `ubication` VALUES ('A',4,1,3,'2022-09-03 22:00:00',1),('A',5,1,3,'2022-09-03 22:00:00',2),('H',7,2,4,'2022-09-05 21:30:00',3),('K',6,1,3,'2022-09-03 22:00:00',5);
 /*!40000 ALTER TABLE `ubication` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,17 +274,17 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `idUser` int NOT NULL AUTO_INCREMENT,
-  `idRole` int NOT NULL,
+  `idRole` int DEFAULT NULL,
   `surname` varchar(45) NOT NULL,
   `name` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   `birthDate` date NOT NULL,
-  `adress` varchar(45) NOT NULL,
+  `adress` varchar(255) NOT NULL,
   `phoneNumber` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   PRIMARY KEY (`idUser`),
-  KEY `fk_User_Rol_idx` (`idRole`),
-  CONSTRAINT `fk_User_Rol` FOREIGN KEY (`idRole`) REFERENCES `role` (`idRole`) ON UPDATE CASCADE
+  KEY `fk_user_rol_idx` (`idRole`),
+  CONSTRAINT `fk_user_role` FOREIGN KEY (`idRole`) REFERENCES `role` (`idRole`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=48278 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -253,4 +307,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-20 19:06:09
+-- Dump completed on 2022-09-02 11:48:00

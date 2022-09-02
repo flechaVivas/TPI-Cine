@@ -221,7 +221,7 @@ public class DataMovie {
 		try {
 					
 			stmt=DbConnector.getInstancia().getConn().createStatement();
-			rs=stmt.executeQuery("SELECT * FROM Movie");
+			rs=stmt.executeQuery("SELECT * FROM movie");
 			
 			while(rs.next()) {
 				Movie m=new Movie();
