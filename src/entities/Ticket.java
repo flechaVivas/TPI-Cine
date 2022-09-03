@@ -1,18 +1,14 @@
 package entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class Ticket {
 	private int idTicket;
 	private String operationCode;
-	private LocalDate date;
-	private LocalTime time;
-	private BigDecimal totalAmmount;
+	private LocalDateTime dateTime;
+	private BigDecimal price;
 	private User user;
-	private Movie movie;
-	private MovieRoom room;
 	
 	
 	public int getIdTicket() {
@@ -27,23 +23,17 @@ public class Ticket {
 	public void setOperationCode(String operationCode) {
 		this.operationCode = operationCode;
 	}
-	public LocalDate getDate() {
-		return date;
+	public LocalDateTime getDateTime() {
+		return dateTime;
 	}
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setDateTime(LocalDateTime localDateTime) {
+		this.dateTime = localDateTime;
 	}
-	public LocalTime getTime() {
-		return time;
+	public BigDecimal getPrice() {
+		return price;
 	}
-	public void setTime(LocalTime time) {
-		this.time = time;
-	}
-	public BigDecimal getTotalAmmount() {
-		return totalAmmount;
-	}
-	public void setTotalAmmount(BigDecimal totalAmmount) {
-		this.totalAmmount = totalAmmount;
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 	public User getUser() {
 		return user;
@@ -51,25 +41,15 @@ public class Ticket {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public Movie getMovie() {
-		return movie;
-	}
-	public void setMovie(Movie movie) {
-		this.movie = movie;
-	}
-	public MovieRoom getRoom() {
-		return room;
-	}
-	public void setRoom(MovieRoom room) {
-		this.room = room;
-	}
-	
+
+
 	@Override
 	public String toString() {
-		return "Ticket [idTicket=" + idTicket + ", operationCode=" + operationCode + ", date=" + date + ", time=" + time
-				+ ", totalAmmount=" + totalAmmount + ", user=" + user + ", movie=" + movie + ", room=" + room + "]\n";
+		return "Ticket [idTicket=" + idTicket + ", operationCode=" + operationCode + ", dateTime=" + dateTime
+				+ ", price=" + price + ", user=" + user + "]";
 	}
 	
+	public Ticket() {}
 	
 	
 	
