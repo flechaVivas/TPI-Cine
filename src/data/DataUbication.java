@@ -4,7 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
-
+import java.time.LocalDateTime;
+import entities.Show;
 import entities.Ubication;
 
 
@@ -16,7 +17,6 @@ public class DataUbication {
 		Ubication ub = null; 
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ubication WHERE roomNumber = ? and row = ? and col = ?");
-			stmt.setInt(1, ubp.getRoomNumber());
 			stmt.setString(2, ubp.getRow());
 			stmt.setInt(3, ubp.getCol());
 			
@@ -24,7 +24,9 @@ public class DataUbication {
 			
 			if(rs != null && rs.next()) {
 				ub = new Ubication();
-				ub.setRoomNumber(rs.getInt("roomNumber"));
+				Show s = new Show();
+				s.setDt(rs.getObject("Dt",LocalDateTime.class));
+				ub.setShow(s);
 				ub.setRow(rs.getString("row"));
 				ub.setCol(rs.getInt("col"));
 				ub.setStatus(rs.getBoolean("status"));
@@ -57,7 +59,9 @@ public class DataUbication {
 			
 			while(rs.next()) {
 				Ubication u = new Ubication();
-				u.setRoomNumber(rs.getInt("roomNumber"));
+				Show s = new Show();
+				s.setDt(rs.getObject("Dt",LocalDateTime.class));
+				u.setShow(s);
 				u.setRow(rs.getString("row"));
 				u.setCol(rs.getInt("col"));
 				u.setStatus(rs.getBoolean("status"));
@@ -99,11 +103,14 @@ public class DataUbication {
 	public Ubication createUbication(Ubication u) {
 		PreparedStatement stmt = null;
 		try{
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(roomNumber, row, col, status) values(?,?,?,?)");
-			stmt.setInt(1, u.getRoomNumber());
-			stmt.setString(2, u.getRow());
-			stmt.setInt(3, u.getCol());
-			stmt.setBoolean(4, u.getStatus());			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(roomNumber, idMovie, show_date_time, idTicket, row, col, status) values(?,?,?,?,?,?,?)");
+			stmt.setInt(1, u.getMovieRoom().getRoomNumber());
+			stmt.setInt(2, u.getMovie().getIdMovie());
+			stmt.setObject(3, u.getShow().getDt());
+			stmt.setInt(4, u.getTicket().getIdTicket());
+			stmt.setString(5, u.getRow());
+			stmt.setInt(6, u.getCol());
+			stmt.setBoolean(7, u.getStatus());			
 		}catch (SQLException e){
 			e.printStackTrace();
 		}finally {

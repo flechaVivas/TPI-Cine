@@ -6,6 +6,10 @@ public class Show {
 	private Movie movie;
 	private LocalDateTime dt;
 	
+	public Show(){
+		
+	}
+	
 	public MovieRoom getMovieroom() {
 		return movieroom;
 	}
