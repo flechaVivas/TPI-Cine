@@ -11,22 +11,25 @@ import entities.Show;
 
 public class DataShow {
 
-	public void getOne(Show s) {
+	public Show getOne(Show s) {
 		
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
-		Show sw=null;
-		MovieRoom mr=null;
-		Movie mo=null;
+		Show sw=new Show();
+		MovieRoom mr=new MovieRoom();
+		Movie mo=new Movie();
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM show WHERE idMovie=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM show WHERE idMovie=? and roomNumber=? and date_time=?");
 			stmt.setInt(1, s.getMovie().getIdMovie());
-			
+			stmt.setInt(2, s.getMovieroom().getRoomNumber());
+			stmt.setObject(3, s.getDt());
 			rs=stmt.executeQuery();
 			
 			mo.setIdMovie(rs.getInt("idMovie"));
 			mr.setRoomNumber(rs.getInt("roomNumber"));
 			sw.setDt(rs.getObject("Dt",LocalDateTime.class));
+			sw.setMovie(mo);
+			sw.setMovieroom(mr);
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -37,8 +40,9 @@ public class DataShow {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			
 		}
-		
+		return sw;
 	}
 
 	public void delete(Show s) {

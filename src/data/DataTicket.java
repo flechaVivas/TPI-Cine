@@ -4,18 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.LinkedList;
 
-import entities.Movie;
-import entities.MovieRoom;
 import entities.Ticket;
 import entities.User;
-import logic.MovieController;
-import logic.MovieRoomController;
-import logic.UserController;
 
 public class DataTicket {
 
