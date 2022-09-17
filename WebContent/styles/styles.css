@@ -1,1 +1,9 @@
 
+body {
+	background-color: #14213d;
+}
+
+.carousel-inner img {
+    width: 90%;
+    height: 90%;
+  }
