@@ -4,7 +4,14 @@ public class MovieRoom {
 
 	private int roomNumber;
 	private int capacity;
+	private RoomType rt;
 	
+	public RoomType getRt() {
+		return rt;
+	}
+	public void setRt(RoomType rt) {
+		this.rt = rt;
+	}
 	public int getRoomNumber() {
 		return roomNumber;
 	}

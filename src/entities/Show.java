@@ -6,9 +6,7 @@ public class Show {
 	private Movie movie;
 	private LocalDateTime dt;
 	
-	public Show(){
-		
-	}
+	public Show(){}
 	
 	public MovieRoom getMovieroom() {
 		return movieroom;
@@ -28,5 +26,4 @@ public class Show {
 	public void setDt(LocalDateTime dt) {
 		this.dt = dt;
 	}
-	
 }
