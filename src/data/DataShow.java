@@ -87,12 +87,12 @@ public class DataShow {
 			return s;
 		}
 
-
+//Ver si la actualizacion es necesaria//
 	public Show update(Show s) {
 		PreparedStatement stmt= null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
-			prepareStatement("update show set (\"update show set idMovie=?,roomNumber=?,date_time=?");
+			prepareStatement("update show set idMovie=?,roomNumber=?,date_time=? where idMovie=?,roomNumber=?, date_time=?");
 			stmt.setInt(1, s.getMovie().getIdMovie());
 			stmt.setInt(2, s.getMovieroom().getRoomNumber());
 			stmt.setObject(3, s.getDt());

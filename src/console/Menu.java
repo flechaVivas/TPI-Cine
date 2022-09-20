@@ -1,8 +1,5 @@
 package console;
 
-
-import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 import entities.*;
@@ -10,9 +7,8 @@ import logic.*;
 
 public class Menu {
 	Scanner s=null;
-	MovieController ctrlMovie = new MovieController();
-	GenreController ctrlGenre = new GenreController();
-	RestrictionController ctrlRest=new RestrictionController();
+	MovieRoomController ctrlMR= new MovieRoomController();
+	RoomTypeController ctrlRT= new RoomTypeController();
 	public void start() {
 		s = new Scanner(System.in);
 		System.out.println();
@@ -25,10 +21,57 @@ public class Menu {
 			
 		}while(!command.equalsIgnoreCase("exit"));
 		
-		s.close();
-	}
-
+		s.close();}
 	private void executeCommand(String command) {
+		switch(command) {
+		case "uno":
+			System.out.println(une());
+		break;
+		case "new":
+			System.out.println(nuevo());
+		break;
+		case "borrar":
+			borrar();
+		break;
+		default:
+			break;
+		}
+	}
+	private String getCommand() {
+		System.out.println("Ingrese el comando según la opción que desee realizar");
+		System.out.println("une\t\tobtener uno");
+		System.out.println("une\t\tagregar uno");
+		System.out.println("une\t\tborrar uno");
+		System.out.print("comando: ");
+		return s.nextLine();
+	}
+	private MovieRoom nuevo() {
+		MovieRoom mr=new MovieRoom();
+		RoomType rt=new RoomType();
+		
+		System.out.print("Ingrese Capacidad");
+		mr.setCapacity(Integer.parseInt(s.nextLine()));
+		System.out.print("Ingrese el tipo de sala");
+		rt.setIdRoomType(Integer.parseInt(s.nextLine()));
+		mr.setRt(ctrlRT.getOne(rt));
+		return ctrlMR.CreateMovieRoom(mr);
+	}
+	private MovieRoom une() {
+		MovieRoom mr=new MovieRoom();
+		mr.setRoomNumber(Integer.parseInt(s.nextLine()));
+		mr=ctrlMR.getOne(mr);
+		mr.setRt(ctrlRT.getOne(mr.getRt()));
+		return mr;
+	}
+	
+	private void borrar() {
+		MovieRoom mr=new MovieRoom();
+		System.out.println(ctrlMR.list());
+		System.out.println("Ingrese ID de la sala a eliminar:");
+		mr.setRoomNumber(Integer.parseInt(s.nextLine()));
+		ctrlMR.deleteMovieRoom(mr);
+	}
+	/*private void executeCommand(String command) {
 		switch (command) {
 		case "list":
 			System.out.println(list());
@@ -245,5 +288,5 @@ public class Menu {
 		System.out.println("Ingrese ID de la pelicula a eliminar:");
 		m.setIdMovie(Integer.parseInt(s.nextLine()));
 		ctrlMovie.deleteOne(m);
-	}
+	}*/
 }

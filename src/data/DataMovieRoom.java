@@ -72,9 +72,10 @@ public class DataMovieRoom {
 	public MovieRoom update(MovieRoom mr) {
 		PreparedStatement stmt = null;
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE movieroom set capacity = ? where = roomNumber ");			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE movieroom set capacity=?,roomType=? where roomNumber=?");			
 			stmt.setInt(1, mr.getCapacity());
 			stmt.setInt(2, mr.getRoomNumber());
+			stmt.setInt(3, mr.getRt().getIdRoomType());
 			stmt.executeUpdate();
 		}catch (SQLException e) {
             e.printStackTrace();
@@ -93,8 +94,9 @@ public class DataMovieRoom {
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO movieroom(capacity) values(?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO movieroom(capacity,roomType) values(?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, mr.getCapacity());
+			stmt.setInt(2, mr.getRt().getIdRoomType());
 			stmt.executeUpdate();
 			ResultSet keyResultSet = stmt.getGeneratedKeys();
 			if(keyResultSet != null && keyResultSet.next()) {
