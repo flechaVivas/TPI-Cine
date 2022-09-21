@@ -1,0 +1,235 @@
+
+
+.navbar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 30px 60px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 7;
+    color: #fff;
+    background-color: #023E8A;
+}
+
+.navbar.site-menu {
+	display: inline-block;
+	margin: 0 auto;
+}
+
+.navbar .site-menu ul {
+	display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar .site-menu ul li {
+	display: inline-block;
+    margin: 0 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.navbar .site-menu ul li a {
+	color: #fff;
+    font-weight: 600;
+}
+
+.navbar .site-menu ul li a:hover {
+	text-decoration: none;
+    color: #0096C7;
+}
+
+.navbar .user-menu {
+	display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: auto;
+}
+
+.navbar .user-menu .navbar-search {
+	display: inline-block;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.navbar .user-menu .navbar-notify {
+	display: inline-block;
+    margin-left: 20px;
+    position: relative;
+    font-size: 20px;
+}
+
+.navbar .user-menu .navbar-notify b {
+	width: 15px;
+    height: 15px;
+    line-height: 15px;
+    background: #204891;
+    position: absolute;
+    right: -7px;
+    top: 0;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 11px;
+}
+
+.navbar .user-menu .navbar-notify i {
+	color: #fff;
+    cursor: pointer;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown {
+	width: 300px;
+    background: #fff;
+    position: absolute;
+    left: calc(50% - 150px);
+    top: calc(100% + 20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+    color: #111111;
+    font-size: 14px;
+    display: none;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown:after {
+    content: "";
+	width: 100%;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    top: -20px;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown .total-notify {
+    width: 100%;
+    display: flex;
+    padding: 20px 25px;
+    background: #204891;
+    color: #fff;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown .total-notify h6 {
+    margin: 0;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 600;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown .total-notify span {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    background: #fff;
+    color: #204891;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: 600;
+    margin-left: 7px;
+    font-size: 15px;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown ul {
+    width: 100%;
+    display: block;
+    margin: 0;
+    padding: 25px;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown ul li {
+    width: 100%;
+    display: block;
+    margin-bottom: 5px;
+    padding: 0;
+    padding-bottom: 5px;
+    list-style: none;
+    border-bottom: 1px solid #cdcdcd;
+    position: relative;
+    padding-left: 20px;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown ul li:before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #204891;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 9px;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown ul li strong {
+    font-weight: 600;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown ul li p {
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 5px;
+    line-height: 1.3;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown ul li span {
+    width: 100%;
+    display: block;
+    opacity: 0.5;
+    font-size: 12px;
+}
+
+.navbar .user-menu .navbar-notify .notify-dropdown ul li:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.navbar .user-menu .navbar-account {
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .user-menu .navbar-account a {
+    line-height: 40px;
+    display: inline-block;
+    font-weight: 600;
+    color: #fff;
+}
+
+.navbar .user-menu .navbar-account i {
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    float: right;
+    border: 2px solid #fff;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 22px;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
