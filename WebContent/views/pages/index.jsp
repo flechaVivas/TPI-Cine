@@ -15,7 +15,16 @@
 
 
 	 
-    <% // Me mapeo los datos de la db
+    <%
+    
+	    User u = new User();
+    
+	    if(session.getAttribute("usuario") == null){
+	    	request.getRequestDispatcher("index.html").forward(request, response);
+	    } else{
+		    u = (User)session.getAttribute("usuario");
+	    }
+    	
     
     	MovieController ctrlMovie = new MovieController();
     	LinkedList<Movie> ml = ctrlMovie.getAll();
