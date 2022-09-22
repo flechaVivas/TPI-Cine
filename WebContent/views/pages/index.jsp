@@ -17,6 +17,7 @@
 	 
     <%
     
+    /*
 	    User u = new User();
     
 	    if(session.getAttribute("usuario") == null){
@@ -28,7 +29,7 @@
     
     	MovieController ctrlMovie = new MovieController();
     	LinkedList<Movie> ml = ctrlMovie.getAll();
-    	
+   	*/
 	%>
 
 
