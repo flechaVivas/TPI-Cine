@@ -11,7 +11,7 @@
 <body>
     <div class="input-group">
         <h1>Inicio de Sesion</h1>
-        <form action="/TPI-Cine/src/servlet/Inicio" method="post">
+        <form action="/TPI-Cine/src/servlet/login" method="post">
                 <input type="email" name="email" class="input" placeholder="Usuario" required>
             <br>
             <br>
