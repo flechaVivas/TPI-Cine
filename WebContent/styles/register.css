@@ -20,6 +20,7 @@ main{
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	border-radius: 10px;
 }
 
 .Container H2{
@@ -68,7 +69,8 @@ form{
     border-bottom-color: #90e0efff;
     padding: .2rem .2rem;
     outline: none;
-    background-color: transparent;
+    background-color: #d6fffa;
+    border-radius: 10px;
     color: #03045eff;
     transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
