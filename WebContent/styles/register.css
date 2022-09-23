@@ -2,14 +2,19 @@
 
 body{
 	background-color: #CAF0F8;
-	padding: 10px;
-	justify-content: center;
+	padding: 0px;
+  	margin: 0px;
+}
 
+main{
+	margin-top: 10px;
+	display: flex;
+	justify-content: center;
 }
 
 .Container{
 	background-color: #fff;
-	width: 100%;
+	width: 80%;
 	height: 100%;
 	margin: 10px;
 	display: flex;
@@ -41,11 +46,12 @@ form{
 	display: flex;
 	justify-content: center;
 	align-self: center;
+	
 }
 
 .formContent div{
 	width: 90%;
-	margin: 5px;
+	margin: 5px;	
 }
 
 .divForm {
@@ -53,13 +59,34 @@ form{
 	flex-wrap: wrap;
   	flex-direction: column;
   	justify-content: center;
+  	
 }
 
 .divForm input{
-	background-color: #CAF0F8 ;
-	padding: 5px;
-	border: 0.5px solid #1a5fb4; 
-	border-radius: 3px;
+	line-height: 28px;
+    border: 2px solid transparent;
+    border-bottom-color: #90e0efff;
+    padding: .2rem .2rem;
+    outline: none;
+    background-color: transparent;
+    color: #03045eff;
+    transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.divForm input:focus, input:hover {
+    outline: none;
+    padding: .2rem 1rem;
+    border-radius: 1rem;
+    border-color: #03045eff;
+   }
+   
+.divForm input::placeholder {
+ color: #90e0efff;
+}
+   
+.divForm input:focus::placeholder {
+ opacity: 0;
+ transition: opacity .3s;
 }
 
 .buttonSend{
@@ -69,7 +96,27 @@ form{
 	height: 40px;
 }
 
-.buttonSend button{
-	width: 30%;
-	height: 100%;
-}
+.buttonSend button {
+  border: 2px #0077b6ff;
+  font-size: 1rem;
+  padding: .2rem 2rem;
+  border-radius: 8px;
+  border-color: #7a9cc6;
+  cursor: pointer;
+ }
+ 
+.buttonSend button:active {
+  color: #caf0f8ff;
+  box-shadow: 0 0.2rem #dfd9d9;
+  transform: translateY(0.2rem);
+ }
+ 
+.buttonSend button:hover:not(:disabled) {
+  background: #03045eff;
+  color: #caf0f8ff;
+ }
+ 
+.buttonSend button:disabled {
+  cursor: auto;
+  color: #caf0f8ff;
+ }
