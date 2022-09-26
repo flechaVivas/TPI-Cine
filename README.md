@@ -48,7 +48,7 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 |Envio de emails|Al enviar tickets al cliente.|
 
 ## Modelo de Datos
-![DER-CINE-Definitiva](https://user-images.githubusercontent.com/78052165/188151096-ae430ebd-309d-4c44-b748-2217f9369460.png)
+![DER-CINE(RE CONTRA DEFINITIVO)](https://user-images.githubusercontent.com/78052165/192290721-92f9b8ae-78e2-447c-96af-52720206bbc4.png)
 
 
 
