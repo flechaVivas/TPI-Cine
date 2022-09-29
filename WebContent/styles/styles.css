@@ -1,0 +1,20 @@
+footer{
+    background-color: #9495f8;
+}
+.nav-footer{
+    display: flex;
+}
+li{
+    display: flex;
+    flex-direction: column;
+}
+.cine{
+    margin-left: 4px;
+}
+
+.container{
+    background-color: #0077B6;
+}
+a{
+    color: #ADE8F4;
+}
