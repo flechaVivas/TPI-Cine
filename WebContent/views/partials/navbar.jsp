@@ -1,40 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+<%@page import="entities.Role"%>
+<%@page import="entities.User"%>
 
-<link rel="stylesheet" href="../../styles/navbar.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+<%
+		User u = new User();
+		u=(User)session.getAttribute("usuario");
+ %>
 
-</head>
-<body>
+<nav class="navbar">
+	<div class="site-menu">
+		<ul>
+			<li>
+				<a href="#">CARTELERA</a>
+			</li>
+			<li>
+				<a href="#">ENTRADAS</a>
+			</li>
+			<li>
+				<a href="#">CONTACTO</a>
+			</li>
+			<% if(u!=null){
+				if(u.getRole().getDescription().equals("taquillero")){ %>
+			<li>
+				<a href="#">ADMINISTRAR FUNCIONES</a>
+			</li>
+			<li>
+				<a href="#">ADMINISTRAR PELICULAS</a>
+			</li>
+			<%}
+				} %>
+		</ul>
+	</div>
+	
+	<%if(u==null){%>
+	
+	<div id="login_link" class="user-menu">
+       	<div class="navbar-account">
+       		
+           	<span id="ctl00_lblLogin"><a href="login.jsp"> Inicia Sesión! </a></span> 
+           	<i class="fa-solid fa-user"></i>
+          	</div>
+      	</div>
+      	
+     <%} else{%>
+     
+     <div id="login_link" class="user-menu">
+       	<div class="navbar-account">
+           	<span id="ctl00_lblLogin"><a href="administrarCuenta.jsp"><%=u.getName()+" "+u.getSurname()%> </a></span> 
+           	<i class="fa-solid fa-user"></i>
+      	</div>
+    </div>
+     
+     
+     <%} %>
+     
 
-	<nav class="navbar">
-		<div class="site-menu">
-			<ul>
-				<li>
-					<a href="#">CARTELERA</a>
-				</li>
-				<li>
-					<a href="#">ENTRADAS</a>
-				</li>
-				<li>
-					<a href="#">CONTACTO</a>
-				</li>
-			</ul>
-		</div>
-		
-		<div id="login_link" class="user-menu">
-        	<div class="navbar-account">
-        		
-            	<span id="ctl00_lblLogin"><a href="login.jsp"> MI CUENTA </a></span> 
-            	<i class="fa-solid fa-user"></i>
-           	</div>
-       	</div>
-		
-		
-	</nav>
-</body>
-</html>
+      	
+      	
+      	
+      	
+      	
+</nav>
