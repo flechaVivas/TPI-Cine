@@ -13,7 +13,7 @@
 				<a href="#">CARTELERA</a>
 			</li>
 			<li>
-				<a href="#">ENTRADAS</a>
+				<a href="entradas.jsp">ENTRADAS</a>
 			</li>
 			<li>
 				<a href="#">CONTACTO</a>
@@ -49,7 +49,6 @@
            	<i class="fa-solid fa-user"></i>
       	</div>
     </div>
-     
      
      <%} %>
 

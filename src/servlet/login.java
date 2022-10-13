@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -50,8 +52,10 @@ public class login extends HttpServlet {
             }
 
             if(u==null) {
-
-                // response.sendRedirect("../../WebContent/views/pages/login.jsp");
+            	PrintWriter out = response.getWriter();
+            	
+            	out.println("<h1>Usuario o Contraseña incorrectos!</h1>");
+            	
             }
             else {
                 response.setStatus(200);
