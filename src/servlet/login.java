@@ -52,9 +52,9 @@ public class login extends HttpServlet {
             }
 
             if(u==null) {
-            	PrintWriter out = response.getWriter();
             	
-            	out.println("<h1>Usuario o Contraseña incorrectos!</h1>");
+            	request.setAttribute("action","incorrect");
+            	response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
             	
             }
             else {

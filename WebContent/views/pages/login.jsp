@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="../../styles/login.css">
 </head>
 <body>
+
+	<%if(request.getAttribute("action")=="incorrect"){%>
+	<div class="alert alert-danger" role="alert">
+ 	 	Usuario o Contraseña Incorrectos!
+	</div>
+	<%} %>
+		
     <div class="input-group">
         <h1>Inicio de Sesion</h1>
         <form action="/TPI-Cine/src/servlet/login" method="post">

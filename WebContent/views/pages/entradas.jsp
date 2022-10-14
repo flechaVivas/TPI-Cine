@@ -18,9 +18,11 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
 
 	<%
-		MovieController ctrlMovie = new MovieController();
-		LinkedList<Movie> movies = ctrlMovie.getAll();
-		
+	
+		if(session.getAttribute("usuario")==null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		}
+	
 // 		RoomTypeController ctrlRoomType = new RoomTypeController();
 // 		LinkedList<RoomType> types = ctrlRoomType.getAvailableTypes();
 
@@ -46,40 +48,20 @@
 					</div>
 				</div>
 				
-				<form action="ventaEntradas" method="post">
-				<div class="row">
-					<br><br>
-					
-					<label name="movie">Seleccione una <strong>película</strong></label>
-					<select name="movie" id="movie">
-						<% for (Movie m : movies){ %>
-						<option value=" <%=m.getTitle()%> "><%=m.getTitle()%></option>
-						<%} %>
-				  	</select>
-				  	
-<!-- 				  	<label name="type">Seleccione un <strong>tipo</strong> de <strong>sala</strong></label> -->
-<!-- 					<select name="type" id="type"> -->
-<%-- 						<% for (RoomType rt : types){ %> --%>
-<%-- 						<option value=" <%=m.getTitle()%> "><%=m.getTitle()%></option> --%>
-<%-- 						<%} %> --%>
-<!-- 				  	</select> -->
-
-
-				</div>
-				</form>
-			</div>
-
-			
-
+				<jsp:include page="../partials/selecPelicula.jsp"></jsp:include>
 				
-
-
-
-	
-			
-			
-			
-			
+				<% if(request.getAttribute("show") != null){ %>
+				
+				<jsp:include page="../partials/selecHabitacion.jsp"></jsp:include>
+				
+				<jsp:include page="../partials/selecDiaHora.jsp"></jsp:include>
+				
+				<%} %>
+				
+				
+				
+				
+			</div>
 			
 		</section>
 	</main>

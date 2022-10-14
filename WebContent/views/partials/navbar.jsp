@@ -13,7 +13,7 @@
 				<a href="#">CARTELERA</a>
 			</li>
 			<li>
-				<a href="entradas.jsp">ENTRADAS</a>
+				<a href="/TPI-Cine/views/pages/entradas.jsp">ENTRADAS</a>
 			</li>
 			<li>
 				<a href="#">CONTACTO</a>
