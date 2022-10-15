@@ -1,3 +1,4 @@
+<%@page import="entities.Show"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="logic.MovieController"%>
 <%@page import="entities.Movie"%>
@@ -6,6 +7,8 @@
 
 	MovieController ctrlMovie = new MovieController();
 	LinkedList<Movie> movies = ctrlMovie.getAll();
+	
+	Show s = (Show)request.getAttribute("show");
 	
 	%>
 
@@ -16,14 +19,19 @@
 			<label name="movie">Seleccione una <strong>película</strong></label>    
 			<select name="movie" id="movie">
 			
-				<% for (Movie m : movies){ %>
-				<option value="<%=m.getIdMovie()%> "><%=m.getTitle()%></option>
-				<%} %>
+			<% 
+				if(s == null){
+					for (Movie m : movies){ %>
+						<option value="<%=m.getIdMovie()%>"><%=m.getTitle()%></option>
+					<%}
+				} else {%><option value="<%=s.getMovie().getIdMovie()%>"><%=s.getMovie().getTitle()%></option> <% }%>
 				
 	  		</select>
 		</div>
-		<div class="col-md-2">
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>
-		</div>
+		<%if(s == null){ %>
+			<div class="col-md-2">
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>
+			</div>
+		<%} %>
 	</div>
 </form>

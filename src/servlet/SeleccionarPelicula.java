@@ -46,28 +46,23 @@ public class SeleccionarPelicula extends HttpServlet {
 			MovieController ctrlMovie = new MovieController();
 			Show s = new Show();
 			
-			if (request.getParameter("movie") != null) {
-				m.setIdMovie(Integer.parseInt(request.getParameter("movie")));
+			if (request.getParameter("movie") != "") {
+				
+				m.setIdMovie((Integer.parseInt((String)request.getParameter("movie"))));
 				
 				m = ctrlMovie.getbyIdMovie(m);
 				
 				s.setMovie(m);
 				
 				request.setAttribute("show", s);
-				request.getRequestDispatcher("/TPI-Cine/views/pages/entradas.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/pages/entradas.jsp").forward(request, response);
+				
 				
 			}
 			
 			
-			
-			
-			
-			
-			
-			
-			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e.getCause()+" "+e.getStackTrace());
 		}
 		
 		

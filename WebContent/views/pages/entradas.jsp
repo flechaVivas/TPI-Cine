@@ -1,3 +1,4 @@
+<%@page import="entities.Show"%>
 <%@page import="logic.RoomTypeController"%>
 <%@page import="entities.RoomType"%>
 <%@page import="java.util.LinkedList"%>
@@ -23,15 +24,13 @@
 			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 		}
 	
-// 		RoomTypeController ctrlRoomType = new RoomTypeController();
-// 		LinkedList<RoomType> types = ctrlRoomType.getAvailableTypes();
-
-
+		Show s = (Show)request.getAttribute("show");
+	
 	%>
 
 
 </head>
-<body>
+<body style="background-color: #f5f3f4;">
 
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	
@@ -50,13 +49,20 @@
 				
 				<jsp:include page="../partials/selecPelicula.jsp"></jsp:include>
 				
-				<% if(request.getAttribute("show") != null){ %>
+				<% if(s!=null){
+					if(s.getMovie() != null){ %>
 				
-				<jsp:include page="../partials/selecHabitacion.jsp"></jsp:include>
+						<jsp:include page="../partials/selecHabitacion.jsp"></jsp:include>
+						
+						<%if(s.getMovieroom() != null){ %>
+					
+							<jsp:include page="../partials/selecDiaHora.jsp"></jsp:include>
+						
+						<%} %>
 				
-				<jsp:include page="../partials/selecDiaHora.jsp"></jsp:include>
-				
+					<%} %>
 				<%} %>
+				
 				
 				
 				
