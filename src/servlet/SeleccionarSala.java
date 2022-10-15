@@ -7,21 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Movie;
-import entities.Show;
-import logic.MovieController;
+import entities.RoomType;
 
 /**
- * Servlet implementation class SeleccionarPelicula
+ * Servlet implementation class SeleccionarSala
  */
-@WebServlet({ "/src/servlet/SeleccionarPelicula", "/src/servlet/seleccionarpelicula", "/src/servlet/seleccionarPelicula" })
-public class SeleccionarPelicula extends HttpServlet {
+@WebServlet("/SeleccionarSala, /seleccionarSala")
+public class SeleccionarSala extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SeleccionarPelicula() {
+    public SeleccionarSala() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,30 +40,17 @@ public class SeleccionarPelicula extends HttpServlet {
 		
 		try {
 			
-			Movie m = new Movie();
-			MovieController ctrlMovie = new MovieController();
-			Show s = new Show();
+			RoomType rt = new RoomType();
 			
-			if (request.getParameter("movie") != null) {
-				
-				m.setIdMovie((Integer.parseInt((String)request.getParameter("movie"))));
-				
-				m = ctrlMovie.getbyIdMovie(m);
-				
-				s.setMovie(m);
-				
-				request.setAttribute("show", s);
-				request.getRequestDispatcher("/views/pages/entradas.jsp").forward(request, response);
-				
-				
-			}
+			rt.setIdRoomType(Integer.parseInt(request.getParameter("tipo")));
+			
+			
+			
 			
 			
 		} catch (Exception e) {
-			System.out.println(e.getCause()+" "+e.getStackTrace());
+			// TODO: handle exception
 		}
-		
-		
 		
 		
 		
