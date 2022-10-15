@@ -3,10 +3,13 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 
 import entities.Movie;
 import entities.MovieRoom;
+import entities.RoomType;
 import entities.Show;
 
 public class DataShow {
@@ -109,5 +112,55 @@ public class DataShow {
 	}
 	return s;
 }
+
+	public LinkedList<Show> getDateTime(Movie m, RoomType rt) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Show> fechas = new LinkedList<Show>();
+		
+		try {
+			
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select date_time from\n" + 
+					"cine_tpjava.show s\n" + 
+					"inner join movieroom mr\n" + 
+					"	on mr.roomNumber=s.roomNumber\n" + 
+					"where s.idMovie=?\n" + 
+					"and mr.idRoomType=?;"
+			);
+			stmt.setInt(1, m.getIdMovie());
+			stmt.setInt(2, rt.getIdRoomType());
+			rs=stmt.executeQuery();
+			
+			if (rs != null) {
+				while (rs.next()) {
+					Show s = new Show();
+					
+					s.setDt(rs.getObject("date_time",LocalDateTime.class));
+					
+					fechas.add(s);
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		
+		
+		return fechas;
+	}
 
 }
