@@ -1,18 +1,23 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Movie;
 import entities.RoomType;
+import entities.Show;
+import logic.ShowController;
 
 /**
  * Servlet implementation class SeleccionarSala
  */
-@WebServlet("/SeleccionarSala, /seleccionarSala")
+@WebServlet({"/src/servlet/SeleccionarSala", "/src/servlet/seleccionarSala"})
 public class SeleccionarSala extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,16 +45,27 @@ public class SeleccionarSala extends HttpServlet {
 		
 		try {
 			
-			RoomType rt = new RoomType();
+			ShowController ctrlShow = new ShowController();
+			Show s = (Show) request.getAttribute("show");
 			
-			rt.setIdRoomType(Integer.parseInt(request.getParameter("tipo")));
+			response.getWriter().append((CharSequence)s.getMovieroom());
 			
-			
-			
+			if(request.getParameter("tipo") != null){
+
+				RoomType rt = new RoomType();
+				rt.setIdRoomType(Integer.parseInt((String)request.getParameter("tipo")));
+				Movie m = s.getMovie();
+				
+				LinkedList<Show> shows = ctrlShow.getDateTimeByRoomTypeMovie(m,rt);
+				
+				request.setAttribute("showsDateTime", shows);
+				request.getRequestDispatcher("/views/pages/entradas.jsp").forward(request, response);
+				
+			}
 			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e.getCause()+"\n"+e.getMessage());
 		}
 		
 		

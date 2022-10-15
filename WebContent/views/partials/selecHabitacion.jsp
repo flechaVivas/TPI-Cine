@@ -8,37 +8,35 @@
 	
 		Show s = (Show)request.getAttribute("show");
 	
+		Movie m = s.getMovie();
+		RoomTypeController ctrlRoomType = new RoomTypeController();
+		LinkedList<RoomType> types = ctrlRoomType.getAvailables(m);
+	
 	%>
 
-
-
-
-
-<form action="/TPI-Cine/src/servlet/seleccionTipo" method="post">
+<form action="/TPI-Cine/src/servlet/SeleccionarSala" method="post">
 	<div class="row mt-5">
-		<div class="col-md-10">
-			<label name="tipo">Seleccione el <strong>tipo</strong> de<strong> sala</strong></label>    
-			
-			<% if(s != null ) { 
-				Movie m = s.getMovie();
-				RoomTypeController ctrlRoomType = new RoomTypeController();
-				LinkedList<RoomType> types = ctrlRoomType.getAvailables(m);
-			%>
-				<select name="tipo" id="tipo">	
-				<% for (RoomType rt : types){ %>
-					<option value="<%=rt.getIdRoomType()%>"><%=rt.getDescription()%></option>
-				<%}%>
-				</select>
+			<% if(types.isEmpty()) { %>
+				<div class="col-md-10">
+					<h3>No hay salas disponibles!</h3>
+					<div class="col-md-2">
+						<a href="/TPI-Cine/views/pages/entradas.jsp"> Volver</a>
+					</div>
+				</div>
 				
-		<% }else{%>
-			<h3>No hay disponibles!</h3>
-		<%}%>
+			<%} else { %>
+				<div class="col-md-10">
+					<label name="tipo">Seleccione el <strong>tipo</strong> de<strong> sala</strong></label>    
+					<select name="tipo" id="tipo">	
+					<% for (RoomType rt : types){ %>
+						<option value="<%=rt.getIdRoomType()%>"><%=rt.getDescription()%></option>
+					<%}%>
+					</select>
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>
+				</div>
 				
-				
-	  		
+			<% }%>
 		</div>
-		<div class="col-md-2">
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>
-		</div>
-	</div>
 </form>
