@@ -30,7 +30,7 @@
 
 
 </head>
-<body style="background-color: #f5f3f4;">
+<body style="background-color: #d9d9d9">
 
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	

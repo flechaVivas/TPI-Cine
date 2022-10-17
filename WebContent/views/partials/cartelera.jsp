@@ -29,7 +29,7 @@
 	                        <div class="category-thumb">
 	                            <figure class="category-image">
 	                            	<a href="entradas.jsp">
-	                            		<img src="" alt="">
+	                            		<img src="<%=m.getImage()%>" alt="<%=m.getTitle()%>">
 	                            	</a>
 	                            </figure>
 	                        </div>
