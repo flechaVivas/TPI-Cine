@@ -15,9 +15,33 @@
 	
 	%>
 	
+	<script type="text/javascript">
+
+		function limpiarSesion(){
+			<%
+				session.removeAttribute("usuario");
+				session.invalidate();
+			%>
+		}
+	
+	</script>
+	
 <body>
 
     <div class="input-group" style="margin-top: 50px;">
+    	
+    	<% if(action == ("success")){ %>
+
+			<div class="alert alert-success" role="alert">
+	 			<strong style="color: #2feaa8;">USUARIO creado con ÉXITO</strong>
+			</div>
+		
+			<% request.removeAttribute("action");
+			
+			} %>
+    	
+    
+    
         <h1>Inicio de Sesion</h1>
         <form action="/TPI-Cine/src/servlet/login" method="post">
                 <input type="email" name="email" class="input" placeholder="Usuario" required>
@@ -30,7 +54,7 @@
             <br>
             <br>
             <span style="color:#90e0efff">¿No tienes una cuenta?</span>
-            <a style="color: #03045eff " href="/TPI-Cine/views/pages/register.jsp"><b>Crea una</b></a> <!--Enlace a otro fichero-->
+            <a style="color: #03045eff " href="/TPI-Cine/views/pages/register.jsp" onclick="limpiarSesion()"><b>Crea una</b></a> <!--Enlace a otro fichero-->
             <br>
             <br>
         </form>
