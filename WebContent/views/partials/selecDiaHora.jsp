@@ -4,10 +4,8 @@
 	
 	<%
 
-	Show s = new Show();
 	ShowController ctrlShow = new ShowController();
-	
-// 	LinkedList<Show> shows = ctrlShow.getByMovieAndRoom();
+	LinkedList<Show> shows = (LinkedList<Show>)request.getAttribute("showsDateTime");
 	
 	%>
 
@@ -18,9 +16,9 @@
 			<label name="date_time">Seleccione <strong>fecha y hora</strong></label>    
 			<select name="date_time" id="date_time">
 			
-<%-- 				<% for (Show s : shows){ %> --%>
-<%-- 				<option value="<%=s.getDt()%>"><%=s.getDt()%></option> --%>
-<%-- 				<%} %> --%>
+				<% for (Show s : shows){ %>
+				<option value="<%=s.getDt()%>"><%=s.getDt()%></option>
+				<%} %>
 				
 	  		</select>
 		</div>

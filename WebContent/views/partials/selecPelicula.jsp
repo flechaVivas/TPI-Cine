@@ -8,7 +8,7 @@
 	MovieController ctrlMovie = new MovieController();
 	LinkedList<Movie> movies = ctrlMovie.getAll();
 	
-	Show s = (Show)request.getAttribute("show");
+	Show s = (Show)session.getAttribute("show");
 	
 	%>
 

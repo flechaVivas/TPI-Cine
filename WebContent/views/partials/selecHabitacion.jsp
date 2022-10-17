@@ -5,8 +5,7 @@
 <%@page import="entities.RoomType"%>
 
 	<%
-	
-		Show s = (Show)request.getAttribute("show");
+		Show s = (Show)session.getAttribute("show");
 	
 		Movie m = s.getMovie();
 		RoomTypeController ctrlRoomType = new RoomTypeController();
@@ -16,7 +15,10 @@
 
 <form action="/TPI-Cine/src/servlet/SeleccionarSala" method="post">
 	<div class="row mt-5">
-			<% if(types.isEmpty()) { %>
+			<% if(types.isEmpty()) {
+				session.removeAttribute("show");
+			%>
+				
 				<div class="col-md-10">
 					<h3>No hay salas disponibles!</h3>
 					<div class="col-md-2">
@@ -33,9 +35,14 @@
 					<%}%>
 					</select>
 				</div>
-				<div class="col-md-2">
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>
-				</div>
+				
+				<% if(s != null) {%>
+				
+					<div class="col-md-2">
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>
+					</div>
+				
+				<% }%>
 				
 			<% }%>
 		</div>

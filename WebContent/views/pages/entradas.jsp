@@ -24,7 +24,7 @@
 			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 		}
 	
-		Show s = (Show)request.getAttribute("show");
+		Show s = (Show)session.getAttribute("show");
 	
 	%>
 
@@ -50,11 +50,12 @@
 				<jsp:include page="../partials/selecPelicula.jsp"></jsp:include>
 				
 				<% if(s!=null){
+					
 					if(s.getMovie() != null){ %>
 				
 						<jsp:include page="../partials/selecHabitacion.jsp"></jsp:include>
 						
-						<%if(s.getMovieroom() != null){ %>
+						<%if(request.getAttribute("showsDateTime") != null ){ %>
 					
 							<jsp:include page="../partials/selecDiaHora.jsp"></jsp:include>
 						

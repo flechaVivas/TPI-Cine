@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entities.Movie;
 import entities.RoomType;
@@ -44,13 +45,11 @@ public class SeleccionarSala extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		try {
-			
+		
 			ShowController ctrlShow = new ShowController();
-			Show s = (Show) request.getAttribute("show");
+			Show s = (Show) request.getSession(false).getAttribute("show");
 			
-			response.getWriter().append((CharSequence)s.getMovieroom());
-			
-			if(request.getParameter("tipo") != null){
+			if(request.getParameter("tipo") != null && s != null){
 
 				RoomType rt = new RoomType();
 				rt.setIdRoomType(Integer.parseInt((String)request.getParameter("tipo")));
@@ -64,9 +63,10 @@ public class SeleccionarSala extends HttpServlet {
 			}
 			
 			
-		} catch (Exception e) {
-			System.out.println(e.getCause()+"\n"+e.getMessage());
-		}
+		} finally {}
+//		catch (Exception e) {
+//			System.out.println(e.getCause()+"\n"+e.getMessage());
+//		}
 		
 		
 		

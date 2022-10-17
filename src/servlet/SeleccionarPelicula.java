@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entities.Movie;
 import entities.Show;
@@ -54,16 +55,18 @@ public class SeleccionarPelicula extends HttpServlet {
 				
 				s.setMovie(m);
 				
-				request.setAttribute("show", s);
+				HttpSession session = request.getSession(false);
+				session.setAttribute("show", s);
 				request.getRequestDispatcher("/views/pages/entradas.jsp").forward(request, response);
 				
 				
 			}
 			
 			
-		} catch (Exception e) {
-			System.out.println(e.getCause()+" "+e.getStackTrace());
-		}
+		} finally {}
+//		catch (Exception e) {
+//			System.out.println(e.getCause()+" "+e.getStackTrace());
+//		}
 		
 		
 		
