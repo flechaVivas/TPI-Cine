@@ -53,8 +53,8 @@ public class login extends HttpServlet {
 
             if(u==null) {
             	
-            	request.setAttribute("action","incorrect");
-            	response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+            	request.setAttribute("action","error");
+            	request.getRequestDispatcher("/views/pages/login.jsp").forward(request, response);
             	
             }
             else {

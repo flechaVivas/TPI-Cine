@@ -8,15 +8,16 @@
     <title>LogIn</title>
     <link rel="stylesheet" href="../../styles/login.css">
 </head>
+
+	<%
+
+	String action = (String)request.getAttribute("action");
+	
+	%>
+	
 <body>
 
-	<%if(request.getAttribute("action")=="incorrect"){%>
-	<div class="alert alert-danger" role="alert">
- 	 	Usuario o Contraseña Incorrectos!
-	</div>
-	<%} %>
-		
-    <div class="input-group">
+    <div class="input-group" style="margin-top: 50px;">
         <h1>Inicio de Sesion</h1>
         <form action="/TPI-Cine/src/servlet/login" method="post">
                 <input type="email" name="email" class="input" placeholder="Usuario" required>
@@ -29,10 +30,19 @@
             <br>
             <br>
             <span style="color:#90e0efff">¿No tienes una cuenta?</span>
-            <a style="color: #03045eff " href="register.jsp"><b>Crea una</b></a> <!--Enlace a otro fichero-->
+            <a style="color: #03045eff " href="/TPI-Cine/views/pages/register.jsp"><b>Crea una</b></a> <!--Enlace a otro fichero-->
             <br>
             <br>
         </form>
+        <% if(action == ("error")){ %>
+
+			<div class="alert alert-danger" role="alert">
+	 			<strong style="color: #660708;">USUARIO y/o CONTRASEÑA INCORRECTOS!</strong>
+			</div>
+		
+			<% request.removeAttribute("action");
+			
+			} %>
     </div>
 </body>
 </html>
