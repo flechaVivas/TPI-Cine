@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `movie`;
 CREATE TABLE `movie` (
   `idMovie` int NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
-  `image` blob,
+  `image` varchar(255) DEFAULT NULL,
   `releaseDate` date NOT NULL,
   `cast` varchar(150) NOT NULL,
   `director` varchar(45) NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE `movie` (
 
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` VALUES (1,'Relatos Salvajes',NULL,'2014-08-21','Ricardo DarÃƒÂ­n, Oscar MartÃƒÂ­nez, Leonardo Sbaraglia, Ãƒâ€°rica Rivas, Rita Cortese, Julieta Zylberberg, DarÃƒÂ­o Grandinetti','DamiÃƒÂ¡n Szifron',122,4,1),(2,'The pianist',NULL,'2003-03-06','Adrien Brody, Thomas Kretschmann, Frank Finlay, Maureen Lipman, Emilia Fox, Ed Stoppard, Julia Rayner, Jessica Kate Meyer','RomÃƒÂ¡n Polanski',151,4,1),(3,'Inglourious Basterds',NULL,'2009-08-31','Brad Pitt, Christoph Waltz, MÃƒÂ©lanie Laurent, Eli Roth, Diane Kruger, Daniel BrÃƒÂ¼hl, Til Schweiger, Michael Fassbender','Quentin Tarantino',153,3,2),(4,'Thor: Love and thunder',NULL,'2022-07-07','Chris Hemsworth, Christian Bale, Tessa Thompson, Jaimie Alexander, Taika Waititi, Russell Crowe,Natalie Portman','Taika Waititi',119,1,3),(5,'The godfather',NULL,'1972-08-10','Marlon Brando, Al Pacino, Robert Duvall, James Caan, Richard Castellano, Diane Keaton','Francis Ford Coppola',177,5,1),(6,'Deadpool',NULL,'2016-02-11','Ryan Reynolds, Morena Baccarin, Ed Skrein, T. J. Miller, Gina Carano, Leslie Uggams, Brianna Hildebrand, Stefan KapiÃ„ï¿½iÃ„â€¡','Tim Miller',109,4,2),(7,'The Hangover',NULL,'2009-06-05','Bradley Cooper, Ed Helms, Zach Galifianakis, Heather Graham, Mike Epps, Justin Bartha, Jeffrey Tambor','Todd Philips',100,4,3),(8,'Shrek 2',NULL,'2004-06-17','Mike Myers, Cameron Diaz, Eddie Murphy, Antonio Banderas, Julie Andrews, John Cleese, Rupert Everett, Jennifer Saunders, Larry King','Andrew Adamson',93,1,4),(9,'Transformers: Revenge of the Fallen',NULL,'2009-06-25','Shia LaBeouf, Megan Fox, Josh Duhamel, Tyrese Gibson, John Turturro','Michael Bay',150,3,2),(10,'8 mile',NULL,'2002-01-23','Eminem, Kim Basinger, Brittany Murphy, Mekhi Phifer, Evan Jones, Omar Benson Miller, Eugene Byrd, De\'Angelo Wilson, Anthony Mackie, Michael Shannon','Curtis Hanson',106,5,1);
+INSERT INTO `movie` VALUES (1,'Relatos Salvajes','/TPI-Cine/assets/img/relatos_salvajes_1280_720.png','2014-08-21','Ricardo DarÃƒÂ­n, Oscar MartÃƒÂ­nez, Leonardo Sbaraglia, Ãƒâ€°rica Rivas, Rita Cortese, Julieta Zylberberg, DarÃƒÂ­o Grandinetti','DamiÃƒÂ¡n Szifron',122,4,1),(2,'The pianist','/TPI-Cine/assets/img/el_pianista.png','2003-03-06','Adrien Brody, Thomas Kretschmann, Frank Finlay, Maureen Lipman, Emilia Fox, Ed Stoppard, Julia Rayner, Jessica Kate Meyer','RomÃƒÂ¡n Polanski',151,4,1),(3,'Inglourious Basterds','/TPI-Cine/assets/img/inglorious.png','2009-08-31','Brad Pitt, Christoph Waltz, MÃƒÂ©lanie Laurent, Eli Roth, Diane Kruger, Daniel BrÃƒÂ¼hl, Til Schweiger, Michael Fassbender','Quentin Tarantino',153,3,2),(4,'Thor: Love and thunder','/TPI-Cine/assets/img/thor.png','2022-07-07','Chris Hemsworth, Christian Bale, Tessa Thompson, Jaimie Alexander, Taika Waititi, Russell Crowe,Natalie Portman','Taika Waititi',119,1,3),(5,'The godfather','/TPI-Cine/assets/img/elpadrino.png','1972-08-10','Marlon Brando, Al Pacino, Robert Duvall, James Caan, Richard Castellano, Diane Keaton','Francis Ford Coppola',177,5,1),(6,'Deadpool','/TPI-Cine/assets/img/deadpool.png','2016-02-11','Ryan Reynolds, Morena Baccarin, Ed Skrein, T. J. Miller, Gina Carano, Leslie Uggams, Brianna Hildebrand, Stefan KapiÃ„ï¿½iÃ„â€¡','Tim Miller',109,4,2),(7,'The Hangover','/TPI-Cine/assets/img/thehangover.png','2009-06-05','Bradley Cooper, Ed Helms, Zach Galifianakis, Heather Graham, Mike Epps, Justin Bartha, Jeffrey Tambor','Todd Philips',100,4,3),(8,'Shrek 2','/TPI-Cine/assets/img/shrek.png','2004-06-17','Mike Myers, Cameron Diaz, Eddie Murphy, Antonio Banderas, Julie Andrews, John Cleese, Rupert Everett, Jennifer Saunders, Larry King','Andrew Adamson',93,1,4),(9,'Transformers: Revenge of the Fallen','/TPI-Cine/assets/img/transformers.png','2009-06-25','Shia LaBeouf, Megan Fox, Josh Duhamel, Tyrese Gibson, John Turturro','Michael Bay',150,3,2),(10,'8 mile','/TPI-Cine/assets/img/8mile.png','2002-01-23','Eminem, Kim Basinger, Brittany Murphy, Mekhi Phifer, Evan Jones, Omar Benson Miller, Eugene Byrd, De\'Angelo Wilson, Anthony Mackie, Michael Shannon','Curtis Hanson',106,5,1);
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +172,7 @@ CREATE TABLE `room_type` (
 
 LOCK TABLES `room_type` WRITE;
 /*!40000 ALTER TABLE `room_type` DISABLE KEYS */;
-INSERT INTO `room_type` VALUES (1,'IMAX',14,14),(2,'3D',10,10),(3,'2D',15,12),(4,'IMAX',10,10),(5,'4D',14,14),(6,'2D',15,15);
+INSERT INTO `room_type` VALUES (1,'IMAX Subtitulado',14,14),(2,'3D Subtitulado',10,10),(3,'2D Ingles',15,12),(4,'IMAX Ingles',10,10),(5,'4D Subtitulado',14,14),(6,'2D Subtitulado',15,15),(7,'2D Subtitulado',14,14),(8,'3D Ingles',15,15),(9,'4D Ingles',14,14);
 /*!40000 ALTER TABLE `room_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +200,7 @@ CREATE TABLE `show` (
 
 LOCK TABLES `show` WRITE;
 /*!40000 ALTER TABLE `show` DISABLE KEYS */;
-INSERT INTO `show` VALUES (3,1,'2022-09-03 22:00:00'),(1,2,'2022-09-01 13:30:00'),(4,2,'2022-09-05 21:30:00'),(2,3,'2022-09-01 16:30:00'),(2,3,'2022-09-02 19:45:00'),(6,4,'2022-09-02 18:00:00');
+INSERT INTO `show` VALUES (1,1,'2022-12-08 04:08:54'),(2,1,'2022-10-27 10:47:07'),(3,1,'2022-09-03 22:00:00'),(5,1,'2022-11-08 11:02:04'),(5,1,'2022-12-22 10:51:22'),(6,1,'2022-12-20 10:16:48'),(8,1,'2022-11-27 13:25:31'),(9,1,'2022-10-22 13:29:47'),(1,2,'2022-09-01 13:30:00'),(1,2,'2022-11-28 18:50:39'),(2,2,'2022-12-27 18:11:54'),(4,2,'2022-09-05 21:30:00'),(4,2,'2022-10-21 07:38:39'),(4,2,'2022-11-15 10:02:54'),(5,2,'2022-11-06 10:56:34'),(8,2,'2022-12-04 18:45:04'),(9,2,'2022-11-13 14:38:16'),(10,2,'2022-12-08 14:37:58'),(1,3,'2022-11-03 06:18:05'),(2,3,'2022-09-01 16:30:00'),(2,3,'2022-09-02 19:45:00'),(4,3,'2022-11-09 04:26:03'),(8,3,'2022-11-03 11:25:17'),(8,3,'2022-11-08 11:51:55'),(8,3,'2022-11-21 09:52:14'),(9,3,'2022-10-23 03:51:54'),(9,3,'2022-12-08 02:03:57'),(1,4,'2022-11-02 19:45:00'),(1,4,'2022-11-11 20:23:00'),(3,4,'2022-10-21 09:14:37'),(3,4,'2022-11-30 02:15:46'),(5,4,'2022-12-26 11:24:13'),(6,4,'2022-09-02 18:00:00'),(8,4,'2022-12-24 06:39:43'),(10,4,'2022-10-17 15:47:36'),(10,4,'2022-10-28 11:09:38'),(1,5,'2022-11-10 15:52:21'),(2,5,'2022-11-18 23:01:50'),(2,5,'2022-12-19 17:20:11'),(3,5,'2022-11-24 16:58:57'),(6,5,'2022-11-01 14:12:54'),(6,5,'2022-12-17 06:55:30'),(10,5,'2022-11-17 07:13:40'),(1,6,'2022-10-23 00:30:16'),(1,6,'2022-11-13 03:00:59'),(2,6,'2022-12-20 16:24:17'),(3,6,'2022-12-20 16:07:49'),(8,6,'2022-10-21 21:20:06'),(10,6,'2022-12-18 16:07:01'),(2,7,'2022-12-05 04:41:54'),(5,7,'2022-11-12 23:26:49'),(5,7,'2022-11-23 02:19:13'),(7,7,'2022-11-22 03:08:04'),(7,7,'2022-12-11 21:01:11'),(8,7,'2022-10-27 11:56:10'),(8,7,'2022-12-14 05:28:44'),(8,7,'2022-12-22 13:43:10');
 /*!40000 ALTER TABLE `show` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -283,9 +283,10 @@ CREATE TABLE `user` (
   `phoneNumber` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   PRIMARY KEY (`idUser`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_user_rol_idx` (`idRole`),
   CONSTRAINT `fk_user_role` FOREIGN KEY (`idRole`) REFERENCES `role` (`idRole`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=48278 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48291 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +295,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (48271,3,'Buschittari','Nahuel','Nahu123','2000-10-03','Balcarce 1201, ChabÃƒÂ¡s, Santa FÃƒÂ©','690571','nahu_buschittari@hotmail.com'),(48272,1,'Messi','Lionel AndrÃƒÂ©s','7balones','1987-06-24','Mitre 1235, Rosario, Santa FÃƒÂ©','123456','liomessi123@hotmail.com'),(48273,2,'Perez','Juan Cruz','taq456','2004-10-10','Batlle y OrdoÃƒÂ±es 300, Rosario, Santa FÃƒÂ©','534786','perezJC10@gmail.com'),(48274,1,'Biglia','Lucas Rodrigo','pesimo5','1986-01-30','Mendoza 3657, Rosario, Santa FÃƒÂ©','987654','Biglia5@outlook.com'),(48275,1,'Almendra','Agustin','5deBoca','2000-02-11','Bv SeguÃƒÂ­ 5327, Rosario, Santa FÃƒÂ©','453761','Pipahdp@gmail.com'),(48276,1,'Sosa','Santiago','5deAtlanta','1999-05-03','Av Presidente PerÃƒÂ³n 2758, Rosario, Santa FÃƒÂ©','198274','SSusa@gmail.com'),(48277,1,'Rossi','Agustin','penales123','1995-08-25','Rosas 755, Rosario, Santa FÃƒÂ©','321012','tukiLentes@outlook.com');
+INSERT INTO `user` VALUES (48271,3,'Buschittari','Nahuel','Nahu123','2000-10-03','Balcarce 1201, ChabÃƒÂ¡s, Santa FÃƒÂ©','690571','nahu_buschittari@hotmail.com'),(48272,1,'Messi','Lionel AndrÃƒÂ©s','7balones','1987-06-24','Mitre 1235, Rosario, Santa FÃƒÂ©','123456','liomessi123@hotmail.com'),(48273,2,'Perez','Juan Cruz','taq456','2004-10-10','Batlle y OrdoÃƒÂ±es 300, Rosario, Santa FÃƒÂ©','534786','perezJC10@gmail.com'),(48274,1,'Biglia','Lucas Rodrigo','pesimo5','1986-01-30','Mendoza 3657, Rosario, Santa FÃƒÂ©','987654','Biglia5@outlook.com'),(48275,1,'Almendra','Agustin','5deBoca','2000-02-11','Bv SeguÃƒÂ­ 5327, Rosario, Santa FÃƒÂ©','453761','Pipahdp@gmail.com'),(48276,1,'Sosa','Santiago','5deAtlanta','1999-05-03','Av Presidente PerÃƒÂ³n 2758, Rosario, Santa FÃƒÂ©','198274','SSusa@gmail.com'),(48277,1,'Rossi','Agustin','penales123','1995-08-25','Rosas 755, Rosario, Santa FÃƒÂ©','321012','tukiLentes@outlook.com'),(48280,1,'Vivas','Facundo Ignacio','flechita','2002-04-15','16 de Enero 8708','3416172059','fv@gmail.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -307,4 +308,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-02 11:48:00
+-- Dump completed on 2022-10-17 20:26:05
