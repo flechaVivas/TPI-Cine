@@ -10,7 +10,7 @@
 	%>
 
 
-<form action="/TPI-Cine/src/servlet/seleccionFechaHora" method="post">
+<form action="/TPI-Cine/src/servlet/SeleccionarFechaHora" method="post">
 	<div class="row mt-5">
 		<div class="col-md-10">
 			<label name="date_time">Seleccione <strong>fecha y hora</strong></label>    

@@ -1,0 +1,35 @@
+
+*{
+	outline: none !important;
+}
+
+.category-thumb{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+}
+.category-thumb .category-content {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	padding: 15px 30px;
+	color: #fff;
+}
+
+.category-thumb .category-image {
+    width: 100%;
+    display: block;
+    margin-bottom: 1;
+    position: relative;
+    background: #111111;
+}
+
+img{
+	max-width: 100%;
+	vertical-align: middle;
+	border-style: none;
+}

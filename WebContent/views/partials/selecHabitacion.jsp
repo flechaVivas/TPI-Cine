@@ -36,7 +36,7 @@
 					</select>
 				</div>
 				
-				<% if(s != null) {%>
+				<% if(request.getAttribute("showsDateTime") == null) {%>
 				
 					<div class="col-md-2">
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>

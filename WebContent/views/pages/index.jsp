@@ -13,15 +13,16 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles/styles.css">
 	<link rel="stylesheet" href="../../styles/navbar.css">
+	<link rel="stylesheet" href="../../styles/cartelera.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
 
 
 </head>
-<body>
+<body style="background-color: #f5f3f4">
 
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	
-	<jsp:include page="../partials/carrusel.jsp"></jsp:include>
+	<jsp:include page="../partials/cartelera.jsp"></jsp:include>
 	
 
 	

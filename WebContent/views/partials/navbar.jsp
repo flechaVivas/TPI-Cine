@@ -19,7 +19,7 @@
 	<div class="site-menu">
 		<ul>
 			<li>
-				<a href="#">CARTELERA</a>
+				<a href="/TPI-Cine/views/pages/index.jsp">CARTELERA</a>
 			</li>
 			<li>
 				<a href="/TPI-Cine/views/pages/entradas.jsp" onclick="removeSessionAtbs()">ENTRADAS</a>
