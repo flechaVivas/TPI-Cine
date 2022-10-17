@@ -8,10 +8,10 @@
  
 <script type="text/javascript">
 
- 	function removeSessionAtbs() {
-		<% session.removeAttribute("show"); %>
-		return 0;
- 	}
+//  	function removeSessionAtbs() {
+<%-- 		<% session.removeAttribute("show"); %> --%>
+// 		return 0;
+//  	}
 
 </script>
 
