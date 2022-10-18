@@ -21,7 +21,7 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 |Requerimiento|cant. mín.<br>1 o 2 integ|cant. máx.<br>3 o 4 integ|Detalle/Listado de casos incluidos|
 |:-|-:|-:|:-|
 |ABMC simple|1 x integ|1 x integ|Restriction, Genre, roomType o Actors|
-|ABMC dependiente|1|2|Movie, MovieRoom|
+|ABMC dependiente|1|2|Movie, Show|
 |CU NO-ABMC|1|2|Crear Funcion, Reserva|
 |Listado simple|1|-|-|
 |Listado complejo|0|1(*)|Movies and Function|
