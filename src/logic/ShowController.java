@@ -15,10 +15,7 @@ public class ShowController {
 	public void deleteOne(Show s) {ds.delete(s);}
 	public Show editOne(Show s) {return ds.update(s);}
 	public Show addOne(Show s) {return ds.createOne(s);}
-	
+	public LinkedList<Show> getAll(){return ds.getList();}
 	public LinkedList<Show> getDateTimeByRoomTypeMovie(Movie m, RoomType rt) {
-		
-		return ds.getDateTime(m,rt);
-		
-	}
+	return ds.getDateTime(m,rt);}
 }

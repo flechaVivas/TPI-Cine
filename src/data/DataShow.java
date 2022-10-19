@@ -3,12 +3,13 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 import entities.Movie;
 import entities.MovieRoom;
+
 import entities.RoomType;
 import entities.Show;
 
@@ -162,5 +163,43 @@ public class DataShow {
 		
 		return fechas;
 	}
+
+	public LinkedList<Show> getList() {
+			Statement stmt=null;
+			ResultSet rs=null;
+			LinkedList<Show> shows=new LinkedList<Show>();
+			Movie mo=null;
+			MovieRoom mr=null;	
+			try {
+						
+				stmt=DbConnector.getInstancia().getConn().createStatement();
+				rs=stmt.executeQuery("SELECT * FROM show");
+				
+				while(rs.next()) {
+					Show s=new Show();
+					mo=new Movie();
+					mr=new MovieRoom();
+				
+					mo.setIdMovie(rs.getInt("idMovie"));
+					s.setMovie(mo);
+					mr.setRoomNumber(rs.getInt("RoomNumber"));
+					s.setMovieroom(mr);
+					s.setDt(rs.getObject("Dt",LocalDateTime.class));
+					
+					shows.add(s);
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if(rs!=null) {rs.close();}
+					if(stmt!=null) {stmt.close();}
+					DbConnector.getInstancia().releaseConn();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+				return shows;
+			}
 
 }
