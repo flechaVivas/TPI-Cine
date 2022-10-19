@@ -42,7 +42,6 @@ body{
     grid-template-columns: 1fr 1fr;
   }
   .foto{
-    text-align: center;
     margin-top: auto;
     margin-bottom: auto;
   }
