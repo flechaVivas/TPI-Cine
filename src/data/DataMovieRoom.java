@@ -22,8 +22,8 @@ public class DataMovieRoom {
 			rs = stmt.executeQuery();
 			if(rs != null && rs.next() ) {
 				mr = new MovieRoom();
-				mr.setRoomNumber(rs.getInt("roomNumber"));
-				mr.setCapacity(rs.getInt("capacity"));
+				mr.setRoomNumber(rs.getInt("roomNumber"));				
+				rt.setIdRoomType(rs.getInt("idRoomType"));
 				mr.setRt(rt);
 			}	
 		}catch (SQLException e) {
@@ -46,12 +46,12 @@ public class DataMovieRoom {
 		LinkedList<MovieRoom> mrs = new LinkedList<MovieRoom>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("SELECT * FROM movieRoom");
+			rs = stmt.executeQuery("SELECT * FROM movieRoom;");
 			while(rs.next()) {
 				RoomType rt=new RoomType();
 				MovieRoom mr = new MovieRoom();
 				mr.setRoomNumber(rs.getInt("roomNumber"));
-				mr.setCapacity(rs.getInt("capacity"));
+				rt.setIdRoomType(rs.getInt("idRoomType"));
 				mr.setRt(rt);
 				mrs.add(mr);
 			}
@@ -72,8 +72,7 @@ public class DataMovieRoom {
 	public MovieRoom update(MovieRoom mr) {
 		PreparedStatement stmt = null;
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE movieroom set capacity=?,roomType=? where roomNumber=?");			
-			stmt.setInt(1, mr.getCapacity());
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE movieroom set roomType=? where roomNumber=?");			
 			stmt.setInt(2, mr.getRoomNumber());
 			stmt.setInt(3, mr.getRt().getIdRoomType());
 			stmt.executeUpdate();
@@ -95,8 +94,7 @@ public class DataMovieRoom {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO movieroom(capacity,roomType) values(?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, mr.getCapacity());
-			stmt.setInt(2, mr.getRt().getIdRoomType());
+			stmt.setInt(1, mr.getRt().getIdRoomType());
 			stmt.executeUpdate();
 			ResultSet keyResultSet = stmt.getGeneratedKeys();
 			if(keyResultSet != null && keyResultSet.next()) {

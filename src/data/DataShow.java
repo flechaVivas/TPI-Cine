@@ -173,7 +173,7 @@ public class DataShow {
 			try {
 						
 				stmt=DbConnector.getInstancia().getConn().createStatement();
-				rs=stmt.executeQuery("SELECT * FROM show");
+				rs=stmt.executeQuery("SELECT * FROM cine_tpjava.show;");
 				
 				while(rs.next()) {
 					Show s=new Show();
@@ -182,9 +182,9 @@ public class DataShow {
 				
 					mo.setIdMovie(rs.getInt("idMovie"));
 					s.setMovie(mo);
-					mr.setRoomNumber(rs.getInt("RoomNumber"));
+					mr.setRoomNumber(rs.getInt("roomNumber"));
 					s.setMovieroom(mr);
-					s.setDt(rs.getObject("Dt",LocalDateTime.class));
+					s.setDt(rs.getObject("date_time",LocalDateTime.class));
 					
 					shows.add(s);
 				}
