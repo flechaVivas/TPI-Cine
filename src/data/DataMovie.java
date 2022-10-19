@@ -71,7 +71,7 @@ public class DataMovie {
 		Restriction re=null;
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE title=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE title LIKE %?%");
 			stmt.setString(1, m.getTitle());
 
 			rs=stmt.executeQuery();
@@ -250,7 +250,7 @@ public class DataMovie {
 		Restriction re=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where releaseDate between cast(? as date) and cast(? as date)");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where releaseDate between ? and ?");
 			stmt.setObject(1,d.getReleaseDate());
 			stmt.setObject(2,h.getReleaseDate());
 			rs=stmt.executeQuery();
@@ -298,7 +298,7 @@ public class DataMovie {
 		Restriction re=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where idGenre=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idGenre=?");
 			stmt.setInt(1, g.getIdGenre());
 			rs=stmt.executeQuery();
 			

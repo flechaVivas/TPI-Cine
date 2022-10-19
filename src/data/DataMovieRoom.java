@@ -46,7 +46,7 @@ public class DataMovieRoom {
 		LinkedList<MovieRoom> mrs = new LinkedList<MovieRoom>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("SELECT * FROM movieRoom;");
+			rs = stmt.executeQuery("select * from movieroom order by roomNumber");
 			while(rs.next()) {
 				RoomType rt=new RoomType();
 				MovieRoom mr = new MovieRoom();
@@ -93,7 +93,7 @@ public class DataMovieRoom {
 		PreparedStatement stmt = null;
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO movieroom(capacity,roomType) values(?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO movieroom(roomType) values(?)", PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, mr.getRt().getIdRoomType());
 			stmt.executeUpdate();
 			ResultSet keyResultSet = stmt.getGeneratedKeys();
