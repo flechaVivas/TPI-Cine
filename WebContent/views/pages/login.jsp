@@ -35,7 +35,6 @@
 			<div class="alert alert-success" role="alert">
 	 			<strong style="color: #2feaa8;">USUARIO creado con ÉXITO</strong>
 			</div>
-		
 			<% request.removeAttribute("action");
 			
 			} %>

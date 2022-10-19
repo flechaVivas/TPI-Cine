@@ -13,7 +13,7 @@
 		User u = new User();
 		u=(User)session.getAttribute("usuario");
 		
- %>
+%>
 
 <nav class="navbar">
 	<div class="site-menu">

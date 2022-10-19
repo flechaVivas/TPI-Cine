@@ -45,7 +45,6 @@ public class SeleccionarSala extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		try {
-		
 			ShowController ctrlShow = new ShowController();
 			Show s = (Show) request.getSession(false).getAttribute("show");
 			
@@ -59,7 +58,6 @@ public class SeleccionarSala extends HttpServlet {
 				
 				request.setAttribute("showsDateTime", shows);
 				request.getRequestDispatcher("/views/pages/entradas.jsp").forward(request, response);
-				
 			}
 			
 			
