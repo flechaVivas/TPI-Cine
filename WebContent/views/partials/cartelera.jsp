@@ -5,10 +5,10 @@
 <%@page import="entities.Movie"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="logic.MovieController"%>
+
 <%
 	MovieController ctrlMovie = new MovieController();
 	LinkedList<Movie> movies = ctrlMovie.getAll();
-
 %>
 
     <main class="mt-8">
