@@ -56,7 +56,7 @@
      
      <div id="login_link" class="user-menu">
        	<div class="navbar-account">
-           	<span id="ctl00_lblLogin"><a href="administrarCuenta.jsp"><%=u.getName()+" "+u.getSurname()%> </a></span> 
+           	<span id="ctl00_lblLogin"><a href="/TPI-Cine/views/pages/MiCuenta.jsp"><%=u.getName()+" "+u.getSurname()%> </a></span> 
            	<i class="fa-solid fa-user"></i>
       	</div>
     </div>

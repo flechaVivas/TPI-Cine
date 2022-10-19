@@ -196,16 +196,15 @@ public class DataUser {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE user set idRole=?, surname=?, name=?, email=?, password=?, birthDate=?, adress=?, phoneNumber=? where idUser=?");
-			stmt.setInt(1, u.getRole().getIdRole());
-			stmt.setString(2, u.getSurname());
-			stmt.setString(3, u.getName());
-			stmt.setString(4, u.getEmail());
-			stmt.setString(5, u.getPassword());
-			stmt.setObject(6, u.getBirthDate());
-			stmt.setString(7, u.getAdress());
-			stmt.setString(8, u.getPhoneNumber());
-			stmt.setInt(9, u.getIdUser());
+					"UPDATE user set surname=?, name=?, email=?, password=?, birthDate=?, adress=?, phoneNumber=? where idUser=?");
+			stmt.setString(1, u.getSurname());
+			stmt.setString(2, u.getName());
+			stmt.setString(3, u.getEmail());
+			stmt.setString(4, u.getPassword());
+			stmt.setObject(5, u.getBirthDate());
+			stmt.setString(6, u.getAdress());
+			stmt.setString(7, u.getPhoneNumber());
+			stmt.setInt(8, u.getIdUser());
 			
 			stmt.executeUpdate();
 			

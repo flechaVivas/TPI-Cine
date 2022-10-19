@@ -15,7 +15,7 @@ import logic.UserController;
 /**
  * Servlet implementation class UpdateCuenta
  */
-@WebServlet("/TPI-Cine/src/servlet/UpdateCuenta")
+@WebServlet("/src/servlet/UpdateCuenta")
 public class UpdateCuenta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,6 +40,10 @@ public class UpdateCuenta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		User usesion = (User)request.getSession(false).getAttribute("usuario");
+		
+		
 		request.setAttribute("action", "");
 		try {
 			UserController ctrlUser = new UserController();
@@ -50,13 +54,19 @@ public class UpdateCuenta extends HttpServlet {
 			u.setBirthDate(LocalDate.parse(request.getParameter("birthDate")));
 			u.setAdress(request.getParameter("adress"));
 			u.setPhoneNumber(request.getParameter("phoneNumber"));
+			
 			if (request.getParameter("password").equals(request.getParameter("repeatPassword"))) { //poner que la copntraseña no sea null
 				
 				u.setPassword(request.getParameter("password"));
+				u.setIdUser(usesion.getIdUser());
+				
 				ctrlUser.update(u);
 				
+				response.getWriter().append(u.getName()+u.getSurname());
+				
 				request.getSession(false).invalidate();
-				request.getRequestDispatcher("/views/pages/Login.jsp").forward(request, response);
+				request.getRequestDispatcher("/views/pages/login.jsp").forward(request, response);
+				
 				
 			} else {
 				request.setAttribute("action", "errorPasswd");

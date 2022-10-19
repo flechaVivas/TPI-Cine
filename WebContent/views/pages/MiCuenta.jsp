@@ -23,38 +23,38 @@
 		<%if( u != null){%>
 			<label>Mi Cuenta</label>
 			
-			<form class="RegisterForm" method="POST" action="/TPI-Cine/src/servlet/MiCuenta">
+			<form class="RegisterForm" method="POST" action="/TPI-Cine/src/servlet/UpdateCuenta">
 					<div class="formContent">
 						<div>
 							<div class="divForm">
 								<label class="labelForm">Nombre</label>
-								<input class="inputForm" name="name" type="text" value = "<%u.getName(); %>" >
+								<input class="inputForm" name="name" type="text" value = "<%=u.getName()%>" >
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Apellido</label>
-								<input class="inputForm" name="surname" type="text" value = "<%u.getSurname(); %>">
+								<input class="inputForm" name="surname" type="text" value = "<%=u.getSurname()%>">
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Email</label>
-								<input class="inputForm" name="email" type="email" value = "<% u.getEmail(); %>">
+								<input class="inputForm" name="email" type="email" value = "<%=u.getEmail() %>">
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Fecha Nacimiento</label>
-								<input class="inputForm" name="birthDate" type="date" value = "<% u.getBirthDate(); %>">
+								<input class="inputForm" name="birthDate" type="date" value = "<%=u.getBirthDate()%>">
 							</div>
 						</div>
 						<div>
 							<div class="divForm">
 								<label class="labelForm">Direccion</label>
-								<input class="inputForm" name="adress" type="text" value = "<% u.getAdress();%>">
+								<input class="inputForm" name="adress" type="text" value = "<%=u.getAdress()%>">
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Telefono</label>
-								<input class="inputForm" name="phoneNumber" type="text" value = "<%u.getPhoneNumber();%>">
+								<input class="inputForm" name="phoneNumber" type="text" value = "<%=u.getPhoneNumber()%>">
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Cambiar Contraseña</label>
-								<input class="inputForm" name="password" type="password" value = "<% u.getPassword(); %>>" >
+								<input class="inputForm" name="password" type="password" value = "<%=u.getPassword()%>>" >
 								
 								
 							</div>
