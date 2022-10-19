@@ -32,10 +32,10 @@
 				if(u.getRole().getDescription().equals("taquillero")){ %>
 				
 			<li>
-				<a href="#">ADMINISTRAR FUNCIONES</a>
+				<a href="/TPI-Cine/views/pages/abmcShow.jsp">ADMINISTRAR FUNCIONES</a>
 			</li>
 			<li>
-				<a href="#">ADMINISTRAR PELICULAS</a>
+				<a href="/TPI-Cine/views/pages/abmcMovie.jsp">ADMINISTRAR PELICULAS</a>
 			</li>
 			<%}
 				} %>
