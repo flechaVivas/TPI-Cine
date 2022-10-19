@@ -28,7 +28,7 @@
 	                    <div class="col-lg-3 col-sm-6">
 	                        <div class="category-thumb">
 	                            <figure class="category-image">
-	                            	<a href="entradas.jsp">
+	                            	<a href="/TPI-Cine/views/pages/movieDescription.jsp?idMovie=<%=m.getIdMovie()%>">
 	                            		<img src="<%=m.getImage()%>" alt="<%=m.getTitle()%>">
 	                            	</a>
 	                            </figure>

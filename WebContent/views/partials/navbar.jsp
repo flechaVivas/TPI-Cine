@@ -1,19 +1,19 @@
 <%@page import="entities.Role"%>
 <%@page import="entities.User"%>
 
-<%
-		User u = new User();
-		u=(User)session.getAttribute("usuario");
- %>
- 
 <script type="text/javascript">
 
 //  	function removeSessionAtbs() {
 <%-- 		<% session.removeAttribute("show"); %> --%>
-// 		return 0;
 //  	}
 
 </script>
+
+<%
+		User u = new User();
+		u=(User)session.getAttribute("usuario");
+		
+ %>
 
 <nav class="navbar">
 	<div class="site-menu">
@@ -28,7 +28,9 @@
 				<a href="#">CONTACTO</a>
 			</li>
 			<% if(u!=null){
+				
 				if(u.getRole().getDescription().equals("taquillero")){ %>
+				
 			<li>
 				<a href="#">ADMINISTRAR FUNCIONES</a>
 			</li>
