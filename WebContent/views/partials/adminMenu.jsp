@@ -12,7 +12,7 @@
 				<a class="list-group-item" href="listTickets.jsp">Ticket</a>
 				<a class="list-group-item" href="listShows.jsp">Show</a>
 				<a class="list-group-item" href="listMovies.jsp">Movie</a>
-				<a class="list-group-item" href="listRestrictions.jsp">Restriction</a>
+				<a class="list-group-item" href="./ui-restriction/listRestrictions.jsp">Restriction</a>
 				<a class="list-group-item" href="listGenres.jsp">Genre</a>
 				<a class="list-group-item" href="listMoovieRooms.jsp">Moovie Room</a>
 				<a class="list-group-item" href="listRoomTypes.jsp">Room Type</a>

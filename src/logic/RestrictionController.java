@@ -17,4 +17,9 @@ private DataRestriction dr;
 	public void deleteOne(Restriction r) {dr.delete(r);}
 	
 	public Restriction addOne(Restriction r) {return dr.createOne(r);}
+
+	public void update(Restriction r) {
+		dr.update(r);
+		
+	}
 }

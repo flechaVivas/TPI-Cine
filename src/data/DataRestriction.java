@@ -100,4 +100,34 @@ public class DataRestriction {
 		System.out.println("VendorError"+ ex.getErrorCode());}
 		return r;
 	}
+
+	public void update(Restriction r) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"UPDATE restriction set description=? where idRestriction=?");
+			stmt.setInt(1, r.getIdRestriction());
+			stmt.setString(2, r.getDescription());
+			
+			stmt.executeUpdate();
+					
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
 }

@@ -70,7 +70,7 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
                                 <select name="genre">
                                 	<%for (Genre g: genres) {%>
                                     <option value="<%=g.getIdGenre() %>"><%=g.getDescription() %></option>
-                                    <% }%>
+                                    <%}%>
                                 </select></p>
                             </div>
                         </div>
