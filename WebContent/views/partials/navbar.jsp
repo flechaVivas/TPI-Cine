@@ -12,7 +12,6 @@
 <%
 		User u = new User();
 		u=(User)session.getAttribute("usuario");
-		
 %>
 
 <nav class="navbar">
@@ -37,8 +36,12 @@
 			<li>
 				<a href="/TPI-Cine/views/pages/abmcMovie.jsp">ADMINISTRAR PELICULAS</a>
 			</li>
-			<%}
-				} %>
+			<%} if (u.getRole().getDescription().equals("admin")){ %>
+			<li>
+				<a href="/TPI-Cine/views/pages/adminPanel.jsp">PANEL ADMINISTRADOR</a>
+			</li>
+				<% } 
+			}%>
 		</ul>
 	</div>
 	
