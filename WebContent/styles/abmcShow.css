@@ -14,7 +14,7 @@ body{
     margin:auto;
     color: #03045eff;
    }
-input[type="datetime-local"] { border-radius: 8px;
+input[type="date"] { border-radius: 8px;
     border: 2px solid transparent;
     border-color: #90e0efff;
     padding: .2rem .2rem;
