@@ -70,7 +70,7 @@ public class DataGenre {
 	public void delete(Genre g) {
 		PreparedStatement stmt=null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE * FROM genre WHERE idGenre=? ");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM genre WHERE idGenre=?");
 			stmt.setInt(1, g.getIdGenre());
 			stmt.executeUpdate();
 			if(stmt!=null) {stmt.close();}
@@ -85,6 +85,9 @@ public class DataGenre {
 				,PreparedStatement.RETURN_GENERATED_KEYS);
 		
 		stmt.setString(1,g.getDescription());
+		
+		stmt.executeUpdate();
+		
 		ResultSet keyResultSet=stmt.getGeneratedKeys();
 		if (keyResultSet!=null && keyResultSet.next()) {
 			int id=keyResultSet.getInt(1);
@@ -101,4 +104,37 @@ public class DataGenre {
 		System.out.println("VendorError"+ ex.getErrorCode());}
 		return g;
 	}
+
+	public void update(Genre g) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"UPDATE genre set description=? where idGenre=?");
+			stmt.setString(1, g.getDescription());
+			stmt.setInt(2, g.getIdGenre());
+			
+			stmt.executeUpdate();
+					
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+
+
+
+
 }

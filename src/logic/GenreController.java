@@ -17,4 +17,7 @@ private DataGenre dg;
 	public void deleteOne(Genre g) {dg.delete(g);}
 	
 	public Genre addOne(Genre g) {return dg.createOne(g);}
+
+	public void update(Genre g){dg.update(g);}
+
 }
