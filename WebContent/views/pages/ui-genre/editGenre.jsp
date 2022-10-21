@@ -1,30 +1,30 @@
-<%@page import="entities.Restriction"%>
-<%@page import="logic.RestrictionController"%>
+<%@page import="entities.Genre"%>
+<%@page import="logic.GenreController"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Editar usuario</title>
-	
+<title>Insert title here</title>
+
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<%
+		Integer id = Integer.parseInt((String)request.getParameter("idGenre"));
+		GenreController ctrlGen = new GenreController();
+		Genre g = new Genre();
+		g.setIdGenre(id);
+		g = ctrlGen.getOne(g);
+	
+	%>
 
 
 </head>
 <body>
 
-	<%
-		Integer id = Integer.parseInt((String)request.getParameter("idRestriction"));
-		RestrictionController ctrlRes = new RestrictionController();
-		Restriction r = new Restriction();
-		r.setIdRestriction(id);
-		r = ctrlRes.getOne(r);
-	
-	
-	%>
-	
+
 	<div class="container mt-4" style="min-height: 65vh;">
 
 		<!-- Body de la pagina -->
@@ -49,10 +49,9 @@
 	    	<!-- Content Column -->
 			<div class="col-10 ">
 	        	<h2>PANEL ADMINISTRADOR</h2>
-	        	<p>Desde aquí podrá gestionar los datos</p>
-	        	<h4>Restricciones</h4>
+	        	<h4>Generos</h4>
 				
-				<form action="/TPI-Cine/src/servlet/ABMCRestriction?action=update&idRestriction=<%=r.getIdRestriction()%>" method="post">
+				<form action="/TPI-Cine/src/servlet/UpdateRestriction" method="post">
 				
 				<div class="col-12 col-sm-12 col-lg-12">
 			     	<div class="table-responsive">
@@ -65,8 +64,8 @@
 			                </thead>
 							<tbody>
 								<tr>
-			                		<td><input type="text" value="<%=r.getIdRestriction()%>" name="idRestriction" readonly="" class="form-control"></td>
-			                    	<td><input value="<%=r.getDescription()%>"name="description" type="text" class="form-control" required></td>
+			                		<td><input type="text" value="<%=g.getIdGenre()%>" name="idGenre" readonly="" class="form-control"></td>
+			                    	<td><input value="<%=g.getDescription()%>"name="description" type="text" class="form-control" required></td>
 			                    				
 			                    	<td>
 										<button class="btn btn-warning" type="submit">Confirmar</button>
@@ -77,12 +76,14 @@
 			         </div>
 			      </div>
 			      </form>	
-	             <a href="/TPI-Cine/views/pages/ui-restriction/listRestrictions.jsp" class="btn">Volver a restricciones</a>
+	             <a href="/TPI-Cine/views/pages/ui-genre/listGenres.jsp" class="btn">Volver a Generos</a>
 			</div>
 		</div>
 	</div>
-				
-	
+
+
+
+
 
 </body>
 </html>

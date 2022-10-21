@@ -12,7 +12,7 @@
 </head>
 <body>
 
-	<form action="/TPI-Cine/src/servlet/NewRestriction" method="post">
+	<form action="/TPI-Cine/src/servlet/ABMCRestriction?action=new" method="post">
 		<div class="container mt-5">
 
 			<h2>Alta de Restriccion</h2>
@@ -26,7 +26,6 @@
 			</table>
 			<a href="/TPI-Cine/views/pages/ui-restriction/listRestrictions.jsp" class="btn">Volver a restricciones</a>
 		</div>
-
 	</form>
 	
 

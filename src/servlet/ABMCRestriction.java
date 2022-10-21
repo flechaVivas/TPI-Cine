@@ -11,16 +11,16 @@ import entities.Restriction;
 import logic.RestrictionController;
 
 /**
- * Servlet implementation class NewRestriction
+ * Servlet implementation class ABMCRestriction
  */
-@WebServlet("/src/servlet/NewRestriction")
-public class NewRestriction extends HttpServlet {
+@WebServlet("/src/servlet/ABMCRestriction")
+public class ABMCRestriction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NewRestriction() {
+    public ABMCRestriction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,20 +38,59 @@ public class NewRestriction extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+	
 		Restriction r = new Restriction();
 		RestrictionController ctrlRes = new RestrictionController();
 		
 		try {
 			
-			r.setDescription((String)request.getParameter("description"));
-			ctrlRes.addOne(r);
+			switch ((String)request.getParameter("action")) {
 			
-			request.getRequestDispatcher("/views/pages/ui-restriction/listRestrictions.jsp").forward(request, response);
+			case "new":
+			
+				r.setDescription((String)request.getParameter("description"));
+				ctrlRes.addOne(r);
+				
+				request.getRequestDispatcher("/views/pages/ui-restriction/listRestrictions.jsp").forward(request, response);
+			
+				break;
+			
+			case "update":
+				
+				r.setIdRestriction(Integer.parseInt(((String)request.getParameter("idRestriction"))));
+				r.setDescription((String)request.getParameter("description"));
+				
+				ctrlRes.update(r);
+				
+				request.getRequestDispatcher("/views/pages/ui-restriction/listRestrictions.jsp").forward(request, response);
+
+				
+				break;
+				
+			case "delete":
+				
+				r.setIdRestriction(Integer.parseInt((String)request.getParameter("idRestriction")));
+				
+				ctrlRes.deleteOne(r);
+				
+				request.getRequestDispatcher("/views/pages/ui-restriction/listRestrictions.jsp").forward(request, response);
+				
+				break;
+
+			default:
+				break;
+			}
 			
 		} catch (Exception e) {
 			
+			
 		}
+		
+		
+		
+		
+		
+		
 		
 		
 	}
