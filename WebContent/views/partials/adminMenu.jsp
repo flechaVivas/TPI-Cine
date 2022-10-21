@@ -4,7 +4,7 @@
 	<!-- Body de la pagina -->
 	<div class="row"> 
 	<!-- Menu de la izquierda-->
-		<div id="Menu" class="col-2">
+		<div id="Menu" class="col-2 mt-5">
 			<!-- Sidebar Column -->
 			<div class="list-group">
 				<a class="list-group-item" href="listUsers.jsp">User</a>

@@ -9,16 +9,11 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-	<%
-		request.setAttribute("action", "new");
-	%>
-
-
 </head>
 <body>
 
-	<form action="/TPI-Cine/src/servlet/ABMCRestriction" method="post">
-		<div class="container">
+	<form action="/TPI-Cine/src/servlet/NewRestriction" method="post">
+		<div class="container mt-5">
 
 			<h2>Alta de Restriccion</h2>
 	
@@ -29,7 +24,7 @@
 					<td> <button class="btn btn-success">Aceptar</button> </td>
 				</tr>
 			</table>
-			<a href="./listRestrictions.jsp" class="btn">Volver a restricciones</a>
+			<a href="/TPI-Cine/views/pages/ui-restriction/listRestrictions.jsp" class="btn">Volver a restricciones</a>
 		</div>
 
 	</form>

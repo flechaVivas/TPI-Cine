@@ -29,7 +29,7 @@
 	<!-- Body de la pagina -->
 	<div class="row"> 
 	<!-- Menu de la izquierda-->
-		<div id="Menu" class="col-2">
+		<div id="Menu" class="col-2 mt-5">
 			<!-- Sidebar Column -->
 			<div class="list-group">
 				<a class="list-group-item" href="listUsers.jsp">User</a>
@@ -48,7 +48,6 @@
     	<!-- Content Column -->
 		<div class="col-10 ">
         	<h2>PANEL ADMINISTRADOR</h2>
-        	<p>Desde aquí podrá gestionar los datos</p>
         	<h4>Restricciones</h4>
 
             <div class="col-12 col-sm-12 col-lg-12">
@@ -58,7 +57,7 @@
                     		<tr>
                     			<th>ID</th>
                     		    <th>Descripcion</th>
-                        		<th> <a class="btn btn-success" href="./newRestriction.jsp">Nueva Restriccion</a> </th>
+                        		<th> <a class="btn btn-success" href="/TPI-Cine/views/pages/ui-restriction/newRestriction.jsp">Nueva Restriccion</a> </th>
                         		<th></th>
                       		</tr>
                       	</thead>
@@ -69,31 +68,9 @@
                     				<td><%=r.getDescription()%></td>
                     				
                     				<td>
-                    					<!-- Button trigger modal -->
-										<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCentered">
-										  Editar
-										</button><!-- editar -->
-										<!-- Modal -->
-										<div class="modal" id="exampleModalCentered" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
-										  <div class="modal-dialog modal-dialog-centered" role="document">
-										    <div class="modal-content">
-										      <div class="modal-header">
-										        <h5 class="modal-title" id="exampleModalCenteredLabel">Modal title</h5>
-										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										          <span aria-hidden="true">&times;</span>
-										        </button>
-										      </div>
-										      <div class="modal-body">
-										        ...
-										      </div>
-										      <div class="modal-footer">
-										        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										        <button type="button" class="btn btn-primary">Save changes</button>
-										      </div>
-										    </div>
-										  </div>
-										</div>
-                    					<a href="deleteRestriction?idRestriction=<%=r.getIdRestriction()%>" class="btn btn-danger">Eliminar</a><!-- borrar -->
+                    					<a href="/TPI-Cine/views/pages/ui-restriction/editRestriction.jsp?idRestriction=<%=r.getIdRestriction()%>" class="btn">Editar</a><!-- editar -->
+                    					<a href="/TPI-Cine/src/servlet/DeleteRestriction?idRestriction=<%=r.getIdRestriction()%>" class="btn btn-danger">Eliminar</a><!-- borrar -->
+                    					
                     				</td>
                     			</tr>
                     		<% } %>
@@ -101,13 +78,24 @@
                    		</table>
                    	</div>
            		</div>	
-            	<a href="../adminPanel.jsp" class="btn">Volver al menu</a>
+            	<a href="/TPI-Cine/views/pages/adminPanel.jsp" class="btn">Volver al menu</a>
        		</div>
 		</div>
 	</div>
 	
 	
+<script type="text/javascript">
 	
+	function confirmar(){
+		
+		if(confirm("Esta seguro que desea eliminar la restricción?")){
+			<% request.setAttribute("action", "confirm"); %>
+		}
+		
+	}
+
+
+</script>
 	
 	
 	

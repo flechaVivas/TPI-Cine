@@ -69,14 +69,14 @@ public class DataRestriction {
 	public void delete(Restriction r) {
 		PreparedStatement stmt=null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE * FROM restriction WHERE idrestriction=? ");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM restriction WHERE idRestriction=?");
 			stmt.setInt(1, r.getIdRestriction());
 			stmt.executeUpdate();
 			if(stmt!=null) {stmt.close();}
 		} catch (Exception e) {e.printStackTrace();}
 	}
 	
-	public Restriction createOne(Restriction r) {
+	public void createOne(Restriction r) {
 		PreparedStatement stmt=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
@@ -84,6 +84,9 @@ public class DataRestriction {
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1,r.getDescription());
+			
+			stmt.executeUpdate();
+			
 			ResultSet keyResultSet=stmt.getGeneratedKeys();
 			if (keyResultSet!=null && keyResultSet.next()) {
 				int id=keyResultSet.getInt(1);
@@ -98,7 +101,6 @@ public class DataRestriction {
 		System.out.println("SQLException: "+ ex.getMessage());
 		System.out.println("SQLState: "+ ex.getSQLState());
 		System.out.println("VendorError"+ ex.getErrorCode());}
-		return r;
 	}
 
 	public void update(Restriction r) {
@@ -110,8 +112,8 @@ public class DataRestriction {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"UPDATE restriction set description=? where idRestriction=?");
-			stmt.setInt(1, r.getIdRestriction());
-			stmt.setString(2, r.getDescription());
+			stmt.setString(1, r.getDescription());
+			stmt.setInt(2, r.getIdRestriction());
 			
 			stmt.executeUpdate();
 					

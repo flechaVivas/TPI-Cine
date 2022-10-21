@@ -30,7 +30,7 @@
 		<!-- Body de la pagina -->
 		<div class="row"> 
 		<!-- Menu de la izquierda-->
-			<div id="Menu" class="col-2">
+			<div id="Menu" class="col-2 mt-5">
 				<!-- Sidebar Column -->
 				<div class="list-group">
 					<a class="list-group-item" href="listUsers.jsp">User</a>
@@ -52,7 +52,7 @@
 	        	<p>Desde aquí podrá gestionar los datos</p>
 	        	<h4>Restricciones</h4>
 				
-				<form action="/TPI-Cine/src/servlet/ABMCRestriction" method="post">
+				<form action="/TPI-Cine/src/servlet/UpdateRestriction" method="post">
 				
 				<div class="col-12 col-sm-12 col-lg-12">
 			     	<div class="table-responsive">
@@ -77,7 +77,7 @@
 			         </div>
 			      </div>
 			      </form>	
-	             <a href="./listRestrictions.jsp" class="btn">Volver a restricciones</a>
+	             <a href="/TPI-Cine/views/pages/ui-restriction/listRestrictions.jsp" class="btn">Volver a restricciones</a>
 			</div>
 		</div>
 	</div>
