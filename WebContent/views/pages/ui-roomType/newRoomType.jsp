@@ -28,7 +28,7 @@
                     <a class="list-group-item" href="/TPI-Cine/views/pages/ui-restriction/listRestrictions.jsp">Restricciones</a>
                     <a class="list-group-item" href="/TPI-Cine/views/pages/ui-genre/listGenres.jsp">Generos</a>
                     <a class="list-group-item" href="listMoovieRooms.jsp">Salas de Cine</a>
-                    <a class="list-group-item" href="listRoomTypes.jsp">Tipos de Salas</a>
+                    <a class="list-group-item" href="/TPI-Cine/views/pages/ui-roomType/listRoomTypes.jsp">Tipos de Salas</a>
                     <a class="list-group-item" href="listUbication.jsp">Ubicaciones</a>
                 </div>
             </div>
@@ -36,21 +36,27 @@
             <!-- Content Column -->
             <div class="col-10 ">
                 <h2>PANEL ADMINISTRADOR</h2>
-                <h4>Generos</h4>  
+                <h4>Tipos de Sala</h4>  
 
-                <form action="/TPI-Cine/src/servlet/ABMCGenre?action=new" method="post">
+                <form action="/TPI-Cine/src/servlet/ABMCRoomType?action=new" method="post">
                     <div class="container mt-5">
             
-                        <h2>Alta de Genero</h2>
+                        <h2>Alta de Tipo de Sala</h2>
                 
                         <table class="table table-borderless">
                             <tr>
                                 <td> Descripcion </td>
-                                <td><input name="description" type="text" class="form-control" required></td>
+                                <td> Filas </td>
+                                <td> Columnas </td>
                                 <td> <button class="btn btn-success">Aceptar</button> </td>
                             </tr>
+                            <tr>
+                            	<td><input name="description" type="text" class="form-control" required></td>
+                            	<td><input name="row" type="number" class="form-control" required></td>
+                            	<td><input name="col" type="number" class="form-control" required></td>
+                            </tr>
                         </table>
-                        <a href="/TPI-Cine/views/pages/ui-genre/listGenres.jsp" class="btn">Volver a Generos</a>
+                        <a href="/TPI-Cine/views/pages/ui-roomType/listRoomTypes.jsp" class="btn">Volver a Tipos de Sala</a>
                     </div>
                 </form>
             </div>

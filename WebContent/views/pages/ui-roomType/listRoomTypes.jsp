@@ -1,3 +1,5 @@
+<%@page import="entities.RoomType"%>
+<%@page import="logic.RoomTypeController"%>
 <%@page import="entities.Genre"%>
 <%@page import="logic.GenreController"%>
 <%@page import="java.util.LinkedList"%>
@@ -18,14 +20,14 @@
 		User u = (User)session.getAttribute("usuario");
 	
 		if(u!=null){
-			if(!(u.getRole().getDescription().equals("admin"))){
+			if(u.getRole().getDescription() != "admin"){
 				session.invalidate();
 				request.getRequestDispatcher("/TPI-Cine/views/pages/login.jsp");
 			}
 		}
 		
-		GenreController ctrlGen = new GenreController();
-		LinkedList<Genre> genres = ctrlGen.getAll();
+		RoomTypeController ctrlRT = new RoomTypeController();
+		LinkedList<RoomType> types = ctrlRT.list();
 	
 	%>
 
@@ -56,7 +58,7 @@
     	<!-- Content Column -->
 		<div class="col-10 ">
         	<h2>PANEL ADMINISTRADOR</h2>
-        	<h4>Restricciones</h4>  
+        	<h4>Tipos de Sala</h4>  
 
 			<div class="col-12 col-sm-12 col-lg-12">
             	<div class="table-responsive">
@@ -65,19 +67,22 @@
                     		<tr>
                     			<th>ID</th>
                     		    <th>Descripcion</th>
-                        		<th> <a class="btn btn-success" href="/TPI-Cine/views/pages/ui-genre/newGenre.jsp">Nuevo Genero</a> </th>
+                    		    <th>Filas</th>
+                    		    <th>Columnas</th>
+                        		<th> <a class="btn btn-success" href="/TPI-Cine/views/pages/ui-roomType/newRoomType.jsp">Nuevo Tipo de Sala</a> </th>
                         		<th></th>
                       		</tr>
                       	</thead>
                     	<tbody>
-                    		<% for (Genre g : genres) { %>
+                    		<% for (RoomType r : types) { %>
                     			<tr>
-                    				<td><%=g.getIdGenre()%></td>
-                    				<td><%=g.getDescription()%></td>
-                    				
+                    				<td><%=r.getIdRoomType()%></td>
+                    				<td><%=r.getDescription()%></td>
+                    				<td><%=r.getSizeRow()%></td>
+                    				<td><%=r.getSizeCol()%></td>
                     				<td>
-                    					<a href="/TPI-Cine/views/pages/ui-genre/editGenre.jsp?idGenre=<%=g.getIdGenre()%>" class="btn">Editar</a><!-- editar -->
-                    					<a href="/TPI-Cine/src/servlet/ABMCGenre?action=delete&idGenre=<%=g.getIdGenre()%>" class="btn btn-danger">Eliminar</a><!-- borrar -->
+                    					<a href="/TPI-Cine/views/pages/ui-roomType/editRoomType.jsp?idRoomType=<%=r.getIdRoomType()%>" class="btn">Editar</a><!-- editar -->
+                    					<a href="/TPI-Cine/src/servlet/ABMCRoomType?action=delete&idRoomType=<%=r.getIdRoomType()%>" class="btn btn-danger">Eliminar</a><!-- borrar -->
                     				</td>
                     			</tr>
                     		<% } %>

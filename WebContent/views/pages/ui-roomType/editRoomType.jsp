@@ -1,5 +1,5 @@
-<%@page import="entities.Genre"%>
-<%@page import="logic.GenreController"%>
+<%@page import="logic.RoomTypeController"%>
+<%@page import="entities.RoomType"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,11 +12,11 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 	<%
-		Integer id = Integer.parseInt((String)request.getParameter("idGenre"));
-		GenreController ctrlGen = new GenreController();
-		Genre g = new Genre();
-		g.setIdGenre(id);
-		g = ctrlGen.getOne(g);
+		Integer id = Integer.parseInt((String)request.getParameter("idRoomType"));
+		RoomTypeController ctrlRT = new RoomTypeController();
+		RoomType r = new RoomType();
+		r.setIdRoomType(id);
+		r = ctrlRT.getOne(r);
 	
 	%>
 
@@ -41,7 +41,7 @@
 					<a class="list-group-item" href="/TPI-Cine/views/pages/ui-restriction/listRestrictions.jsp">Restricciones</a>
 					<a class="list-group-item" href="/TPI-Cine/views/pages/ui-genre/listGenres.jsp">Generos</a>
 					<a class="list-group-item" href="listMoovieRooms.jsp">Salas de Cine</a>
-					<a class="list-group-item" href="listRoomTypes.jsp">Tipos de Salas</a>
+					<a class="list-group-item" href="/TPI-Cine/views/pages/ui-roomType/listRoomTypes.jsp">Tipos de Salas</a>
 					<a class="list-group-item" href="listUbication.jsp">Ubicaciones</a>
 				</div>
 			</div>
@@ -49,9 +49,9 @@
 	    	<!-- Content Column -->
 			<div class="col-10 ">
 	        	<h2>PANEL ADMINISTRADOR</h2>
-	        	<h4>Generos</h4>
+	        	<h4>Tipos de Salas</h4>
 				
-				<form action="/TPI-Cine/src/servlet/ABMCGenre?action=update&idGenre=<%=g.getIdGenre()%>" method="post">
+				<form action="/TPI-Cine/src/servlet/ABMCRoomType?action=update&idRoomType=<%=r.getIdRoomType()%>" method="post">
 				
 				<div class="col-12 col-sm-12 col-lg-12">
 			     	<div class="table-responsive">
@@ -60,12 +60,16 @@
 			                	<tr>
 			                		<th>ID</th>
 			                		<th>Descripcion</th>
+			                		<th>Filas</th>
+                    		   		<th>Columnas</th>
 			                  	</tr>
 			                </thead>
 							<tbody>
 								<tr>
-			                		<td><input type="text" value="<%=g.getIdGenre()%>" name="idGenre" readonly="" class="form-control"></td>
-			                    	<td><input value="<%=g.getDescription()%>"name="description" type="text" class="form-control" required></td>
+			                		<td><input type="number" value="<%=r.getIdRoomType()%>" name="idRoomType" readonly="" class="form-control"></td>
+			                    	<td><input type="text" value="<%=r.getDescription()%>"name="description"  class="form-control" required></td>
+			                    	<td><input type="number" value="<%=r.getSizeRow()%>"name="row"  class="form-control" required></td>
+			                    	<td><input type="number" value="<%=r.getSizeCol()%>"name="col" class="form-control" required></td>
 			                    				
 			                    	<td>
 										<button class="btn btn-warning" type="submit">Confirmar</button>
@@ -76,7 +80,7 @@
 			         </div>
 			      </div>
 			      </form>	
-	             <a href="/TPI-Cine/views/pages/ui-genre/listGenres.jsp" class="btn">Volver a Generos</a>
+	             <a href="/TPI-Cine/views/pages/ui-roomType/listRoomTypes.jsp" class="btn">Volver a Tipos de Sala</a>
 			</div>
 		</div>
 	</div>
