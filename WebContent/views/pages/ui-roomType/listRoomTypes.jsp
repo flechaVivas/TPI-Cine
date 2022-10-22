@@ -43,7 +43,7 @@
 			<!-- Sidebar Column -->
 			<div class="list-group">
 				<a class="list-group-item" href="listUsers.jsp">Usuarios</a>
-				<a class="list-group-item" href="listRoles.jsp">Roles</a>
+				<a class="list-group-item" href="/TPI-Cine/views/pages/ui-role/listRoles.jsp">Roles</a>
 				<a class="list-group-item" href="listTickets.jsp">Tickets</a>
 				<a class="list-group-item" href="listShows.jsp">Funciones</a>
 				<a class="list-group-item" href="listMovies.jsp">Películas</a>

@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Restriction;
-import logic.RestrictionController;
+import entities.Role;
+import logic.RoleController;
 
 /**
  * Servlet implementation class ABMCRestriction
  */
-@WebServlet("/src/servlet/ABMCRestriction")
-public class ABMCRestriction extends HttpServlet {
+@WebServlet("/src/servlet/ABMCRole")
+public class ABMCRole extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ABMCRestriction() {
+    public ABMCRole() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,8 +39,8 @@ public class ABMCRestriction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	
-		Restriction r = new Restriction();
-		RestrictionController ctrlRes = new RestrictionController();
+		Role r = new Role();
+		RoleController ctrlRole = new RoleController();
 		
 		try {
 			
@@ -49,24 +49,24 @@ public class ABMCRestriction extends HttpServlet {
 			case "new":
 			
 				r.setDescription((String)request.getParameter("description"));
-				ctrlRes.addOne(r);
+				ctrlRole.add(r);
 				
 				break;
 			
 			case "update":
 				
-				r.setIdRestriction(Integer.parseInt(((String)request.getParameter("idRestriction"))));
+				r.setIdRole(Integer.parseInt(((String)request.getParameter("idRole"))));
 				r.setDescription((String)request.getParameter("description"));
 				
-				ctrlRes.update(r);
+				ctrlRole.update(r);
 				
 				break;
 				
 			case "delete":
 				
-				r.setIdRestriction(Integer.parseInt((String)request.getParameter("idRestriction")));
+				r.setIdRole(Integer.parseInt((String)request.getParameter("idRole")));
 				
-				ctrlRes.deleteOne(r);
+				ctrlRole.delete(r);
 				
 				break;
 
@@ -74,7 +74,7 @@ public class ABMCRestriction extends HttpServlet {
 				break;
 			}
 			
-			request.getRequestDispatcher("/views/pages/ui-restriction/listRestrictions.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/pages/ui-role/listRoles.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			

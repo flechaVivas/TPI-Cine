@@ -21,7 +21,7 @@
                 <!-- Sidebar Column -->
                 <div class="list-group">
                     <a class="list-group-item" href="listUsers.jsp">Usuarios</a>
-                    <a class="list-group-item" href="listRoles.jsp">Roles</a>
+                    <a class="list-group-item" href="/TPI-Cine/views/pages/ui-role/listRoles.jsp">Roles</a>
                     <a class="list-group-item" href="listTickets.jsp">Tickets</a>
                     <a class="list-group-item" href="listShows.jsp">Funciones</a>
                     <a class="list-group-item" href="listMovies.jsp">Películas</a>
@@ -40,13 +40,15 @@
 
 
 				<form action="/TPI-Cine/src/servlet/ABMCRestriction?action=new" method="post">
-					<div class="container mt-5">
+					<div class="col-12 col-sm-12 col-lg-12">
 
 						<h2>Alta de Restriccion</h2>
 				
 						<table class="table table-borderless">
 							<tr>
 								<td> Descripcion </td>
+							</tr>
+							<tr>
 								<td><input name="description" type="text" class="form-control" required></td>
 								<td> <button class="btn btn-success">Aceptar</button> </td>
 							</tr>

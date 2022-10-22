@@ -57,8 +57,6 @@ public class ABMCRoomType extends HttpServlet {
 				
 				ctrRT.addOne(r);
 				
-				request.getRequestDispatcher("/views/pages/ui-roomType/listRoomTypes.jsp").forward(request, response);
-			
 				break;
 			
 			case "update":
@@ -70,8 +68,6 @@ public class ABMCRoomType extends HttpServlet {
 				
 				ctrRT.update(r);
 				
-				request.getRequestDispatcher("/views/pages/ui-roomType/listRoomTypes.jsp").forward(request, response);
-				
 				break;
 				
 			case "delete":
@@ -80,13 +76,13 @@ public class ABMCRoomType extends HttpServlet {
 				
 				ctrRT.deleteOne(r);
 				
-				request.getRequestDispatcher("/views/pages/ui-roomType/listRoomTypes.jsp").forward(request, response);
-				
 				break;
 
 			default:
 				break;
 			}
+			
+			request.getRequestDispatcher("/views/pages/ui-roomType/listRoomTypes.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			

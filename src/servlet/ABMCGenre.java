@@ -52,8 +52,6 @@ public class ABMCGenre extends HttpServlet {
 				g.setDescription((String)request.getParameter("description"));
 				ctrGen.addOne(g);
 				
-				request.getRequestDispatcher("/views/pages/ui-genre/listGenres.jsp").forward(request, response);
-			
 				break;
 			
 			case "update":
@@ -63,9 +61,6 @@ public class ABMCGenre extends HttpServlet {
 				
 				ctrGen.update(g);
 				
-				request.getRequestDispatcher("/views/pages/ui-genre/listGenres.jsp").forward(request, response);
-
-				
 				break;
 				
 			case "delete":
@@ -74,13 +69,13 @@ public class ABMCGenre extends HttpServlet {
 				
 				ctrGen.deleteOne(g);
 				
-				request.getRequestDispatcher("/views/pages/ui-genre/listGenres.jsp").forward(request, response);
-				
 				break;
 
 			default:
 				break;
 			}
+			
+			request.getRequestDispatcher("/views/pages/ui-genre/listGenres.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			

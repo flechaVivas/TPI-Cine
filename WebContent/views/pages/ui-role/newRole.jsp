@@ -36,30 +36,26 @@
             <!-- Content Column -->
             <div class="col-10">
                 <h2>PANEL ADMINISTRADOR</h2>
-                <h4>Tipos de Sala</h4>  
+                <h4>Roles de Usuario</h4>  
 
-                <form action="/TPI-Cine/src/servlet/ABMCRoomType?action=new" method="post">
+                <form action="/TPI-Cine/src/servlet/ABMCRole?action=new" method="post">
                 
                 	<div class="col-12 col-sm-12 col-lg-12">
                 
                    		<div class="table-responsive">
             
-                        	<h2>Alta de Tipo de Sala</h2>
+                        	<h2>Alta Roles</h2>
                 
                         	<table class="table table-borderless">
 	                            <tr>
 	                                <td> Descripcion </td>
-	                                <td> Filas </td>
-	                                <td> Columnas </td>
 	                            </tr>
 	                            <tr>
 	                            	<td><input name="description" type="text" class="form-control" required></td>
-	                            	<td><input name="row" type="number" class="form-control" required></td>
-	                            	<td><input name="col" type="number" class="form-control" required></td>
 	                            	<td> <button class="btn btn-success">Aceptar</button> </td>
 	                            </tr>
                         	</table>
-                        	<a href="/TPI-Cine/views/pages/ui-roomType/listRoomTypes.jsp" class="btn">Volver a Tipos de Sala</a>
+                        	<a href="/TPI-Cine/views/pages/ui-role/listRoles.jsp" class="btn">Volver Roles</a>
                     	</div>
                     </div>
                 </form>

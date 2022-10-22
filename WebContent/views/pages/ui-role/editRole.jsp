@@ -1,3 +1,5 @@
+<%@page import="entities.Role"%>
+<%@page import="logic.RoleController"%>
 <%@page import="logic.RoomTypeController"%>
 <%@page import="entities.RoomType"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,17 +8,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Roles</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 	<%
-		Integer id = Integer.parseInt((String)request.getParameter("idRoomType"));
-		RoomTypeController ctrlRT = new RoomTypeController();
-		RoomType r = new RoomType();
-		r.setIdRoomType(id);
-		r = ctrlRT.getOne(r);
+		Integer id = Integer.parseInt((String)request.getParameter("idRole"));
+		RoleController ctrlRole = new RoleController();
+		Role r = new Role();
+		r.setIdRole(id);
+		r = ctrlRole.getOne(r);
 	
 	%>
 
@@ -49,9 +51,9 @@
 	    	<!-- Content Column -->
 			<div class="col-10 ">
 	        	<h2>PANEL ADMINISTRADOR</h2>
-	        	<h4>Tipos de Salas</h4>
+	        	<h4>Roles de Usuario</h4>
 				
-				<form action="/TPI-Cine/src/servlet/ABMCRoomType?action=update&idRoomType=<%=r.getIdRoomType()%>" method="post">
+				<form action="/TPI-Cine/src/servlet/ABMCRole?action=update&idRole=<%=r.getIdRole()%>" method="post">
 				
 				<div class="col-12 col-sm-12 col-lg-12">
 			     	<div class="table-responsive">
@@ -60,17 +62,12 @@
 			                	<tr>
 			                		<th>ID</th>
 			                		<th>Descripcion</th>
-			                		<th>Filas</th>
-                    		   		<th>Columnas</th>
 			                  	</tr>
 			                </thead>
 							<tbody>
 								<tr>
-			                		<td><input type="number" value="<%=r.getIdRoomType()%>" name="idRoomType" readonly="" class="form-control"></td>
+			                		<td><input type="number" value="<%=r.getIdRole()%>" name="idRole" readonly="" class="form-control"></td>
 			                    	<td><input type="text" value="<%=r.getDescription()%>"name="description"  class="form-control" required></td>
-			                    	<td><input type="number" value="<%=r.getSizeRow()%>"name="row"  class="form-control" required></td>
-			                    	<td><input type="number" value="<%=r.getSizeCol()%>"name="col" class="form-control" required></td>
-			                    				
 			                    	<td>
 										<button class="btn btn-warning" type="submit">Confirmar</button>
 			               			</td>
@@ -80,7 +77,7 @@
 			         </div>
 			      </div>
 	    		</form>	
-				<a href="/TPI-Cine/views/pages/ui-roomType/listRoomTypes.jsp" class="btn">Volver a Tipos de Sala</a>
+				<a href="/TPI-Cine/views/pages/ui-role/listRoles.jsp" class="btn">Volver Roles de Usuario</a>
 			</div>
 		</div>
 	</div>
