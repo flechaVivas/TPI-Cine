@@ -134,10 +134,10 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `idRole` int NOT NULL,
+  `idRole` int NOT NULL AUTO_INCREMENT,
   `description` varchar(45) NOT NULL,
   PRIMARY KEY (`idRole`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,7 +163,7 @@ CREATE TABLE `room_type` (
   `rowQuantity` int NOT NULL,
   `colQuantity` int NOT NULL,
   PRIMARY KEY (`idRoomType`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +172,7 @@ CREATE TABLE `room_type` (
 
 LOCK TABLES `room_type` WRITE;
 /*!40000 ALTER TABLE `room_type` DISABLE KEYS */;
-INSERT INTO `room_type` VALUES (1,'IMAX Subtitulado',14,14),(2,'3D Subtitulado',10,10),(3,'2D Ingles',15,12),(4,'IMAX Ingles',10,10),(5,'4D Subtitulado',14,14),(6,'2D Subtitulado',15,15),(7,'2D Subtitulado',14,14),(8,'3D Ingles',15,15),(9,'4D Ingles',14,14);
+INSERT INTO `room_type` VALUES (1,'IMAX Subtitulado',14,14),(2,'3D Subtitulado',10,10),(3,'2D Ingles',15,12),(4,'IMAX Ingles',10,10),(5,'4D Subtitulado',14,14),(6,'2D Subtitulado',15,15),(7,'2D Subtitulado',14,14),(8,'3D Ingles',15,15),(9,'4D Ingles',14,14),(12,'2D Frances',12,10);
 /*!40000 ALTER TABLE `room_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,7 +284,7 @@ CREATE TABLE `user` (
   `email` varchar(45) NOT NULL,
   PRIMARY KEY (`idUser`),
   UNIQUE KEY `email_UNIQUE` (`email`),
-  KEY `fk_user_rol_idx` (`idRole`),
+  KEY `fk_user_role_idx` (`idRole`),
   CONSTRAINT `fk_user_role` FOREIGN KEY (`idRole`) REFERENCES `role` (`idRole`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=48291 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -308,4 +308,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-22 11:45:04
+-- Dump completed on 2022-10-22 20:13:45
