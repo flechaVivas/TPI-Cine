@@ -17,12 +17,12 @@
 	<%
 		User u = (User)session.getAttribute("usuario");
 	
-		if(u!=null){
-			if(!(u.getRole().getDescription().equals("admin"))){
-				session.invalidate();
-				request.getRequestDispatcher("/TPI-Cine/views/pages/login.jsp");
-			}
-		}
+// 		if(u!=null){
+// 			if(!(u.getRole().getDescription().equals("admin"))){
+// 				session.invalidate();
+// 				request.getRequestDispatcher("/TPI-Cine/views/pages/login.jsp");
+// 			}
+// 		}
 		
 		GenreController ctrlGen = new GenreController();
 		LinkedList<Genre> genres = ctrlGen.getAll();

@@ -41,7 +41,7 @@
 					<a class="list-group-item" href="/TPI-Cine/views/pages/ui-restriction/listRestrictions.jsp">Restricciones</a>
 					<a class="list-group-item" href="/TPI-Cine/views/pages/ui-genre/listGenres.jsp">Generos</a>
 					<a class="list-group-item" href="listMoovieRooms.jsp">Salas de Cine</a>
-					<a class="list-group-item" href="listRoomTypes.jsp">Tipos de Salas</a>
+					<a class="list-group-item" href="/TPI-Cine/views/pages/ui-roomType/listRoomTypes.jsp">Tipos de Salas</a>
 					<a class="list-group-item" href="listUbication.jsp">Ubicaciones</a>
 				</div>
 			</div>

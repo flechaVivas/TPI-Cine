@@ -1,3 +1,7 @@
+<%@page import="entities.User"%>
+<% 
+	User u = (User)session.getAttribute("usuario");
+%>
 
 <div class="container mt-4" style="min-height: 65vh;">
 
@@ -22,7 +26,7 @@
     	
     	<!-- Content Column -->
 		<div class="col-10 ">
-        	<h2>PANEL ADMINISTRADOR</h2>
+        	<h2>Bienvenido <strong> <%=u.getName()+" "+u.getSurname()%> </strong> al PANEL ADMINISTRADOR</h2>
         	<p>Desde aquí podrá gestionar los datos</p>
        	</div>
 	
