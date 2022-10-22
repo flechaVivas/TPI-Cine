@@ -20,6 +20,21 @@ public class RoleController {
 	public LinkedList<Role> getAll(){
 		return dr.getAll();
 	}
+
+	public void add(Role r) {
+		dr.add(r);
+		
+	}
+
+	public void update(Role r) {
+		dr.update(r);
+		
+	}
+
+	public void delete(Role r) {
+		dr.delete(r);
+		
+	}
 	
 	
 }

@@ -81,11 +81,84 @@ public class DataRole {
 		return roles;
 		
 	} // getAll
+
+	public void add(Role r) {
+		PreparedStatement stmt=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+			"INSERT INTO role(description) values (?)"
+					,PreparedStatement.RETURN_GENERATED_KEYS);
+			
+			stmt.setString(1,r.getDescription());
+			
+			stmt.executeUpdate();
+			
+			ResultSet keyResultSet=stmt.getGeneratedKeys();
+			if (keyResultSet!=null && keyResultSet.next()) {
+				int id=keyResultSet.getInt(1);
+				r.setIdRole(id);
+			}
+			
+			if(keyResultSet!=null){keyResultSet.close();}
+		    if(stmt!=null){stmt.close();}
+		    
+		
+		} catch (SQLException ex) {
+			System.out.println("SQLException: "+ ex.getMessage());
+			System.out.println("SQLState: "+ ex.getSQLState());
+			System.out.println("VendorError"+ ex.getErrorCode());
+		}
+	}
+
+	public void update(Role r) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"UPDATE role set description=? where idRole=?");
+			stmt.setString(1, r.getDescription());
+			stmt.setInt(2, r.getIdRole());
+			
+			stmt.executeUpdate();
+					
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	public void delete(Role r) {
+
+		PreparedStatement stmt=null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM role WHERE idRole=?");
+			stmt.setInt(1, r.getIdRole());
+			stmt.executeUpdate();
+			
+			if(stmt!=null) {
+				stmt.close();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 	
 	
-	// Omitimos los metodos add, update, delete pues eso se gestionará desde MySql
-
-
 	
 	
 	

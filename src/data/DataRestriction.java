@@ -97,11 +97,11 @@ public class DataRestriction {
 		    if(stmt!=null){stmt.close();}
 		    
 		
-	} catch (SQLException ex) {
-		System.out.println("SQLException: "+ ex.getMessage());
-		System.out.println("SQLState: "+ ex.getSQLState());
-		System.out.println("VendorError"+ ex.getErrorCode());}
-	}
+		} catch (SQLException ex) {
+			System.out.println("SQLException: "+ ex.getMessage());
+			System.out.println("SQLState: "+ ex.getSQLState());
+			System.out.println("VendorError"+ ex.getErrorCode());}
+		}
 
 	public void update(Restriction r) {
 		
