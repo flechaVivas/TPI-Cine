@@ -16,6 +16,14 @@ public class RoomTypeController {
 		return drt.getAvailablesByMovie(m);
 	}
 	
+	public LinkedList<RoomType> list(){
+		return drt.list();
+	}
+	
+	public void update(RoomType r) {
+		drt.update(r);
+	}
+	
 	public void deleteOne(RoomType rt) {drt.delete(rt);}
 	//public RoomType editOne(RoomType rt) {return drt.update(rt);}
 	public RoomType addOne(RoomType rt) {return drt.createOne(rt);}

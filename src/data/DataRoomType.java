@@ -7,7 +7,9 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
+import entities.Genre;
 import entities.Movie;
+import entities.Restriction;
 import entities.Role;
 import entities.RoomType;
 import entities.User;
@@ -24,10 +26,15 @@ public class DataRoomType {
 			stmt.setInt(1, rt.getIdRoomType());
 			rs=stmt.executeQuery();
 			
-			r.setIdRoomType(rs.getInt("idRoomType"));
-			r.setDescription(rs.getString("description"));
-			r.setSizeRow(rs.getInt("rowQuantity"));
-			r.setSizeCol(rs.getInt("colQuantity"));
+			if(rs!=null && rs.next()) {
+			
+				r.setIdRoomType(rs.getInt("idRoomType"));
+				r.setDescription(rs.getString("description"));
+				r.setSizeRow(rs.getInt("rowQuantity"));
+				r.setSizeCol(rs.getInt("colQuantity"));
+				
+			}
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -42,6 +49,37 @@ public class DataRoomType {
 		}
 		return r;
 	}
+	
+	public LinkedList<RoomType> list(){
+		
+		Statement stmt=null;
+		ResultSet rs=null;
+		LinkedList<RoomType> rtts = new LinkedList<RoomType>();
+		try {
+			stmt=DbConnector.getInstancia().getConn().createStatement();
+			rs=stmt.executeQuery("select * from room_type");
+			
+			
+		while(rs.next()) {
+			RoomType r = new RoomType();
+			r.setIdRoomType(rs.getInt("idRoomType"));
+			r.setDescription(rs.getString("description"));
+			r.setSizeRow(rs.getInt("rowQuantity"));
+			r.setSizeCol(rs.getInt("colQuantity"));
+			rtts.add(r);
+		}
+		if(rs!=null) {rs.close();}
+		if(stmt!=null) {stmt.close();}
+		}catch(SQLException ex) {
+			System.out.println("SQLException: "+ ex.getMessage());
+			System.out.println("SQLState: "+ ex.getSQLState());
+			System.out.println("VendorError"+ ex.getErrorCode());
+		
+		}
+		return rtts;
+	}
+	
+	
 	
 	public LinkedList<RoomType> getAvailablesByMovie(Movie m){
 
@@ -120,14 +158,21 @@ public class DataRoomType {
 		ResultSet keyResultSet = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO room_type(idRoomType,description,rowQuantity,colQuantity) values (?,?,?,?)"
+			"INSERT INTO room_type (description,rowQuantity,colQuantity) values (?,?,?)"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, rt.getIdRoomType());
-			stmt.setString(2, rt.getDescription());
-			stmt.setInt(3, rt.getSizeRow());
-			stmt.setInt(4, rt.getSizeCol());
+			
+			stmt.setString(1, rt.getDescription());
+			stmt.setInt(2, rt.getSizeRow());
+			stmt.setInt(3, rt.getSizeCol());
 			
 			stmt.executeUpdate();	
+			
+			keyResultSet=stmt.getGeneratedKeys();
+			if (keyResultSet!=null && keyResultSet.next()) {
+				int id=keyResultSet.getInt(1);
+				rt.setIdRoomType(id);
+			}
+			
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
@@ -139,5 +184,45 @@ public class DataRoomType {
 						}
 			return rt;
 	}
+	
+	public void update(RoomType r) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"UPDATE room_type set description=?, rowQuantity=?, colQuantity=? where idRoomType=?");
+			stmt.setString(1, r.getDescription());
+			stmt.setInt(2, r.getSizeRow());
+			stmt.setInt(3, r.getSizeCol());
+			stmt.setInt(4, r.getIdRoomType());
+			
+			stmt.executeUpdate();
+					
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
