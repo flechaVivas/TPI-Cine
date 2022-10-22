@@ -87,8 +87,8 @@ CREATE TABLE `movieroom` (
   `roomNumber` int NOT NULL,
   `idRoomType` int NOT NULL,
   PRIMARY KEY (`roomNumber`),
-  KEY `fk_room_type_1_idx` (`idRoomType`),
-  CONSTRAINT `fk_movieroom_type` FOREIGN KEY (`idRoomType`) REFERENCES `room_type` (`idRoomType`) ON DELETE RESTRICT ON UPDATE CASCADE
+  KEY `fk_movieroom_roomType_idx` (`idRoomType`),
+  CONSTRAINT `fk_movieroom_roomType` FOREIGN KEY (`idRoomType`) REFERENCES `room_type` (`idRoomType`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -98,7 +98,7 @@ CREATE TABLE `movieroom` (
 
 LOCK TABLES `movieroom` WRITE;
 /*!40000 ALTER TABLE `movieroom` DISABLE KEYS */;
-INSERT INTO `movieroom` VALUES (1,1),(2,1),(3,1),(8,1),(5,2),(6,2),(4,3),(7,4);
+INSERT INTO `movieroom` VALUES (4,1),(1,2),(2,2),(3,2),(6,4),(5,5),(8,5),(7,8);
 /*!40000 ALTER TABLE `movieroom` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,12 +158,12 @@ DROP TABLE IF EXISTS `room_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `room_type` (
-  `idRoomType` int NOT NULL,
+  `idRoomType` int NOT NULL AUTO_INCREMENT,
   `description` varchar(45) NOT NULL,
   `rowQuantity` int NOT NULL,
   `colQuantity` int NOT NULL,
   PRIMARY KEY (`idRoomType`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,4 +308,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-17 20:26:05
+-- Dump completed on 2022-10-22 11:45:04
