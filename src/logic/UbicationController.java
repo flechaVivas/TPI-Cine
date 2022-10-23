@@ -3,12 +3,13 @@ package logic;
 import java.util.LinkedList;
 
 import data.DataUbication;
+import entities.Show;
 import entities.Ubication;
 
 public class UbicationController {
 	private DataUbication du;
 	
-	public 	UbicationController(DataUbication du){
+	public 	UbicationController(){
 		du = new DataUbication();
 	}
 	
@@ -26,6 +27,11 @@ public class UbicationController {
 	
 	public Ubication createUbication(Ubication u) {
 		return du.createUbication(u);
+	}
+	
+	public LinkedList<Ubication > getByShow(Show s) {
+		return du.getByShow(s);
+		
 	}
 	
 }

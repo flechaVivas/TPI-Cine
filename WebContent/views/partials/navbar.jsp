@@ -1,14 +1,6 @@
 <%@page import="entities.Role"%>
 <%@page import="entities.User"%>
 
-<script type="text/javascript">
-
-//  	function removeSessionAtbs() {
-<%-- 		<% session.removeAttribute("show"); %> --%>
-//  	}
-
-</script>
-
 <%
 		User u = new User();
 		u=(User)session.getAttribute("usuario");
@@ -60,7 +52,7 @@
      <div id="login_link" class="user-menu">
        	<div class="navbar-account">
            	<span id="ctl00_lblLogin"><a href="/TPI-Cine/views/pages/MiCuenta.jsp"><%=u.getName()+" "+u.getSurname()%> </a></span> 
-           	<i class="fa-solid fa-user"></i>
+           	<i class="fa-duotone fa-user"></i>
       	</div>
     </div>
      

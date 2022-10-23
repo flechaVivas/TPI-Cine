@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.time.LocalDateTime;
 import entities.Show;
+import entities.Ticket;
 import entities.Ubication;
 
 
@@ -29,7 +30,6 @@ public class DataUbication {
 				ub.setShow(s);
 				ub.setRow(rs.getString("row"));
 				ub.setCol(rs.getInt("col"));
-				ub.setStatus(rs.getBoolean("status"));
 			}
 			
 		}catch (SQLException e) {
@@ -64,7 +64,6 @@ public class DataUbication {
 				u.setShow(s);
 				u.setRow(rs.getString("row"));
 				u.setCol(rs.getInt("col"));
-				u.setStatus(rs.getBoolean("status"));
 				ubis.add(u);
 			}
 		}catch (SQLException e) {
@@ -86,7 +85,6 @@ public class DataUbication {
 		try {
 			// lo unico que se actualiza es el status, lo demas son fijos
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE ubication set status = ?");
-			stmt.setBoolean(1, u.getStatus());
 			stmt.executeUpdate();
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -103,14 +101,13 @@ public class DataUbication {
 	public Ubication createUbication(Ubication u) {
 		PreparedStatement stmt = null;
 		try{
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(roomNumber, idMovie, show_date_time, idTicket, row, col, status) values(?,?,?,?,?,?,?)");
-			stmt.setInt(1, u.getMovieRoom().getRoomNumber());
-			stmt.setInt(2, u.getMovie().getIdMovie());
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(roomNumber, idMovie, show_date_time, idTicket, row, col) values(?,?,?,?,?,?)");
+			stmt.setInt(1, u.getShow().getMovieroom().getRoomNumber());
+			stmt.setInt(2, u.getShow().getMovie().getIdMovie());
 			stmt.setObject(3, u.getShow().getDt());
 			stmt.setInt(4, u.getTicket().getIdTicket());
 			stmt.setString(5, u.getRow());
 			stmt.setInt(6, u.getCol());
-			stmt.setBoolean(7, u.getStatus());			
 		}catch (SQLException e){
 			e.printStackTrace();
 		}finally {
@@ -122,5 +119,53 @@ public class DataUbication {
 			}
 		}
 		return u;
+	}
+
+	public LinkedList<Ubication> getByShow(Show s) {
+		
+		Ubication u = new Ubication();
+		LinkedList<Ubication> ubics = new LinkedList<Ubication>();
+		
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select u.*\n" + 
+					"    from ubication u\n" + 
+					"    inner join cine_tpjava.show s\n" + 
+					"		on s.roomNumber=u.roomNumber\n" + 
+					"        and s.idMovie=u.idMovie\n" + 
+					"        and s.date_time=u.show_date_time\n" + 
+					"	where s.idMovie=? and s.roomNumber=?;");
+			
+			stmt.setInt(1, s.getMovie().getIdMovie());
+			stmt.setInt(2, s.getMovieroom().getRoomNumber());
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Ticket t = new Ticket();
+				u.setRow(rs.getString("row"));
+				u.setCol(rs.getInt("col"));
+				u.setShow(s);
+				t.setIdTicket(rs.getInt("idTicket"));
+				u.setTicket(t);
+				
+				ubics.add(u);
+				
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return ubics;
 	}
 }

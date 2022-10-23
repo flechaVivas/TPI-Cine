@@ -1,5 +1,6 @@
 package data;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -91,7 +92,6 @@ public class DataShow {
 			return s;
 		}
 
-//Ver si la actualizacion es necesaria//
 	public Show update(Show s) {
 		PreparedStatement stmt= null;
 		try {
@@ -158,9 +158,6 @@ public class DataShow {
 			}
 		}
 		
-		
-		
-		
 		return fechas;
 	}
 
@@ -200,6 +197,60 @@ public class DataShow {
 				}
 			}
 				return shows;
+	}
+
+	public Show getRoomByMovieDateTime(Show s) {
+		
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		MovieRoom mr = new MovieRoom();
+
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement
+					("select roomNumber\n" + 
+					"from cine_tpjava.show s\n" + 
+					"where s.date_time=?\n" + 
+					"and s.idMovie=?;");
+			
+			stmt.setString(1, s.getDt().toString());
+			stmt.setInt(2, s.getMovie().getIdMovie());
+			
+			rs=stmt.executeQuery();
+			
+			if(rs!=null && rs.next()) {
+				mr.setRoomNumber(rs.getInt("roomNumber"));
+				s.setMovieroom(mr);
 			}
+		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return s;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
