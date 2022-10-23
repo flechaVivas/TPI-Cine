@@ -30,7 +30,7 @@
 		</div>
 		<%if(s == null){ %>
 			<div class="col-md-2">
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>
+				<button class="btn btn-primary btn-block" type="submit">Aceptar</button>
 			</div>
 		<%} %>
 	</div>

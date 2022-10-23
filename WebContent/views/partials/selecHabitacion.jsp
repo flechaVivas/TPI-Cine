@@ -36,10 +36,10 @@
 					</select>
 				</div>
 				
-				<% if(request.getAttribute("showsDateTime") == null) {%>
+				<% if( ((String)request.getParameter("step")).equals("selecSala")) {%>
 				
 					<div class="col-md-2">
-						<button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>
+						<button class="btn btn-primary btn-block" type="submit">Aceptar</button>
 					</div>
 				
 				<% }%>

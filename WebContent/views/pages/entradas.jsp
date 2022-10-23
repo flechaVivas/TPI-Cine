@@ -47,25 +47,39 @@
 					</div>
 				</div>
 				
-				<jsp:include page="../partials/selecPelicula.jsp"></jsp:include>
 				
-				<% if(s!=null){
+				<% if((String)request.getParameter("step") == null) { %>
 					
-					if(s.getMovie() != null){ %>
-				
-						<jsp:include page="../partials/selecHabitacion.jsp"></jsp:include>
-						
-						<%if(request.getAttribute("showsDateTime") != null ){ %>
+					<% request.getSession().removeAttribute("show"); %>
 					
-							<jsp:include page="../partials/selecDiaHora.jsp"></jsp:include>
+					<jsp:include page="/views/partials/selecPelicula.jsp"></jsp:include>
+				
+				<%}else { %>
+				
+					<% switch ((String)request.getParameter("step") )	{
+					
+					case "selecSala": %>
 						
-						<%} %>
-				
-					<%} %>
-				<%} %>
-				
-				
-				
+						<jsp:include page="/views/partials/selecPelicula.jsp"></jsp:include>
+						<jsp:include page="/views/partials/selecHabitacion.jsp"></jsp:include>
+						
+					<% 	break;
+					
+					case "selecHora": %>
+					
+						<jsp:include page="/views/partials/selecPelicula.jsp"></jsp:include>
+						<jsp:include page="/views/partials/selecHabitacion.jsp"></jsp:include>
+						<jsp:include page="/views/partials/selecDiaHora.jsp"></jsp:include>
+						
+					<% break;
+					
+					case "selecAsiento": %>
+					
+						<jsp:include page="/views/partials/selecAsiento.jsp"></jsp:include>
+					
+					
+					<%}%>
+				<%}%>
 				
 				
 			</div>

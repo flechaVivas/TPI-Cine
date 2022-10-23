@@ -56,8 +56,8 @@ public class SeleccionarSala extends HttpServlet {
 				
 				LinkedList<Show> shows = ctrlShow.getDateTimeByRoomTypeMovie(m,rt);
 				
-				request.setAttribute("showsDateTime", shows);
-				request.getRequestDispatcher("/views/pages/entradas.jsp").forward(request, response);
+				request.getSession().setAttribute("showsDateTime", shows);
+				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecHora");
 			}
 			
 			

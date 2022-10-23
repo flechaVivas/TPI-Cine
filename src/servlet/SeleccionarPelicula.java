@@ -55,9 +55,10 @@ public class SeleccionarPelicula extends HttpServlet {
 				
 				s.setMovie(m);
 				
-				HttpSession session = request.getSession(false);
-				session.setAttribute("show", s);
-				request.getRequestDispatcher("/views/pages/entradas.jsp").forward(request, response);
+				request.getSession(false).setAttribute("show", s);
+				
+//				request.getRequestDispatcher("/views/pages/entradas.jsp?step=selecSala").forward(request, response);
+				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecSala");
 				
 				
 			}

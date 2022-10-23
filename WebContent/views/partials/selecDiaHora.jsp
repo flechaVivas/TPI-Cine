@@ -5,7 +5,7 @@
 	<%
 
 	ShowController ctrlShow = new ShowController();
-	LinkedList<Show> shows = (LinkedList<Show>)request.getAttribute("showsDateTime");
+	LinkedList<Show> shows = (LinkedList<Show>) session.getAttribute("showsDateTime");
 	
 	%>
 
@@ -23,7 +23,7 @@
 	  		</select>
 		</div>
 		<div class="col-md-2">
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Aceptar</button>
+			<button class="btn btn-primary btn-block" type="submit">Aceptar</button>
 		</div>
 	</div>
 </form>
