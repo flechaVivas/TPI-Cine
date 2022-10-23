@@ -29,7 +29,7 @@ public class UbicationController {
 		return du.createUbication(u);
 	}
 	
-	public LinkedList<Ubication > getByShow(Show s) {
+	public LinkedList<Ubication> getByShow(Show s) {
 		return du.getByShow(s);
 		
 	}

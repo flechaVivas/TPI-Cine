@@ -18,6 +18,19 @@
 	LinkedList<Ubication> asientos = ctrlUbi.getByShow(s);
 	
 	
+	for(int i=0; i <= rt.getSizeRow(); i++){
+		Character letra = 'A';
+		
+		for(int j=1; j <= rt.getSizeCol(); j++){ 
+			Ubication u = new Ubication();
+			u.setRow(Character.toString(letra+i));
+			u.setCol(j);
+			asientos.add(u);
+		}
+	
+	}
+		
+		
 %>
 
 
@@ -27,24 +40,30 @@
 			<h3>Seleccione un Asiento</h3>
 			<table class="table table-responsive table-borderless">
 				<thead>
-					<tr><h2 style="text-align: center; border: 1px solid black">PANTALLA</h2></tr>
+					<tr> <h2 style="text-align: center; border: 1px solid black">PANTALLA</h2> </tr>
 				</thead>
 				<tbody>
-					<% for(int i=1; i <= rt.getSizeRow(); i++){ %>
+					
+					
+				
+					<% for(Ubication u : asientos){ %>
+						
 						<tr>
-							<% for(int j=1; j <= rt.getSizeCol(); j++){ %>
+
+							<% if(u.getTicket() == null){ %>	
 							
-<%-- 								<% if (asientos.get(i).getTicket() != null){ %> --%>
+								<td><a href="#"> <i class="fa-solid fa-couch"></i> </a></td>
 								
-<!-- 									<td><a> <i class="fa-solid fa-couch"></i> </a></td> -->
-								
-<%-- 								<%} %> --%>
-								
+							<%} else { %>
+								<td><a href="#"> <i class="fa-solid fa-xmark"></i> </a></td>
 							<%} %>
 							
-						</tr>
-							
+						</tr>		
+						
 					<%} %>
+					
+					
+						
 				</tbody>
 			
 			

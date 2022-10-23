@@ -131,7 +131,7 @@ public class DataUbication {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"select u.*\n" + 
+					"select u.row, u.col, u.idTicket\n" + 
 					"    from ubication u\n" + 
 					"    inner join cine_tpjava.show s\n" + 
 					"		on s.roomNumber=u.roomNumber\n" + 
