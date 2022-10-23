@@ -15,21 +15,23 @@
 	rt = ctrlRT.getOne(rt);
 
 	UbicationController ctrlUbi = new UbicationController();
-	LinkedList<Ubication> asientos = ctrlUbi.getByShow(s);
+	LinkedList<Ubication> ubicaciones = ctrlUbi.getByShow(s);
 	
+	Ubication[][] asientos = new Ubication[rt.getSizeRow()+1][rt.getSizeCol()+1]; 
 	
-	for(int i=0; i <= rt.getSizeRow(); i++){
-		Character letra = 'A';
-		
+	for(int i=1; i <= rt.getSizeRow(); i++){
 		for(int j=1; j <= rt.getSizeCol(); j++){ 
 			Ubication u = new Ubication();
-			u.setRow(Character.toString(letra+i));
+			u.setRow(i);
 			u.setCol(j);
-			asientos.add(u);
+			asientos[i][j] = u;
 		}
-	
 	}
-		
+	
+	for(Ubication u : ubicaciones){
+		asientos[u.getRow()][u.getCol()] = u;
+	}
+	
 		
 %>
 
@@ -46,20 +48,25 @@
 					
 					
 				
-					<% for(Ubication u : asientos){ %>
-						
+					<% for(int i=1; i <= rt.getSizeRow(); i++){ %>
+					
 						<tr>
-
-							<% if(u.getTicket() == null){ %>	
+					
+						<% for(int j=1; j <= rt.getSizeCol(); j++){ // Character fila = 'A'; %>
+						
+							<% if(asientos[i][j].getTicket() == null){ %>	
 							
-								<td><a href="#"> <i class="fa-solid fa-couch"></i> </a></td>
+								<td><%=asientos[i][j].getRow()%>-<%=asientos[i][j].getCol()%>   <a href="#" style="color: blue"><i class="fa-solid fa-couch"></i> </a></td>
 								
 							<%} else { %>
-								<td><a href="#"> <i class="fa-solid fa-xmark"></i> </a></td>
+								<td><%=asientos[i][j].getRow()%>-<%=asientos[i][j].getCol()%> 	<i class="fa-solid fa-xmark" style="color: red"></i> </td>
 							<%} %>
 							
-						</tr>		
+							
 						
+						<%} %>
+						
+						</tr>	
 					<%} %>
 					
 					
@@ -76,16 +83,6 @@
 		
 		
 		</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	</div>

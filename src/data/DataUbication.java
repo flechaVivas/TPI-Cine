@@ -18,7 +18,8 @@ public class DataUbication {
 		Ubication ub = null; 
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ubication WHERE roomNumber = ? and row = ? and col = ?");
-			stmt.setString(2, ubp.getRow());
+			stmt.setInt(1, ubp.getShow().getMovieroom().getRoomNumber());
+			stmt.setInt(2, ubp.getRow());
 			stmt.setInt(3, ubp.getCol());
 			
 			rs = stmt.executeQuery();
@@ -28,7 +29,7 @@ public class DataUbication {
 				Show s = new Show();
 				s.setDt(rs.getObject("Dt",LocalDateTime.class));
 				ub.setShow(s);
-				ub.setRow(rs.getString("row"));
+				ub.setRow(rs.getInt("row"));
 				ub.setCol(rs.getInt("col"));
 			}
 			
@@ -62,7 +63,7 @@ public class DataUbication {
 				Show s = new Show();
 				s.setDt(rs.getObject("Dt",LocalDateTime.class));
 				u.setShow(s);
-				u.setRow(rs.getString("row"));
+				u.setRow(rs.getInt("row"));
 				u.setCol(rs.getInt("col"));
 				ubis.add(u);
 			}
@@ -106,7 +107,7 @@ public class DataUbication {
 			stmt.setInt(2, u.getShow().getMovie().getIdMovie());
 			stmt.setObject(3, u.getShow().getDt());
 			stmt.setInt(4, u.getTicket().getIdTicket());
-			stmt.setString(5, u.getRow());
+			stmt.setInt(5, u.getRow());
 			stmt.setInt(6, u.getCol());
 		}catch (SQLException e){
 			e.printStackTrace();
@@ -145,7 +146,7 @@ public class DataUbication {
 			
 			while(rs.next()) {
 				Ticket t = new Ticket();
-				u.setRow(rs.getString("row"));
+				u.setRow(rs.getInt("row"));
 				u.setCol(rs.getInt("col"));
 				u.setShow(s);
 				t.setIdTicket(rs.getInt("idTicket"));

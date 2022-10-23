@@ -2,7 +2,7 @@ package entities;
 
 public class Ubication {
 	
-	private String row;
+	private int row;
 	private int col;
 	private Show show;
 	private Ticket ticket;
@@ -19,10 +19,10 @@ public class Ubication {
 	public void setShow(Show show) {
 		this.show = show;
 	}
-	public String getRow() {
+	public int getRow() {
 		return row;
 	}
-	public void setRow(String row) {
+	public void setRow(int row) {
 		this.row = row;
 	}
 	public int getCol() {
