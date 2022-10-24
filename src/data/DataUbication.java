@@ -124,7 +124,7 @@ public class DataUbication {
 
 	public LinkedList<Ubication> getByShow(Show s) {
 		
-		Ubication u = new Ubication();
+		
 		LinkedList<Ubication> ubics = new LinkedList<Ubication>();
 		
 		PreparedStatement stmt=null;
@@ -145,6 +145,7 @@ public class DataUbication {
 			rs = stmt.executeQuery();
 			
 			while(rs.next()) {
+				Ubication u = new Ubication();
 				Ticket t = new Ticket();
 				u.setRow(rs.getInt("row"));
 				u.setCol(rs.getInt("col"));

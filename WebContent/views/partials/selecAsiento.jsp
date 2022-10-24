@@ -30,6 +30,7 @@
 	
 	for(Ubication u : ubicaciones){
 		asientos[u.getRow()][u.getCol()] = u;
+		System.out.println(asientos[u.getRow()][u.getCol()]);
 	}
 	
 		
@@ -61,8 +62,6 @@
 							<%} else { %>
 								<td><%=asientos[i][j].getRow()%>-<%=asientos[i][j].getCol()%> 	<i class="fa-solid fa-xmark" style="color: red"></i> </td>
 							<%} %>
-							
-							
 						
 						<%} %>
 						
