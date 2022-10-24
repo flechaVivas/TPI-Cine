@@ -51,11 +51,13 @@
 	                                <td> Descripcion </td>
 	                                <td> Filas </td>
 	                                <td> Columnas </td>
+	                                <td>Precio</td>
 	                            </tr>
 	                            <tr>
 	                            	<td><input name="description" type="text" class="form-control" required></td>
 	                            	<td><input name="row" type="number" class="form-control" required></td>
 	                            	<td><input name="col" type="number" class="form-control" required></td>
+	                            	<td><input name="price" type="number" class="form-control" required></td>
 	                            	<td> <button class="btn btn-success">Aceptar</button> </td>
 	                            </tr>
                         	</table>

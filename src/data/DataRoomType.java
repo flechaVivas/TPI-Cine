@@ -32,6 +32,7 @@ public class DataRoomType {
 				r.setDescription(rs.getString("description"));
 				r.setSizeRow(rs.getInt("rowQuantity"));
 				r.setSizeCol(rs.getInt("colQuantity"));
+				r.setPrice(rs.getBigDecimal("price"));
 				
 			}
 			
@@ -66,6 +67,7 @@ public class DataRoomType {
 			r.setDescription(rs.getString("description"));
 			r.setSizeRow(rs.getInt("rowQuantity"));
 			r.setSizeCol(rs.getInt("colQuantity"));
+			r.setPrice(rs.getBigDecimal("price"));
 			rtts.add(r);
 		}
 		if(rs!=null) {rs.close();}
@@ -89,7 +91,7 @@ public class DataRoomType {
 		
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select distinct rt.idRoomType, rt.description, rt.rowQuantity, rt.colQuantity\n" + 
+					"select distinct rt.idRoomType, rt.description, rt.rowQuantity, rt.colQuantity, rt.price\n" + 
 					"from room_type rt\n" + 
 					"inner join movieroom mr\n" + 
 					"	on mr.idRoomType=rt.idRoomType\n" + 
@@ -110,6 +112,7 @@ public class DataRoomType {
 					rt.setDescription((rs.getString("description")));
 					rt.setSizeRow((rs.getInt("rowQuantity")));
 					rt.setSizeCol((rs.getInt("colQuantity")));
+					rt.setPrice(rs.getBigDecimal("price"));
 					
 					tipos.add(rt);
 				}
@@ -158,12 +161,13 @@ public class DataRoomType {
 		ResultSet keyResultSet = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO room_type (description,rowQuantity,colQuantity) values (?,?,?)"
+			"INSERT INTO room_type (description,rowQuantity,colQuantity,price) values (?,?,?,?)"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1, rt.getDescription());
 			stmt.setInt(2, rt.getSizeRow());
 			stmt.setInt(3, rt.getSizeCol());
+			stmt.setBigDecimal(4, rt.getPrice());
 			
 			stmt.executeUpdate();	
 			
@@ -193,11 +197,13 @@ public class DataRoomType {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE room_type set description=?, rowQuantity=?, colQuantity=? where idRoomType=?");
+					"UPDATE room_type set description=?, rowQuantity=?, colQuantity=?, price=? where idRoomType=?");
 			stmt.setString(1, r.getDescription());
 			stmt.setInt(2, r.getSizeRow());
 			stmt.setInt(3, r.getSizeCol());
-			stmt.setInt(4, r.getIdRoomType());
+			stmt.setBigDecimal(4, r.getPrice());
+			stmt.setInt(5, r.getIdRoomType());
+			
 			
 			stmt.executeUpdate();
 					

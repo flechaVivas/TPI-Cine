@@ -30,7 +30,6 @@
 	
 	for(Ubication u : ubicaciones){
 		asientos[u.getRow()][u.getCol()] = u;
-		System.out.println(asientos[u.getRow()][u.getCol()]);
 	}
 	
 		
@@ -53,21 +52,20 @@
 					
 						<tr>
 					
-						<% for(int j=1; j <= rt.getSizeCol(); j++){ // Character fila = 'A'; %>
+						<% for(int j=1; j <= rt.getSizeCol(); j++){  Character fila = '@'; %>
 						
 							<% if(asientos[i][j].getTicket() == null){ %>	
 							
-								<td><%=asientos[i][j].getRow()%>-<%=asientos[i][j].getCol()%>   <a href="#" style="color: blue"><i class="fa-solid fa-couch"></i> </a></td>
+								<td><%=Character.toString(fila+i)%>-<%=asientos[i][j].getCol()%>   <a href="#" style="color: blue" type="submit"><i class="fa-solid fa-couch"></i> </a></td>
 								
 							<%} else { %>
-								<td><%=asientos[i][j].getRow()%>-<%=asientos[i][j].getCol()%> 	<i class="fa-solid fa-xmark" style="color: red"></i> </td>
+								<td><%=Character.toString(fila+i)%>-<%=asientos[i][j].getCol()%> 	<i class="fa-solid fa-xmark" style="color: red"></i> </td>
 							<%} %>
 						
 						<%} %>
 						
 						</tr>	
 					<%} %>
-					
 					
 						
 				</tbody>

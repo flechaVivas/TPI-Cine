@@ -162,8 +162,9 @@ CREATE TABLE `room_type` (
   `description` varchar(45) NOT NULL,
   `rowQuantity` int NOT NULL,
   `colQuantity` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   PRIMARY KEY (`idRoomType`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +173,7 @@ CREATE TABLE `room_type` (
 
 LOCK TABLES `room_type` WRITE;
 /*!40000 ALTER TABLE `room_type` DISABLE KEYS */;
-INSERT INTO `room_type` VALUES (1,'IMAX Subtitulado',14,14),(2,'3D Subtitulado',10,10),(3,'2D Ingles',15,12),(4,'IMAX Ingles',10,10),(5,'4D Subtitulado',14,14),(6,'2D Subtitulado',15,15),(7,'2D Subtitulado',14,14),(8,'3D Ingles',15,15),(9,'4D Ingles',14,14),(12,'2D Frances',12,10);
+INSERT INTO `room_type` VALUES (1,'IMAX Subtitulado',14,14,1600.00),(2,'3D Subtitulado',10,10,1200.00),(3,'2D Ingles',15,12,900.00),(4,'IMAX Ingles',10,10,1450.00),(5,'4D Subtitulado',14,14,1300.00),(6,'2D Subtitulado',15,15,800.00),(7,'2D Subtitulado',14,14,770.00),(8,'3D Ingles',15,15,1250.00),(9,'4D Ingles',14,14,1220.00),(13,'2D Aleman',9,9,670.00);
 /*!40000 ALTER TABLE `room_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,7 +262,7 @@ CREATE TABLE `ubication` (
 
 LOCK TABLES `ubication` WRITE;
 /*!40000 ALTER TABLE `ubication` DISABLE KEYS */;
-INSERT INTO `ubication` VALUES (1,4,1,3,'2022-09-03 22:00:00',1),(1,5,1,3,'2022-09-03 22:00:00',2),(5,3,1,3,'2022-09-03 22:00:00',2),(5,7,2,4,'2022-09-05 21:30:00',3),(3,9,1,3,'2022-09-03 22:00:00',4),(9,6,1,3,'2022-09-03 22:00:00',5),(2,7,1,3,'2022-09-03 22:00:00',6),(9,8,1,3,'2022-09-03 22:00:00',7);
+INSERT INTO `ubication` VALUES (1,4,1,3,'2022-09-03 22:00:00',1),(1,5,1,3,'2022-09-03 22:00:00',2),(5,3,1,3,'2022-09-03 22:00:00',2),(5,7,2,4,'2022-09-05 21:30:00',3),(3,9,1,3,'2022-09-03 22:00:00',4),(2,7,1,3,'2022-09-03 22:00:00',6);
 /*!40000 ALTER TABLE `ubication` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,4 +309,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-23 16:48:35
+-- Dump completed on 2022-10-24 10:48:29

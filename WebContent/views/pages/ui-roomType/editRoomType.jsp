@@ -62,6 +62,7 @@
 			                		<th>Descripcion</th>
 			                		<th>Filas</th>
                     		   		<th>Columnas</th>
+                    		   		<th>Precio</th>
 			                  	</tr>
 			                </thead>
 							<tbody>
@@ -70,6 +71,7 @@
 			                    	<td><input type="text" value="<%=r.getDescription()%>"name="description"  class="form-control" required></td>
 			                    	<td><input type="number" value="<%=r.getSizeRow()%>"name="row"  class="form-control" required></td>
 			                    	<td><input type="number" value="<%=r.getSizeCol()%>"name="col" class="form-control" required></td>
+			                    	<td><input type="number" value="<%=r.getPrice()%>"name="price" class="form-control" required></td>
 			                    				
 			                    	<td>
 										<button class="btn btn-warning" type="submit">Confirmar</button>

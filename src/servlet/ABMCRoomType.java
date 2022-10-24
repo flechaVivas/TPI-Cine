@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,6 +56,8 @@ public class ABMCRoomType extends HttpServlet {
 				r.setDescription((String)request.getParameter("description"));
 				r.setSizeRow(Integer.parseInt((String)request.getParameter("row")));
 				r.setSizeCol(Integer.parseInt((String)request.getParameter("col")));
+				BigDecimal price = new BigDecimal((String)request.getParameter("price"));
+				r.setPrice(price);
 				
 				ctrRT.addOne(r);
 				
@@ -65,6 +69,8 @@ public class ABMCRoomType extends HttpServlet {
 				r.setDescription((String)request.getParameter("description"));
 				r.setSizeRow(Integer.parseInt(((String)request.getParameter("row"))));
 				r.setSizeCol(Integer.parseInt(((String)request.getParameter("col"))));
+				BigDecimal price1 = new BigDecimal((String)request.getParameter("price"));
+				r.setPrice(price1);
 				
 				ctrRT.update(r);
 				

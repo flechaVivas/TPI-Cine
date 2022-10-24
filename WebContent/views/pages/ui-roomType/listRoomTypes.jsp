@@ -69,6 +69,7 @@
                     		    <th>Descripcion</th>
                     		    <th>Filas</th>
                     		    <th>Columnas</th>
+                    		    <th>Precio</th>
                         		<th> <a class="btn btn-success" href="/TPI-Cine/views/pages/ui-roomType/newRoomType.jsp">Nuevo Tipo de Sala</a> </th>
                         		<th></th>
                       		</tr>
@@ -80,6 +81,7 @@
                     				<td><%=r.getDescription()%></td>
                     				<td><%=r.getSizeRow()%></td>
                     				<td><%=r.getSizeCol()%></td>
+                    				<td><%=r.getPrice()%></td>
                     				<td>
                     					<a href="/TPI-Cine/views/pages/ui-roomType/editRoomType.jsp?idRoomType=<%=r.getIdRoomType()%>" class="btn">Editar</a><!-- editar -->
                     					<a href="/TPI-Cine/src/servlet/ABMCRoomType?action=delete&idRoomType=<%=r.getIdRoomType()%>" class="btn btn-danger">Eliminar</a><!-- borrar -->
