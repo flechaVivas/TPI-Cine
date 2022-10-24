@@ -31,9 +31,13 @@
 					<label name="tipo">Seleccione el <strong>tipo</strong> de<strong> sala</strong></label>    
 					<select name="tipo" id="tipo">	
 					<% for (RoomType rt : types){ %>
-						<option value="<%=rt.getIdRoomType()%>"><%=rt.getDescription()%></option>
+						<option value="<%=rt.getIdRoomType()%>"><%=rt.getDescription() +" "+rt.getPrice()%></option>
 					<%}%>
 					</select>
+					<br><br>
+					<label> Seleccione <strong> cantidad de entradas  </strong></label>
+					<input type="number" name="cantidad" value="1"  min="1" max="10">
+					
 				</div>
 				
 				<% if( ((String)request.getParameter("step")).equals("selecSala")) {%>

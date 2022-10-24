@@ -55,6 +55,7 @@
 						request.getSession().removeAttribute("show");
 						request.getSession().removeAttribute("showsDateTime");
 						request.getSession().removeAttribute("tipoSala");
+						request.getSession().removeAttribute("cantidad");
 					%>
 					
 					<jsp:include page="/views/partials/selecPelicula.jsp"></jsp:include>

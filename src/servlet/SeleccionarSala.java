@@ -56,6 +56,7 @@ public class SeleccionarSala extends HttpServlet {
 				
 				LinkedList<Show> shows = ctrlShow.getDateTimeByRoomTypeMovie(m,rt);
 				
+				request.getSession().setAttribute("cantidad", request.getParameter("cantidad"));
 				request.getSession().setAttribute("tipoSala", rt);
 				request.getSession().setAttribute("showsDateTime", shows);
 				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecHora");

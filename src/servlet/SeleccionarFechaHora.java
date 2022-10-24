@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
@@ -9,8 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.RoomType;
 import entities.Show;
+import entities.Ticket;
+import entities.User;
 import logic.ShowController;
+import logic.TicketController;
 
 /**
  * Servlet implementation class SeleccionarFechaHora
@@ -52,6 +57,18 @@ public class SeleccionarFechaHora extends HttpServlet {
 		s = ctrlShow.getRoomByMovieDateTime(s);
 		
 		System.out.println(s.getMovie().getTitle()+" "+s.getMovieroom().getRoomNumber()+" "+s.getDt());
+		
+		Ticket t = new Ticket();
+		TicketController ctrlTicket = new TicketController();
+		RoomType rt = (RoomType)request.getSession(false).getAttribute("rt");
+		User u = (User)request.getSession(false).getAttribute("usuario");
+		
+//		t.setOperationCode(ctrlTicket.getLastTicket().getOperationCode()+1);
+		t.setDateTime(LocalDateTime.now());
+		BigDecimal cant = new BigDecimal((String)request.getSession(false).getAttribute("price"));
+		t.setPrice(rt.getPrice().multiply(cant));
+		t.setUser(u);
+		
 		
 		request.getSession(false).setAttribute("show", s);
 		
