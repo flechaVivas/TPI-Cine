@@ -16,7 +16,7 @@
 	%>
 
 
-<form action="/TPI-Cine/src/servlet/SeleccionarPelicula" method="post">
+<form action="/TPI-Cine/src/servlet/EntradasServlet?step=pelicula" method="post">
 	<div class="row mt-5">
 		<div class="col-md-10">
 			<label name="movie">Seleccione una <strong>película</strong></label>    

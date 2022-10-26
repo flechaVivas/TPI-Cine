@@ -13,7 +13,7 @@
 	
 	%>
 
-<form action="/TPI-Cine/src/servlet/SeleccionarSala" method="post">
+<form action="/TPI-Cine/src/servlet/EntradasServlet?step=tipoDeSala" method="post">
 	<div class="row mt-5">
 			<% if(types.isEmpty()) {
 				session.removeAttribute("show");

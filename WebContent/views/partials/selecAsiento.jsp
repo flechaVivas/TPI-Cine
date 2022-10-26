@@ -70,17 +70,9 @@
 						
 				</tbody>
 			
-			
-			
 			</table>
 		
-		
-		
-		
-		
-		
 		</div>
-	
 	
 	</div>
 
