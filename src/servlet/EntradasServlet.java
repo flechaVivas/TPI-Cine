@@ -14,6 +14,7 @@ import entities.Movie;
 import entities.RoomType;
 import entities.Show;
 import logic.MovieController;
+import logic.RoomTypeController;
 import logic.ShowController;
 
 /**
@@ -52,6 +53,7 @@ public class EntradasServlet extends HttpServlet {
 			RoomType rt = new RoomType();
 			MovieController ctrlMovie = new MovieController();
 			ShowController ctrlShow = new ShowController();
+			RoomTypeController ctrlRT = new RoomTypeController();
 			
 			
 			switch ((String)request.getParameter("step")) {
@@ -84,6 +86,8 @@ public class EntradasServlet extends HttpServlet {
 					
 					LinkedList<Show> shows = ctrlShow.getDateTimeByRoomTypeMovie(m,rt);
 					
+					rt = ctrlRT.getOne(rt);
+					
 					request.getSession().setAttribute("cantidad", request.getParameter("cantidad"));
 					request.getSession().setAttribute("tipoSala", rt);
 					request.getSession().setAttribute("showsDateTime", shows);
@@ -101,7 +105,7 @@ public class EntradasServlet extends HttpServlet {
 				
 				s = ctrlShow.getRoomByMovieDateTime(s);
 				
-				System.out.println(s.getMovie().getTitle()+" "+s.getMovieroom().getRoomNumber()+" "+s.getDt());
+				System.out.println(s.getMovie().getTitle()+" "+s.getMovieroom().getRoomNumber()+" "+s.getDt() +" "+request.getSession(false).getAttribute("cantidad"));
 				
 				request.getSession(false).setAttribute("show", s);
 				

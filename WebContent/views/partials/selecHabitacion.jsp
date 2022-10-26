@@ -29,14 +29,28 @@
 			<%} else { %>
 				<div class="col-md-10">
 					<label name="tipo">Seleccione el <strong>tipo</strong> de<strong> sala</strong></label>    
-					<select name="tipo" id="tipo">	
-					<% for (RoomType rt : types){ %>
+					
+					
+					<% if(session.getAttribute("tipoSala")==null){ %>
+						<select name="tipo" id="tipo">
+						<% for (RoomType rt : types){ %>
+							<option value="<%=rt.getIdRoomType()%>"><%=rt.getDescription() +" "+rt.getPrice()%></option>
+						<%}%>
+						</select>
+						<br><br>
+						<label> Seleccione <strong> cantidad de entradas  </strong></label>
+						<input type="number" name="cantidad" value="1"  min="1" max="10">
+					<%} else {%>
+						
+						<% RoomType rt = (RoomType)session.getAttribute("tipoSala"); %>
+						
+						<select name="tipo" id="tipo">
 						<option value="<%=rt.getIdRoomType()%>"><%=rt.getDescription() +" "+rt.getPrice()%></option>
-					<%}%>
-					</select>
-					<br><br>
-					<label> Seleccione <strong> cantidad de entradas  </strong></label>
-					<input type="number" name="cantidad" value="1"  min="1" max="10">
+						</select>
+						<br><br>
+						<label> Seleccione <strong> cantidad de entradas  </strong></label>
+						<input type="number" name="cantidad" value="<%=session.getAttribute("cantidad") %>"  min="1" max="10" disabled="disabled">
+					<%} %>
 					
 				</div>
 				
