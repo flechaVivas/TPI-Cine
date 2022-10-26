@@ -58,15 +58,15 @@ public class login extends HttpServlet {
             	
             }
             else {
-                response.setStatus(200);
-                HttpSession session=request.getSession(true);
+//              response.setStatus(200);
+                HttpSession session = request.getSession(true);
                 session.setAttribute("usuario", u);
                 request.getRequestDispatcher("/views/pages/index.jsp").forward(request, response);
             }
 
 
         }catch(Exception e) {
-            e.getMessage();//Ver que carajo esto
+            e.getMessage();
         }
 
     }

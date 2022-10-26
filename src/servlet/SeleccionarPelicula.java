@@ -57,17 +57,15 @@ public class SeleccionarPelicula extends HttpServlet {
 				
 				request.getSession(false).setAttribute("show", s);
 				
-//				request.getRequestDispatcher("/views/pages/entradas.jsp?step=selecSala").forward(request, response);
 				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecSala");
 				
 				
 			}
 			
 			
-		} finally {}
-//		catch (Exception e) {
-//			System.out.println(e.getCause()+" "+e.getStackTrace());
-//		}
+		} catch (Exception e) {
+			System.out.println(e.getCause()+" "+e.getStackTrace());
+		}
 		
 		
 		

@@ -37,7 +37,7 @@ public class MiCuenta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		User u = (User)request.getSession(false).getAttribute("usuario");
+		User u = (User) request.getSession(false).getAttribute("usuario");
 		if(u!=null) {
 			request.setAttribute("validate", true);
 			response.setStatus(200);

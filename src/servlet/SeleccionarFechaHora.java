@@ -58,16 +58,16 @@ public class SeleccionarFechaHora extends HttpServlet {
 		
 		System.out.println(s.getMovie().getTitle()+" "+s.getMovieroom().getRoomNumber()+" "+s.getDt());
 		
-		Ticket t = new Ticket();
-		TicketController ctrlTicket = new TicketController();
-		RoomType rt = (RoomType)request.getSession(false).getAttribute("rt");
-		User u = (User)request.getSession(false).getAttribute("usuario");
+//		Ticket t = new Ticket();
+//		TicketController ctrlTicket = new TicketController();
+//		RoomType rt = (RoomType)request.getSession(false).getAttribute("rt");
+//		User u = (User)request.getSession(false).getAttribute("usuario");
 		
 //		t.setOperationCode(ctrlTicket.getLastTicket().getOperationCode()+1);
-		t.setDateTime(LocalDateTime.now());
-		BigDecimal cant = new BigDecimal((String)request.getSession(false).getAttribute("price"));
-		t.setPrice(rt.getPrice().multiply(cant));
-		t.setUser(u);
+//		t.setDateTime(LocalDateTime.now());
+//		BigDecimal cant = new BigDecimal((String)request.getSession(false).getAttribute("cantidad"));
+//		t.setPrice(rt.getPrice().multiply(cant));
+//		t.setUser(u);
 		
 		
 		request.getSession(false).setAttribute("show", s);
