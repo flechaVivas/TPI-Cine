@@ -4,16 +4,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.LinkedList;
 
-import entities.Genre;
 import entities.Movie;
-import entities.Restriction;
-import entities.Role;
 import entities.RoomType;
-import entities.User;
-import logic.RoleController;
 
 public class DataRoomType {
 

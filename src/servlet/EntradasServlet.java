@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import entities.Movie;
 import entities.RoomType;
 import entities.Show;
+import entities.Ubication;
 import logic.MovieController;
 import logic.RoomTypeController;
 import logic.ShowController;
@@ -110,6 +112,23 @@ public class EntradasServlet extends HttpServlet {
 				request.getSession(false).setAttribute("show", s);
 				
 				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecAsiento");
+				
+				
+				break;
+				
+			case "asiento":
+				
+				int cant =  Integer.parseInt((String) request.getSession().getAttribute("cantidad"));
+				Ubication[][] asientos = (Ubication[][]) request.getAttribute("asientos");
+				
+				for (int i = 0; i < cant; i++) {
+					
+					
+					request.getRequestDispatcher("/views/pages/entradas.jsp?step=selecAsiento");
+					
+				}
+				
+				
 				
 				
 				break;

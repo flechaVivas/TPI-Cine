@@ -19,7 +19,7 @@
 <form action="/TPI-Cine/src/servlet/EntradasServlet?step=pelicula" method="post">
 	<div class="row mt-5">
 		<div class="col-md-10">
-			<label name="movie">Seleccione una <strong>película</strong></label>    
+			<label>Seleccione una <strong>película</strong></label>    
 			<select name="movie" id="movie">
 			
 			<% 
