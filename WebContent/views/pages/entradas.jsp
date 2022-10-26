@@ -21,7 +21,7 @@
 	
 	<%
 	
-		if(session.getAttribute("usuario")==null){
+		if(request.getSession(false).getAttribute("usuario")==null){
 			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 		}
 	

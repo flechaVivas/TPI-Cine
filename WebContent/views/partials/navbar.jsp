@@ -2,8 +2,7 @@
 <%@page import="entities.User"%>
 
 <%
-		User u = new User();
-		u=(User)session.getAttribute("usuario");
+	User u = (User)session.getAttribute("usuario");
 %>
 
 <nav class="navbar">

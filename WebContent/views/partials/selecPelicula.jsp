@@ -1,9 +1,12 @@
+<%@page import="entities.User"%>
 <%@page import="entities.Show"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="logic.MovieController"%>
 <%@page import="entities.Movie"%>
 
 	<%
+	
+	User u = (User)session.getAttribute("usuario");
 
 	MovieController ctrlMovie = new MovieController();
 	LinkedList<Movie> movies = ctrlMovie.getAll();

@@ -22,6 +22,9 @@
 				<a class="list-group-item" href="/TPI-Cine/views/pages/ui-roomType/listRoomTypes.jsp">Tipos de Salas</a>
 				<a class="list-group-item" href="listUbication.jsp">Ubicaciones</a>
 			</div>
+			<a class="btn btn-success" href="/TPI-Cine/views/pages/index.jsp">Volver a la app</a>
+			<br><br>
+			<a class="btn btn-danger" href="/TPI-Cine/src/cerrarSesion">Cerrar Sesion</a>
 		</div>
     	
     	<!-- Content Column -->

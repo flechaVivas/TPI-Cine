@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="entities.Restriction"%>
 <%@page import="entities.Genre"%>
 <%@page import="logic.RestrictionController"%>
@@ -9,6 +10,8 @@
 <%
 	MovieController ctrlMovie = new MovieController();
 	LinkedList<Movie> movies = ctrlMovie.getAll();
+	
+	User u = (User)session.getAttribute("usuario");
 %>
 
     <main class="mt-8">
