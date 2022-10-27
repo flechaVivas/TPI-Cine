@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.LinkedList;
+
 public class Ubication {
 	
 	private int row;

@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+.MiCuentaContainer{
+	display:flex;
+	flex-direction: column;
+}
+
+.MiCuentaContainer h1,
+.MiCuentaContainer .ticket{
+	align-self: center;
+}
+
+.cartelDeInicioSesion{
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	align-self: center;	
+}
+
+.containerEntradas{
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+}
+
+
+

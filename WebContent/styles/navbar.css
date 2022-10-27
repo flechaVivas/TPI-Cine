@@ -210,6 +210,11 @@
     margin-left: 10px;
 }
 
+.navDatos ul {
+	list-style: none;
+	overflow: hidden;
+}
+
 
 
 

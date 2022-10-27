@@ -17,6 +17,7 @@ public class TicketController {
 		return dt.getOne(t);
 	}
 	
+	
 	public LinkedList<Ticket> getAll(){
 		return dt.getAll();
 	}

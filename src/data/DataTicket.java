@@ -95,6 +95,8 @@ public class DataTicket {
 	
 	} // getAll
 	
+	
+	
 	public void add(Ticket t) {
 		
 		PreparedStatement stmt = null;

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import data.DataUbication;
 import entities.Show;
+import entities.Ticket;
 import entities.Ubication;
 
 public class UbicationController {
@@ -11,6 +12,10 @@ public class UbicationController {
 	
 	public 	UbicationController(){
 		du = new DataUbication();
+	}
+	
+	public LinkedList<Ubication> getTicketswhithUser(int idUser){
+		return du.getTicketswhithUser(idUser);
 	}
 	
 	public Ubication getOne(Ubication u) {

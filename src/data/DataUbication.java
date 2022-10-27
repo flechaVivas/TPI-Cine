@@ -5,12 +5,80 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.time.LocalDateTime;
-import entities.Show;
-import entities.Ticket;
-import entities.Ubication;
+import entities.*;
+
 
 
 public class DataUbication {
+	
+public LinkedList<Ubication> getTicketswhithUser(int idUser){
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Ubication> ubications = new LinkedList<Ubication>();
+		
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(" SELECT t.idTicket,t.operationCode, t.dateTime fechaCompra, t.price, ubi.row, ubi.col, s.roomNumber, s.date_time, m.title. m.image "
+																	 + " FROM ticket t "
+																	 + " inner join ubication ubi"
+																	 + "	on ubi.idTicket = t.idTicket"
+																	 + " inner join show s"
+																	 + "	on  s.idMovie = ubi.idMovie"
+																	 + "	and s.roomNumber = ubi.roomNumber"
+																	 + "	and s.date_time = ubi.show_date_time"
+																	 + " inner join movie m"
+																	 + "	on m.idMovie = s.idMovie"
+																	 + " where idUser = ?");
+			stmt.setInt(1, idUser);
+			rs=stmt.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					Ubication u = new Ubication();
+					Ticket t = new Ticket();
+					Show s = new Show();
+					
+					u.setRow(rs.getInt("row"));
+					u.setCol(rs.getInt("col"));
+					
+					t.setIdTicket(rs.getInt("idTicket"));
+					t.setOperationCode(rs.getString("operationCode"));
+					t.setDateTime(rs.getObject("dateTime", LocalDateTime.class));
+					t.setPrice(rs.getBigDecimal("price"));
+					u.setTicket(t);
+					
+					s.setDt(rs.getObject("date_time", LocalDateTime.class));
+					
+					MovieRoom mr = new MovieRoom();
+					mr.setRoomNumber(rs.getInt("roomNumber"));
+					s.setMovieroom(mr);
+					
+					Movie m = new Movie();
+					m.setTitle(rs.getString("title"));
+					m.setImage(rs.getString("image"));
+					s.setMovie(m);
+					
+					u.setShow(s);
+
+					ubications.add(u);
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return ubications;
+	
+	}
 	
 	public Ubication GetOne(Ubication ubp){
 		PreparedStatement stmt = null;
