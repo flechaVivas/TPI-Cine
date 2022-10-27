@@ -24,6 +24,7 @@
             <h2 style="text-align: center">Resumen</h2>
             <h4 style="text-align: center">Usted ha seleccionado: </h4>
         </div>
+    </div>
     <div class="row">
         <div class="col-12 mt-4">
 
@@ -58,7 +59,13 @@
 
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-12">
+            <h4 style="text-align: center">¿Desea confirmar la reserva?</h4>
+            <div class="d-flex justify-content-center"">
+                <button class="btn btn-success">Confirmar</button>
+            </div>
+        </div>
     </div>
 
 
