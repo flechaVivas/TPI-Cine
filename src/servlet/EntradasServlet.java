@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Movie;
+import entities.MovieRoom;
 import entities.RoomType;
 import entities.Show;
 import entities.Ubication;
 import logic.MovieController;
+import logic.MovieRoomController;
 import logic.RoomTypeController;
 import logic.ShowController;
 
@@ -56,6 +59,7 @@ public class EntradasServlet extends HttpServlet {
 			MovieController ctrlMovie = new MovieController();
 			ShowController ctrlShow = new ShowController();
 			RoomTypeController ctrlRT = new RoomTypeController();
+			MovieRoomController ctrlMovieRoom = new MovieRoomController();
 			
 			
 			switch ((String)request.getParameter("step")) {
@@ -91,6 +95,8 @@ public class EntradasServlet extends HttpServlet {
 					rt = ctrlRT.getOne(rt);
 					
 					request.getSession().setAttribute("cantidad", Integer.parseInt(request.getParameter("cantidad")));
+					BigDecimal total = new BigDecimal(Integer.parseInt(request.getParameter("cantidad")));
+					request.getSession().setAttribute("total", total);
 					request.getSession().setAttribute("tipoSala", rt);
 					request.getSession().setAttribute("showsDateTime", shows);
 					response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecHora");
@@ -107,12 +113,16 @@ public class EntradasServlet extends HttpServlet {
 				
 				Show s_traido = new Show();
 				s_traido = ctrlShow.getRoomByMovieDateTime(s);
+				
+				s_traido.setMovieroom(ctrlMovieRoom.getOne(s_traido.getMovieroom()));
+				
 				s_traido.getMovieroom().setRt((RoomType)request.getSession().getAttribute("tipoSala"));
 				
 				s.setMovieroom(s_traido.getMovieroom());
 				
-				System.out.println(s.getMovie().getTitle()+" "+s.getMovieroom().getRoomNumber()+" "+s.getDt() +" "+request.getSession(false).getAttribute("cantidad"));
+				System.out.println(s.getMovie().getTitle()+" "+s.getMovieroom().getRoomNumber()+" "+s.getDt() +" "+request.getSession(false).getAttribute("cantidad")+" "+s.getMovieroom().getRt().getDescription());
 				
+				request.getSession(false).removeAttribute("show");
 				request.getSession(false).setAttribute("show", s);
 				
 				LinkedList<Ubication> ubicElegidas = new LinkedList<Ubication>();

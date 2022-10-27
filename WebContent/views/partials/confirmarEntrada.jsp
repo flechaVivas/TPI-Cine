@@ -1,3 +1,4 @@
+<%@page import="java.math.BigDecimal"%>
 <%@page import="logic.MovieRoomController"%>
 <%@page import="entities.RoomType"%>
 <%@page import="logic.MovieController"%>
@@ -6,14 +7,14 @@
 <%@page import="entities.Show"%>
 
 <%
+
 	Show s = (Show) request.getSession(false).getAttribute("show");
 	LinkedList<Ubication> ubicElegidas = (LinkedList<Ubication>)request.getSession(false).getAttribute("ubicElegidas");
 	MovieController ctrlMovie = new MovieController();
 	MovieRoomController ctrlMovieRoom = new MovieRoomController();
 	
-	s.setMovie(ctrlMovie.getbyIdMovie(s.getMovie()));
-	s.setMovieroom(ctrlMovieRoom.getOne(s.getMovieroom()));
-
+	BigDecimal cant_entradas = (BigDecimal)request.getSession().getAttribute("total");
+	
 %>
 
 
@@ -24,7 +25,7 @@
             <h4 style="text-align: center">Usted ha seleccionado: </h4>
         </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 mt-4">
 
             <table class="table table-striped">
                 <thead>
@@ -32,8 +33,9 @@
                         <th scope="col">Pelicula</th>
                         <th scope="col">Sala</th>
                         <th scope="col">Numero Sala</th>
-                        <th scope="col">Fecha y Hora</th>
                         <th scope="col">Ubicacion</th>
+                        <th scope="col">Fecha y Hora</th>
+                        <th scope="col">Cantidad Entradas</th>
                         <th scope="col">Total</th>
                     </tr>
                 </thead>
@@ -42,14 +44,14 @@
                         <td><%=s.getMovie().getTitle()%></td>
                         <td><%=s.getMovieroom().getRt().getDescription()%></td>
                         <td><%=s.getMovieroom().getRoomNumber()%></td>
-                        <td><%=s.getDt()%></td>
                         <td>
                         <% for(Ubication u : ubicElegidas){ %>
-                        	<%=u.getRow()+" "+u.getCol()%>
-                        
+                        	<%=u.getRow()+"-"+u.getCol()%>
                         <%}%>
                         </td>
-                        <td></td>
+                        <td><%=s.getDt()%></td>
+                        <td><%=cant_entradas %></td>
+                        <td>$<%=s.getMovieroom().getRt().getPrice().multiply(cant_entradas) %></td>
                     </tr>
                 </tbody>
             </table>
