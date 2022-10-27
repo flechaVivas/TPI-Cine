@@ -105,7 +105,11 @@ public class EntradasServlet extends HttpServlet {
 				s = (Show)request.getSession(false).getAttribute("show");
 				s.setDt(LocalDateTime.parse(date_time));
 				
-				s = ctrlShow.getRoomByMovieDateTime(s);
+				Show s_traido = new Show();
+				s_traido = ctrlShow.getRoomByMovieDateTime(s);
+				s_traido.getMovieroom().setRt((RoomType)request.getSession().getAttribute("tipoSala"));
+				
+				s.setMovieroom(s_traido.getMovieroom());
 				
 				System.out.println(s.getMovie().getTitle()+" "+s.getMovieroom().getRoomNumber()+" "+s.getDt() +" "+request.getSession(false).getAttribute("cantidad"));
 				
@@ -142,26 +146,20 @@ public class EntradasServlet extends HttpServlet {
 					
 					if ((Integer)request.getSession(false).getAttribute("cantidad") != 0) {
 						response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecAsiento");
+						
 					} else {
-						response.sendRedirect("/TPI-Cine/views/pages/index.jsp");
+						
+						request.getSession(false).setAttribute("ubicElegidas", ubicElegidas);
+						response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=confirmar");
 					}
-					
-					
-				} else {
-					
-					response.sendRedirect("/TPI-Cine/views/pages/index.jsp");
-					System.out.println(ubicElegidas);
 					
 				}
 				
 				break;
 			
-
 			default:
 				break;
 			}
-			
-			
 			
 			
 		} catch (Exception e) {

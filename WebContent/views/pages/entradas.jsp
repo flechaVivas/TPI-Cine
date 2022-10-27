@@ -64,26 +64,32 @@
 				
 					<% switch ((String)request.getParameter("step") )	{
 					
-					case "selecSala": %>
+						case "selecSala": %>
+							
+							<jsp:include page="/views/partials/selecPelicula.jsp"></jsp:include>
+							<jsp:include page="/views/partials/selecHabitacion.jsp"></jsp:include>
+							
+						<% 	break;
 						
-						<jsp:include page="/views/partials/selecPelicula.jsp"></jsp:include>
-						<jsp:include page="/views/partials/selecHabitacion.jsp"></jsp:include>
+						case "selecHora": %>
 						
-					<% 	break;
-					
-					case "selecHora": %>
-					
-						<jsp:include page="/views/partials/selecPelicula.jsp"></jsp:include>
-						<jsp:include page="/views/partials/selecHabitacion.jsp"></jsp:include>
-						<jsp:include page="/views/partials/selecDiaHora.jsp"></jsp:include>
+							<jsp:include page="/views/partials/selecPelicula.jsp"></jsp:include>
+							<jsp:include page="/views/partials/selecHabitacion.jsp"></jsp:include>
+							<jsp:include page="/views/partials/selecDiaHora.jsp"></jsp:include>
+							
+						<% break;
 						
-					<% break;
-					
-					case "selecAsiento": %>
-					
-						<jsp:include page="/views/partials/selecAsiento.jsp"></jsp:include>
-					
-					
+						case "selecAsiento": %>
+						
+							<jsp:include page="/views/partials/selecAsiento.jsp"></jsp:include>
+						
+						<% break;
+						
+						case "confirmar": %>
+						
+							<jsp:include page="/views/partials/confirmarEntrada.jsp"></jsp:include>
+						
+						
 					<%}%>
 				<%}%>
 				
