@@ -118,15 +118,32 @@ public class EntradasServlet extends HttpServlet {
 				
 			case "asiento":
 				
+				request.getSession(false).setAttribute("cantidad", Integer.parseInt((String) request.getSession().getAttribute("cantidad")) - 1);
 				int cant =  Integer.parseInt((String) request.getSession().getAttribute("cantidad"));
+				
 				Ubication[][] asientos = (Ubication[][]) request.getAttribute("asientos");
 				
-				for (int i = 0; i < cant; i++) {
+				LinkedList<Ubication> ubicElegidas = new LinkedList<Ubication>();
+				
+				System.out.println(cant);
+				
+				do {
 					
+					Ubication u_elegida = new Ubication();
 					
-					request.getRequestDispatcher("/views/pages/entradas.jsp?step=selecAsiento");
+					int fila = Integer.parseInt( (String)request.getParameter("fila"));
+					int colu = Integer.parseInt( (String)request.getParameter("col"));
 					
-				}
+					u_elegida.setRow(fila);
+					u_elegida.setCol(colu);
+					
+					ubicElegidas.add(u_elegida);
+					
+					response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecAsiento");
+					
+				} while (condition);
+					
+				System.out.println(ubicElegidas);
 				
 				
 				
