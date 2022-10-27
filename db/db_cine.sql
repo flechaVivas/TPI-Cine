@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `cine_tpjava` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `cine_tpjava`;
--- MySQL dump 10.13  Distrib 8.0.30, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Linux (x86_64)
 --
 -- Host: localhost    Database: cine_tpjava
 -- ------------------------------------------------------
--- Server version	8.0.30-0ubuntu0.22.04.1
+-- Server version	8.0.31-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -173,7 +173,7 @@ CREATE TABLE `room_type` (
 
 LOCK TABLES `room_type` WRITE;
 /*!40000 ALTER TABLE `room_type` DISABLE KEYS */;
-INSERT INTO `room_type` VALUES (1,'IMAX Subtitulado',14,14,1600.00),(2,'3D Subtitulado',10,10,1200.00),(3,'2D Ingles',15,12,900.00),(4,'IMAX Ingles',10,10,1450.00),(5,'4D Subtitulado',14,14,1300.00),(6,'2D Subtitulado',15,15,800.00),(7,'2D Subtitulado',14,14,770.00),(8,'3D Ingles',15,15,1250.00),(9,'4D Ingles',14,14,1220.00),(13,'2D Aleman',9,9,670.00);
+INSERT INTO `room_type` VALUES (1,'IMAX Subtitulado',14,14,1600.00),(2,'3D Subtitulado',10,10,1200.00),(3,'2D Ingles',15,12,900.00),(4,'IMAX Ingles',10,10,1450.00),(5,'4D Subtitulado',14,14,1300.00),(6,'2D Subtitulado',15,15,800.00),(7,'2D Subtitulado',14,14,770.00),(8,'3D Ingles',15,15,1250.00),(9,'4D Ingles',14,14,1225.00),(13,'2D Aleman',9,9,670.00);
 /*!40000 ALTER TABLE `room_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,6 +219,7 @@ CREATE TABLE `ticket` (
   `price` decimal(10,0) NOT NULL,
   `idUser` int DEFAULT NULL,
   PRIMARY KEY (`idTicket`),
+  UNIQUE KEY `operationCode_UNIQUE` (`operationCode`),
   KEY `fk_ticket_user_idx` (`idUser`),
   CONSTRAINT `fk_ticket_user` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -230,7 +231,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'123456','2022-07-18 22:30:00',900,48274),(2,'123457','2022-09-18 22:30:00',900,48271),(3,'123458','2022-09-12 00:00:00',1100,48275),(4,'123459','2022-09-10 00:00:00',1000,48277),(5,'123460','2022-09-03 22:30:00',900,48272),(6,'123461','2022-09-03 23:35:10',900,48274),(7,'123461','2022-09-04 02:35:16',900,48275);
+INSERT INTO `ticket` VALUES (1,'123456','2022-07-18 22:30:00',900,48274),(2,'123457','2022-09-18 22:30:00',900,48271),(3,'123458','2022-09-12 00:00:00',1100,48275),(4,'123459','2022-09-10 00:00:00',1000,48277),(5,'123460','2022-09-03 22:30:00',900,48272),(6,'123461','2022-09-03 23:35:10',900,48274),(7,'123462','2022-09-04 02:35:16',900,48275);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -309,4 +310,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-24 10:48:29
+-- Dump completed on 2022-10-27  9:11:53
