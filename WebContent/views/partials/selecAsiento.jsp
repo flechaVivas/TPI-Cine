@@ -57,7 +57,9 @@
 						
 							<% if(asientos[i][j].getTicket() == null){ %>	
 							
-								<td><%=Character.toString(fila+i)%>-<%=asientos[i][j].getCol()%>   <a href="/TPI-Cine/src/servlet/EntradasServlet?step=asiento&fila=<%=asientos[i][j].getRow()%>&col=<%=asientos[i][j].getCol()%>" style="color: blue" type="submit"><i class="fa-solid fa-couch"></i> </a></td>
+								<td><%=Character.toString(fila+i)%>-<%=asientos[i][j].getCol()%>   <a 
+								href="/TPI-Cine/src/servlet/EntradasServlet?step=asiento&fila=<%=asientos[i][j].getRow()%>&col=<%=asientos[i][j].getCol()%>"
+								style="color: blue" type="submit"><i class="fa-solid fa-couch"></i> </a></td>
 								
 							<%} else { %>
 								<td><%=Character.toString(fila+i)%>-<%=asientos[i][j].getCol()%> 	<i class="fa-solid fa-xmark" style="color: red"></i> </td>
