@@ -56,7 +56,6 @@ public class EntradasServlet extends HttpServlet {
 			MovieController ctrlMovie = new MovieController();
 			ShowController ctrlShow = new ShowController();
 			RoomTypeController ctrlRT = new RoomTypeController();
-			LinkedList<Ubication> ubicElegidas = new LinkedList<Ubication>();
 			
 			
 			switch ((String)request.getParameter("step")) {
@@ -112,6 +111,9 @@ public class EntradasServlet extends HttpServlet {
 				
 				request.getSession(false).setAttribute("show", s);
 				
+				LinkedList<Ubication> ubicElegidas = new LinkedList<Ubication>();
+				request.getSession(false).setAttribute("ubicElegidas", ubicElegidas);
+				
 				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecAsiento");
 				
 				
@@ -119,10 +121,12 @@ public class EntradasServlet extends HttpServlet {
 				
 			case "asiento":
 				
+				ubicElegidas = (LinkedList<Ubication>)request.getSession(false).getAttribute("ubicElegidas");
+				
 				request.getSession(false).setAttribute
 				("cantidad", (Integer)request.getSession(false).getAttribute("cantidad") - 1);
 				
-				if((Integer)request.getSession(false).getAttribute("cantidad") > 0) {
+				if((Integer)request.getSession(false).getAttribute("cantidad") >= 0) {
 					
 					Ubication u_elegida = new Ubication();
 					
@@ -134,43 +138,21 @@ public class EntradasServlet extends HttpServlet {
 					
 					ubicElegidas.add(u_elegida);
 					
-					response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecAsiento");
+					System.out.println(u_elegida);
+					
+					if ((Integer)request.getSession(false).getAttribute("cantidad") != 0) {
+						response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecAsiento");
+					} else {
+						response.sendRedirect("/TPI-Cine/views/pages/index.jsp");
+					}
+					
 					
 				} else {
 					
 					response.sendRedirect("/TPI-Cine/views/pages/index.jsp");
+					System.out.println(ubicElegidas);
 					
 				}
-				
-				
-				
-				
-				
-//				while (Integer.parseInt((String)request.getSession(false).getAttribute("cantidad")) > 0) {
-//					
-//					System.out.println();
-//					
-//					Ubication u_elegida = new Ubication();
-//					
-//					int fila = Integer.parseInt( (String)request.getParameter("fila"));
-//					int colu = Integer.parseInt( (String)request.getParameter("col"));
-//					
-//					u_elegida.setRow(fila);
-//					u_elegida.setCol(colu);
-//					
-//					ubicElegidas.add(u_elegida);
-//					
-//					request.getSession(false).setAttribute
-//					("cantidad", Integer.parseInt((String)request.getSession(false).getAttribute("cantidad")) - 1);
-//					
-//					response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecAsiento");
-//				}
-//				
-//				request.getRequestDispatcher("/views/pages/index.jsp").forward(request, response);
-//				System.out.println(ubicElegidas);
-				
-				
-				
 				
 				break;
 			
