@@ -293,9 +293,7 @@ public class DataMovie {
 	public LinkedList<Movie> getByGenre(Genre g){
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
-		ResultSet rs=null;
-		Genre ge=null;
-		Restriction re=null;	
+		ResultSet rs=null;	
 		try {
 					
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idGenre=?");
@@ -304,8 +302,8 @@ public class DataMovie {
 			
 			while(rs.next()) {
 				Movie m=new Movie();
-				ge=new Genre();
-				re=new Restriction();
+				Genre ge=new Genre();
+				Restriction re=new Restriction();
 			
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
@@ -475,10 +473,188 @@ public class DataMovie {
 		}
 			return movs;
 	}
+	public LinkedList<Movie> getByRestGenre(Restriction r,Genre g){
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;	
+		try {
+					
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where idRestriction>=? and idGenre=?");
+			stmt.setInt(1, r.getIdRestriction());
+			stmt.setInt(2, g.getIdGenre());
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie m=new Movie();
+				Genre ge=new Genre();
+				Restriction re=new Restriction();
+			
+				m.setIdMovie(rs.getInt("idMovie"));
+				m.setTitle(rs.getString("title"));
+				m.setImage(rs.getString("image"));
+				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				m.setCast(rs.getString("cast"));
+				m.setDirector(rs.getString("director"));
+				m.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				m.setRestriction(re);
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				m.setGenre(ge);
+			
+				movs.add(m);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
+	public LinkedList<Movie> getByRestGenreTit(Restriction r,Genre g, Movie m){
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;	
+		try {
+					
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where title like '%?%' and idRestriction>=? and idGenre=?");
+			stmt.setString(1, m.getTitle());
+			stmt.setInt(2, r.getIdRestriction());
+			stmt.setInt(3, g.getIdGenre());
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie mo=new Movie();
+				Genre ge=new Genre();
+				Restriction re=new Restriction();
+			
+				mo.setIdMovie(rs.getInt("idMovie"));
+				mo.setTitle(rs.getString("title"));
+				mo.setImage(rs.getString("image"));
+				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				mo.setCast(rs.getString("cast"));
+				mo.setDirector(rs.getString("director"));
+				mo.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				mo.setRestriction(re);
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				mo.setGenre(ge);
+			
+				movs.add(mo);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
+	
+	public LinkedList<Movie> getByRestTit(Restriction r,Movie m){
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;	
+		try {
+					
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where title like '%?%' and idRestriction>=?");
+			stmt.setString(1, m.getTitle());
+			stmt.setInt(2, r.getIdRestriction());
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie mo=new Movie();
+				Genre ge=new Genre();
+				Restriction re=new Restriction();
+			
+				mo.setIdMovie(rs.getInt("idMovie"));
+				mo.setTitle(rs.getString("title"));
+				mo.setImage(rs.getString("image"));
+				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				mo.setCast(rs.getString("cast"));
+				mo.setDirector(rs.getString("director"));
+				mo.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				mo.setRestriction(re);
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				mo.setGenre(ge);
+			
+				movs.add(mo);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
+	
+	public LinkedList<Movie> getByGenreTit(Genre g, Movie m){
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;	
+		try {
+					
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where title like '%?%' and idGenre=?");
+			stmt.setString(1, m.getTitle());
+			stmt.setInt(2, g.getIdGenre());
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie mo=new Movie();
+				Genre ge=new Genre();
+				Restriction re=new Restriction();
+			
+				mo.setIdMovie(rs.getInt("idMovie"));
+				mo.setTitle(rs.getString("title"));
+				mo.setImage(rs.getString("image"));
+				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				mo.setCast(rs.getString("cast"));
+				mo.setDirector(rs.getString("director"));
+				mo.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				mo.setRestriction(re);
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				mo.setGenre(ge);
+			
+				movs.add(mo);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
 }
-
-	
-	
-	
-	
 

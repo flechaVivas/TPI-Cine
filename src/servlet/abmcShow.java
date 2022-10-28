@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Movie;
-import logic.MovieController;
+import entities.Show;
+import logic.ShowController;
 
 /**
- * Servlet implementation class abmcMovie
+ * Servlet implementation class ABMCShow
  */
-@WebServlet({ "/abmcMovie", "/abmcMOVIE", "/ABMCMovie", "/ABMCmovie" })
-public class abmcMovie extends HttpServlet {
+@WebServlet({ "/ABMCShow", "/abmcShow", "/abmcshow", "/ABMCshow" })
+public class abmcShow extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public abmcMovie() {
+    public abmcShow() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,6 +29,7 @@ public class abmcMovie extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doPost(request, response);
 	}
 
@@ -36,29 +37,25 @@ public class abmcMovie extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Movie m=new Movie();
-		MovieController ctrlMovie= new MovieController();
+		// TODO Auto-generated method stub
+		Show s=new Show();
+		ShowController ctrlShow=new ShowController();
 		try {
 			switch((String)request.getParameter("action")) {
 				case "new":
 				break;
 				case "delete":
-					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-					ctrlMovie.deleteOne(m);
-				break;
-				case "update":
-					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-					ctrlMovie.editOne(m);
+					//Que viaja como parametro? deberia viajar el indice, la sala y la fecha y hora
 				break;
 			default:
 				break;
 			}
-		request.getRequestDispatcher("/views/pages/abmcMovie.jsp");	
 		}catch(Exception e){
-			e.getMessage();
-		}
+			e.getMessage();}
 	}
 
 }
+
+
 
 

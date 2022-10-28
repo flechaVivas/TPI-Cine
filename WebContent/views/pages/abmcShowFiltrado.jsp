@@ -6,14 +6,12 @@
 <%@page import="logic.MovieRoomController"%>
 <%@page import="logic.ShowController"%>
 <%
-ShowController ctrlShow = new ShowController();
-LinkedList<Show> shows = ctrlShow.getAll();
-
-MovieController ctrlMovie = new MovieController();
-LinkedList<Movie> movies = ctrlMovie.getAll();
-
 MovieRoomController ctrlMR = new MovieRoomController();
 LinkedList<MovieRoom> movierooms = ctrlMR.list();
+MovieController ctrlMovie = new MovieController();
+LinkedList<Movie> movies = ctrlMovie.getAll();
+ShowController ctrlShow = new ShowController();
+LinkedList<Show> shows = ctrlShow.getAll();
 %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

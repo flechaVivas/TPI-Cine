@@ -25,11 +25,20 @@ public class MovieController {
 	
 	public LinkedList<Movie> getByRango(Movie desde,Movie hasta){return dm.getEntreFechas(desde,hasta);}
 	
-	public LinkedList<Movie> getByGen(Genre g){return dm.getByGenre(g);}
+	public LinkedList<Movie> getByGenre(Genre g){return dm.getByGenre(g);}
 	
 	public LinkedList<Movie> getByRestri(Restriction r){return dm.getByRest(r);}
 	
 	public LinkedList<Movie> getByDir(Movie m){return dm.getByDirector(m);}
 	
 	public LinkedList<Movie> getByDur(Movie tm){return dm.getByDuration(tm);}
+	
+	public LinkedList<Movie> getByGR(Genre g,Restriction r){return dm.getByRestGenre(r,g);}
+	
+	public LinkedList<Movie> getByGRT(Genre g,Restriction r, Movie m){return dm.getByRestGenreTit(r,g,m);}
+	
+	public LinkedList<Movie> getByRT(Restriction r, Movie m){return dm.getByRestTit(r,m);}
+	
+	public LinkedList<Movie> getByGT(Genre g,Movie m){return dm.getByGenreTit(g,m);}
 }
+

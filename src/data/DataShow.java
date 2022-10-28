@@ -238,19 +238,5 @@ public class DataShow {
 		return s;
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
+
