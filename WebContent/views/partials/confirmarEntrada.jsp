@@ -60,12 +60,15 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
-            <h4 style="text-align: center">¿Desea confirmar la reserva?</h4>
-            <div class="d-flex justify-content-center"">
-                <button class="btn btn-success">Confirmar</button>
-            </div>
-        </div>
+    	<form action="/TPI-Cine/src/servlet/ABMCTicket?action=new" method="post">
+    		<div class="col-12">
+	            <h4 style="text-align: center">¿Desea confirmar la reserva?</h4>
+	            <div class="d-flex justify-content-center">
+	                <button class="btn btn-success">Confirmar</button>
+	            </div>
+        	</div>
+    	</form>
+        
     </div>
 
 
