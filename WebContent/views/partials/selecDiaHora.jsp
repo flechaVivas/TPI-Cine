@@ -1,3 +1,4 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="logic.ShowController"%>
 <%@page import="entities.Show"%>
@@ -6,6 +7,8 @@
 
 	ShowController ctrlShow = new ShowController();
 	LinkedList<Show> shows = (LinkedList<Show>) session.getAttribute("showsDateTime");
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 	
 	%>
 
@@ -17,7 +20,7 @@
 			<select name="date_time" id="date_time">
 			
 				<% for (Show s : shows){ %>
-				<option value="<%=s.getDt()%>"><%=s.getDt()%></option>
+				<option value="<%=s.getDt()%>"><%=s.getDt().format(formatter)%></option>
 				<%} %>
 				
 	  		</select>

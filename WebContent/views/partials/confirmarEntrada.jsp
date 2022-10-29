@@ -1,3 +1,4 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="logic.MovieRoomController"%>
 <%@page import="entities.RoomType"%>
@@ -14,6 +15,8 @@
 	MovieRoomController ctrlMovieRoom = new MovieRoomController();
 	
 	BigDecimal cant_entradas = (BigDecimal)request.getSession().getAttribute("total");
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 	
 %>
 
@@ -50,7 +53,7 @@
                         	<%=u.getRow()+"-"+u.getCol()%>
                         <%}%>
                         </td>
-                        <td><%=s.getDt()%></td>
+                        <td><%=s.getDt().format(formatter)%></td>
                         <td><%=cant_entradas %></td>
                         <td>$<%=s.getMovieroom().getRt().getPrice().multiply(cant_entradas) %></td>
                     </tr>
