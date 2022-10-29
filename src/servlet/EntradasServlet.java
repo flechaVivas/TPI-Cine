@@ -152,6 +152,8 @@ public class EntradasServlet extends HttpServlet {
 					
 					ubicElegidas.add(u_elegida);
 					
+					request.getSession(false).setAttribute("ubicElegidas", ubicElegidas);
+					
 //					System.out.println(u_elegida);
 					
 					if ((Integer)request.getSession(false).getAttribute("cantidad") != 0) {
