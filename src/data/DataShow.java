@@ -126,9 +126,10 @@ public class DataShow {
 					"select date_time from\n" + 
 					"cine_tpjava.show s\n" + 
 					"inner join movieroom mr\n" + 
-					"	on mr.roomNumber=s.roomNumber\n" + 
+					"on mr.roomNumber=s.roomNumber\n" + 
 					"where s.idMovie=?\n" + 
-					"and mr.idRoomType=?;"
+					"and mr.idRoomType=?\n" + 
+					"and s.date_time >= CURRENT_DATE;"
 			);
 			stmt.setInt(1, m.getIdMovie());
 			stmt.setInt(2, rt.getIdRoomType());
