@@ -33,6 +33,8 @@
 	}
 	
 	request.setAttribute("asientos", asientos);
+	
+	LinkedList<Ubication> ubicElegidas = (LinkedList<Ubication>)request.getSession(false).getAttribute("ubicElegidas");
 		
 %>
 
@@ -47,15 +49,13 @@
 				</thead>
 				<tbody>
 					
-					
-				
 					<% for(int i=1; i <= rt.getSizeRow(); i++){ %>
 					
 						<tr>
 					
 						<% for(int j=1; j <= rt.getSizeCol(); j++){  Character fila = '@'; %>
 						
-							<% if(asientos[i][j].getTicket() == null){ %>	
+							<% if(asientos[i][j].getTicket() == null ){ %>	
 							
 								<td><%=Character.toString(fila+i)%>-<%=asientos[i][j].getCol()%>   <a 
 								href="/TPI-Cine/src/servlet/EntradasServlet?step=asiento&fila=<%=asientos[i][j].getRow()%>&col=<%=asientos[i][j].getCol()%>"
