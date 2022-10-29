@@ -120,7 +120,7 @@ public class EntradasServlet extends HttpServlet {
 				
 				s.setMovieroom(s_traido.getMovieroom());
 				
-				System.out.println(s.getMovie().getTitle()+" "+s.getMovieroom().getRoomNumber()+" "+s.getDt() +" "+request.getSession(false).getAttribute("cantidad")+" "+s.getMovieroom().getRt().getDescription());
+//				System.out.println(s.getMovie().getTitle()+" "+s.getMovieroom().getRoomNumber()+" "+s.getDt() +" "+request.getSession(false).getAttribute("cantidad")+" "+s.getMovieroom().getRt().getDescription());
 				
 				request.getSession(false).removeAttribute("show");
 				request.getSession(false).setAttribute("show", s);
@@ -152,7 +152,7 @@ public class EntradasServlet extends HttpServlet {
 					
 					ubicElegidas.add(u_elegida);
 					
-					System.out.println(u_elegida);
+//					System.out.println(u_elegida);
 					
 					if ((Integer)request.getSession(false).getAttribute("cantidad") != 0) {
 						response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecAsiento");
