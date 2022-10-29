@@ -34,7 +34,7 @@
 					<% if(session.getAttribute("tipoSala")==null){ %>
 						<select name="tipo" id="tipo">
 						<% for (RoomType rt : types){ %>
-							<option value="<%=rt.getIdRoomType()%>"><%=rt.getDescription() +" "+rt.getPrice()%></option>
+							<option value="<%=rt.getIdRoomType()%>"><%=rt.getDescription() +" $"+rt.getPrice()%></option>
 						<%}%>
 						</select>
 						<br><br>
@@ -44,8 +44,8 @@
 						
 						<% RoomType rt = (RoomType)session.getAttribute("tipoSala"); %>
 						
-						<select name="tipo" id="tipo">
-						<option value="<%=rt.getIdRoomType()%>"><%=rt.getDescription() +" "+rt.getPrice()%></option>
+						<select name="tipo" id="tipo" disabled="disabled">
+						<option value="<%=rt.getIdRoomType()%>"><%=rt.getDescription() +" $"+rt.getPrice()%></option>
 						</select>
 						<br><br>
 						<label> Seleccione <strong> cantidad de entradas  </strong></label>

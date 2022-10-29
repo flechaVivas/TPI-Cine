@@ -20,16 +20,24 @@
 	<div class="row mt-5">
 		<div class="col-md-10">
 			<label>Seleccione una <strong>película</strong></label>    
-			<select name="movie" id="movie">
+			
 			
 			<% 
-				if(s == null){
-					for (Movie m : movies){ %>
+				if(s == null){%>
+					<select name="movie" id="movie">
+					<% for (Movie m : movies){ %>
+						
 						<option value="<%=m.getIdMovie()%>"><%=m.getTitle()%></option>
-					<%}
-				} else {%><option value="<%=s.getMovie().getIdMovie()%>"><%=s.getMovie().getTitle()%></option> <% }%>
+						
+					<%}%>
+					</select>
+				<%} else {%>
+					<select name="movie" id="movie" disabled="disabled">
+					<option value="<%=s.getMovie().getIdMovie()%>"><%=s.getMovie().getTitle()%></option> 
+					</select>
+				<% }%>
 				
-	  		</select>
+	  		
 		</div>
 		<%if(s == null){ %>
 			<div class="col-md-2">
