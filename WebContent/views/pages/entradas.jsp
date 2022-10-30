@@ -89,6 +89,13 @@
 						
 							<jsp:include page="/views/partials/confirmarEntrada.jsp"></jsp:include>
 						
+						<% break; 
+						
+						case "informarExito": %>
+							
+							<jsp:include page="/views/partials/informarExito.jsp"></jsp:include>
+						
+						<% break; %>
 						
 					<%}%>
 				<%}%>
