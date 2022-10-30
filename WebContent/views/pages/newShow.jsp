@@ -5,6 +5,10 @@
 <%@page import="entities.MovieRoom" %>
 <%@page import="logic.MovieRoomController"%>
 <%@page import="logic.ShowController"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
 <%
 ShowController ctrlShow = new ShowController();
 LinkedList<Show> shows = ctrlShow.getAll();
@@ -15,10 +19,6 @@ LinkedList<Movie> movies = ctrlMovie.getAll();
 MovieRoomController ctrlMR = new MovieRoomController();
 LinkedList<MovieRoom> movierooms = ctrlMR.list();
 %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
 <head>
 <meta charset="UTF-8">
 <title>Funciones</title>
@@ -39,7 +39,7 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	<main>
 		<div class="input-group">
-    	<form name="showForm" action="" method="get">
+    	<form name="showForm" method="get" action="">
         	<p><b>Película:</b>
         	<select name="pelicula">
         	<%for(Movie m: movies) {%>

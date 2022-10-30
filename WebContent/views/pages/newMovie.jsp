@@ -29,7 +29,7 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
          <main>
             <div class="Container">
                 <h2><i>Nueva pelicula</i></h2>
-                <form class="RegisterForm" method="POST" action="HACIA DONDE VA">
+                <form class="RegisterForm" method="POST" action="/TPI-Cine/src/servlet/abmcMovie?action=new">
                     <div class="formContent">
                         <div>
                             <div class="divForm">
@@ -38,7 +38,7 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Imagen</label>
-                                <input class="inputForm" name="image" type="image" >
+                                <input class="inputForm" name="image" type="text" >
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Fecha estreno</label>
@@ -75,9 +75,7 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
                             </div>
                         </div>
                     </div>
-                    <div class="buttonSend">
-                          <button type="submit" class="ButtonCreat">Agregar pelicula</button>
-                    </div>
+                    <input id="boton" type="submit" name="new"  value="new">
                 </form>
                 
             </div>

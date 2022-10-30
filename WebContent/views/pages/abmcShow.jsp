@@ -5,16 +5,6 @@
 <%@page import="entities.MovieRoom" %>
 <%@page import="logic.MovieRoomController"%>
 <%@page import="logic.ShowController"%>
-<%
-ShowController ctrlShow = new ShowController();
-LinkedList<Show> shows = ctrlShow.getAll();
-
-MovieController ctrlMovie = new MovieController();
-LinkedList<Movie> movies = ctrlMovie.getAll();
-
-MovieRoomController ctrlMR = new MovieRoomController();
-LinkedList<MovieRoom> movierooms = ctrlMR.list();
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -34,6 +24,16 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
 			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 		}*/
 	%>
+<%
+ShowController ctrlShow = new ShowController();
+LinkedList<Show> shows = ctrlShow.getAll();
+
+MovieController ctrlMovie = new MovieController();
+LinkedList<Movie> movies = ctrlMovie.getAll();
+
+MovieRoomController ctrlMR = new MovieRoomController();
+LinkedList<MovieRoom> movierooms = ctrlMR.list();
+%>
 </head>
 <body>
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
@@ -56,7 +56,7 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
             		<th scope="col">Pelicula</th>
             		<th scope="col">Sala</th>
             		<th scope="col"></th>
-            		<th><input type="submit" id="boton" value="+"></p></th>
+            		<th><input type="submit" id="boton" value="+" onClick='<jsp:attribute name="/newShow.jsp"></jsp:attribute>'></p></th>
           		</tr>
         	</thead>
         	<tbody>

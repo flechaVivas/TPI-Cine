@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,11 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Movie;
 import logic.MovieController;
+import entities.Genre;
+import entities.Restriction;
+import logic.GenreController;
+import logic.RestrictionController;
 
 /**
  * Servlet implementation class abmcMovie
  */
-@WebServlet({ "/abmcMovie", "/abmcMOVIE", "/ABMCMovie", "/ABMCmovie" })
+@WebServlet({ "/src/servlet/abmcMovie", "/src/servlet/abmcMOVIE", "/src/servlet/ABMCMovie", "/src/servlet/ABMCmovie" })
 public class abmcMovie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,25 +44,52 @@ public class abmcMovie extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Movie m=new Movie();
 		MovieController ctrlMovie= new MovieController();
-		try {
+		Restriction r= new Restriction();
+		RestrictionController ctrlRest= new RestrictionController();
+		Genre g=new Genre();
+		GenreController ctrlGen= new GenreController();
+		System.out.println("Bienvenido a servlet");
+		//try {
 			switch((String)request.getParameter("action")) {
 				case "new":
+					m.setTitle((String)request.getParameter("title"));
+					m.setImage((String)request.getParameter("image"));
+					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
+					m.setCast((String)request.getParameter("cast"));
+					m.setDirector((String)request.getParameter("director"));
+					m.setDuration(Integer.parseInt((String)request.getParameter("duration")));
+					r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
+					m.setRestriction(ctrlRest.getOne(r));
+					g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
+					m.setGenre(ctrlGen.getOne(g));
+					ctrlMovie.addOne(m);
 				break;
+				
 				case "delete":
 					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
 					ctrlMovie.deleteOne(m);
 				break;
 				case "update":
 					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+					m.setTitle((String)request.getParameter("title"));
+					m.setImage((String)request.getParameter("image"));
+					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
+					m.setCast((String)request.getParameter("cast"));
+					m.setDirector((String)request.getParameter("director"));
+					m.setDuration(Integer.parseInt((String)request.getParameter("duration")));
+					r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
+					m.setRestriction(ctrlRest.getOne(r));
+					g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
+					m.setGenre(ctrlGen.getOne(g));
 					ctrlMovie.editOne(m);
 				break;
 			default:
 				break;
 			}
-		request.getRequestDispatcher("/views/pages/abmcMovie.jsp");	
-		}catch(Exception e){
+		request.getRequestDispatcher("/views/pages/abmcMovie.jsp").forward(request, response);	
+		/*}catch(Exception e){
 			e.getMessage();
-		}
+		}*/
 	}
 
 }

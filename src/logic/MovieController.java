@@ -40,5 +40,8 @@ public class MovieController {
 	public LinkedList<Movie> getByRT(Restriction r, Movie m){return dm.getByRestTit(r,m);}
 	
 	public LinkedList<Movie> getByGT(Genre g,Movie m){return dm.getByGenreTit(g,m);}
+
+
+	public LinkedList<Movie> getbySimilTitle(Movie m) {return dm.getSimilTit(m);}
 }
 

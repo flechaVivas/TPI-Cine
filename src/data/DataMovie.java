@@ -71,8 +71,8 @@ public class DataMovie {
 		Restriction re=null;
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE title LIKE %?%");
-			stmt.setString(1, m.getTitle());
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE title like ?");
+			stmt.setString(1, "%"+m.getTitle()+"%");
 
 			rs=stmt.executeQuery();
 			
@@ -343,7 +343,7 @@ public class DataMovie {
 		Restriction re=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where idRestriction>=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idRestriction>=?");
 			stmt.setInt(1, r.getIdRestriction());
 			rs=stmt.executeQuery();
 			
@@ -389,7 +389,7 @@ public class DataMovie {
 		Genre ge=null;
 		Restriction re=null;	
 		try {		
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where director=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where director=?");
 			stmt.setString(1, mo.getDirector());
 			rs=stmt.executeQuery();
 			
@@ -435,7 +435,7 @@ public class DataMovie {
 		Genre ge=null;
 		Restriction re=null;	
 		try {		
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where duration<=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where duration<=?");
 			stmt.setInt(1, tm.getDuration());
 			rs=stmt.executeQuery();
 			
@@ -479,7 +479,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where idRestriction>=? and idGenre=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idRestriction>=? and idGenre=?");
 			stmt.setInt(1, r.getIdRestriction());
 			stmt.setInt(2, g.getIdGenre());
 			rs=stmt.executeQuery();
@@ -524,8 +524,8 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where title like '%?%' and idRestriction>=? and idGenre=?");
-			stmt.setString(1, m.getTitle());
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idRestriction>=? and idGenre=?");
+			stmt.setString(1, "%"+m.getTitle()+"%");
 			stmt.setInt(2, r.getIdRestriction());
 			stmt.setInt(3, g.getIdGenre());
 			rs=stmt.executeQuery();
@@ -571,8 +571,8 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where title like '%?%' and idRestriction>=?");
-			stmt.setString(1, m.getTitle());
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idRestriction>=?");
+			stmt.setString(1, "%"+m.getTitle()+"%");
 			stmt.setInt(2, r.getIdRestriction());
 			rs=stmt.executeQuery();
 			
@@ -617,9 +617,54 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM Movie where title like '%?%' and idGenre=?");
-			stmt.setString(1, m.getTitle());
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idGenre=?");
+			stmt.setString(1, "%"+m.getTitle()+"%");
 			stmt.setInt(2, g.getIdGenre());
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie mo=new Movie();
+				Genre ge=new Genre();
+				Restriction re=new Restriction();
+			
+				mo.setIdMovie(rs.getInt("idMovie"));
+				mo.setTitle(rs.getString("title"));
+				mo.setImage(rs.getString("image"));
+				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				mo.setCast(rs.getString("cast"));
+				mo.setDirector(rs.getString("director"));
+				mo.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				mo.setRestriction(re);
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				mo.setGenre(ge);
+			
+				movs.add(mo);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
+
+	public LinkedList<Movie> getSimilTit(Movie m) {
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;	
+		try {
+					
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ?");
+			stmt.setString(1, "%"+m.getTitle()+"%");
 			rs=stmt.executeQuery();
 			
 			while(rs.next()) {

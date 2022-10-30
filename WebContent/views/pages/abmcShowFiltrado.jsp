@@ -5,14 +5,6 @@
 <%@page import="entities.MovieRoom" %>
 <%@page import="logic.MovieRoomController"%>
 <%@page import="logic.ShowController"%>
-<%
-MovieRoomController ctrlMR = new MovieRoomController();
-LinkedList<MovieRoom> movierooms = ctrlMR.list();
-MovieController ctrlMovie = new MovieController();
-LinkedList<Movie> movies = ctrlMovie.getAll();
-ShowController ctrlShow = new ShowController();
-LinkedList<Show> shows = ctrlShow.getAll();
-%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,6 +24,14 @@ LinkedList<Show> shows = ctrlShow.getAll();
 			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 		}*/
 	%>
+<%
+MovieRoomController ctrlMR = new MovieRoomController();
+LinkedList<MovieRoom> movierooms = ctrlMR.list();
+MovieController ctrlMovie = new MovieController();
+LinkedList<Movie> movies = ctrlMovie.getAll();
+ShowController ctrlShow = new ShowController();
+LinkedList<Show> shows = ctrlShow.getAll();
+%>
 </head>
 <body>
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
