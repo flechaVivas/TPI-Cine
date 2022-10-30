@@ -14,9 +14,6 @@
 			<li>
 				<a href="/TPI-Cine/views/pages/entradas.jsp" onclick="removeSessionAtbs()">ENTRADAS</a>
 			</li>
-			<li>
-				<a href="#">CONTACTO</a>
-			</li>
 			<% if(u!=null){
 				
 				if(u.getRole().getDescription().equals("taquillero")){ %>
