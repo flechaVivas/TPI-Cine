@@ -54,6 +54,7 @@ public class abmcMovie extends HttpServlet {
 				case "new":
 					m.setTitle((String)request.getParameter("title"));
 					m.setImage((String)request.getParameter("image"));
+					m.setSynopsis(getServletInfo()); //Agregar en new y edit
 					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
 					m.setCast((String)request.getParameter("cast"));
 					m.setDirector((String)request.getParameter("director"));
@@ -67,12 +68,13 @@ public class abmcMovie extends HttpServlet {
 				
 				case "delete":
 					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-					ctrlMovie.deleteOne(m);
+					ctrlMovie.logicDelete(m);
 				break;
 				case "update":
 					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
 					m.setTitle((String)request.getParameter("title"));
 					m.setImage((String)request.getParameter("image"));
+					m.setSynopsis(getServletInfo());//Agregar en new y edit 
 					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
 					m.setCast((String)request.getParameter("cast"));
 					m.setDirector((String)request.getParameter("director"));

@@ -35,6 +35,7 @@ public class DataMovie {
 				
 				mo.setTitle(rs.getString("title"));
 				mo.setImage(rs.getString("image"));
+				mo.setSynopsis(rs.getString("synopsis"));
 				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				mo.setCast(rs.getString("cast"));
 				mo.setDirector(rs.getString("director"));
@@ -45,6 +46,7 @@ public class DataMovie {
 				
 				ge.setIdGenre(rs.getInt("idGenre"));
 				mo.setGenre(ge);
+				mo.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 			}
 			
 		} catch (SQLException e) {
@@ -86,6 +88,7 @@ public class DataMovie {
 				
 				mo.setTitle(rs.getString("title"));
 				mo.setImage(rs.getString("image"));
+				mo.setSynopsis(rs.getString("synopsis"));
 				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				mo.setCast(rs.getString("cast"));
 				mo.setDirector(rs.getString("director"));
@@ -96,6 +99,7 @@ public class DataMovie {
 				
 				ge.setIdGenre(rs.getInt("idGenre"));
 				mo.setGenre(ge);
+				mo.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 			}
 			
 		} catch (SQLException e) {
@@ -117,17 +121,19 @@ public class DataMovie {
 	PreparedStatement stmt= null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
-			prepareStatement("update movie set title=?, image=?, releaseDate=?, cast=?, director=?, "
-			+ "duration=?, idRestriction=?, idGenre=?   where idMovie=?");
+			prepareStatement("update movie set title=?, image=?, synopsis=? releaseDate=?, cast=?, director=?, "
+			+ "duration=?, idRestriction=?, idGenre=?, retirementDate=?   where idMovie=?");
 			stmt.setString(1,m.getTitle());
 			stmt.setString(2,m.getImage());
-			stmt.setObject(3,m.getReleaseDate());
-			stmt.setString(4,m.getCast());
-			stmt.setString(5,m.getDirector());
-			stmt.setInt(6, m.getDuration());
-			stmt.setInt(7, m.getRestriction().getIdRestriction());
-			stmt.setInt(8, m.getGenre().getIdGenre());
-			stmt.setInt(9, m.getIdMovie());
+			stmt.setString(3,m.getSynopsis());
+			stmt.setObject(4,m.getReleaseDate());
+			stmt.setString(5,m.getCast());
+			stmt.setString(6,m.getDirector());
+			stmt.setInt(7, m.getDuration());
+			stmt.setInt(8, m.getRestriction().getIdRestriction());
+			stmt.setInt(9, m.getGenre().getIdGenre());
+			stmt.setObject(10,m.getRetirementDate());
+			stmt.setInt(11, m.getIdMovie());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
             e.printStackTrace();
@@ -165,17 +171,18 @@ public class DataMovie {
 		ResultSet keyResultSet = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO movie(title,image,releaseDate,cast,director,duration,idRestriction,idGenre) values (?,?,?,?,?,?,?,?)"
+			"INSERT INTO movie(title,image,synopsis,releaseDate,cast,director,duration,idRestriction,idGenre) values (?,?,?,?,?,?,?,?)"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1,m.getTitle());
 			stmt.setString(2,m.getImage());
-			stmt.setObject(3,m.getReleaseDate());
-			stmt.setString(4,m.getCast());
-			stmt.setString(5,m.getDirector());
-			stmt.setInt(6, m.getDuration());
-			stmt.setInt(7, m.getRestriction().getIdRestriction());
-			stmt.setInt(8, m.getGenre().getIdGenre());
+			stmt.setString(3, m.getSynopsis());
+			stmt.setObject(4,m.getReleaseDate());
+			stmt.setString(5,m.getCast());
+			stmt.setString(6,m.getDirector());
+			stmt.setInt(7, m.getDuration());
+			stmt.setInt(8, m.getRestriction().getIdRestriction());
+			stmt.setInt(9, m.getGenre().getIdGenre());
 			
 			stmt.executeUpdate();
 			keyResultSet=stmt.getGeneratedKeys();
@@ -215,6 +222,7 @@ public class DataMovie {
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
+				m.setSynopsis(rs.getString("synopsis"));
 				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				m.setCast(rs.getString("cast"));
 				m.setDirector(rs.getString("director"));
@@ -225,6 +233,7 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				m.setGenre(ge);
+				m.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 			
 				movs.add(m);
 			}
@@ -263,6 +272,7 @@ public class DataMovie {
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
+				m.setSynopsis(rs.getString("synopsis"));
 				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				m.setCast(rs.getString("cast"));
 				m.setDirector(rs.getString("director"));
@@ -273,7 +283,7 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				m.setGenre(ge);
-			
+				m.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 				movs.add(m);
 			}
 		}catch (SQLException e) {
@@ -308,6 +318,7 @@ public class DataMovie {
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
+				m.setSynopsis(rs.getString("synopsis"));
 				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				m.setCast(rs.getString("cast"));
 				m.setDirector(rs.getString("director"));
@@ -318,7 +329,7 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				m.setGenre(ge);
-			
+				m.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 				movs.add(m);
 			}
 		}catch (SQLException e) {
@@ -343,7 +354,7 @@ public class DataMovie {
 		Restriction re=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idRestriction>=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idRestriction=?");
 			stmt.setInt(1, r.getIdRestriction());
 			rs=stmt.executeQuery();
 			
@@ -355,6 +366,7 @@ public class DataMovie {
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
+				m.setSynopsis(rs.getString("synopsis"));
 				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				m.setCast(rs.getString("cast"));
 				m.setDirector(rs.getString("director"));
@@ -365,7 +377,7 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				m.setGenre(ge);
-			
+				m.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 				movs.add(m);
 			}
 		}catch (SQLException e) {
@@ -401,6 +413,7 @@ public class DataMovie {
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
+				m.setSynopsis(rs.getString("synopsis"));
 				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				m.setCast(rs.getString("cast"));
 				m.setDirector(rs.getString("director"));
@@ -411,7 +424,7 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				m.setGenre(ge);
-			
+				m.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 				movs.add(m);
 			}
 		}catch (SQLException e) {
@@ -447,6 +460,7 @@ public class DataMovie {
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
+				m.setSynopsis(rs.getString("synopsis"));
 				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				m.setCast(rs.getString("cast"));
 				m.setDirector(rs.getString("director"));
@@ -457,7 +471,7 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				m.setGenre(ge);
-			
+				m.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 				movs.add(m);
 			}
 		}catch (SQLException e) {
@@ -479,7 +493,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idRestriction>=? and idGenre=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idRestriction=? and idGenre=?");
 			stmt.setInt(1, r.getIdRestriction());
 			stmt.setInt(2, g.getIdGenre());
 			rs=stmt.executeQuery();
@@ -492,6 +506,7 @@ public class DataMovie {
 				m.setIdMovie(rs.getInt("idMovie"));
 				m.setTitle(rs.getString("title"));
 				m.setImage(rs.getString("image"));
+				m.setSynopsis(rs.getString("synopsis"));
 				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				m.setCast(rs.getString("cast"));
 				m.setDirector(rs.getString("director"));
@@ -502,7 +517,7 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				m.setGenre(ge);
-			
+				m.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 				movs.add(m);
 			}
 		}catch (SQLException e) {
@@ -524,7 +539,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idRestriction>=? and idGenre=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idRestriction=? and idGenre=?");
 			stmt.setString(1, "%"+m.getTitle()+"%");
 			stmt.setInt(2, r.getIdRestriction());
 			stmt.setInt(3, g.getIdGenre());
@@ -538,6 +553,7 @@ public class DataMovie {
 				mo.setIdMovie(rs.getInt("idMovie"));
 				mo.setTitle(rs.getString("title"));
 				mo.setImage(rs.getString("image"));
+				mo.setSynopsis(rs.getString("synopsis"));
 				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				mo.setCast(rs.getString("cast"));
 				mo.setDirector(rs.getString("director"));
@@ -548,7 +564,7 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				mo.setGenre(ge);
-			
+				mo.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 				movs.add(mo);
 			}
 		}catch (SQLException e) {
@@ -571,7 +587,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idRestriction>=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idRestriction=?");
 			stmt.setString(1, "%"+m.getTitle()+"%");
 			stmt.setInt(2, r.getIdRestriction());
 			rs=stmt.executeQuery();
@@ -584,6 +600,7 @@ public class DataMovie {
 				mo.setIdMovie(rs.getInt("idMovie"));
 				mo.setTitle(rs.getString("title"));
 				mo.setImage(rs.getString("image"));
+				mo.setSynopsis(rs.getString("synopsis"));
 				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				mo.setCast(rs.getString("cast"));
 				mo.setDirector(rs.getString("director"));
@@ -594,7 +611,7 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				mo.setGenre(ge);
-			
+				mo.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 				movs.add(mo);
 			}
 		}catch (SQLException e) {
@@ -630,6 +647,7 @@ public class DataMovie {
 				mo.setIdMovie(rs.getInt("idMovie"));
 				mo.setTitle(rs.getString("title"));
 				mo.setImage(rs.getString("image"));
+				mo.setSynopsis(rs.getString("synopsis"));
 				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				mo.setCast(rs.getString("cast"));
 				mo.setDirector(rs.getString("director"));
@@ -640,7 +658,7 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				mo.setGenre(ge);
-			
+				mo.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 				movs.add(mo);
 			}
 		}catch (SQLException e) {
@@ -675,6 +693,7 @@ public class DataMovie {
 				mo.setIdMovie(rs.getInt("idMovie"));
 				mo.setTitle(rs.getString("title"));
 				mo.setImage(rs.getString("image"));
+				mo.setSynopsis(rs.getString("synopsis"));
 				mo.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
 				mo.setCast(rs.getString("cast"));
 				mo.setDirector(rs.getString("director"));
@@ -685,8 +704,72 @@ public class DataMovie {
 			
 				ge.setIdGenre(rs.getInt("idGenre"));
 				mo.setGenre(ge);
-			
+				mo.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
 				movs.add(mo);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+			return movs;
+	}
+	public Movie bajalogica(Movie m) {	
+		PreparedStatement stmt= null;
+			try {
+				stmt=DbConnector.getInstancia().getConn().
+				prepareStatement("update movie set retirementDate=? where idMovie=?");
+				stmt.setObject(1,LocalDate.now());
+				stmt.setInt(2, m.getIdMovie());
+				stmt.executeUpdate();
+			} catch (SQLException e) {
+	            e.printStackTrace();
+			} finally {
+	            try {
+	                if(stmt!=null)stmt.close();
+	                DbConnector.getInstancia().releaseConn();
+	            } catch (SQLException e) {
+	            	e.printStackTrace();
+	            }
+			}
+			return m;
+		}
+	public LinkedList<Movie> getBillboardMovies(){
+		LinkedList<Movie> movs=new LinkedList<Movie>();
+		PreparedStatement stmt=null;
+		ResultSet rs=null;	
+		try {
+					
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where retirementDate is not null");
+			rs=stmt.executeQuery();
+			
+			while(rs.next()) {
+				Movie m=new Movie();
+				Genre ge=new Genre();
+				Restriction re=new Restriction();
+			
+				m.setIdMovie(rs.getInt("idMovie"));
+				m.setTitle(rs.getString("title"));
+				m.setImage(rs.getString("image"));
+				m.setSynopsis(rs.getString("synopsis"));
+				m.setReleaseDate(rs.getObject("releaseDate",LocalDate.class));
+				m.setCast(rs.getString("cast"));
+				m.setDirector(rs.getString("director"));
+				m.setDuration(rs.getInt("duration"));
+			
+				re.setIdRestriction(rs.getInt("idRestriction"));
+				m.setRestriction(re);
+			
+				ge.setIdGenre(rs.getInt("idGenre"));
+				m.setGenre(ge);
+				m.setRetirementDate(rs.getObject("retirementDate",LocalDate.class));
+				movs.add(m);
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();

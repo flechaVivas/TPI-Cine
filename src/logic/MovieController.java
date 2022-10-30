@@ -43,5 +43,9 @@ public class MovieController {
 
 
 	public LinkedList<Movie> getbySimilTitle(Movie m) {return dm.getSimilTit(m);}
+	
+	public void logicDelete(Movie m) {dm.bajalogica(m);}
+	
+	public LinkedList<Movie> getBillboard(){return dm.getBillboardMovies();} 
 }
 

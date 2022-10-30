@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `cine_tpjava` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `cine_tpjava`;
--- MySQL dump 10.13  Distrib 8.0.31, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
 -- Host: localhost    Database: cine_tpjava
 -- ------------------------------------------------------
--- Server version	8.0.31-0ubuntu0.22.04.1
+-- Server version	8.0.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -52,18 +52,20 @@ CREATE TABLE `movie` (
   `idMovie` int NOT NULL AUTO_INCREMENT,
   `title` varchar(45) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
+  `synopsis` varchar(255) DEFAULT NULL,
   `releaseDate` date NOT NULL,
   `cast` varchar(150) NOT NULL,
   `director` varchar(45) NOT NULL,
   `duration` int NOT NULL,
   `idRestriction` int NOT NULL,
   `idGenre` int NOT NULL,
+  `retirementDate` date DEFAULT NULL,
   PRIMARY KEY (`idMovie`),
   KEY `fk_movie_restriction_idx` (`idRestriction`),
   KEY `fk_movie_genre_idx` (`idGenre`),
   CONSTRAINT `fk_movie_genre` FOREIGN KEY (`idGenre`) REFERENCES `genre` (`idGenre`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_movie_restriction` FOREIGN KEY (`idRestriction`) REFERENCES `restriction` (`idRestriction`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,8 +74,8 @@ CREATE TABLE `movie` (
 
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
-INSERT INTO `movie` VALUES (1,'Relatos Salvajes','/TPI-Cine/assets/img/relatos_salvajes_1280_720.png','2014-08-21','Ricardo DarÃƒÂ­n, Oscar MartÃƒÂ­nez, Leonardo Sbaraglia, Ãƒâ€°rica Rivas, Rita Cortese, Julieta Zylberberg, DarÃƒÂ­o Grandinetti','DamiÃƒÂ¡n Szifron',122,4,1),(2,'The pianist','/TPI-Cine/assets/img/el_pianista.png','2003-03-06','Adrien Brody, Thomas Kretschmann, Frank Finlay, Maureen Lipman, Emilia Fox, Ed Stoppard, Julia Rayner, Jessica Kate Meyer','RomÃƒÂ¡n Polanski',151,4,1),(3,'Inglourious Basterds','/TPI-Cine/assets/img/inglorious.png','2009-08-31','Brad Pitt, Christoph Waltz, MÃƒÂ©lanie Laurent, Eli Roth, Diane Kruger, Daniel BrÃƒÂ¼hl, Til Schweiger, Michael Fassbender','Quentin Tarantino',153,3,2),(4,'Thor: Love and thunder','/TPI-Cine/assets/img/thor.png','2022-07-07','Chris Hemsworth, Christian Bale, Tessa Thompson, Jaimie Alexander, Taika Waititi, Russell Crowe,Natalie Portman','Taika Waititi',119,1,3),(5,'The godfather','/TPI-Cine/assets/img/elpadrino.png','1972-08-10','Marlon Brando, Al Pacino, Robert Duvall, James Caan, Richard Castellano, Diane Keaton','Francis Ford Coppola',177,5,1),(6,'Deadpool','/TPI-Cine/assets/img/deadpool.png','2016-02-11','Ryan Reynolds, Morena Baccarin, Ed Skrein, T. J. Miller, Gina Carano, Leslie Uggams, Brianna Hildebrand, Stefan KapiÃ„ï¿½iÃ„â€¡','Tim Miller',109,4,2),(7,'The Hangover','/TPI-Cine/assets/img/thehangover.png','2009-06-05','Bradley Cooper, Ed Helms, Zach Galifianakis, Heather Graham, Mike Epps, Justin Bartha, Jeffrey Tambor','Todd Philips',100,4,3),(8,'Shrek 2','/TPI-Cine/assets/img/shrek.png','2004-06-17','Mike Myers, Cameron Diaz, Eddie Murphy, Antonio Banderas, Julie Andrews, John Cleese, Rupert Everett, Jennifer Saunders, Larry King','Andrew Adamson',93,1,4),(9,'Transformers: Revenge of the Fallen','/TPI-Cine/assets/img/transformers.png','2009-06-25','Shia LaBeouf, Megan Fox, Josh Duhamel, Tyrese Gibson, John Turturro','Michael Bay',150,3,2),(10,'8 mile','/TPI-Cine/assets/img/8mile.png','2002-01-23','Eminem, Kim Basinger, Brittany Murphy, Mekhi Phifer, Evan Jones, Omar Benson Miller, Eugene Byrd, De\'Angelo Wilson, Anthony Mackie, Michael Shannon','Curtis Hanson',106,5,1);
-/* !40000 ALTER TABLE `movie` ENABLE KEYS */;
+INSERT INTO `movie` VALUES (1,'Relatos Salvajes','/TPI-Cine/assets/img/relatos_salvajes_1280_720.png',NULL,'2014-08-21','Ricardo DarÃƒÂ­n, Oscar MartÃƒÂ­nez, Leonardo Sbaraglia, Ãƒâ€°rica Rivas, Rita Cortese, Julieta Zylberberg, DarÃƒÂ­o Grandinetti','DamiÃƒÂ¡n Szifron',122,4,1,NULL),(2,'The pianist','/TPI-Cine/assets/img/el_pianista.png',NULL,'2003-03-06','Adrien Brody, Thomas Kretschmann, Frank Finlay, Maureen Lipman, Emilia Fox, Ed Stoppard, Julia Rayner, Jessica Kate Meyer','RomÃƒÂ¡n Polanski',151,4,1,NULL),(3,'Inglourious Basterds','/TPI-Cine/assets/img/inglorious.png',NULL,'2009-08-31','Brad Pitt, Christoph Waltz, MÃƒÂ©lanie Laurent, Eli Roth, Diane Kruger, Daniel BrÃƒÂ¼hl, Til Schweiger, Michael Fassbender','Quentin Tarantino',153,3,2,NULL),(4,'Thor: Love and thunder','/TPI-Cine/assets/img/thor.png',NULL,'2022-07-07','Chris Hemsworth, Christian Bale, Tessa Thompson, Jaimie Alexander, Taika Waititi, Russell Crowe,Natalie Portman','Taika Waititi',119,1,3,NULL),(5,'The godfather','/TPI-Cine/assets/img/elpadrino.png',NULL,'1972-08-10','Marlon Brando, Al Pacino, Robert Duvall, James Caan, Richard Castellano, Diane Keaton','Francis Ford Coppola',177,5,1,NULL),(6,'Deadpool','/TPI-Cine/assets/img/deadpool.png',NULL,'2016-02-11','Ryan Reynolds, Morena Baccarin, Ed Skrein, T. J. Miller, Gina Carano, Leslie Uggams, Brianna Hildebrand, Stefan KapiÃ„ï¿½iÃ„â€¡','Tim Miller',109,4,2,NULL),(7,'The Hangover','/TPI-Cine/assets/img/thehangover.png',NULL,'2009-06-05','Bradley Cooper, Ed Helms, Zach Galifianakis, Heather Graham, Mike Epps, Justin Bartha, Jeffrey Tambor','Todd Philips',100,4,3,NULL),(8,'Shrek 2','/TPI-Cine/assets/img/shrek.png',NULL,'2004-06-17','Mike Myers, Cameron Diaz, Eddie Murphy, Antonio Banderas, Julie Andrews, John Cleese, Rupert Everett, Jennifer Saunders, Larry King','Andrew Adamson',93,1,4,NULL),(9,'Transformers: Revenge of the Fallen','/TPI-Cine/assets/img/transformers.png',NULL,'2009-06-25','Shia LaBeouf, Megan Fox, Josh Duhamel, Tyrese Gibson, John Turturro','Michael Bay',150,3,2,NULL),(10,'8 mile','/TPI-Cine/assets/img/8mile.png',NULL,'2002-01-23','Eminem, Kim Basinger, Brittany Murphy, Mekhi Phifer, Evan Jones, Omar Benson Miller, Eugene Byrd, De\'Angelo Wilson, Anthony Mackie, Michael Shannon','Curtis Hanson',106,5,1,NULL);
+/*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -218,6 +220,7 @@ CREATE TABLE `ticket` (
   `dateTime` datetime NOT NULL,
   `price` decimal(10,0) NOT NULL,
   `idUser` int DEFAULT NULL,
+  `retirementDate` datetime DEFAULT NULL,
   PRIMARY KEY (`idTicket`),
   UNIQUE KEY `operationCode_UNIQUE` (`operationCode`),
   KEY `fk_ticket_user_idx` (`idUser`),
@@ -231,7 +234,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,'123456','2022-07-18 22:30:00',900,48274),(2,'123457','2022-09-18 22:30:00',900,48271),(3,'123458','2022-09-12 00:00:00',1100,48275),(4,'123459','2022-09-10 00:00:00',1000,48277),(5,'123460','2022-09-03 22:30:00',900,48272),(6,'123461','2022-09-03 23:35:10',900,48274),(7,'123462','2022-09-04 02:35:16',900,48275);
+INSERT INTO `ticket` VALUES (1,'123456','2022-07-18 22:30:00',900,48274,NULL),(2,'123457','2022-09-18 22:30:00',900,48271,NULL),(3,'123458','2022-09-12 00:00:00',1100,48275,NULL),(4,'123459','2022-09-10 00:00:00',1000,48277,NULL),(5,'123460','2022-09-03 22:30:00',900,48272,NULL),(6,'123461','2022-09-03 23:35:10',900,48274,NULL),(7,'123462','2022-09-04 02:35:16',900,48275,NULL);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,4 +313,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-27  9:11:53
+-- Dump completed on 2022-10-30 20:15:24

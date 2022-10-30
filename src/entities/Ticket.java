@@ -9,6 +9,7 @@ public class Ticket {
 	private LocalDateTime dateTime;
 	private BigDecimal price;
 	private User user;
+	private LocalDateTime retirementDate;
 	
 	
 	public int getIdTicket() {
@@ -41,15 +42,14 @@ public class Ticket {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-	@Override
-	public String toString() {
-		return "Ticket [idTicket=" + idTicket + ", operationCode=" + operationCode + ", dateTime=" + dateTime
-				+ ", price=" + price + ", user=" + user + "]";
-	}
 	
 	public Ticket() {}
+	public LocalDateTime getRetirementDate() {
+		return retirementDate;
+	}
+	public void setRetirementDate(LocalDateTime retirementDate) {
+		this.retirementDate = retirementDate;
+	}
 	
 	
 	

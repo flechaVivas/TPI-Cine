@@ -6,12 +6,14 @@ public class Movie {
 	private int idMovie;
 	private String title;
 	private String image;
+	private String synopsis;
 	private LocalDate releaseDate;
 	private String cast;
 	private String director;
 	private int duration;
 	private Restriction restriction;
 	private Genre genre;
+	private LocalDate retirementDate;
 	
 	public int getIdMovie() {
 		return idMovie;
@@ -68,11 +70,17 @@ public class Movie {
 		this.genre = genre;
 	}
 
-	@Override
-	public String toString() {
-		return "Movie [idMovie=" + idMovie + ", title=" + title + ", image=" + image + ", releaseDate=" + releaseDate
-				+ ", cast=" + cast + ", director=" + director + ", duration=" + duration + ", restriction="
-				+ restriction + ", genre=" + genre + "]";
+	public String getSynopsis() {
+		return synopsis;
+	}
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
+	}
+	public LocalDate getRetirementDate() {
+		return retirementDate;
+	}
+	public void setRetirementDate(LocalDate retirementDate) {
+		this.retirementDate = retirementDate;
 	}
 	
 	
