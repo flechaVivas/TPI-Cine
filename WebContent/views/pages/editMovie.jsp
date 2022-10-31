@@ -50,6 +50,10 @@ m=ctrlMovie.getbyIdMovie(m);%>
                                 <label class="labelForm">Fecha estreno</label>
                                 <input class="inputForm" name="releaseDate" type="date" value="<%=m.getReleaseDate()%>">
                             </div>
+                            <div class="divForm">
+                                <label class="labelForm">Sinopsis:</label>
+                                <input class="inputForm" name="synopsis" type="text" value="<%=m.getSynopsis()%>">
+                            </div>
                         </div>
                         <div>
                             <div class="divForm">
@@ -64,8 +68,7 @@ m=ctrlMovie.getbyIdMovie(m);%>
                                 <label class="labelForm">Duracion en minutos</label>
                                 <input class="inputForm" name="duration" type="number" value="<%=m.getDuration()%>">
                             </div>
-                            <div class="divForm">
-                            
+                            <div class="divForm">                            
                                 <p>Restriccion de edad
                                 <select name="restriction">
                                 	<%for(Restriction r: restrictions) {

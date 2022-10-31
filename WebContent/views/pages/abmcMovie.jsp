@@ -52,46 +52,64 @@ LinkedList<Movie> movies =ctrlMovie.getAll();%>
                      <button class="btn btn-success">Aceptar</button>
              </form>
     	</div>
-    <%for (Movie m: movies){ %>
+    <%for (Movie m: movies){%>  
     	<div class="wrapper">
-        	<div class="foto"><img src="<%=m.getImage()%>" alt="Imagen html"></div>
-        	<div class="data">
-            	<h1><%=m.getTitle()%></h1>
-            	<% 
-	                            	
-	           	Genre g = new Genre();
-	           	g.setIdGenre(m.getGenre().getIdGenre());
-	           	m.setGenre(ctrlGenre.getOne(g));
-	                            	
-	           	Restriction r = new Restriction();
-	           	r.setIdRestriction(m.getRestriction().getIdRestriction());
-	          	 m.setRestriction(ctrlRest.getOne(r));
-	                            	
-	         	%>
-            	<h5><%=m.getGenre().getDescription()%></h5>
-            	<small> Restricción: <%=m.getRestriction().getDescription()%></small> 
-            	<h4><%=m.getDirector() %></h4>
-            	<p><%=m.getCast() %></p> 
-            	<p>Fecha de estreno: <%=m.getReleaseDate() %>          Duración: <%=m.getDuration() %></p>
-            	</small>
-        	</div>
-        	<div class="upde">
-        		<a class="btn btn-outline-dark" href="/TPI-Cine/views/pages/editMovie.jsp?idM=<%=m.getIdMovie() %>">
-        		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
- 				<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
-  				<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
-				</svg></a>
-            <form class="registerForm" method="POST" action="/TPI-Cine/src/servlet/abmcMovie?action=delete">
-            	<button type="submit" name="idM" class="btn btn-outline-dark" value="<%=m.getIdMovie() %>">            	
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-  				<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-  				<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-				</svg>
-             </form>
-        	</div>
+    	<div class="foto">
+    		<%if(m.getRetirementDate()!=null){ %>
+    		<p><b>Fecha de baja: <%=m.getRetirementDate()%></b></p><%} %>
+    		<img src="<%=m.getImage()%>" alt="Imagen html">
     	</div>
-    	<br>
-    <%} %>
+    	<div class="data">
+        	<h1><%=m.getTitle()%></h1>
+        	<% 
+                            	
+           	Genre g = new Genre();
+           	g.setIdGenre(m.getGenre().getIdGenre());
+           	m.setGenre(ctrlGenre.getOne(g));
+                            	
+           	Restriction r = new Restriction();
+           	r.setIdRestriction(m.getRestriction().getIdRestriction());
+          	 m.setRestriction(ctrlRest.getOne(r));
+                            	
+         	%>
+        	<h5><%=m.getGenre().getDescription()%> </h5>
+        	<small> Restricción: <%=m.getRestriction().getDescription()%></small> 
+        	<h4><%=m.getDirector() %></h4>
+        	<p><%=m.getCast() %></p> 
+        	<p>Fecha de estreno: <%=m.getReleaseDate()%>
+        	Duración: <%=m.getDuration() %>
+        	</p>
+        	</small>
+    	</div>
+    	<div class="upde">
+    		<a class="btn btn-outline-dark" href="/TPI-Cine/views/pages/editMovie.jsp?idM=<%=m.getIdMovie() %>">
+    		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+				<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"></path>
+				<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"></path>
+			</svg></a>
+		<%if(m.getRetirementDate()==null){ %>
+        <form class="registerForm" method="POST" action="/TPI-Cine/src/servlet/abmcMovie?action=delete">
+        	<button type="submit" name="idM" class="btn btn-outline-dark" value="<%=m.getIdMovie() %>">            	
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+				<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+				<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+			</svg>
+			</button>
+         </form>
+     	<%}else{ %>	
+     	<form class="registerForm" method="POST" action="/TPI-Cine/src/servlet/abmcMovie?action=undelete">
+        	<button type="submit" name="idM" class="btn btn-outline-dark" value="<%=m.getIdMovie() %>">            	
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+				<path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+				<path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+			</svg>
+			</button>
+         </form>
+     	<%} %>
+     </div>
+     </div>
+     <br>
+     <%} %> 
     </main>	
 </body>
 </html>

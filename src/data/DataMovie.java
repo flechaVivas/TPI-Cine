@@ -212,7 +212,7 @@ public class DataMovie {
 		try {
 					
 			stmt=DbConnector.getInstancia().getConn().createStatement();
-			rs=stmt.executeQuery("SELECT * FROM movie");
+			rs=stmt.executeQuery("SELECT * FROM movie order by retirementDate asc");
 			
 			while(rs.next()) {
 				Movie m=new Movie();
@@ -726,6 +726,26 @@ public class DataMovie {
 				stmt=DbConnector.getInstancia().getConn().
 				prepareStatement("update movie set retirementDate=? where idMovie=?");
 				stmt.setObject(1,LocalDate.now());
+				stmt.setInt(2, m.getIdMovie());
+				stmt.executeUpdate();
+			} catch (SQLException e) {
+	            e.printStackTrace();
+			} finally {
+	            try {
+	                if(stmt!=null)stmt.close();
+	                DbConnector.getInstancia().releaseConn();
+	            } catch (SQLException e) {
+	            	e.printStackTrace();
+	            }
+			}
+			return m;
+		}
+	public Movie deshacerBajaLogica(Movie m) {	
+		PreparedStatement stmt= null;
+			try {
+				stmt=DbConnector.getInstancia().getConn().
+				prepareStatement("update movie set retirementDate=? where idMovie=?");
+				stmt.setObject(1,null);
 				stmt.setInt(2, m.getIdMovie());
 				stmt.executeUpdate();
 			} catch (SQLException e) {

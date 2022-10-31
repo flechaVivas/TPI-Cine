@@ -44,6 +44,10 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
                                 <label class="labelForm">Fecha estreno</label>
                                 <input class="inputForm" name="releaseDate" type="date">
                             </div>
+                            <div class="divForm">
+                                <label class="labelForm">Sinopsis:</label>
+                                <input class="inputForm" name="synopsis" type="text">
+                            </div>
                         </div>
                         <div>
                             <div class="divForm">
@@ -57,7 +61,7 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
                             <div class="divForm">
                                 <label class="labelForm">Duracion en minutos</label>
                                 <input class="inputForm" name="duration" type="number">
-                            </div>
+                            </div>                            
                             <div class="divForm">
                             
                                 <p>Restriccion de edad

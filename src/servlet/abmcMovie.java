@@ -85,6 +85,10 @@ public class abmcMovie extends HttpServlet {
 					m.setGenre(ctrlGen.getOne(g));
 					ctrlMovie.editOne(m);
 				break;
+				case "undelete":
+					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+					ctrlMovie.logicUndelete(m);
+				break;
 			default:
 				break;
 			}

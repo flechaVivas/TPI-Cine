@@ -30,7 +30,8 @@ body{
     grid-gap: 5px;
     grid-auto-rows: minmax(15px, auto);
 }
-  .data {
+
+ .data {
     grid-column: 2;
     grid-row: 1;
   }
@@ -42,6 +43,7 @@ body{
     grid-template-columns: 1fr 1fr;
   }
   .foto{
+  	text-align:center;
     margin-top: auto;
     margin-bottom: auto;
   }

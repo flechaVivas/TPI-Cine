@@ -46,6 +46,8 @@ public class MovieController {
 	
 	public void logicDelete(Movie m) {dm.bajalogica(m);}
 	
+	public void logicUndelete(Movie m) {dm.deshacerBajaLogica(m);}
+	
 	public LinkedList<Movie> getBillboard(){return dm.getBillboardMovies();} 
 }
 
