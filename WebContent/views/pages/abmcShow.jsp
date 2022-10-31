@@ -56,7 +56,7 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
             		<th scope="col">Pelicula</th>
             		<th scope="col">Sala</th>
             		<th scope="col"></th>
-            		<th><input type="submit" id="boton" value="+" onClick='<jsp:attribute name="/newShow.jsp"></jsp:attribute>'></p></th>
+            		<th><input type="submit" id="boton" value="+"></p></th>
           		</tr>
         	</thead>
         	<tbody>

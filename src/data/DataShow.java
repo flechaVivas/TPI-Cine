@@ -238,5 +238,153 @@ public class DataShow {
 		return s;
 		
 	}
+public LinkedList<Show> getShowsbyMovie(Show s) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Show> shows = new LinkedList<Show>();
+		
+		try {
+			
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select * from\n" + 
+					"cine_tpjava.show\n" + 
+					"where s.idMovie=?;"
+			);
+			stmt.setInt(1, s.getMovie().getIdMovie());
+			rs=stmt.executeQuery();
+			
+			if (rs != null) {
+				while (rs.next()) {
+					MovieRoom mr=new MovieRoom();
+					Movie m=new Movie();
+					Show sw = new Show();
+					
+					
+					sw.setDt(rs.getObject("date_time",LocalDateTime.class));
+					mr.setRoomNumber(rs.getInt("roomNumber"));
+					sw.setMovieroom(mr);
+					m.setIdMovie(rs.getInt("idMovie"));
+					sw.setMovie(m);
+					shows.add(sw);
+				}
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return shows;
+	}
+public LinkedList<Show> getShowsbyFecha(Show s) {
+	
+	PreparedStatement stmt = null;
+	ResultSet rs = null;
+	LinkedList<Show> shows = new LinkedList<Show>();
+	
+	try {
+		
+		stmt=DbConnector.getInstancia().getConn().prepareStatement(
+				"select * from\n" + 
+				"cine_tpjava.show\n" + 
+				"where CAST(s.date_time AS DATE)=?;"
+		);
+		stmt.setObject(1, s.getDt());
+		rs=stmt.executeQuery();
+		
+		if (rs != null) {
+			while (rs.next()) {
+				MovieRoom mr=new MovieRoom();
+				Movie m=new Movie();
+				Show sw = new Show();
+				
+				
+				sw.setDt(rs.getObject("date_time",LocalDateTime.class));
+				mr.setRoomNumber(rs.getInt("roomNumber"));
+				sw.setMovieroom(mr);
+				m.setIdMovie(rs.getInt("idMovie"));
+				sw.setMovie(m);
+				shows.add(sw);
+			}
+		}
+		
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+		
+	} finally {
+		try {
+			if(rs!=null) {rs.close();}
+			if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	return shows;
+	}
+
+public LinkedList<Show> getShowsbyFechaMovie(Show s) {
+	
+	PreparedStatement stmt = null;
+	ResultSet rs = null;
+	LinkedList<Show> shows = new LinkedList<Show>();
+	
+	try {
+		
+		stmt=DbConnector.getInstancia().getConn().prepareStatement(
+				"select * from\n " + 
+				"cine_tpjava.show\n " + 
+				"where CAST(s.date_time AS DATE)=? "+
+				"and idMovie=?;"
+		);
+		stmt.setObject(1, s.getDt());
+		stmt.setInt(2, s.getMovie().getIdMovie());
+		rs=stmt.executeQuery();
+		
+		if (rs != null) {
+			while (rs.next()) {
+				MovieRoom mr=new MovieRoom();
+				Movie m=new Movie();
+				Show sw = new Show();
+				
+				
+				sw.setDt(rs.getObject("date_time",LocalDateTime.class));
+				mr.setRoomNumber(rs.getInt("roomNumber"));
+				sw.setMovieroom(mr);
+				m.setIdMovie(rs.getInt("idMovie"));
+				sw.setMovie(m);
+				shows.add(sw);
+			}
+		}
+		
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+		
+	} finally {
+		try {
+			if(rs!=null) {rs.close();}
+			if(stmt!=null) {stmt.close();}
+			DbConnector.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	return shows;
+	}
+	
 }
 

@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -11,12 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Movie;
 import entities.Show;
+import logic.MovieController;
 import logic.ShowController;
 
 /**
  * Servlet implementation class filterShow
  */
-@WebServlet({ "/filterShow", "/FilterShow", "/filtershow", "/Filtershow" })
+@WebServlet({ "/src/servlet/filterShow", "/src/servlet/FilterShow", "/src/servlet/filtershow", "/src/servlet/Filtershow" })
 public class filterShow extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -41,19 +44,24 @@ public class filterShow extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Movie m = new Movie();
-		m.setTitle((String)request.getParameter("titulo"));       
-       	ShowController ctrlShow = new ShowController();
+		Show s= new Show();
+		MovieController ctrlMovie= new MovieController();
+		ShowController ctrlShow = new ShowController();
+		Movie m= new Movie();
+		m.setTitle((String)request.getParameter("title"));
+		m=ctrlMovie.getbyTitle(m);
+		s.setMovie(m);
+		s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));  	
        	
-			if((String)request.getParameter("title")!=null) {
-				if((String)request.getParameter("dt")!=null) {
-						//titulo y fecha
+			if((String)request.getParameter("title")!="") {
+				if((String)request.getParameter("dt")!="") {
+						LinkedList<Show>sw=ctrlShow.getByTityFech(s);
 				}else{
 						//titulo
 				}
 				
 			}else{
-				if((String)request.getParameter("dt")!=null){
+				if((String)request.getParameter("dt")!=""){
 						//fecha
 				}else{
 						LinkedList<Show> shows=ctrlShow.getAll();

@@ -34,5 +34,10 @@ public class ShowController {
 	public Show getRoomByMovieDateTime(Show s) {
 		return ds.getRoomByMovieDateTime(s);
 	}
+	public LinkedList<Show> getByTit(Show s){return ds.getShowsbyMovie(s);}
+	
+	public LinkedList<Show> getByTityFech(Show s){return ds.getShowsbyFechaMovie(s);}
+	
+	public LinkedList<Show> getByFech(Show s){return ds.getShowsbyFecha(s);}
 }
 
