@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Movie;
 import entities.Show;
-import logic.MovieController;
 import logic.ShowController;
 
 /**
@@ -45,13 +43,11 @@ public class filterShow extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Show s= new Show();
-		MovieController ctrlMovie= new MovieController();
 		ShowController ctrlShow = new ShowController();
 		Movie m= new Movie();
 		m.setTitle((String)request.getParameter("title"));
-		m=ctrlMovie.getbyTitle(m);
-		//s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));  	Ver problema acá
-		System.out.println("id de la peli: "+m.getIdMovie());
+		String date=(String)request.getParameter("dt");
+		s.setDt(LocalDateTime.parse(date));
        	LinkedList<Show>shows=new LinkedList<Show>();
        	
 		if((String)request.getParameter("title")!="") {

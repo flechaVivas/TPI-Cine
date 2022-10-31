@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +17,7 @@ import logic.ShowController;
 /**
  * Servlet implementation class ABMCShow
  */
-@WebServlet({ "/ABMCShow", "/abmcShow", "/abmcshow", "/ABMCshow" })
+@WebServlet({ "/src/servlet/ABMCShow", "/src/servlet/abmcShow", "/src/servlet/abmcshow", "/src/servlet/ABMCshow" })
 public class abmcShow extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,24 +46,28 @@ public class abmcShow extends HttpServlet {
 		Show s=new Show();
 		MovieRoom mr= new MovieRoom();
 		ShowController ctrlShow=new ShowController();
-		try {
+		//try {
 			switch((String)request.getParameter("action")) {
 				case "new":
-					m.setIdMovie(Integer.parseInt((String)request.getParameter("idm")));
+					m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
 					s.setMovie(m);
-					mr.setRoomNumber(Integer.parseInt((String)request.getParameter("idm")));
+					mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
 					s.setMovieroom(mr);
-					s.setDt(null);
+					s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 					ctrlShow.addOne(s);
 				break;
 				case "delete":
-					//Que viaja como parametro? deberia viajar el indice, la sala y la fecha y hora
+					System.out.println("Detalles de la funcion:");
+					System.out.println("Pelicula: "+Integer.parseInt((String)request.getParameter("movie")));
+					System.out.println("Sala: "+Integer.parseInt((String)request.getParameter("room")));
+					System.out.println("fecha y hora "+LocalDateTime.parse((String)request.getParameter("dt")));
 				break;
 			default:
 				break;
 			}
-		}catch(Exception e){
-			e.getMessage();}
+		/*}catch(Exception e){
+			e.getMessage();}*/
+		request.getRequestDispatcher("/views/pages/abmcShow.jsp").forward(request, response);
 	}
 
 }

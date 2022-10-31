@@ -28,7 +28,7 @@ public class DataUbication {
 																	 + "	and s.date_time = ubi.show_date_time"
 																	 + " inner join movie m"
 																	 + "	on m.idMovie = s.idMovie"
-																	 + " where idUser = ?");
+																	 + " where idUser = ? and t.retirementDate is null");
 			stmt.setInt(1, user.getIdUser());
 			
 			rs=stmt.executeQuery();
