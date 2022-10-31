@@ -39,7 +39,7 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	<main>
 		<div class="input-group">
-    	<form name="showForm" method="get" action="/TPI-Cine/src/servlet/abmcShow?action=new">
+    	<form name="showForm" method="post" action="/TPI-Cine/src/servlet/abmcShow?action=new">
         	<p><b>Película:</b>
         	<select name="movie">
         	<%for(Movie m: movies) {%>

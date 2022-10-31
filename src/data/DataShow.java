@@ -26,7 +26,7 @@ public class DataShow {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM show WHERE idMovie=? and roomNumber=? and date_time=?");
 			stmt.setInt(1, s.getMovie().getIdMovie());
 			stmt.setInt(2, s.getMovieroom().getRoomNumber());
-			stmt.setObject(3, s.getDt());
+			stmt.setString(3, s.getDt().toString());
 			rs=stmt.executeQuery();
 			
 			mo.setIdMovie(rs.getInt("idMovie"));
@@ -52,8 +52,11 @@ public class DataShow {
 	public void delete(Show s) {
 		PreparedStatement stmt=null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM Show WHERE idMovie=? ");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM cine_tpjava.show "
+					+ "WHERE idMovie=? and roomNumber=? and date_time=?;");
 			stmt.setInt(1, s.getMovie().getIdMovie());
+			stmt.setInt(2, s.getMovieroom().getRoomNumber());
+			stmt.setObject(3, s.getDt());
 			stmt.executeUpdate();
 			} catch (SQLException e) {
 			e.printStackTrace();
@@ -72,7 +75,7 @@ public class DataShow {
 		ResultSet keyResultSet = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO movie(idMovie,roomNumber,date_time) values (?,?,?)"
+			"INSERT INTO cine_tpjava.show(idMovie,roomNumber,date_time) values (?,?,?)"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, s.getMovie().getIdMovie());
 			stmt.setInt(2, s.getMovieroom().getRoomNumber());
@@ -298,10 +301,10 @@ public LinkedList<Show> getShowsbyFecha(Show s) {
 		
 		stmt=DbConnector.getInstancia().getConn().prepareStatement(
 				"select * from\n" + 
-				"cine_tpjava.show\n" + 
-				"where CAST(s.date_time AS DATE)=?;"
+				"cine_tpjava.show s\n" + 
+				"where DATE(s.date_time)=?;"
 		);
-		stmt.setObject(1, s.getDt());
+		stmt.setObject(1, s.getDt().toString());
 		rs=stmt.executeQuery();
 		
 		if (rs != null) {

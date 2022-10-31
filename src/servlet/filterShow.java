@@ -45,8 +45,9 @@ public class filterShow extends HttpServlet {
 		Show s= new Show();
 		ShowController ctrlShow = new ShowController();
 		Movie m= new Movie();
+		System.out.println((String)request.getParameter("dt"));
 		m.setTitle((String)request.getParameter("title"));
-		String date=(String)request.getParameter("dt");
+		String date=(String)request.getParameter("dt")+"T00:00";
 		s.setDt(LocalDateTime.parse(date));
        	LinkedList<Show>shows=new LinkedList<Show>();
        	

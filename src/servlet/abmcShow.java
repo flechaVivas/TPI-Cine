@@ -57,10 +57,12 @@ public class abmcShow extends HttpServlet {
 					ctrlShow.addOne(s);
 				break;
 				case "delete":
-					System.out.println("Detalles de la funcion:");
-					System.out.println("Pelicula: "+Integer.parseInt((String)request.getParameter("movie")));
-					System.out.println("Sala: "+Integer.parseInt((String)request.getParameter("room")));
-					System.out.println("fecha y hora "+LocalDateTime.parse((String)request.getParameter("dt")));
+					m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
+					s.setMovie(m);
+					mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
+					s.setMovieroom(mr);
+					s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
+					ctrlShow.deleteOne(s);
 				break;
 			default:
 				break;
