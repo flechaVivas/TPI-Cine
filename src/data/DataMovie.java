@@ -121,7 +121,7 @@ public class DataMovie {
 	PreparedStatement stmt= null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
-			prepareStatement("update movie set title=?, image=?, synopsis=? releaseDate=?, cast=?, director=?, "
+			prepareStatement("update movie set title=?, image=?, synopsis=?, releaseDate=?, cast=?, director=?, "
 			+ "duration=?, idRestriction=?, idGenre=?, retirementDate=?   where idMovie=?");
 			stmt.setString(1,m.getTitle());
 			stmt.setString(2,m.getImage());
