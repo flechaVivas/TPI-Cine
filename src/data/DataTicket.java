@@ -189,14 +189,50 @@ public class DataTicket {
 		}
 		
 	} // delete
+
+	public Ticket getLast() {
+		Ticket t = null;
+		User u = null;
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+	    try {
 	
+	        stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ticket ORDER BY idTicket DESC LIMIT 1");
+	        rs=stmt.executeQuery();
 	
+	        if (rs != null && rs.next()) {
+	            t = new Ticket();
+	            u = new User();
 	
+	            t.setIdTicket(rs.getInt("idTicket"));
+	            u.setIdUser(rs.getInt("idUser"));
+	            t.setUser(u);
+	            t.setOperationCode(rs.getString("operationCode"));
+	            t.setDateTime(rs.getObject("dateTime", LocalDateTime.class));
+	            t.setPrice(rs.getBigDecimal("price"));
+	            t.setRetirementDate(rs.getObject("retirementDate", LocalDateTime.class));
 	
+	        }
 	
-	
-	
-	
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if(rs!=null) {rs.close();}
+	            if(stmt!=null) {stmt.close();}
+	            DbConnector.getInstancia().releaseConn();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return t;
+
+	} // getLast
+
+	 
+		
 	
 	
 	

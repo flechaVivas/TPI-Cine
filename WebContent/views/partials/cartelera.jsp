@@ -9,7 +9,7 @@
 
 <%
 	MovieController ctrlMovie = new MovieController();
-	LinkedList<Movie> movies = ctrlMovie.getAll();
+	LinkedList<Movie> movies = ctrlMovie.getBillboard();
 	
 	User u = (User)session.getAttribute("usuario");
 

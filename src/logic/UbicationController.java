@@ -30,8 +30,8 @@ public class UbicationController {
 		du.update(u);
 	}
 	
-	public Ubication createUbication(Ubication u) {
-		return du.createUbication(u);
+	public void createUbication(Ubication u) {
+		du.createUbication(u);
 	}
 	
 	public LinkedList<Ubication> getByShow(Show s) {

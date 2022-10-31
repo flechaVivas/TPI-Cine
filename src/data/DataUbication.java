@@ -168,16 +168,17 @@ public class DataUbication {
 		}		
 	}
 	
-	public Ubication createUbication(Ubication u) {
+	public void createUbication(Ubication u) {
 		PreparedStatement stmt = null;
 		try{
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(roomNumber, idMovie, show_date_time, idTicket, row, col) values(?,?,?,?,?,?)");
-			stmt.setInt(1, u.getShow().getMovieroom().getRoomNumber());
-			stmt.setInt(2, u.getShow().getMovie().getIdMovie());
-			stmt.setObject(3, u.getShow().getDt());
-			stmt.setInt(4, u.getTicket().getIdTicket());
-			stmt.setInt(5, u.getRow());
-			stmt.setInt(6, u.getCol());
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(row, col, roomNumber, idMovie, show_date_time, idTicket) values(?,?,?,?,?,?)");
+			stmt.setInt(1, u.getRow());
+			stmt.setInt(2, u.getCol());
+			stmt.setInt(3, u.getShow().getMovieroom().getRoomNumber());
+			stmt.setInt(4, u.getShow().getMovie().getIdMovie());
+			stmt.setObject(5, u.getShow().getDt());
+			stmt.setInt(6, u.getTicket().getIdTicket());
+			
 		}catch (SQLException e){
 			e.printStackTrace();
 		}finally {
@@ -188,7 +189,6 @@ public class DataUbication {
 				e.printStackTrace();
 			}
 		}
-		return u;
 	}
 
 	public LinkedList<Ubication> getByShow(Show s) {

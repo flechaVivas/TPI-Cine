@@ -67,24 +67,26 @@ public class ABMCTicket extends HttpServlet {
 				for (Ubication ubi : ubicElegidas) {
 					
 					Ticket t = new Ticket();
-//					t.setOperationCode(ctrlTicket.getLastTicket().getOperationCode());
+					
+					Integer op = Integer.parseInt(ctrlTicket.getLastTicket().getOperationCode());
+					op = op + 1;
+					t.setOperationCode(op.toString());
 					t.setDateTime(LocalDateTime.now());
 					t.setPrice(s.getMovieroom().getRt().getPrice());
 					t.setUser(u);
+					ctrlTicket.add(t);
 					
-//					ctrlTicket.add(t);
-
-					
-//					ubi.setRow(ubicElegidas.get(i).getRow());
-//					ubi.setCol(ubicElegidas.get(i).getCol());
 					ubi.setShow(s);
 					ubi.setTicket(t);
+					ctrlUbi.createUbication(ubi);
 					
-//					ctrlUbi.createUbication(ubi);
 					
-					System.out.println(ubi.getRow()+" "+ubi.getCol()+" "+ubi.getShow()+" "+ubi.getTicket());
-					System.out.println(t.getDateTime()+" "+t.getPrice()+t.getUser());
+					
+//					System.out.println(ubi.getRow()+" "+ubi.getCol()+" "+ubi.getShow()+" "+ubi.getTicket());
+//					System.out.println(t.getOperationCode()+" "+t.getDateTime()+" "+t.getPrice()+t.getUser());
 				}
+				
+				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=informarExito");
 				
 				break;
 

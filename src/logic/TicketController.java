@@ -34,5 +34,9 @@ public class TicketController {
 		dt.delete(t);
 	}
 	
+	public Ticket getLastTicket() {
+		return dt.getLast();
+	}
+	
 	
 }
