@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Movie;
+import entities.MovieRoom;
 import entities.Show;
 import logic.ShowController;
 
@@ -38,11 +40,19 @@ public class abmcShow extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Movie m= new Movie();
 		Show s=new Show();
+		MovieRoom mr= new MovieRoom();
 		ShowController ctrlShow=new ShowController();
 		try {
 			switch((String)request.getParameter("action")) {
 				case "new":
+					m.setIdMovie(Integer.parseInt((String)request.getParameter("idm")));
+					s.setMovie(m);
+					mr.setRoomNumber(Integer.parseInt((String)request.getParameter("idm")));
+					s.setMovieroom(mr);
+					s.setDt(null);
+					ctrlShow.addOne(s);
 				break;
 				case "delete":
 					//Que viaja como parametro? deberia viajar el indice, la sala y la fecha y hora

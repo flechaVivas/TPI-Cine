@@ -54,7 +54,7 @@ public class abmcMovie extends HttpServlet {
 				case "new":
 					m.setTitle((String)request.getParameter("title"));
 					m.setImage((String)request.getParameter("image"));
-					m.setSynopsis(getServletInfo()); //Agregar en new y edit
+					m.setSynopsis((String)request.getParameter("synopsis"));
 					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
 					m.setCast((String)request.getParameter("cast"));
 					m.setDirector((String)request.getParameter("director"));

@@ -238,7 +238,7 @@ public class DataShow {
 		return s;
 		
 	}
-public LinkedList<Show> getShowsbyMovie(Show s) {
+public LinkedList<Show> getShowsbyMovie(Movie m) {
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -248,24 +248,24 @@ public LinkedList<Show> getShowsbyMovie(Show s) {
 			
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"select * from\n" + 
-					"cine_tpjava.show\n" + 
+					"cine_tpjava.show s\n" + 
 					"where s.idMovie=?;"
 			);
-			stmt.setInt(1, s.getMovie().getIdMovie());
+			stmt.setInt(1, m.getIdMovie());
 			rs=stmt.executeQuery();
 			
 			if (rs != null) {
 				while (rs.next()) {
 					MovieRoom mr=new MovieRoom();
-					Movie m=new Movie();
+					Movie mo=new Movie();
 					Show sw = new Show();
 					
 					
 					sw.setDt(rs.getObject("date_time",LocalDateTime.class));
 					mr.setRoomNumber(rs.getInt("roomNumber"));
 					sw.setMovieroom(mr);
-					m.setIdMovie(rs.getInt("idMovie"));
-					sw.setMovie(m);
+					mo.setIdMovie(rs.getInt("idMovie"));
+					sw.setMovie(mo);
 					shows.add(sw);
 				}
 			}
@@ -335,7 +335,7 @@ public LinkedList<Show> getShowsbyFecha(Show s) {
 	return shows;
 	}
 
-public LinkedList<Show> getShowsbyFechaMovie(Show s) {
+public LinkedList<Show> getShowsbyFechaMovie(Show s, Movie m) {
 	
 	PreparedStatement stmt = null;
 	ResultSet rs = null;
@@ -350,21 +350,21 @@ public LinkedList<Show> getShowsbyFechaMovie(Show s) {
 				"and idMovie=?;"
 		);
 		stmt.setObject(1, s.getDt());
-		stmt.setInt(2, s.getMovie().getIdMovie());
+		stmt.setInt(2, m.getIdMovie());
 		rs=stmt.executeQuery();
 		
 		if (rs != null) {
 			while (rs.next()) {
 				MovieRoom mr=new MovieRoom();
-				Movie m=new Movie();
+				Movie mo=new Movie();
 				Show sw = new Show();
 				
 				
 				sw.setDt(rs.getObject("date_time",LocalDateTime.class));
 				mr.setRoomNumber(rs.getInt("roomNumber"));
 				sw.setMovieroom(mr);
-				m.setIdMovie(rs.getInt("idMovie"));
-				sw.setMovie(m);
+				mo.setIdMovie(rs.getInt("idMovie"));
+				sw.setMovie(mo);
 				shows.add(sw);
 			}
 		}

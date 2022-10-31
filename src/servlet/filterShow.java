@@ -50,25 +50,31 @@ public class filterShow extends HttpServlet {
 		Movie m= new Movie();
 		m.setTitle((String)request.getParameter("title"));
 		m=ctrlMovie.getbyTitle(m);
-		s.setMovie(m);
-		s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));  	
+		//s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));  	Ver problema acá
+		System.out.println("id de la peli: "+m.getIdMovie());
+       	LinkedList<Show>shows=new LinkedList<Show>();
        	
-			if((String)request.getParameter("title")!="") {
-				if((String)request.getParameter("dt")!="") {
-						LinkedList<Show>sw=ctrlShow.getByTityFech(s);
-				}else{
-						//titulo
-				}
-				
+		if((String)request.getParameter("title")!="") {
+			if((String)request.getParameter("dt")!="") {
+					//Filtro por fecha y titulo
+					shows=ctrlShow.getByTityFech(s,m);					
 			}else{
-				if((String)request.getParameter("dt")!=""){
-						//fecha
-				}else{
-						LinkedList<Show> shows=ctrlShow.getAll();
-						request.getSession(false).setAttribute("shows",shows);
-				}
+					//Filtro por titulo
+					shows=ctrlShow.getByTit(m);
 			}
 				
+		}else{
+			if((String)request.getParameter("dt")!=""){
+					//Filtro por fecha
+					shows=ctrlShow.getByFech(s);
+			}else{
+					//No filtro"
+					shows=ctrlShow.getAll();
+			}
+		}
+		System.out.println("Titulo: "+(String)request.getParameter("title"));
+		System.out.println("fecha: "+(String)request.getParameter("dt"));
+		request.getSession(false).setAttribute("shows",shows);
 		response.sendRedirect("/TPI-Cine/views/pages/abmcShowFiltrado.jsp");		
 	}
 }

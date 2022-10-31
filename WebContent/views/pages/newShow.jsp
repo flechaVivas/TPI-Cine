@@ -14,7 +14,7 @@ ShowController ctrlShow = new ShowController();
 LinkedList<Show> shows = ctrlShow.getAll();
 
 MovieController ctrlMovie = new MovieController();
-LinkedList<Movie> movies = ctrlMovie.getAll();
+LinkedList<Movie> movies = ctrlMovie.getBillboard();
 
 MovieRoomController ctrlMR = new MovieRoomController();
 LinkedList<MovieRoom> movierooms = ctrlMR.list();

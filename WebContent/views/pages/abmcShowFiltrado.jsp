@@ -30,7 +30,7 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
 MovieController ctrlMovie = new MovieController();
 LinkedList<Movie> movies = ctrlMovie.getAll();
 ShowController ctrlShow = new ShowController();
-LinkedList<Show> shows = ctrlShow.getAll();
+LinkedList<Show> shows = (LinkedList<Show>)request.getSession(false).getAttribute("shows");;
 %>
 </head>
 <body>

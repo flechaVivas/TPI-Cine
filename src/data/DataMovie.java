@@ -766,7 +766,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where retirementDate is not null");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where retirementDate is null");
 			rs=stmt.executeQuery();
 			
 			while(rs.next()) {

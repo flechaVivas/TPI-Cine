@@ -48,111 +48,46 @@ public class filterMovie extends HttpServlet {
        	Restriction r = new Restriction();
        	r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
        	MovieController ctrlMovie = new MovieController();
-       	System.out.println("Restriccion: "+r.getIdRestriction());
-       	System.out.println("Genero: "+g.getIdGenre() );
-       	System.out.println("Titulo: "+m.getTitle());
-       /*	if((String)request.getParameter("restriction")!="0" && 
-       			(String)request.getParameter("genre")!="0" && 
-       			(String)request.getParameter("title")!=null) {
-       		LinkedList<Movie> movies=ctrlMovie.getByGRT(g, r, m);
-			request.getSession(false).setAttribute("movies",movies);
-			response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");
-       	}
-       	if((String)request.getParameter("restriction")!="0" && 
-       			(String)request.getParameter("genre")!="0" && 
-       			(String)request.getParameter("title")==null) {
-       		LinkedList<Movie> movies=ctrlMovie.getByGR(g, r);
-			request.getSession(false).setAttribute("movies",movies);
-			response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");
-       	}
-       	if((String)request.getParameter("restriction")!="0" && 
-       			(String)request.getParameter("genre")=="0" && 
-       			(String)request.getParameter("title")==null) {
-       		LinkedList<Movie> movies=ctrlMovie.getByRestri(r);
-			request.getSession(false).setAttribute("movies",movies);
-			response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");}
-       	
-       	if((String)request.getParameter("restriction")=="0" && 
-       			(String)request.getParameter("genre")=="0" && 
-       			(String)request.getParameter("title")==null) {
-       		LinkedList<Movie> movies=ctrlMovie.getAll();
-			request.getSession(false).setAttribute("movies",movies);
-			response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");}
-       	
-       	if((String)request.getParameter("restriction")!="0" && 
-       			(String)request.getParameter("genre")=="0" && 
-       			(String)request.getParameter("title")!=null) {
-       		LinkedList<Movie> movies=ctrlMovie.getByRT(r, m);
-			request.getSession(false).setAttribute("movies",movies);
-			response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");}*/
-       	
-       	
-       	
-       	
+       	LinkedList<Movie> movies=new LinkedList<Movie>();
        	
       	if(Integer.parseInt((String)request.getParameter("restriction"))!=0) {
 				if(Integer.parseInt((String)request.getParameter("genre"))!=0) {
 					if((String)request.getParameter("title")!="") {
-						
-								 System.out.println("Todos los filtros");
-						LinkedList<Movie> movies=ctrlMovie.getByGRT(g, r, m);
-						request.getSession(false).setAttribute("movies",movies);
-						response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");
+								//Todos los filtros
+						movies=ctrlMovie.getByGRT(g, r, m);
+
 					}else{
-						
-								System.out.println("Genero y restriccion");
-						LinkedList<Movie> movies=ctrlMovie.getByGR(g, r);
-						request.getSession(false).setAttribute("movies", movies);
-						response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");}
-				}else{
-					
-								System.out.println("Restriccion y titulo");		
+								//"Genero y restriccion"
+						movies=ctrlMovie.getByGR(g, r);}
+				}else{					
+								//Restriccion y titulo"		
 					if((String)request.getParameter("title")!=""){
-						LinkedList<Movie> movies=ctrlMovie.getByRT(r, m);
-						request.getSession(false).setAttribute("movies",movies);
-						response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");
+						movies=ctrlMovie.getByRT(r, m);						
 					}else{
-								System.out.println("Restriccion");
-						LinkedList<Movie> movies=ctrlMovie.getByRestri(r);
-						request.getSession(false).setAttribute("movies",movies);
-						response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");
+								//Restriccion"
+						movies=ctrlMovie.getByRestri(r);						
 					}
 				}
 		}else {
 				if(Integer.parseInt((String)request.getParameter("genre"))!=0) {
-					if((String)request.getParameter("title")!="") {
-						
-								System.out.println("//Genero y titulo");
-						LinkedList<Movie> movies = ctrlMovie.getByGT(g, m);
-						request.getSession(false).setAttribute("movies",movies);
-						response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");
+					if((String)request.getParameter("title")!="") {						
+								//Genero y titulo
+						movies = ctrlMovie.getByGT(g, m);						
 					}else{
-								System.out.println("//Genero");
-						LinkedList<Movie> movies = ctrlMovie.getByGenre(g);
-						request.getSession(false).setAttribute("movies",movies);
-						response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");
-					}
-				
+								//Genero"
+						movies = ctrlMovie.getByGenre(g);						
+					}				
 				}else{
-					if((String)request.getParameter("title")!=""){
-								System.out.println("//titulo");
-						LinkedList<Movie> movies = ctrlMovie.getbySimilTitle(m);
-						request.getSession(false).setAttribute("movies",movies);
-						response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");
+					if((String)request.getParameter("title")!=""){						
+								//Título
+						movies = ctrlMovie.getbySimilTitle(m);						
 					}else{
-								System.out.println("//Sin filtro");
-						LinkedList<Movie> movies = ctrlMovie.getAll();
-						request.getSession(false).setAttribute("movies",movies);
-						response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");
+								//Sin filtro
+						movies = ctrlMovie.getAll();						
 					}
-				}
-				
+				}				
 			}
-	/*System.out.println((String)request.getParameter("title")+(String)request.getParameter("restriction")+(String)request.getParameter("genre"));
-	response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");	*/
-	
+      	request.getSession(false).setAttribute("movies",movies);
+      	response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");	
 	}
 }
-
-
-
