@@ -39,9 +39,9 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	<main>
 		<div class="input-group">
-    	<form name="showForm" method="get" action="">
+    	<form name="showForm" method="get" action="/TPI-Cine/src/servlet/abmcShow?action=new">
         	<p><b>Película:</b>
-        	<select name="pelicula">
+        	<select name="movie">
         	<%for(Movie m: movies) {%>
                 <option value="<%=m.getIdMovie()%>"><%=m.getTitle() %></option>
             <%} %>
@@ -49,13 +49,14 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
         	<b>Dia y horario:</b>
         	<input type="datetime-local" name="dt" placeholder="fecha y hora">
         	<b>Sala:</b> 
-        	<select name="sala">
+        	<select name="room">
             <%for(MovieRoom mr: movierooms) {%>
                 <option value="<%=mr.getRoomNumber()%>"><%=mr.getRoomNumber() %></option>
             <%} %>
         	</select>                  
-        	<input type="submit" id="boton" value="Crear funcion"></p>
+        	<input type="submit" value="Crear funcion"></p>
     	</form>
+    	</div>
 	</main>
 </body>
 </html>

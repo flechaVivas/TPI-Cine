@@ -247,11 +247,13 @@ public LinkedList<Show> getShowsbyMovie(Movie m) {
 		try {
 			
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select * from\n" + 
-					"cine_tpjava.show s\n" + 
-					"where s.idMovie=?;"
+					"select s.idMovie, s.roomNumber, s.date_time \n"
+					+ "from cine_tpjava.show s\n"
+					+ "inner join movie m\n"
+					+ "on m.idMovie=s.idMovie\n"
+					+ "where m.title like ?;"
 			);
-			stmt.setInt(1, m.getIdMovie());
+			stmt.setString(1, "%"+m.getTitle()+"%");
 			rs=stmt.executeQuery();
 			
 			if (rs != null) {
@@ -344,13 +346,14 @@ public LinkedList<Show> getShowsbyFechaMovie(Show s, Movie m) {
 	try {
 		
 		stmt=DbConnector.getInstancia().getConn().prepareStatement(
-				"select * from\n " + 
-				"cine_tpjava.show\n " + 
-				"where CAST(s.date_time AS DATE)=? "+
-				"and idMovie=?;"
+				"select s.idMovie, s.roomNumber, s.date_time \n"
+				+ "from cine_tpjava.show s\n"
+				+ "inner join movie m\n"
+				+ "on m.idMovie=s.idMovie \n"
+				+ "where m.title like and CAST(s.date_time as DATE)=?;"
 		);
-		stmt.setObject(1, s.getDt());
-		stmt.setInt(2, m.getIdMovie());
+		stmt.setString(1, "%"+m.getTitle()+"%");
+		stmt.setObject(2, s.getDt());
 		rs=stmt.executeQuery();
 		
 		if (rs != null) {
