@@ -17,6 +17,7 @@
 </head>
 <%
 	String action = (String)request.getAttribute("action");
+	User userSession = (User)session.getAttribute("usuario");
 %>
 <body>
 	<header>
@@ -77,8 +78,9 @@
 		<h1>Mis Tickts</h1>
 		<div class="MisEntradas">
 			<div class="containerEntradas">
-				<%UbicationController ctrlUbication = new UbicationController();
-				 LinkedList<Ubication> UbicationsUser = ctrlUbication.getTicketswhithUser(u.getIdUser());
+				<%
+				UbicationController ctrlUbication = new UbicationController();
+				LinkedList<Ubication> UbicationsUser = ctrlUbication.getTicketswhithUser(userSession);
 				if(UbicationsUser.size() > 0){ %>
 					<%for(Ubication ubi: UbicationsUser){ %>
 						<div class="ticket">
@@ -99,8 +101,8 @@
 								<label class="roomNumber">Sala: <%=mr.getRoomNumber()%></label>
 								<label class="price">Precio: <%=t.getPrice()%></label>
 							</div>
-							<form>
-								<input type="button" value:"<%=t.getIdTicket() %>">Cancelar Entrada</input>
+							<form method="POST" action="/TPI-Cine/src/servlet/DeleteTicket" >
+								<input type="submit" value="Cancelar Entrada" name="idTicket">
 							</form>
 						</div>
 					<%}
@@ -116,8 +118,6 @@
 				<label class=""><a style="color: #03045eff " href="/TPI-Cine/views/pages/login.jsp" onclick="limpiarSesion()"><b>Iniciar Sesion</b></a></label>
 			</div>
 		<%} %>
-		
-			
 			</div>
 		</div>
 		

@@ -11,25 +11,26 @@ import entities.*;
 
 public class DataUbication {
 	
-public LinkedList<Ubication> getTicketswhithUser(int idUser){
+	public LinkedList<Ubication> getTicketswhithUser(User user){
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Ubication> ubications = new LinkedList<Ubication>();
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement(" SELECT t.idTicket,t.operationCode, t.dateTime fechaCompra, t.price, ubi.row, ubi.col, s.roomNumber, s.date_time, m.title. m.image "
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(" SELECT t.idTicket, t.operationCode, cine_tpjava.t.dateTime, t.price, ubi.row, ubi.col, s.roomNumber, s.date_time, m.title, m.image "
 																	 + " FROM ticket t "
 																	 + " inner join ubication ubi"
 																	 + "	on ubi.idTicket = t.idTicket"
-																	 + " inner join show s"
+																	 + " inner join cine_tpjava.show s"
 																	 + "	on  s.idMovie = ubi.idMovie"
 																	 + "	and s.roomNumber = ubi.roomNumber"
 																	 + "	and s.date_time = ubi.show_date_time"
 																	 + " inner join movie m"
 																	 + "	on m.idMovie = s.idMovie"
 																	 + " where idUser = ?");
-			stmt.setInt(1, idUser);
+			stmt.setInt(1, user.getIdUser());
+			
 			rs=stmt.executeQuery();
 			if (rs != null) {
 				while (rs.next()) {
