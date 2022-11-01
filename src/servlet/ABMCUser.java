@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import entities.Role;
 import entities.User;
+import logic.RoleController;
 import logic.UserController;
 
 /**
@@ -44,6 +45,7 @@ public class ABMCUser extends HttpServlet {
 		
 		UserController ctrlUser = new UserController();
 		User u = new User();
+		RoleController ctrlRole = new RoleController();
 		Role r = new Role();
 	
 		try {
@@ -59,6 +61,7 @@ public class ABMCUser extends HttpServlet {
 				u.setAdress(request.getParameter("adress"));
 				u.setPhoneNumber(request.getParameter("phoneNumber"));
 				r.setIdRole(Integer.parseInt((String)request.getParameter("rol")));
+				r = ctrlRole.getOne(r);
 				u.setRole(r);
 				u.setPassword(request.getParameter("password"));
 				ctrlUser.add(u);
