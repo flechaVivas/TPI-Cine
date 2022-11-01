@@ -60,24 +60,26 @@ public class ABMCUser extends HttpServlet {
 				u.setPhoneNumber(request.getParameter("phoneNumber"));
 				r.setIdRole(Integer.parseInt((String)request.getParameter("rol")));
 				u.setRole(r);
-				u.setPassword(request.getParameter("passwd"));
+				u.setPassword(request.getParameter("password"));
 				ctrlUser.add(u);
+				
+				
 				
 				break;
 			
 			case "update":
 				
+				u.setIdUser(Integer.parseInt((String)request.getParameter("idUser")));
 				u.setName(request.getParameter("name"));
 				u.setSurname(request.getParameter("surname"));
-				u.setEmail(request.getParameter("email"));
 				u.setBirthDate(LocalDate.parse(request.getParameter("birthDate")));
+				u.setEmail(request.getParameter("email"));
 				u.setAdress(request.getParameter("adress"));
 				u.setPhoneNumber(request.getParameter("phoneNumber"));
-				r.setIdRole(Integer.parseInt((String)request.getParameter("rol")));
-				u.setRole(r);
 				u.setPassword(request.getParameter("password"));
 				
 				ctrlUser.update(u);
+				
 				
 				break;
 				
@@ -85,6 +87,8 @@ public class ABMCUser extends HttpServlet {
 				
 				u.setIdUser(Integer.parseInt((String)request.getParameter("idUser")));
 				ctrlUser.delete(u);
+				
+				
 				
 				break;
 
@@ -94,10 +98,14 @@ public class ABMCUser extends HttpServlet {
 			
 			request.getRequestDispatcher("/views/pages/ui-user/listUsers.jsp").forward(request, response);
 			
-		} catch (Exception e) {
+		}finally {
 			
-			
-		}
+		} 
+//		catch (Exception e) {
+//			
+//			
+//			
+//		}
 	
 	
 	}
