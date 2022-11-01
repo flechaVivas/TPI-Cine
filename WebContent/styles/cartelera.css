@@ -3,6 +3,10 @@
 	outline: none !important;
 }
 
+h1 {
+	color: #fff;
+}
+
 .category-thumb{
 	width: 100%;
 	display: flex;

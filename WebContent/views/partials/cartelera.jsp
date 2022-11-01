@@ -19,10 +19,10 @@
         <section class="content-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 p-5">
                         <div class="section-title">
-                            <h1>PELICULAS</h1>
-                            <h4>en CARTELERA</h4>
+                            <h1 style="color:white">PELICULAS</h1>
+                            <h4 style="color:white" >en CARTELERA</h4>
                         </div>
                     </div>
                	</div>
@@ -40,7 +40,7 @@
 							r.setIdRestriction(m.getRestriction().getIdRestriction());
 							m.setRestriction(ctrlRest.getOne(r)); 
 							%>
-							<div class="card text-center m-4" style="width:25rem; background-color: #fff; color: #2a2b38; border-radius: 5%">
+							<div class="card text-center m-4" style="width:25rem; background-color: #023E8A; color: #fff; border-radius: 5%">
 								<a class="card-img-top" href="/TPI-Cine/views/pages/movieDescription.jsp?idMovie=<%=m.getIdMovie()%>">
 									<img style="border-radius: 7%" src="<%=m.getImage()%>" alt="<%=m.getTitle()%>">
 								</a>
