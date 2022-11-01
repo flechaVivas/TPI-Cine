@@ -57,31 +57,18 @@
 	                    		    <th>Telefono</th>
 	                    		    <th>Email</th>
 	                    		    <th>Contraseña</th>
-	                    		    <th>Rol</th>
 			                  	</tr>
 			                </thead>
 							<tbody>
 								<tr>
-			                		<td><input type="number" value="<%=ur.getIdUser()%>" name="idUser" readonly="" class="form-control"></td>
-			                    	<td><input type="text" value="<%=ur.getName()%>"name="nombre"  class="form-control" required></td>
-			                    	<td><input type="text" value="<%=ur.getSurname()%>"name="apellido"  class="form-control" required></td>
-			                    	<td><input type="date" value="<%=ur.getBirthDate()%>"name="nacimiento"  class="form-control" required></td>
-			                    	<td><input type="text" value="<%=ur.getAdress()%>"name="direccion" class="form-control" required></td>
-			                    	<td><input type="text" value="<%=ur.getPhoneNumber()%>"name="tel" class="form-control" required></td>
-			                    	<td><input type="text" value="<%=ur.getEmail()%>"name="email" class="form-control" required></td>
-			                    	<td><input type="password" value="<%=ur.getPassword()%>"name="passwd" class="form-control" required></td>
-			                    	<td>
-										<select class="form-control" name="rol" id="rol">
-											<% for (Role r : roles){  %>
-												<%if(r.getIdRole()==ur.getRole().getIdRole()){%>
-                                    				<option value="<%=r.getIdRole()%>" selected> <%=r.getDescription() %> </option>
-                                    			<%} else {%>
-                                    				<option value="<%=r.getIdRole()%>"> <%=r.getDescription() %> </option>
-                                    			<%}%>
-											<%} %>
-										</select>
-			                    	</td>
-			                    				
+			                		<td><input type="number"  name="idUser" value="<%=ur.getIdUser()%>" readonly="" class="form-control"></td>
+			                    	<td><input type="text" name="name"  	value="<%=ur.getName()%>" class="form-control" required></td>
+			                    	<td><input type="text" name="surname"  value="<%=ur.getSurname()%>"	class="form-control" required></td>
+									<td><input type="date" name="birthDate"  	value="<%=ur.getBirthDate()%>" class="form-control" required></td>
+			                    	<td><input type="text" name="adress" 	value="<%=ur.getAdress()%>"	class="form-control" required></td>
+									<td><input type="text" name="phoneNumber" value="<%=ur.getPhoneNumber()%>"	class="form-control" required></td>
+			                    	<td><input type="text" name="email" 	value="<%=ur.getEmail()%>"	class="form-control" required></td>
+			                    	<td><input type="password" name="password" value="<%=ur.getPassword()%>" class="form-control" required></td>
 			                    	<td>
 										<button class="btn btn-warning" type="submit">Confirmar</button>
 			               			</td>

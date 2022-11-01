@@ -54,13 +54,13 @@
 	                    		    <td>Rol</td>
 	                            </tr>
 	                            <tr>
-			                    	<td><input type="text" name="nombre"  class="form-control" required></td>
-			                    	<td><input type="text" name="apellido"  class="form-control" required></td>
-			                    	<td><input type="date" name="nacimiento"  class="form-control" required></td>
-			                    	<td><input type="text" name="direccion" class="form-control" required></td>
-			                    	<td><input type="text" name="tel" class="form-control" required></td>
+			                    	<td><input type="text" name="name"  class="form-control" required></td>
+			                    	<td><input type="text" name="surname"  class="form-control" required></td>
+			                    	<td><input type="date" name="birthDate"  class="form-control" required></td>
+			                    	<td><input type="text" name="adress" class="form-control" required></td>
+			                    	<td><input type="text" name="phoneNumber" class="form-control" required></td>
 			                    	<td><input type="text" name="email" class="form-control" required></td>
-			                    	<td><input type="password" name="passwd" class="form-control" required></td>
+			                    	<td><input type="password" name="password" class="form-control" required></td>
 			                    	<td>
 										<select class="form-control" name="rol" id="rol">
 											<% for (Role r : roles){  %>

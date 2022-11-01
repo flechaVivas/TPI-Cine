@@ -80,7 +80,7 @@
                     				<td><%=ur.getRole().getDescription()%></td>
                     				<td>
                     					<a href="/TPI-Cine/views/pages/ui-user/editUser.jsp?idUser=<%=ur.getIdUser()%>" class="btn">Editar</a><!-- editar -->
-                    					<a href="/TPI-Cine/src/servlet/ABMCRoomType?action=delete&idUser=<%=ur.getIdUser()%>" class="btn btn-danger">Eliminar</a><!-- borrar -->
+                    					<a href="/TPI-Cine/src/servlet/ABMCUser?action=delete&idUser=<%=ur.getIdUser()%>" class="btn btn-danger">Eliminar</a><!-- borrar -->
                     				</td>
                     			</tr>
                     		<% } %>
