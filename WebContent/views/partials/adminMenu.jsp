@@ -1,6 +1,11 @@
 <%@page import="entities.User"%>
 <% 
 	User u = (User)session.getAttribute("usuario");
+
+	if(u == null){
+		request.getRequestDispatcher("/views/pages/login.jsp").forward(request, response);
+	}
+
 %>
 
 <div class="container mt-4" style="min-height: 65vh;">
