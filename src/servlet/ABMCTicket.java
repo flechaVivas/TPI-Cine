@@ -63,7 +63,6 @@ public class ABMCTicket extends HttpServlet {
 			
 			case "new":
 				
-				
 				for (Ubication ubi : ubicElegidas) {
 					
 					Ticket t = new Ticket();
@@ -80,10 +79,21 @@ public class ABMCTicket extends HttpServlet {
 					ubi.setTicket(t);
 					ctrlUbi.createUbication(ubi);
 					
-					System.out.println(ubi.getRow()+" "+ubi.getCol()+" "+ubi.getShow().getMovieroom()+" "+ubi.getShow().getMovie().getIdMovie()+" "+ubi.getShow().getDt()+""+ubi.getTicket().getIdTicket());
+//					System.out.println(ubi.getRow()+" "+ubi.getCol()+" "+ubi.getShow().getMovieroom()+" "+ubi.getShow().getMovie().getIdMovie()+" "+ubi.getShow().getDt()+""+ubi.getTicket().getIdTicket());
 				}
 				
 				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=informarExito");
+				
+				break;
+				
+			case "cancel":
+				
+				Ticket t = new Ticket();
+				t.setIdTicket(Integer.parseInt((String)request.getParameter("idTicket")));
+				ctrlTicket.cancelTicket(t);
+				
+				response.sendRedirect("/TPI-Cine/views/pages/MiCuenta.jsp");
+				
 				
 				break;
 
