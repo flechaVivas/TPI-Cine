@@ -5,6 +5,7 @@
 <%@page import="entities.MovieRoom" %>
 <%@page import="logic.MovieRoomController"%>
 <%@page import="logic.ShowController"%>
+<%@page import="java.time.LocalDateTime"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,10 +19,18 @@ LinkedList<Movie> movies = ctrlMovie.getBillboard();
 
 MovieRoomController ctrlMR = new MovieRoomController();
 LinkedList<MovieRoom> movierooms = ctrlMR.list();
+Movie mo=new Movie();
+MovieRoom mrm=new MovieRoom();
+Show s=new Show();
+mo.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+s.setMovie(mo);
+mrm.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
+s.setMovieroom(mrm);
+s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 %>
 <head>
 <meta charset="UTF-8">
-<title>Nueva funcion</title>
+<title>Modificar funcion</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 	<link rel="stylesheet" href="./styles/styles.css"> 
@@ -39,22 +48,28 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	<main>
 		<div class="input-group">
-    	<form name="showForm" method="post" action="/TPI-Cine/src/servlet/abmcShow?action=new">
+    	<form name="showForm" method="post" action="/TPI-Cine/src/servlet/abmcShow?action=update">
         	<p><b>Película:</b>
         	<select name="movie">
-        	<%for(Movie m: movies) {%>
-                <option value="<%=m.getIdMovie()%>"><%=m.getTitle() %></option>
-            <%} %>
+        	<%for(Movie m: movies) {
+        		if(m.getIdMovie()==s.getMovie().getIdMovie()){%>
+                <option value="<%=m.getIdMovie()%>" selected><%=m.getTitle() %></option>
+            <%}else{%>
+            	<option value="<%=m.getIdMovie()%>"><%=m.getTitle() %></option>
+            <%}} %>
         	</select>
         	<b>Dia y horario:</b>
-        	<input type="datetime-local" name="dt" placeholder="fecha y hora">
+        	<input type="datetime-local" name="dt" value="<%=s.getDt()%>">
         	<b>Sala:</b> 
         	<select name="room">
-            <%for(MovieRoom mr: movierooms) {%>
+            <%for(MovieRoom mr: movierooms) {
+            	if(mr.getRoomNumber()==s.getMovieroom().getRoomNumber()){%>
+                <option value="<%=mr.getRoomNumber()%>" selected><%=mr.getRoomNumber() %></option>
+                <%}else{%>
                 <option value="<%=mr.getRoomNumber()%>"><%=mr.getRoomNumber() %></option>
-            <%} %>
+            <%}} %>
         	</select>                  
-        	<input type="submit" value="Crear funcion"></p>
+        	<input type="submit" value="Modificar funcion"></p>
     	</form>
     	</div>
 	</main>
