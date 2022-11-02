@@ -356,7 +356,7 @@ public LinkedList<Show> getShowsbyFechaMovie(Show s, Movie m) {
 				+ "from cine_tpjava.show s\n"
 				+ "inner join movie m\n"
 				+ "on m.idMovie=s.idMovie \n"
-				+ "where m.title like and CAST(s.date_time as DATE)=?;"
+				+ "where m.title like ? and CAST(s.date_time as DATE)=?;"
 		);
 		stmt.setString(1, "%"+m.getTitle()+"%");
 		stmt.setObject(2, s.getDt());

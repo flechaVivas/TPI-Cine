@@ -45,33 +45,32 @@ public class filterShow extends HttpServlet {
 		Show s= new Show();
 		ShowController ctrlShow = new ShowController();
 		Movie m= new Movie();
-		System.out.println((String)request.getParameter("dt"));
+		
 		m.setTitle((String)request.getParameter("title"));
 		String date=(String)request.getParameter("dt");
+		String time="T00:00";
 		if(date!="") {
-			s.setDt(LocalDateTime.parse(date));}
+			s.setDt(LocalDateTime.parse(date+time));}
        	LinkedList<Show>shows=new LinkedList<Show>();
        	
 		if((String)request.getParameter("title")!="") {
 			if((String)request.getParameter("dt")!="") {
-					//Filtro por fecha y titulo
+					System.out.println("//Filtro por fecha y titulo");//Filtro por fecha y titulo
 					shows=ctrlShow.getByTityFech(s,m);					
 			}else{
-					//Filtro por titulo
+				System.out.println("//Filtro por titulo");//Filtro por titulo
 					shows=ctrlShow.getByTit(m);
 			}
 				
 		}else{
 			if((String)request.getParameter("dt")!=""){
-					//Filtro por fecha
+				System.out.println("//Filtro por fecha");//Filtro por fecha
 					shows=ctrlShow.getByFech(s);
 			}else{
-					//No filtro"
+				System.out.println("//No filtro");//No filtro
 					shows=ctrlShow.getAll();
 			}
 		}
-		System.out.println("Titulo: "+(String)request.getParameter("title"));
-		System.out.println("fecha: "+(String)request.getParameter("dt"));
 		request.getSession(false).setAttribute("shows",shows);
 		response.sendRedirect("/TPI-Cine/views/pages/abmcShowFiltrado.jsp");		
 	}
