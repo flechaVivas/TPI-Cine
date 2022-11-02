@@ -5,7 +5,7 @@
 	User u = (User)session.getAttribute("usuario");
 %>
 
-<nav class="navbar">
+<nav class="navbar" style="background-color: #000029;">
 	<div class="site-menu">
 		<ul>
 			<li>
