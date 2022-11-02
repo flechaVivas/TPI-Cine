@@ -1,13 +1,20 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import entities.Movie;
 import logic.MovieController;
@@ -16,11 +23,12 @@ import entities.Restriction;
 import logic.GenreController;
 import logic.RestrictionController;
 
-/**
- * Servlet implementation class abmcMovie
- */
+@MultipartConfig
 @WebServlet({ "/src/servlet/abmcMovie", "/src/servlet/abmcMOVIE", "/src/servlet/ABMCMovie", "/src/servlet/ABMCmovie" })
 public class abmcMovie extends HttpServlet {
+	private String pathFiles="D:\\Facultad\\Java\\Programas\\TPI-Cine\\WebContent\\assets\\img";
+	private File uploads = new File(pathFiles);
+	private String[] extens = {".png",".jpg",".jpeg"};		//Variables para manejo de imagen
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -53,7 +61,7 @@ public class abmcMovie extends HttpServlet {
 			switch((String)request.getParameter("action")) {
 				case "new":
 					m.setTitle((String)request.getParameter("title"));
-					m.setImage((String)request.getParameter("image"));
+					validarImagen(request,response,m);
 					m.setSynopsis((String)request.getParameter("synopsis"));
 					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
 					m.setCast((String)request.getParameter("cast"));
@@ -64,6 +72,8 @@ public class abmcMovie extends HttpServlet {
 					g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
 					m.setGenre(ctrlGen.getOne(g));
 					ctrlMovie.addOne(m);
+					System.out.println("Titulo: "+m.getTitle());
+					System.out.println("Ruta de imagen: "+m.getImage());
 				break;
 				
 				case "delete":
@@ -72,7 +82,7 @@ public class abmcMovie extends HttpServlet {
 				break;
 				case "update":
 					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-					m.setTitle((String)request.getParameter("title"));
+					m.setTitle((String)request.getParameter("title"));					
 					m.setImage((String)request.getParameter("image"));
 					m.setSynopsis((String)request.getParameter("synopsis")); 
 					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
@@ -96,6 +106,45 @@ public class abmcMovie extends HttpServlet {
 		/*}catch(Exception e){
 			e.getMessage();
 		}*/
+	}
+	private void validarImagen(HttpServletRequest request, HttpServletResponse response, Movie m) throws IOException{
+	try {
+		String photo="";
+		Part part=request.getPart("image");
+		if (part!=null) {
+		if(isExtension(part.getSubmittedFileName(), extens)) {
+			photo=saveFile(part,uploads);}//Asignamos la ruta absoluta a la variable photo	
+			}
+		m.setImage(photo);
+		} catch (Exception e) {
+		e.printStackTrace();
+		}		
+	}
+	
+	
+	private String saveFile(Part part, File pathUploads) {
+		String pathAbsolute="";
+		try {
+			Path path=Paths.get(part.getSubmittedFileName());
+			String fileName=path.getFileName().toString();		//nombre de archivo
+			InputStream input=part.getInputStream();			//archivo
+			
+			if(input!=null) {
+				File file=new File(pathUploads, fileName);
+				pathAbsolute=file.getAbsolutePath();
+				Files.copy(input, file.toPath());		//Se guarda el archivo en la carpeta de archivos
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pathAbsolute;		//Retorna la ruta Absoluta
+	}
+	
+	
+	private boolean isExtension(String fileName,String[] extensions) {	//Validacion formato de archivo
+		for (String et : extensions) {
+			if(fileName.toLowerCase().endsWith(et)) {return true;}
+		}return false;
 	}
 
 }

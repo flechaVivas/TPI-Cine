@@ -171,7 +171,7 @@ public class DataMovie {
 		ResultSet keyResultSet = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO movie(title,image,synopsis,releaseDate,cast,director,duration,idRestriction,idGenre) values (?,?,?,?,?,?,?,?)"
+			"INSERT INTO movie(title,image,synopsis,releaseDate,cast,director,duration,idRestriction,idGenre) values (?,?,?,?,?,?,?,?,?)"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1,m.getTitle());

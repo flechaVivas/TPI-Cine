@@ -40,37 +40,37 @@ m=ctrlMovie.getbyIdMovie(m);%>
                         <div>
                             <div class="divForm">
                                 <label class="labelForm">Título</label>
-                                <input class="inputForm" name="title" type="text" value="<%=m.getTitle()%>">
+                                <input class="inputForm" name="title" type="text" value="<%=m.getTitle()%>" required>
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Imagen</label>
-                                <input class="inputForm" name="image" type="text" value="<%=m.getImage()%>">
+                                <input class="inputForm" name="image" type="text" value="<%=m.getImage()%>" >
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Fecha estreno</label>
-                                <input class="inputForm" name="releaseDate" type="date" value="<%=m.getReleaseDate()%>">
+                                <input class="inputForm" name="releaseDate" type="date" value="<%=m.getReleaseDate()%>" required>
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Sinopsis:</label>
-                                <input class="inputForm" name="synopsis" type="text" value="<%=m.getSynopsis()%>">
+                                <input class="inputForm" name="synopsis" type="text" value="<%=m.getSynopsis()%>" required>
                             </div>
                         </div>
                         <div>
                             <div class="divForm">
                                 <label class="labelForm">Reparto</label>
-                                <input class="inputForm" name="cast" type="text" value="<%=m.getCast()%>">
+                                <input class="inputForm" name="cast" type="text" value="<%=m.getCast()%>" required>
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Director</label>
-                                <input class="inputForm" name="director" type="text" value="<%=m.getDirector()%>">
+                                <input class="inputForm" name="director" type="text" value="<%=m.getDirector()%>" required>
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Duracion en minutos</label>
-                                <input class="inputForm" name="duration" type="number" value="<%=m.getDuration()%>">
+                                <input class="inputForm" name="duration" type="number" value="<%=m.getDuration()%>" required>
                             </div>
                             <div class="divForm">                            
                                 <p>Restriccion de edad
-                                <select name="restriction">
+                                <select name="restriction" required>
                                 	<%for(Restriction r: restrictions) {
                                 	if(r.getIdRestriction()==m.getRestriction().getIdRestriction()){%>
                                     	<option value="<%=r.getIdRestriction()%>" selected> <%=r.getDescription() %> </option>
@@ -79,7 +79,7 @@ m=ctrlMovie.getbyIdMovie(m);%>
                                     	<%}
                                 	}%>
                                 </select></p>
-                                <p><select name="genre">
+                                <p><select name="genre" required>
                                 	<%for (Genre g: genres) {
                                 	if(g.getIdGenre()==m.getGenre().getIdGenre()){%>
                                     	<option value="<%=g.getIdGenre()%>" selected> <%=g.getDescription() %> </option>

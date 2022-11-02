@@ -50,7 +50,7 @@ s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 		<div class="input-group">
     	<form name="showForm" method="post" action="/TPI-Cine/src/servlet/abmcShow?action=update">
         	<p><b>Película:</b>
-        	<select name="movie">
+        	<select name="movie" required>
         	<%for(Movie m: movies) {
         		if(m.getIdMovie()==s.getMovie().getIdMovie()){%>
                 <option value="<%=m.getIdMovie()%>" selected><%=m.getTitle() %></option>
@@ -59,9 +59,9 @@ s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
             <%}} %>
         	</select>
         	<b>Dia y horario:</b>
-        	<input type="datetime-local" name="dt" value="<%=s.getDt()%>">
+        	<input type="datetime-local" name="dt" value="<%=s.getDt()%>" required>
         	<b>Sala:</b> 
-        	<select name="room">
+        	<select name="room" required>
             <%for(MovieRoom mr: movierooms) {
             	if(mr.getRoomNumber()==s.getMovieroom().getRoomNumber()){%>
                 <option value="<%=mr.getRoomNumber()%>" selected><%=mr.getRoomNumber() %></option>

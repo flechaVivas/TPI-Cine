@@ -41,15 +41,15 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
 		<div class="input-group">
     	<form name="showForm" method="post" action="/TPI-Cine/src/servlet/abmcShow?action=new">
         	<p><b>Película:</b>
-        	<select name="movie">
+        	<select name="movie" required>
         	<%for(Movie m: movies) {%>
                 <option value="<%=m.getIdMovie()%>"><%=m.getTitle() %></option>
             <%} %>
         	</select>
         	<b>Dia y horario:</b>
-        	<input type="datetime-local" name="dt" placeholder="fecha y hora">
+        	<input type="datetime-local" name="dt" placeholder="fecha y hora" required>
         	<b>Sala:</b> 
-        	<select name="room">
+        	<select name="room" required>
             <%for(MovieRoom mr: movierooms) {%>
                 <option value="<%=mr.getRoomNumber()%>"><%=mr.getRoomNumber() %></option>
             <%} %>

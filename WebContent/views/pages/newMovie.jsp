@@ -29,49 +29,49 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
          <main>
             <div class="Container">
                 <h2><i>Nueva pelicula</i></h2>
-                <form class="RegisterForm" method="POST" action="/TPI-Cine/src/servlet/abmcMovie?action=new">
+                <form class="RegisterForm" method="POST" action="/TPI-Cine/src/servlet/abmcMovie?action=new" enctype="multipart/form-data">
                     <div class="formContent">
                         <div>
                             <div class="divForm">
                                 <label class="labelForm">Título</label>
-                                <input class="inputForm" name="title" type="text" >
+                                <input class="inputForm" name="title" type="text" required>
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Imagen</label>
-                                <input class="inputForm" name="image" type="text" >
+                                <input class="inputForm" name="image" type="file">
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Fecha estreno</label>
-                                <input class="inputForm" name="releaseDate" type="date">
+                                <input class="inputForm" name="releaseDate" type="date" required>
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Sinopsis:</label>
-                                <input class="inputForm" name="synopsis" type="text">
+                                <input class="inputForm" name="synopsis" type="text" required>
                             </div>
                         </div>
                         <div>
                             <div class="divForm">
                                 <label class="labelForm">Reparto</label>
-                                <input class="inputForm" name="cast" type="text">
+                                <input class="inputForm" name="cast" type="text" required>
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Director</label>
-                                <input class="inputForm" name="director" type="text">
+                                <input class="inputForm" name="director" type="text" required>
                             </div>
                             <div class="divForm">
                                 <label class="labelForm">Duracion en minutos</label>
-                                <input class="inputForm" name="duration" type="number">
+                                <input class="inputForm" name="duration" type="number" required>
                             </div>                            
                             <div class="divForm">
                             
                                 <p>Restriccion de edad
-                                <select name="restriction">
+                                <select name="restriction" required>
                                 	<%for(Restriction r: restrictions) {%>
                                     <option value="<%=r.getIdRestriction()%>"><%=r.getDescription() %></option>
                                     <%} %>
                                 </select></p>
                                 <p>Genero
-                                <select name="genre">
+                                <select name="genre" required>
                                 	<%for (Genre g: genres) {%>
                                     <option value="<%=g.getIdGenre() %>"><%=g.getDescription() %></option>
                                     <%}%>
