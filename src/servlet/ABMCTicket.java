@@ -80,10 +80,7 @@ public class ABMCTicket extends HttpServlet {
 					ubi.setTicket(t);
 					ctrlUbi.createUbication(ubi);
 					
-					
-					
-//					System.out.println(ubi.getRow()+" "+ubi.getCol()+" "+ubi.getShow()+" "+ubi.getTicket());
-//					System.out.println(t.getOperationCode()+" "+t.getDateTime()+" "+t.getPrice()+t.getUser());
+					System.out.println(ubi.getRow()+" "+ubi.getCol()+" "+ubi.getShow().getMovieroom()+" "+ubi.getShow().getMovie().getIdMovie()+" "+ubi.getShow().getDt()+""+ubi.getTicket().getIdTicket());
 				}
 				
 				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=informarExito");
@@ -96,9 +93,10 @@ public class ABMCTicket extends HttpServlet {
 			
 			
 			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		}finally {} 
+//		catch (Exception e) {
+//			// TODO: handle exception
+//		}
 		
 		
 		

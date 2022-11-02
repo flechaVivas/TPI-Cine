@@ -75,7 +75,7 @@
               			<button type="submit" class="ButtonCreat">Editar mi Cuenta</button>
             		</div>
 				</form>
-		<h1>Mis Tickts</h1>
+		<h1>Mis Tickets</h1>
 		<div class="MisEntradas">
 			<div class="containerEntradas">
 				<%

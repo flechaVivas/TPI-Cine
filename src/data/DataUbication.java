@@ -171,13 +171,16 @@ public class DataUbication {
 	public void createUbication(Ubication u) {
 		PreparedStatement stmt = null;
 		try{
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(row, col, roomNumber, idMovie, show_date_time, idTicket) values(?,?,?,?,?,?)");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(ubication.row,ubication.col,ubication.roomNumber,ubication.idMovie,ubication.show_date_time,ubication.idTicket) VALUES (?,?,?,?,?,?)");
+			
 			stmt.setInt(1, u.getRow());
 			stmt.setInt(2, u.getCol());
 			stmt.setInt(3, u.getShow().getMovieroom().getRoomNumber());
 			stmt.setInt(4, u.getShow().getMovie().getIdMovie());
 			stmt.setObject(5, u.getShow().getDt());
 			stmt.setInt(6, u.getTicket().getIdTicket());
+			
+			stmt.executeUpdate();
 			
 		}catch (SQLException e){
 			e.printStackTrace();
