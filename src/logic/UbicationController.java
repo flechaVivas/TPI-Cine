@@ -14,8 +14,8 @@ public class UbicationController {
 		du = new DataUbication();
 	}
 	
-	public LinkedList<Ubication> getTicketswhithUser(User User){
-		return du.getTicketswhithUser(User);
+	public LinkedList<Ubication> getTicketsWithUser(User User){
+		return du.getTicketsWithUser(User);
 	}
 	
 	public Ubication getOne(Ubication u) {

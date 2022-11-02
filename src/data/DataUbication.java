@@ -11,7 +11,7 @@ import entities.*;
 
 public class DataUbication {
 	
-	public LinkedList<Ubication> getTicketswhithUser(User user){
+	public LinkedList<Ubication> getTicketsWithUser(User user){
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -28,7 +28,7 @@ public class DataUbication {
 																	 + "	and s.date_time = ubi.show_date_time"
 																	 + " inner join movie m"
 																	 + "	on m.idMovie = s.idMovie"
-																	 + " where idUser = ? and t.retirementDate is null");
+																	 + " where idUser = ? and t.retirementDate is null and s.date_time > current_timestamp()");
 			stmt.setInt(1, user.getIdUser());
 			
 			rs=stmt.executeQuery();
