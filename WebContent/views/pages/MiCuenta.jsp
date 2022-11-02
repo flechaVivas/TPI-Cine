@@ -75,12 +75,12 @@
               			<button type="submit" class="ButtonCreat">Editar mi Cuenta</button>
             		</div>
 				</form>
-		<h1>Mis Tickets</h1>
+		<h1>Mis Tickets Activos</h1>
 		<div class="MisEntradas">
 			<div class="containerEntradas">
 				<%
 				UbicationController ctrlUbication = new UbicationController();
-				LinkedList<Ubication> UbicationsUser = ctrlUbication.getTicketswhithUser(userSession);
+				LinkedList<Ubication> UbicationsUser = ctrlUbication.getTicketsWithUser(userSession);
 				if(UbicationsUser.size() > 0){ %>
 					<%for(Ubication ubi: UbicationsUser){ %>
 						<div class="ticket">
@@ -91,19 +91,17 @@
 								MovieRoom mr = s.getMovieroom();
 							%>
 							<div class="ContectTitle">
-								<img src="/TPI-Cine/assets/img/inglorious.png" alt="Inglourious Basterds">
+								<img src="<%=m.getImage()%>" alt="<%=m.getTitle()%>">
 								<h4><%=m.getTitle()%> </h4>
 							</div>
 							<div class="Information">
 								<label class="dateShow">Fecha: <%=s.getDt()%></label>
-								<label class="roww">Fila: <%=ubi.getRow()%></label>
+								<label class="row">Fila: <%=ubi.getRow()%></label>
 								<label class="col">Asiento: <%=ubi.getCol()%></label>
 								<label class="roomNumber">Sala: <%=mr.getRoomNumber()%></label>
 								<label class="price">Precio: <%=t.getPrice()%></label>
 							</div>
-							<form method="POST" action="/TPI-Cine/src/servlet/DeleteTicket" >
-								<input type="submit" value="Cancelar Entrada" name="idTicket">
-							</form>
+							<a href="/TPI-Cine/src/servlet/ABMCTicket?action=cancel&idTicket=<%=ubi.getTicket().getIdTicket()%>" type="submit" class="btn btn-danger"></a>
 						</div>
 					<%}
 				}else{%>
