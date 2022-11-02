@@ -38,5 +38,9 @@ public class TicketController {
 		return dt.getLast();
 	}
 	
+	public void cancelTicket(Ticket t) {
+		dt.cancel(t);
+	}
+	
 	
 }

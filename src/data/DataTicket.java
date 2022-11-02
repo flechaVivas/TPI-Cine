@@ -230,6 +230,36 @@ public class DataTicket {
 	    return t;
 
 	} // getLast
+	
+	
+	
+	public void cancel(Ticket t) {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"update ticket set retirementDate = current_timestamp() where idTicket = ?;");
+			stmt.setInt(1, t.getIdTicket());
+			
+			stmt.executeUpdate();
+
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+	}
+	
 
 	 
 		
