@@ -65,15 +65,20 @@ public class abmcShow extends HttpServlet {
 					ctrlShow.deleteOne(s);
 				break;
 				case "update":
+					Show sw=new Show();
+					Movie mo=new Movie();
+					MovieRoom mrm=new MovieRoom();
+					mo.setIdMovie(Integer.parseInt((String)request.getParameter("exMovie")));
+					sw.setMovie(mo);
+					mrm.setRoomNumber(Integer.parseInt((String)request.getParameter("exRoom")));
+					sw.setMovieroom(mrm);
+					sw.setDt(LocalDateTime.parse((String)request.getParameter("exdt")));
 					m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
 					s.setMovie(m);
 					mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
 					s.setMovieroom(mr);
 					s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
-					//ctrlShow.editOne(s);
-					System.out.println("Movie editada: "+s.getMovie().getIdMovie());
-					System.out.println("Room editada: "+s.getMovieroom().getRoomNumber());
-					System.out.println("Fecha editada: "+s.getDt());
+					ctrlShow.editOne(s,sw);
 			default:
 				break;
 			}

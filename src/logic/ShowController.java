@@ -19,8 +19,8 @@ public class ShowController {
 	public void deleteOne(Show s) {
 		ds.delete(s);
 	}
-	public Show editOne(Show s) {
-		return ds.update(s);
+	public Show editOne(Show s, Show sw) {
+		return ds.update(s,sw);
 	}
 	public Show addOne(Show s) {
 		return ds.createOne(s);

@@ -45,7 +45,7 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
                     <label>Ingrese Título de la pelicula</label>
                    <input class="inputForm" name="title" type="text" placeholder="Ingrese titulo de la pelicula"></input>
                    <b>Dia</b>
-        	<input type="date" name="dt" placeholder="fecha"></input></div>  
+        	<input type="datetime-local" name="dt" placeholder="fecha"></input></div>  
 			</div>     
 			<button class="btn btn-success">Aceptar</button>    
     	</form>

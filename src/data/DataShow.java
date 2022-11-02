@@ -94,14 +94,17 @@ public class DataShow {
 			return s;
 		}
 
-	public Show update(Show s) {
+	public Show update(Show s, Show sw) {
 		PreparedStatement stmt= null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
-			prepareStatement("update show set idMovie=?,roomNumber=?,date_time=? where idMovie=?,roomNumber=?, date_time=?");
+			prepareStatement("update cine_tpjava.show set idMovie=?,roomNumber=?,date_time=? where idMovie=? and roomNumber=? and date_time=?");
 			stmt.setInt(1, s.getMovie().getIdMovie());
 			stmt.setInt(2, s.getMovieroom().getRoomNumber());
 			stmt.setObject(3, s.getDt());
+			stmt.setInt(4, sw.getMovie().getIdMovie());
+			stmt.setInt(5, sw.getMovieroom().getRoomNumber());
+			stmt.setObject(6, sw.getDt());
 			stmt.executeUpdate();
 	}catch (SQLException e) {
         e.printStackTrace();

@@ -48,7 +48,7 @@ s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	<main>
 		<div class="input-group">
-    	<form name="showForm" method="post" action="/TPI-Cine/src/servlet/abmcShow?action=update">
+    	<form name="showForm" method="post" action="/TPI-Cine/src/servlet/abmcShow?action=update&exMovie=<%=s.getMovie().getIdMovie() %>&exRoom=<%=s.getMovieroom().getRoomNumber() %>&exdt=<%=s.getDt()%>">
         	<p><b>Película:</b>
         	<select name="movie" required>
         	<%for(Movie m: movies) {
