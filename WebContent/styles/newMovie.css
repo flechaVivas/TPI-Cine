@@ -2,8 +2,6 @@
 
 body{
 	background-color: #2a2b38;
-	padding: 0px;
-  	margin: 0px;
 }
 main{
 	margin-top: 10px;
@@ -91,34 +89,34 @@ form{
  transition: opacity .3s;
 }
 
-.buttonSend{
+#buttonSend{
 	display:flex;
 	justify-content: center;
-	width: 100%;
-	height: 40px;
+	width: 5px;
+	height: 8px;
 }
 
-.buttonSend button {
+#buttonSend button {
   border: 2px #0077b6ff;
   font-size: 1rem;
-  padding: .2rem 2rem;
+  padding: .2rem .2rem;
   border-radius: 8px;
   border-color: #7a9cc6;
   cursor: pointer;
  }
  
-.buttonSend button:active {
+#buttonSend button:active {
   color: #caf0f8ff;
   box-shadow: 0 0.2rem #dfd9d9;
   transform: translateY(0.2rem);
  }
  
-.buttonSend button:hover:not(:disabled) {
+#buttonSend button:hover:not(:disabled) {
   background: #03045eff;
   color: #caf0f8ff;
  }
  
-.buttonSend button:disabled {
+#buttonSend button:disabled {
   cursor: auto;
   color: #caf0f8ff;
  }

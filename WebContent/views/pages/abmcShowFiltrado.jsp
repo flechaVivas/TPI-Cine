@@ -20,9 +20,9 @@
 
 	<%
 	
-		/*if(session.getAttribute("usuario")==null){
+		if(session.getAttribute("usuario")==null){
 			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
-		}*/
+		}
 	%>
 <%
 MovieRoomController ctrlMR = new MovieRoomController();

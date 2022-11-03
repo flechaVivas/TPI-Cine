@@ -17,13 +17,19 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
 <title> Nueva Pelicula</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-	<link rel="stylesheet" href="./styles/styles.css"> 
+	<link rel="stylesheet" href="./styles/styles.css">
 	<link rel="stylesheet" href="../../styles/navbar.css">
-	<link rel="stylesheet" href="../../styles/newMovie.css"/>
+	<link rel="stylesheet" href="../../styles/newMovie.css"/> 
+	<%
+	
+		if(session.getAttribute("usuario")==null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		}
+	%>
 	</head>
 	<body>
+	<nav class="navbar"> <%@ include file="../partials/navbar.jsp" %> </nav>
 		<header> 
-		<nav class="navbar"> <%@ include file="../partials/navbar.jsp" %> </nav>
 		
 		 </header>
          <main>
@@ -75,13 +81,12 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
                                 	<%for (Genre g: genres) {%>
                                     <option value="<%=g.getIdGenre() %>"><%=g.getDescription() %></option>
                                     <%}%>
-                                </select></p>
+                                </select></p> 
                             </div>
                         </div>
                     </div>
-                    <input id="boton" type="submit" name="new"  value="new">
-                </form>
-                
+                    <input type="submit" name="new"  value="new">   
+                </form> 
             </div>
         </main>
         
