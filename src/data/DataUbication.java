@@ -28,7 +28,7 @@ public class DataUbication {
 																	 + "	and s.date_time = ubi.show_date_time"
 																	 + " inner join movie m"
 																	 + "	on m.idMovie = s.idMovie"
-																	 + " where idUser = ? and t.retirementDate is null and s.date_time > current_timestamp()");
+																	 + " where idUser = ? and t.retirementDate is null and s.date_time > current_timestamp();");
 			stmt.setInt(1, user.getIdUser());
 			
 			rs=stmt.executeQuery();
@@ -86,7 +86,7 @@ public class DataUbication {
 		ResultSet rs = null;
 		Ubication ub = null; 
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ubication WHERE roomNumber = ? and row = ? and col = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ubication WHERE roomNumber = ? and row = ? and col = ?;");
 			stmt.setInt(1, ubp.getShow().getMovieroom().getRoomNumber());
 			stmt.setInt(2, ubp.getRow());
 			stmt.setInt(3, ubp.getCol());
@@ -123,7 +123,7 @@ public class DataUbication {
 		LinkedList<Ubication> ubis = new LinkedList<Ubication>();
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ubication where roomNumber = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ubication where roomNumber = ?;");
 			stmt.setInt(1, roomNumber);
 			rs = stmt.executeQuery();
 			
@@ -154,7 +154,7 @@ public class DataUbication {
 		PreparedStatement stmt = null;
 		try {
 			// lo unico que se actualiza es el status, lo demas son fijos
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE ubication set status = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE ubication set status = ?;");
 			stmt.executeUpdate();
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -171,7 +171,7 @@ public class DataUbication {
 	public void createUbication(Ubication u) {
 		PreparedStatement stmt = null;
 		try{
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(ubication.row,ubication.col,ubication.roomNumber,ubication.idMovie,ubication.show_date_time,ubication.idTicket) VALUES (?,?,?,?,?,?)");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(ubication.row,ubication.col,ubication.roomNumber,ubication.idMovie,ubication.show_date_time,ubication.idTicket) VALUES (?,?,?,?,?,?);");
 			
 			stmt.setInt(1, u.getRow());
 			stmt.setInt(2, u.getCol());

@@ -21,7 +21,7 @@ public class DataMovie {
 		Genre ge=null;
 		Restriction re=null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE idMovie=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE idMovie=?;");
 			stmt.setInt(1, m.getIdMovie());
 
 			rs=stmt.executeQuery();
@@ -73,7 +73,7 @@ public class DataMovie {
 		Restriction re=null;
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE title like ?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie WHERE title like ?;");
 			stmt.setString(1, "%"+m.getTitle()+"%");
 
 			rs=stmt.executeQuery();
@@ -122,7 +122,7 @@ public class DataMovie {
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 			prepareStatement("update movie set title=?, image=?, synopsis=?, releaseDate=?, cast=?, director=?, "
-			+ "duration=?, idRestriction=?, idGenre=?, retirementDate=?   where idMovie=?");
+			+ "duration=?, idRestriction=?, idGenre=?, retirementDate=?   where idMovie=?;");
 			stmt.setString(1,m.getTitle());
 			stmt.setString(2,m.getImage());
 			stmt.setString(3,m.getSynopsis());
@@ -151,7 +151,7 @@ public class DataMovie {
 	public void delete(Movie m) {
 		PreparedStatement stmt=null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM movie WHERE idMovie=? ");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM movie WHERE idMovie=?;");
 			stmt.setInt(1, m.getIdMovie());
 			stmt.executeUpdate();
 			} catch (SQLException e) {
@@ -171,7 +171,7 @@ public class DataMovie {
 		ResultSet keyResultSet = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO movie(title,image,synopsis,releaseDate,cast,director,duration,idRestriction,idGenre) values (?,?,?,?,?,?,?,?,?)"
+			"INSERT INTO movie(title,image,synopsis,releaseDate,cast,director,duration,idRestriction,idGenre) values (?,?,?,?,?,?,?,?,?);"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1,m.getTitle());
@@ -212,7 +212,7 @@ public class DataMovie {
 		try {
 					
 			stmt=DbConnector.getInstancia().getConn().createStatement();
-			rs=stmt.executeQuery("SELECT * FROM movie order by retirementDate asc");
+			rs=stmt.executeQuery("SELECT * FROM movie order by retirementDate asc;");
 			
 			while(rs.next()) {
 				Movie m=new Movie();
@@ -259,7 +259,7 @@ public class DataMovie {
 		Restriction re=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where releaseDate between ? and ?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where releaseDate between ? and ?;");
 			stmt.setObject(1,d.getReleaseDate());
 			stmt.setObject(2,h.getReleaseDate());
 			rs=stmt.executeQuery();
@@ -306,7 +306,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idGenre=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idGenre=?;");
 			stmt.setInt(1, g.getIdGenre());
 			rs=stmt.executeQuery();
 			
@@ -354,7 +354,7 @@ public class DataMovie {
 		Restriction re=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idRestriction=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idRestriction=?;");
 			stmt.setInt(1, r.getIdRestriction());
 			rs=stmt.executeQuery();
 			
@@ -401,7 +401,7 @@ public class DataMovie {
 		Genre ge=null;
 		Restriction re=null;	
 		try {		
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where director=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where director=?;");
 			stmt.setString(1, mo.getDirector());
 			rs=stmt.executeQuery();
 			
@@ -448,7 +448,7 @@ public class DataMovie {
 		Genre ge=null;
 		Restriction re=null;	
 		try {		
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where duration<=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where duration<=?;");
 			stmt.setInt(1, tm.getDuration());
 			rs=stmt.executeQuery();
 			
@@ -493,7 +493,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idRestriction=? and idGenre=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where idRestriction=? and idGenre=?;");
 			stmt.setInt(1, r.getIdRestriction());
 			stmt.setInt(2, g.getIdGenre());
 			rs=stmt.executeQuery();
@@ -539,7 +539,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idRestriction=? and idGenre=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idRestriction=? and idGenre=?;");
 			stmt.setString(1, "%"+m.getTitle()+"%");
 			stmt.setInt(2, r.getIdRestriction());
 			stmt.setInt(3, g.getIdGenre());
@@ -587,7 +587,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idRestriction=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idRestriction=?;");
 			stmt.setString(1, "%"+m.getTitle()+"%");
 			stmt.setInt(2, r.getIdRestriction());
 			rs=stmt.executeQuery();
@@ -634,7 +634,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idGenre=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ? and idGenre=?;");
 			stmt.setString(1, "%"+m.getTitle()+"%");
 			stmt.setInt(2, g.getIdGenre());
 			rs=stmt.executeQuery();
@@ -681,7 +681,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where title like ?;");
 			stmt.setString(1, "%"+m.getTitle()+"%");
 			rs=stmt.executeQuery();
 			
@@ -724,7 +724,7 @@ public class DataMovie {
 		PreparedStatement stmt= null;
 			try {
 				stmt=DbConnector.getInstancia().getConn().
-				prepareStatement("update movie set retirementDate=? where idMovie=?");
+				prepareStatement("update movie set retirementDate=? where idMovie=?;");
 				stmt.setObject(1,LocalDate.now());
 				stmt.setInt(2, m.getIdMovie());
 				stmt.executeUpdate();
@@ -744,7 +744,7 @@ public class DataMovie {
 		PreparedStatement stmt= null;
 			try {
 				stmt=DbConnector.getInstancia().getConn().
-				prepareStatement("update movie set retirementDate=? where idMovie=?");
+				prepareStatement("update movie set retirementDate=? where idMovie=?;");
 				stmt.setObject(1,null);
 				stmt.setInt(2, m.getIdMovie());
 				stmt.executeUpdate();
@@ -766,7 +766,7 @@ public class DataMovie {
 		ResultSet rs=null;	
 		try {
 					
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where retirementDate is null order by releaseDate desc");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM movie where retirementDate is null order by releaseDate desc;");
 			rs=stmt.executeQuery();
 			
 			while(rs.next()) {

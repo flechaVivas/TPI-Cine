@@ -22,7 +22,7 @@ public class DataUser {
 		
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"SELECT idUser, idRole, surname, name, birthDate, email, adress, phoneNumber FROM user WHERE email=? and password=?"
+					"SELECT idUser, idRole, surname, name, birthDate, email, adress, phoneNumber FROM user WHERE email=? and password=?;"
 					);
 			stmt.setString(1, user.getEmail());
 			stmt.setString(2, user.getPassword());
@@ -63,7 +63,7 @@ public class DataUser {
 		ResultSet rs = null;
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM user WHERE idUser=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM user WHERE idUser=?;");
 			stmt.setInt(1, user.getIdUser());
 			rs=stmt.executeQuery();
 			
@@ -107,7 +107,7 @@ public class DataUser {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("SELECT * FROM user");
+			rs = stmt.executeQuery("SELECT * FROM user;");
 			
 			if (rs != null) {
 				while (rs.next()) {
@@ -153,7 +153,7 @@ public class DataUser {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"INSERT INTO user(idUser, idRole, surname, name, email, password, birthDate, adress, phoneNumber) VALUES(?,?,?,?,?,?,?,?,?)",
+					"INSERT INTO user(idUser, idRole, surname, name, email, password, birthDate, adress, phoneNumber) VALUES(?,?,?,?,?,?,?,?,?);",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setInt(1, u.getIdUser());
@@ -196,7 +196,7 @@ public class DataUser {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE user set surname=?, name=?, email=?, password=?, birthDate=?, adress=?, phoneNumber=? where idUser=?");
+					"UPDATE user set surname=?, name=?, email=?, password=?, birthDate=?, adress=?, phoneNumber=? where idUser=?;");
 			stmt.setString(1, u.getSurname());
 			stmt.setString(2, u.getName());
 			stmt.setString(3, u.getEmail());
@@ -229,7 +229,7 @@ public class DataUser {
 		
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"DELETE FROM user WHERE idUser=?");
+					"DELETE FROM user WHERE idUser=?;");
 			stmt.setInt(1, u.getIdUser());
 			
 			stmt.executeUpdate();

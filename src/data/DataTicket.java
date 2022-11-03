@@ -21,7 +21,7 @@ public class DataTicket {
 		
 		try {
 			
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ticket WHERE idTicket=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ticket WHERE idTicket=?;");
 			stmt.setInt(1, tick.getIdTicket());
 			rs=stmt.executeQuery();
 			
@@ -61,7 +61,7 @@ public class DataTicket {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("SELECT * FROM ticket");
+			rs = stmt.executeQuery("SELECT * FROM ticket;");
 			
 			if (rs != null) {
 				while (rs.next()) {
@@ -104,7 +104,7 @@ public class DataTicket {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"INSERT INTO ticket(idUser, operationCode, dateTime, price) VALUES(?,?,?,?)",
+					"INSERT INTO ticket(idUser, operationCode, dateTime, price) VALUES(?,?,?,?);",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, t.getUser().getIdUser());
 			stmt.setString(2, t.getOperationCode());
@@ -140,7 +140,7 @@ public class DataTicket {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE ticket SET idUser=?, operationCode=?, dateTime=?, price=? WHERE idTicket=?");
+					"UPDATE ticket SET idUser=?, operationCode=?, dateTime=?, price=? WHERE idTicket=?;");
 			stmt.setInt(1, t.getUser().getIdUser());
 			stmt.setString(2, t.getOperationCode());
 			stmt.setObject(3, t.getDateTime());
@@ -171,7 +171,7 @@ public class DataTicket {
 		
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"DELETE FROM ticket WHERE idTicket=?");
+					"DELETE FROM ticket WHERE idTicket=?;");
 			stmt.setInt(1, t.getIdTicket());
 			
 			stmt.executeUpdate();
@@ -199,7 +199,7 @@ public class DataTicket {
 		
 	    try {
 	
-	        stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ticket ORDER BY idTicket DESC LIMIT 1");
+	        stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ticket ORDER BY idTicket DESC LIMIT 1;");
 	        rs=stmt.executeQuery();
 	
 	        if (rs != null && rs.next()) {
