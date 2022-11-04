@@ -18,7 +18,10 @@
 	<link rel="stylesheet" href="../../styles/navbar.css">
 	<link rel="stylesheet" href="../../styles/abmcMovie.css"/>
 
-<%
+	<%
+	if(session.getAttribute("usuario")==null){
+	response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		}
 MovieController ctrlMovie = new MovieController();
 GenreController ctrlGenre = new GenreController();
 LinkedList<Genre> genres = ctrlGenre.getAll();

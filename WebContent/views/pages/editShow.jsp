@@ -39,9 +39,9 @@ s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 
 	<%
 	
-		/*if(session.getAttribute("usuario")==null){
+		if(session.getAttribute("usuario")==null){
 			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
-		}*/
+		}
 	%>
 </head>
 <body>

@@ -9,7 +9,11 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<%
+	<%
+	
+		if(session.getAttribute("usuario")==null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		}
 ShowController ctrlShow = new ShowController();
 LinkedList<Show> shows = ctrlShow.getAll();
 
@@ -27,13 +31,6 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
 	<link rel="stylesheet" href="./styles/styles.css"> 
 	<link rel="stylesheet" href="../../styles/navbar.css">
 	<link rel="stylesheet" href="../../styles/abmcShow.css"/>
-
-	<%
-	
-		/*if(session.getAttribute("usuario")==null){
-			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
-		}*/
-	%>
 </head>
 <body>
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>

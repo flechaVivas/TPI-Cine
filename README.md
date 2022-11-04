@@ -11,7 +11,7 @@
 Aplicación web cliente-servidor desarrollada Java para la gestión de entradas de un Cine.
 
 ### 2.1 - Alcance Funcional
-Desde que el usuario se loguea en la aplicación, selecciona una película y compra el ticket hasta que recibe el comprobante por correo electrónico.
+Desde que el usuario se loguea en la aplicación, selecciona una película y saca la entrada hasta que recibe el ticket por correo electrónico.
 
 
 #### 3.2.1 Checklist
@@ -22,17 +22,17 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y com
 |:-|-:|-:|:-|
 |ABMC simple|1 x integ|1 x integ|Restriction, Genre, roomType, Role|
 |ABMC dependiente|1|2|Movie, Show|
-|CU NO-ABMC|1|2|Crear Funcion, Reserva|
+|CU NO-ABMC|1|2|Crear Funcion, Reservar Entrada|
 |Listado simple|1|-|-|
-|Listado complejo|0|1(*)|Movies and Function|
+|Listado complejo|0|1(*)|Movies by title/genre/restriction|
 
 ##### Aprobación Directa
 
 |Requerimiento|cant. mín.<br>1 o 2 integ|cant. máx.<br>3 o 4 integ|Detalle/Listado de casos incluidos|
 |:-|-:|-:|:-|
 |ABMC|todos|todos|
-|CU "Complejo"(nivel resumen)|1|2|Buy Tickets (crear funcion venta de entrada, retirar y cancelar)|
-|Listado complejo|1|2|Movies and Function, Today Tickets|
+|CU "Complejo"(nivel resumen)|1|2|Buy Tickets (crear funcion, reserva de entrada y cancelar)|
+|Listado complejo|1|2|Shows by movie/date, Active Tickets|
 |Nivel de acceso|2|2|Admin, Advanced User, Client|
 |Manejo de errores|obligatorio|obligatorio|no requiere detalle|
 |requerimiento extra obligatorio (**)|0|1|Envío de mail o manejo de archivos|

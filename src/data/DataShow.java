@@ -23,7 +23,7 @@ public class DataShow {
 		MovieRoom mr=new MovieRoom();
 		Movie mo=new Movie();
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM show WHERE idMovie=? and roomNumber=? and date_time=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM show WHERE idMovie=? and roomNumber=? and date_time=?;");
 			stmt.setInt(1, s.getMovie().getIdMovie());
 			stmt.setInt(2, s.getMovieroom().getRoomNumber());
 			stmt.setString(3, s.getDt().toString());
@@ -75,7 +75,7 @@ public class DataShow {
 		ResultSet keyResultSet = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO cine_tpjava.show(idMovie,roomNumber,date_time) values (?,?,?)"
+			"INSERT INTO cine_tpjava.show(idMovie,roomNumber,date_time) values (?,?,?);"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, s.getMovie().getIdMovie());
 			stmt.setInt(2, s.getMovieroom().getRoomNumber());
@@ -98,7 +98,7 @@ public class DataShow {
 		PreparedStatement stmt= null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
-			prepareStatement("update cine_tpjava.show set idMovie=?,roomNumber=?,date_time=? where idMovie=? and roomNumber=? and date_time=?");
+			prepareStatement("update cine_tpjava.show set idMovie=?,roomNumber=?,date_time=? where idMovie=? and roomNumber=? and date_time=?;");
 			stmt.setInt(1, s.getMovie().getIdMovie());
 			stmt.setInt(2, s.getMovieroom().getRoomNumber());
 			stmt.setObject(3, s.getDt());

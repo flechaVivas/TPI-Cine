@@ -17,7 +17,7 @@ public class DataRole {
 		Role r = null;
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM role WHERE idRole=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM role WHERE idRole=?;");
 			stmt.setInt(1, role.getIdRole());
 
 			rs=stmt.executeQuery();
@@ -52,7 +52,7 @@ public class DataRole {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
-			rs = stmt.executeQuery("SELECT * FROM role");
+			rs = stmt.executeQuery("SELECT * FROM role;");
 			
 			if (rs != null) {
 				while (rs.next()) {
@@ -86,7 +86,7 @@ public class DataRole {
 		PreparedStatement stmt=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO role(description) values (?)"
+			"INSERT INTO role(description) values (?);"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1,r.getDescription());
@@ -118,7 +118,7 @@ public class DataRole {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE role set description=? where idRole=?");
+					"UPDATE role set description=? where idRole=?;");
 			stmt.setString(1, r.getDescription());
 			stmt.setInt(2, r.getIdRole());
 			
@@ -142,7 +142,7 @@ public class DataRole {
 
 		PreparedStatement stmt=null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM role WHERE idRole=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM role WHERE idRole=?;");
 			stmt.setInt(1, r.getIdRole());
 			stmt.executeUpdate();
 			

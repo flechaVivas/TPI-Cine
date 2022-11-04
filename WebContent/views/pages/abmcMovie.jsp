@@ -14,10 +14,14 @@
 <title>Peliculas</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+	<link rel="stylesheet" href="../../styles/abmcMovie.css"/>
 	<link rel="stylesheet" href="./styles/styles.css"> 
 	<link rel="stylesheet" href="../../styles/navbar.css">
-	<link rel="stylesheet" href="../../styles/abmcMovie.css"/>
-<%
+	<%
+	
+		if(session.getAttribute("usuario")==null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		}
 MovieController ctrlMovie = new MovieController();
 GenreController ctrlGenre = new GenreController();
 LinkedList<Genre> genres = ctrlGenre.getAll();

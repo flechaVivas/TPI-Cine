@@ -18,7 +18,7 @@ public class DataGenre {
 		try {
 			
 			stmt=DbConnector.getInstancia().getConn().createStatement();
-			rs=stmt.executeQuery("select * from genre");
+			rs=stmt.executeQuery("select * from genre;");
 			while(rs.next()) {
 				Genre g=new Genre();
 				g.setIdGenre(rs.getInt("idGenre"));
@@ -42,7 +42,7 @@ public class DataGenre {
 		Genre ge = null;
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM genre WHERE idGenre=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM genre WHERE idGenre=?;");
 			stmt.setInt(1, g.getIdGenre());
 
 			rs=stmt.executeQuery();
@@ -70,7 +70,7 @@ public class DataGenre {
 	public void delete(Genre g) {
 		PreparedStatement stmt=null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM genre WHERE idGenre=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM genre WHERE idGenre=?;");
 			stmt.setInt(1, g.getIdGenre());
 			stmt.executeUpdate();
 			if(stmt!=null) {stmt.close();}
@@ -81,7 +81,7 @@ public class DataGenre {
 	PreparedStatement stmt=null;
 	try {
 		stmt=DbConnector.getInstancia().getConn().prepareStatement(
-		"INSERT INTO genre(description) values (?)"
+		"INSERT INTO genre(description) values (?);"
 				,PreparedStatement.RETURN_GENERATED_KEYS);
 		
 		stmt.setString(1,g.getDescription());
@@ -113,7 +113,7 @@ public class DataGenre {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE genre set description=? where idGenre=?");
+					"UPDATE genre set description=? where idGenre=?;");
 			stmt.setString(1, g.getDescription());
 			stmt.setInt(2, g.getIdGenre());
 			

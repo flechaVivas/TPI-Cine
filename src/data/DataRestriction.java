@@ -17,7 +17,7 @@ public class DataRestriction {
 		try {
 			
 			stmt=DbConnector.getInstancia().getConn().createStatement();
-			rs=stmt.executeQuery("select * from restriction");
+			rs=stmt.executeQuery("select * from restriction;");
 		while(rs.next()) {
 			Restriction r=new Restriction();
 			r.setIdRestriction(rs.getInt("idRestriction"));
@@ -41,7 +41,7 @@ public class DataRestriction {
 		Restriction re = null;
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM restriction WHERE idRestriction=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM restriction WHERE idRestriction=?;");
 			stmt.setInt(1, r.getIdRestriction());
 
 			rs=stmt.executeQuery();
@@ -69,7 +69,7 @@ public class DataRestriction {
 	public void delete(Restriction r) {
 		PreparedStatement stmt=null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM restriction WHERE idRestriction=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM restriction WHERE idRestriction=?;");
 			stmt.setInt(1, r.getIdRestriction());
 			stmt.executeUpdate();
 			if(stmt!=null) {stmt.close();}
@@ -80,7 +80,7 @@ public class DataRestriction {
 		PreparedStatement stmt=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO restriction(description) values (?)"
+			"INSERT INTO restriction(description) values (?);"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1,r.getDescription());
@@ -111,7 +111,7 @@ public class DataRestriction {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE restriction set description=? where idRestriction=?");
+					"UPDATE restriction set description=? where idRestriction=?;");
 			stmt.setString(1, r.getDescription());
 			stmt.setInt(2, r.getIdRestriction());
 			

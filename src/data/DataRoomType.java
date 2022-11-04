@@ -16,7 +16,7 @@ public class DataRoomType {
 		ResultSet rs=null;
 		RoomType r=new RoomType();
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM room_type WHERE idRoomType=?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM room_type WHERE idRoomType=?;");
 			stmt.setInt(1, rt.getIdRoomType());
 			rs=stmt.executeQuery();
 			
@@ -52,7 +52,7 @@ public class DataRoomType {
 		LinkedList<RoomType> rtts = new LinkedList<RoomType>();
 		try {
 			stmt=DbConnector.getInstancia().getConn().createStatement();
-			rs=stmt.executeQuery("select * from room_type");
+			rs=stmt.executeQuery("select * from room_type;");
 			
 			
 		while(rs.next()) {
@@ -133,7 +133,7 @@ public class DataRoomType {
 	public void delete(RoomType rt) {
 		PreparedStatement stmt=null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM room_type WHERE idRoomType=? ");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM room_type WHERE idRoomType=?;");
 			stmt.setInt(1, rt.getIdRoomType());
 			stmt.executeUpdate();
 			} catch (SQLException e) {
@@ -155,7 +155,7 @@ public class DataRoomType {
 		ResultSet keyResultSet = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-			"INSERT INTO room_type (description,rowQuantity,colQuantity,price) values (?,?,?,?)"
+			"INSERT INTO room_type (description,rowQuantity,colQuantity,price) values (?,?,?,?);"
 					,PreparedStatement.RETURN_GENERATED_KEYS);
 			
 			stmt.setString(1, rt.getDescription());
@@ -191,7 +191,7 @@ public class DataRoomType {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE room_type set description=?, rowQuantity=?, colQuantity=?, price=? where idRoomType=?");
+					"UPDATE room_type set description=?, rowQuantity=?, colQuantity=?, price=? where idRoomType=?;");
 			stmt.setString(1, r.getDescription());
 			stmt.setInt(2, r.getSizeRow());
 			stmt.setInt(3, r.getSizeCol());
