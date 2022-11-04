@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -65,7 +66,8 @@ public class login extends HttpServlet {
             }
 
 
-        }catch(Exception e) {
+        }catch(SQLException e) {
+        	
             e.getMessage();
         }
 

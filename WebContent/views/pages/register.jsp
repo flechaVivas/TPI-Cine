@@ -13,6 +13,7 @@
 		
 		<% 
 			session.removeAttribute("usuario");
+			
 			String action = (String)request.getAttribute("action");
 		%>
 		
@@ -26,6 +27,14 @@
 		
 		<main>
 			<div class="Container">
+			
+			<% if(request.getAttribute("error") != null){ %>
+				
+				<div class="alert alert-danger" role="alert">
+		 			<strong style="color: #660708;">Error! <%=request.getAttribute("error")%></strong>
+				</div>
+			
+			<% request.removeAttribute("error"); } %>
 			<% if(action == ("errorPasswd")){ %>
 
 				<div class="alert alert-danger" role="alert">
@@ -41,42 +50,42 @@
 			} %>
 						
 				<h2>Registrarse</h2>
-				<form class="RegisterForm" method="POST" action="/TPI-Cine/src/servlet/Register">
+				<form class="RegisterForm" method="POST" action="/TPI-Cine/src/servlet/ABMCUser?action=register">
 					<div class="formContent">
 						<div>
 							<div class="divForm">
 								<label class="labelForm">Nombre</label>
-								<input class="inputForm" name="name" type="text" >
+								<input class="inputForm" name="name" type="text" required="required">
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Apellido</label>
-								<input class="inputForm" name="surname" type="text" >
+								<input class="inputForm" name="surname" type="text" required="required">
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Email</label>
-								<input class="inputForm" name="email" type="email" >
+								<input class="inputForm" name="email" type="email" required="required">
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Fecha Nacimiento</label>
-								<input class="inputForm" name="birthDate" type="date">
+								<input class="inputForm" name="birthDate" type="date" required="required">
 							</div>
 						</div>
 						<div>
 							<div class="divForm">
 								<label class="labelForm">Direccion</label>
-								<input class="inputForm" name="adress" type="text">
+								<input class="inputForm" name="adress" type="text" required="required">
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Telefono</label>
-								<input class="inputForm" name="phoneNumber" type="text" >
+								<input class="inputForm" name="phoneNumber" type="text" required="required">
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Contraseña</label>
-								<input class="inputForm" name="password" type="password" >
+								<input class="inputForm" name="password" type="password" required="required">
 							</div>
 							<div class="divForm">
 								<label class="labelForm">Repetir Contraseña</label>
-								<input class="inputForm" name="repeatPassword" type="password" >
+								<input class="inputForm" name="repeatPassword" type="password" required="required">
 							</div>
 						</div>
 					</div>

@@ -1,6 +1,9 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
@@ -53,22 +56,82 @@ public class ABMCUser extends HttpServlet {
 			switch ((String)request.getParameter("action")) {
 			
 			case "new":
+				
+				try {
+					
+					u.setName(request.getParameter("name"));
+					u.setSurname(request.getParameter("surname"));
+					u.setEmail(request.getParameter("email"));
+					u.setBirthDate(LocalDate.parse(request.getParameter("birthDate")));
+					u.setAdress(request.getParameter("adress"));
+					u.setPhoneNumber(request.getParameter("phoneNumber"));
+					r.setIdRole(Integer.parseInt((String)request.getParameter("rol")));
+					r = ctrlRole.getOne(r);
+					u.setRole(r);
+					u.setPassword(request.getParameter("password"));
+					ctrlUser.add(u);
+					
+					break;
+					
+				} catch (SQLIntegrityConstraintViolationException sqli) {
+					
+					System.out.println("Error integridad");
+					response.sendRedirect("/TPI-Cine/views/pages/register.jsp");
+					
+				}
+				
 			
-				u.setName(request.getParameter("name"));
-				u.setSurname(request.getParameter("surname"));
-				u.setEmail(request.getParameter("email"));
-				u.setBirthDate(LocalDate.parse(request.getParameter("birthDate")));
-				u.setAdress(request.getParameter("adress"));
-				u.setPhoneNumber(request.getParameter("phoneNumber"));
-				r.setIdRole(Integer.parseInt((String)request.getParameter("rol")));
-				r = ctrlRole.getOne(r);
-				u.setRole(r);
-				u.setPassword(request.getParameter("password"));
-				ctrlUser.add(u);
+			case "register":
+				
+				try {
+
+					u.setName(request.getParameter("name"));
+					u.setSurname(request.getParameter("surname"));
+					u.setEmail(request.getParameter("email"));
+					u.setBirthDate(LocalDate.parse(request.getParameter("birthDate")));
+					u.setAdress(request.getParameter("adress"));
+					u.setPhoneNumber(request.getParameter("phoneNumber"));
+					r.setIdRole(1);
+					u.setRole(r);
+					
+					if (request.getParameter("password").equals(request.getParameter("repeatPassword"))) {
+						
+						u.setPassword(request.getParameter("password"));
+						ctrlUser.add(u);
+						
+						request.setAttribute("action", "success");
+						request.getRequestDispatcher("/views/pages/login.jsp").forward(request, response);
+						
+					} else {
+						request.setAttribute("action", "errorPasswd");
+						request.getRequestDispatcher("/views/pages/register.jsp").forward(request, response);
+					}
+				
+					break;
 				
 				
 				
-				break;
+				} catch (SQLIntegrityConstraintViolationException sqli) {
+					
+					request.setAttribute("error", "El email ya ha sido ingresado!");
+					request.getRequestDispatcher("/views/pages/register.jsp").forward(request, response);
+					
+				} catch (DateTimeException e) {
+					
+					request.setAttribute("error", "La fecha ingresada es inválida");
+					request.getRequestDispatcher("/views/pages/register.jsp").forward(request, response);
+					
+				} catch (Exception e) {
+					
+					request.setAttribute("error", "Ha ocurrido un error, inténtelo más tarde");
+					request.getRequestDispatcher("/views/pages/register.jsp").forward(request, response);
+					
+				}
+				
+				
+				
+			
+				
 			
 			case "update":
 				
@@ -101,14 +164,10 @@ public class ABMCUser extends HttpServlet {
 			
 			request.getRequestDispatcher("/views/pages/ui-user/listUsers.jsp").forward(request, response);
 			
-		}finally {
+		} catch (Exception e) {
 			
-		} 
-//		catch (Exception e) {
-//			
-//			
-//			
-//		}
+			
+		}
 	
 	
 	}

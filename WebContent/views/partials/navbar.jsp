@@ -38,7 +38,7 @@
 	<div id="login_link" class="user-menu">
        	<div class="navbar-account">
        		
-           	<span id="ctl00_lblLogin"><a href="login.jsp"> Inicia Sesión! </a></span> 
+           	<span id="ctl00_lblLogin"><a href="/TPI-Cine/views/pages/login.jsp"> Inicia Sesión! </a></span> 
            	<i class="fa-solid fa-user"></i>
           	</div>
       	</div>

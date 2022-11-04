@@ -3,9 +3,12 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.LinkedList;
+
+import com.sun.javadoc.ThrowsTag;
 
 import entities.Role;
 import entities.User;
@@ -13,7 +16,7 @@ import logic.RoleController;
 
 public class DataUser {
 
-	public User getByUser(User user) {
+	public User getByUser(User user) throws SQLException {
 		User u = null;
 		Role r = null;
 		RoleController ctrRole = new RoleController();
@@ -42,14 +45,14 @@ public class DataUser {
 				u.setRole(ctrRole.getOne(r));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return u;
@@ -146,7 +149,7 @@ public class DataUser {
 		
 	} // getAll
 	
-	public void add(User u) {
+	public void add(User u) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		
@@ -175,7 +178,7 @@ public class DataUser {
 			
 			
 		} catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
@@ -188,7 +191,7 @@ public class DataUser {
 		
 	} // add
 	
-	public void update(User u) {
+	public void update(User u) throws SQLException{
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -209,7 +212,7 @@ public class DataUser {
 			stmt.executeUpdate();
 			
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
