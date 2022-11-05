@@ -12,7 +12,7 @@ import entities.User;
 
 public class DataTicket {
 
-	public Ticket getOne(Ticket tick) {
+	public Ticket getOne(Ticket tick) throws SQLException {
 		Ticket t = null;
 		User u = null;
 		
@@ -39,21 +39,21 @@ public class DataTicket {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return t;
 	
 	} // getOne
 	
-	public LinkedList<Ticket> getAll(){
+	public LinkedList<Ticket> getAll() throws SQLException{
 		
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -79,7 +79,7 @@ public class DataTicket {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -87,7 +87,7 @@ public class DataTicket {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -97,7 +97,7 @@ public class DataTicket {
 	
 	
 	
-	public void add(Ticket t) {
+	public void add(Ticket t) throws SQLException {
 		
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
@@ -119,20 +119,20 @@ public class DataTicket {
             }
 			
 		} catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 		
 	}  // add
 	
-	public void update(Ticket t) {
+	public void update(Ticket t) throws SQLException {
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -150,21 +150,21 @@ public class DataTicket {
 			stmt.executeUpdate();
 			
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
 	} // update
 	
 	
-	public void delete(Ticket t) {
+	public void delete(Ticket t) throws SQLException {
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -177,20 +177,20 @@ public class DataTicket {
 			stmt.executeUpdate();
 
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
 	} // delete
 
-	public Ticket getLast() {
+	public Ticket getLast() throws SQLException {
 		Ticket t = null;
 		User u = null;
 		
@@ -217,14 +217,14 @@ public class DataTicket {
 	        }
 	
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        throw e;
 	    } finally {
 	        try {
 	            if(rs!=null) {rs.close();}
 	            if(stmt!=null) {stmt.close();}
 	            DbConnector.getInstancia().releaseConn();
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            throw e;
 	        }
 	    }
 	    return t;
@@ -233,7 +233,7 @@ public class DataTicket {
 	
 	
 	
-	public void cancel(Ticket t) {
+	public void cancel(Ticket t) throws SQLException {
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -246,14 +246,14 @@ public class DataTicket {
 			stmt.executeUpdate();
 
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
