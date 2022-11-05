@@ -11,7 +11,7 @@ import entities.RoomType;
 
 public class DataRoomType {
 
-	public RoomType getOne(RoomType rt) {
+	public RoomType getOne(RoomType rt) throws SQLException {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		RoomType r=new RoomType();
@@ -31,21 +31,21 @@ public class DataRoomType {
 			}
 			
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 			
 		}
 		return r;
 	}
 	
-	public LinkedList<RoomType> list(){
+	public LinkedList<RoomType> list() throws SQLException{
 		
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -66,10 +66,8 @@ public class DataRoomType {
 		}
 		if(rs!=null) {rs.close();}
 		if(stmt!=null) {stmt.close();}
-		}catch(SQLException ex) {
-			System.out.println("SQLException: "+ ex.getMessage());
-			System.out.println("SQLState: "+ ex.getSQLState());
-			System.out.println("VendorError"+ ex.getErrorCode());
+		}catch(SQLException e) {
+			throw e;
 		
 		}
 		return rtts;
@@ -77,7 +75,7 @@ public class DataRoomType {
 	
 	
 	
-	public LinkedList<RoomType> getAvailablesByMovie(Movie m){
+	public LinkedList<RoomType> getAvailablesByMovie(Movie m) throws SQLException{
 
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -112,7 +110,7 @@ public class DataRoomType {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -120,7 +118,7 @@ public class DataRoomType {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -130,27 +128,27 @@ public class DataRoomType {
 	
 	
 	
-	public void delete(RoomType rt) {
+	public void delete(RoomType rt) throws SQLException {
 		PreparedStatement stmt=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM room_type WHERE idRoomType=?;");
 			stmt.setInt(1, rt.getIdRoomType());
 			stmt.executeUpdate();
 			} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			} finally {
 				try {
 					if(stmt!=null) {stmt.close();}
 					DbConnector.getInstancia().releaseConn();
 					} catch (SQLException e) {
-					e.printStackTrace();
+					throw e;
 					}
 			}
 	}
 	
 	
 
-	public RoomType createOne(RoomType rt) {
+	public RoomType createOne(RoomType rt) throws SQLException {
 		PreparedStatement stmt=null;
 		ResultSet keyResultSet = null;
 		try {
@@ -172,18 +170,18 @@ public class DataRoomType {
 			}
 			
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			} finally {
 					try {
 						if(stmt!=null) {stmt.close();}
 						if(keyResultSet!=null) {keyResultSet.close();}
 						DbConnector.getInstancia().releaseConn();
-						} catch (SQLException e) {e.printStackTrace();}
+						} catch (SQLException e) {throw e;}
 						}
 			return rt;
 	}
 	
-	public void update(RoomType r) {
+	public void update(RoomType r) throws SQLException {
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -202,14 +200,14 @@ public class DataRoomType {
 			stmt.executeUpdate();
 					
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
