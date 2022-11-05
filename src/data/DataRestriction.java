@@ -9,7 +9,7 @@ import entities.Restriction;
 
 public class DataRestriction {
 	
-	public LinkedList<Restriction> list(){
+	public LinkedList<Restriction> list() throws SQLException{
 		
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -27,15 +27,12 @@ public class DataRestriction {
 		if(rs!=null) {rs.close();}
 		if(stmt!=null) {stmt.close();}
 		}catch(SQLException ex) {
-			System.out.println("SQLException: "+ ex.getMessage());
-			System.out.println("SQLState: "+ ex.getSQLState());
-			System.out.println("VendorError"+ ex.getErrorCode());
-		
+			throw ex;
 		}
 		return rtts;
 	}
 
-	public Restriction getOne(Restriction r) {
+	public Restriction getOne(Restriction r) throws SQLException {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Restriction re = null;
@@ -53,30 +50,30 @@ public class DataRestriction {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return re;
 	}
 
-	public void delete(Restriction r) {
+	public void delete(Restriction r) throws Exception {
 		PreparedStatement stmt=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM restriction WHERE idRestriction=?;");
 			stmt.setInt(1, r.getIdRestriction());
 			stmt.executeUpdate();
 			if(stmt!=null) {stmt.close();}
-		} catch (Exception e) {e.printStackTrace();}
+		} catch (Exception e) {throw e;}
 	}
 	
-	public void createOne(Restriction r) {
+	public void createOne(Restriction r) throws SQLException {
 		PreparedStatement stmt=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
@@ -98,12 +95,11 @@ public class DataRestriction {
 		    
 		
 		} catch (SQLException ex) {
-			System.out.println("SQLException: "+ ex.getMessage());
-			System.out.println("SQLState: "+ ex.getSQLState());
-			System.out.println("VendorError"+ ex.getErrorCode());}
+			throw ex;
 		}
+	}
 
-	public void update(Restriction r) {
+	public void update(Restriction r) throws SQLException {
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -118,14 +114,14 @@ public class DataRestriction {
 			stmt.executeUpdate();
 					
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
