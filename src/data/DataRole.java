@@ -10,7 +10,7 @@ import entities.Role;
 
 public class DataRole {
 
-	public Role getOne(Role role) {
+	public Role getOne(Role role) throws SQLException {
 		
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -29,14 +29,14 @@ public class DataRole {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -44,7 +44,7 @@ public class DataRole {
 		
 	} // getOne
 	
-	public LinkedList<Role> getAll(){
+	public LinkedList<Role> getAll() throws SQLException{
 		
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -66,7 +66,7 @@ public class DataRole {
 			
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -74,7 +74,7 @@ public class DataRole {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -82,7 +82,7 @@ public class DataRole {
 		
 	} // getAll
 
-	public void add(Role r) {
+	public void add(Role r) throws SQLException {
 		PreparedStatement stmt=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
@@ -104,13 +104,11 @@ public class DataRole {
 		    
 		
 		} catch (SQLException ex) {
-			System.out.println("SQLException: "+ ex.getMessage());
-			System.out.println("SQLState: "+ ex.getSQLState());
-			System.out.println("VendorError"+ ex.getErrorCode());
+			throw ex;
 		}
 	}
 
-	public void update(Role r) {
+	public void update(Role r) throws SQLException {
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -125,20 +123,20 @@ public class DataRole {
 			stmt.executeUpdate();
 					
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
 	}
 
-	public void delete(Role r) {
+	public void delete(Role r) throws Exception {
 
 		PreparedStatement stmt=null;
 		try {
@@ -151,7 +149,7 @@ public class DataRole {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw e;
 		}
 		
 		
