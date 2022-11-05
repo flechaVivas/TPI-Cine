@@ -10,7 +10,7 @@ import entities.RoomType;
 
 public class DataMovieRoom {
 	
-	public MovieRoom getOne(MovieRoom m){
+	public MovieRoom getOne(MovieRoom m) throws SQLException{
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -27,20 +27,20 @@ public class DataMovieRoom {
 				mr.setRt(rt);
 			}	
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return mr;
 	}
 	
-	public LinkedList<MovieRoom> list(){
+	public LinkedList<MovieRoom> list() throws SQLException{
 		Statement stmt = null;
 		ResultSet rs = null;
 		LinkedList<MovieRoom> mrs = new LinkedList<MovieRoom>();
@@ -56,20 +56,20 @@ public class DataMovieRoom {
 				mrs.add(mr);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return mrs;
 	}
 	
-	public MovieRoom update(MovieRoom mr) {
+	public MovieRoom update(MovieRoom mr) throws SQLException {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE movieroom set roomType=? where roomNumber=?;");			
@@ -77,19 +77,19 @@ public class DataMovieRoom {
 			stmt.setInt(3, mr.getRt().getIdRoomType());
 			stmt.executeUpdate();
 		}catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 		return mr;
 	}
 	
-	public MovieRoom CreateMovieRoom(MovieRoom mr){
+	public MovieRoom CreateMovieRoom(MovieRoom mr) throws SQLException{
 		PreparedStatement stmt = null;
 		
 		try {
@@ -101,32 +101,32 @@ public class DataMovieRoom {
 				mr.setRoomNumber(keyResultSet.getInt(1));
 			}
 		}catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 		return mr;
 	}
 	
-	public void deleteMovieRoom(MovieRoom mr) {
+	public void deleteMovieRoom(MovieRoom mr) throws SQLException {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM movieroom WHERE roomNumber=?;");
 			stmt.setInt(1, mr.getRoomNumber());
 			stmt.executeUpdate();
 		}catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 	}
