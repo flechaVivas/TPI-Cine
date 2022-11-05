@@ -13,7 +13,7 @@ import entities.Movie;
 
 public class DataMovie {
 	
-	public Movie getbyId(Movie m) {
+	public Movie getbyId(Movie m) throws SQLException {
 		
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -50,21 +50,21 @@ public class DataMovie {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
 		return mo;
 	}
 	
-	public Movie getbyTitle(Movie m) {
+	public Movie getbyTitle(Movie m) throws SQLException {
 		
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -103,21 +103,21 @@ public class DataMovie {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
 		return mo;
 	}
 	
-	public Movie update(Movie m) {	
+	public Movie update(Movie m) throws SQLException {	
 	PreparedStatement stmt= null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
@@ -136,37 +136,37 @@ public class DataMovie {
 			stmt.setInt(11, m.getIdMovie());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-            e.printStackTrace();
+			throw e;
 		} finally {
             try {
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 		return m;
 	}
 
-	public void delete(Movie m) {
+	public void delete(Movie m) throws SQLException {
 		PreparedStatement stmt=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE  FROM movie WHERE idMovie=?;");
 			stmt.setInt(1, m.getIdMovie());
 			stmt.executeUpdate();
 			} catch (SQLException e) {
-			e.printStackTrace();
+				throw e;
 			} finally {
 				try {
 					if(stmt!=null) {stmt.close();}
 					DbConnector.getInstancia().releaseConn();
 					} catch (SQLException e) {
-					e.printStackTrace();
+						throw e;
 					}
 			}
 	}
 	
-	public Movie createOne(Movie m){
+	public Movie createOne(Movie m) throws SQLException {
 		PreparedStatement stmt=null;
 		ResultSet keyResultSet = null;
 		try {
@@ -192,18 +192,18 @@ public class DataMovie {
 				m.setIdMovie(id);
 				}	
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			} finally {
 					try {
 						if(stmt!=null) {stmt.close();}
 						if(keyResultSet!=null) {keyResultSet.close();}
 						DbConnector.getInstancia().releaseConn();
-						} catch (SQLException e) {e.printStackTrace();}
+						} catch (SQLException e) {throw e;}
 						}
 			return m;
 		}
 	
-	public LinkedList<Movie> list(){
+	public LinkedList<Movie> list() throws SQLException {
 		Statement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Movie> movs=new LinkedList<Movie>();
@@ -238,20 +238,20 @@ public class DataMovie {
 				movs.add(m);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 		}
 	
-	public LinkedList<Movie> getEntreFechas(Movie d,Movie h){
+	public LinkedList<Movie> getEntreFechas(Movie d,Movie h) throws SQLException {
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -287,20 +287,20 @@ public class DataMovie {
 				movs.add(m);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 	}
 	
-	public LinkedList<Movie> getByGenre(Genre g){
+	public LinkedList<Movie> getByGenre(Genre g) throws SQLException {
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;	
@@ -333,20 +333,20 @@ public class DataMovie {
 				movs.add(m);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 	}
 	
-	public LinkedList<Movie> getByRest(Restriction r){
+	public LinkedList<Movie> getByRest(Restriction r) throws SQLException {
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -381,20 +381,20 @@ public class DataMovie {
 				movs.add(m);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 	}
 	
-	public LinkedList<Movie> getByDirector(Movie mo){
+	public LinkedList<Movie> getByDirector(Movie mo) throws SQLException {
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -428,20 +428,20 @@ public class DataMovie {
 				movs.add(m);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 	}
 	
-	public LinkedList<Movie> getByDuration(Movie tm){
+	public LinkedList<Movie> getByDuration(Movie tm) throws SQLException {
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -475,19 +475,19 @@ public class DataMovie {
 				movs.add(m);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 	}
-	public LinkedList<Movie> getByRestGenre(Restriction r,Genre g){
+	public LinkedList<Movie> getByRestGenre(Restriction r,Genre g) throws SQLException {
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;	
@@ -521,19 +521,19 @@ public class DataMovie {
 				movs.add(m);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 	}
-	public LinkedList<Movie> getByRestGenreTit(Restriction r,Genre g, Movie m){
+	public LinkedList<Movie> getByRestGenreTit(Restriction r,Genre g, Movie m) throws SQLException {
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;	
@@ -568,20 +568,20 @@ public class DataMovie {
 				movs.add(mo);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 	}
 	
-	public LinkedList<Movie> getByRestTit(Restriction r,Movie m){
+	public LinkedList<Movie> getByRestTit(Restriction r,Movie m) throws SQLException {
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;	
@@ -615,20 +615,20 @@ public class DataMovie {
 				movs.add(mo);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 	}
 	
-	public LinkedList<Movie> getByGenreTit(Genre g, Movie m){
+	public LinkedList<Movie> getByGenreTit(Genre g, Movie m) throws SQLException {
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;	
@@ -662,20 +662,20 @@ public class DataMovie {
 				movs.add(mo);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 	}
 
-	public LinkedList<Movie> getSimilTit(Movie m) {
+	public LinkedList<Movie> getSimilTit(Movie m) throws SQLException {
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;	
@@ -708,19 +708,19 @@ public class DataMovie {
 				movs.add(mo);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
 	}
-	public Movie bajalogica(Movie m) {	
+	public Movie bajalogica(Movie m) throws SQLException {	
 		PreparedStatement stmt= null;
 			try {
 				stmt=DbConnector.getInstancia().getConn().
@@ -729,18 +729,18 @@ public class DataMovie {
 				stmt.setInt(2, m.getIdMovie());
 				stmt.executeUpdate();
 			} catch (SQLException e) {
-	            e.printStackTrace();
+				throw e;
 			} finally {
 	            try {
 	                if(stmt!=null)stmt.close();
 	                DbConnector.getInstancia().releaseConn();
 	            } catch (SQLException e) {
-	            	e.printStackTrace();
+	            	throw e;
 	            }
 			}
 			return m;
 		}
-	public Movie deshacerBajaLogica(Movie m) {	
+	public Movie deshacerBajaLogica(Movie m) throws SQLException {	
 		PreparedStatement stmt= null;
 			try {
 				stmt=DbConnector.getInstancia().getConn().
@@ -749,18 +749,18 @@ public class DataMovie {
 				stmt.setInt(2, m.getIdMovie());
 				stmt.executeUpdate();
 			} catch (SQLException e) {
-	            e.printStackTrace();
+				throw e;
 			} finally {
 	            try {
 	                if(stmt!=null)stmt.close();
 	                DbConnector.getInstancia().releaseConn();
 	            } catch (SQLException e) {
-	            	e.printStackTrace();
+	            	throw e;
 	            }
 			}
 			return m;
 		}
-	public LinkedList<Movie> getBillboardMovies(){
+	public LinkedList<Movie> getBillboardMovies() throws SQLException{
 		LinkedList<Movie> movs=new LinkedList<Movie>();
 		PreparedStatement stmt=null;
 		ResultSet rs=null;	
@@ -792,14 +792,14 @@ public class DataMovie {
 				movs.add(m);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 			return movs;
