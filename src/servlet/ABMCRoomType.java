@@ -92,7 +92,11 @@ public class ABMCRoomType extends HttpServlet {
 			
 		} catch (Exception e) {
 			
+			request.setAttribute("error", "No se ha podido realizar la operación: "+e.getMessage());
 			
+		} finally {
+			
+			request.getRequestDispatcher("/views/pages/ui-roomType/listRoomTypes.jsp").forward(request, response);
 		}
 		
 		

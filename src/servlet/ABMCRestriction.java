@@ -74,12 +74,15 @@ public class ABMCRestriction extends HttpServlet {
 				break;
 			}
 			
-			request.getRequestDispatcher("/views/pages/ui-restriction/listRestrictions.jsp").forward(request, response);
-			
 		} catch (Exception e) {
 			
+			request.setAttribute("error", "No se ha podido realizar la operación: "+e.getMessage());
 			
+		} finally {
+			
+			request.getRequestDispatcher("/views/pages/ui-restriction/listRestrictions.jsp").forward(request, response);
 		}
+		
 		
 		
 		

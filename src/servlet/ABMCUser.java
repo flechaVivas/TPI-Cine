@@ -75,9 +75,10 @@ public class ABMCUser extends HttpServlet {
 					
 				} catch (SQLIntegrityConstraintViolationException sqli) {
 					
-					System.out.println("Error integridad");
-					response.sendRedirect("/TPI-Cine/views/pages/register.jsp");
-					
+					request.setAttribute("error", "Ya existe un usuario con ese mail");
+				}
+				finally {
+					request.getRequestDispatcher("/views/pages/ui-user/listUsers.jsp").forward(request, response);
 				}
 				
 			
@@ -113,18 +114,16 @@ public class ABMCUser extends HttpServlet {
 				} catch (SQLIntegrityConstraintViolationException sqli) {
 					
 					request.setAttribute("error", "El email ya ha sido ingresado!");
-					request.getRequestDispatcher("/views/pages/register.jsp").forward(request, response);
 					
 				} catch (DateTimeException e) {
 					
 					request.setAttribute("error", "La fecha ingresada es inválida");
-					request.getRequestDispatcher("/views/pages/register.jsp").forward(request, response);
 					
 				} catch (Exception e) {
 					
 					request.setAttribute("error", "Ha ocurrido un error, inténtelo más tarde");
+				} finally {
 					request.getRequestDispatcher("/views/pages/register.jsp").forward(request, response);
-					
 				}
 				
 				
@@ -144,12 +143,43 @@ public class ABMCUser extends HttpServlet {
 				
 				break;
 				
+			case "actualizar":
+				
+				User usesion = (User)request.getSession(false).getAttribute("usuario");
+				
+				ctrlUser = new UserController();
+				u = new User();
+				u.setName(request.getParameter("name"));
+				u.setSurname(request.getParameter("surname"));
+				u.setEmail(request.getParameter("email"));
+				u.setBirthDate(LocalDate.parse(request.getParameter("birthDate")));
+				u.setAdress(request.getParameter("adress"));
+				u.setPhoneNumber(request.getParameter("phoneNumber"));
+				
+				if (request.getParameter("password").equals(request.getParameter("repeatPassword"))) { //poner que la copntraseña no sea null
+					
+					u.setPassword(request.getParameter("password"));
+					u.setIdUser(usesion.getIdUser());
+					
+					ctrlUser.update(u);
+					
+					response.getWriter().append(u.getName()+u.getSurname());
+					
+					request.getSession(false).invalidate();
+					request.getRequestDispatcher("/views/pages/login.jsp").forward(request, response);
+					
+					
+				} else {
+					request.setAttribute("action", "errorPasswd");
+					request.getRequestDispatcher("/views/pages/MiCuenta.jsp").forward(request, response);
+				}
+				
+				break;
+				
 			case "delete":
 				
 				u.setIdUser(Integer.parseInt((String)request.getParameter("idUser")));
 				ctrlUser.delete(u);
-				
-				
 				
 				break;
 
@@ -161,6 +191,8 @@ public class ABMCUser extends HttpServlet {
 			
 		} catch (Exception e) {
 			
+			request.setAttribute("error", e.getMessage());
+			request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
 			
 		}
 	

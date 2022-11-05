@@ -74,11 +74,13 @@ public class ABMCRole extends HttpServlet {
 				break;
 			}
 			
-			request.getRequestDispatcher("/views/pages/ui-role/listRoles.jsp").forward(request, response);
-			
 		} catch (Exception e) {
 			
+			request.setAttribute("error", "No se ha podido realizar la operación: "+e.getMessage());
+		
+		} finally {
 			
+			request.getRequestDispatcher("/views/pages/ui-role/listRoles.jsp").forward(request, response);
 		}
 		
 		

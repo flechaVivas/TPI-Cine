@@ -66,9 +66,10 @@ public class login extends HttpServlet {
             }
 
 
-        }catch(SQLException e) {
+        }catch(Exception e) {
         	
-            e.getMessage();
+        	request.setAttribute("error", e.getMessage());
+			request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
         }
 
     }

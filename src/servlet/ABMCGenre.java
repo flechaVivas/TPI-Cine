@@ -75,13 +75,13 @@ public class ABMCGenre extends HttpServlet {
 				break;
 			}
 			
-			request.getRequestDispatcher("/views/pages/ui-genre/listGenres.jsp").forward(request, response);
 			
 		} catch (Exception e) {
 			
+			request.setAttribute("error", "No se ha podido realizar la operación"+e.getMessage());
 			
-			
-			
+		} finally {
+			request.getRequestDispatcher("/views/pages/ui-genre/listGenres.jsp").forward(request, response);
 		}
 		
 		
