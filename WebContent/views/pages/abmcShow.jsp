@@ -41,18 +41,23 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	<main>
 		<div class="input-group">
-    	<form class="registerForm" method="POST" action="/TPI-Cine/src/servlet/filterShow">
-			<div class="input-group mb-3">
-  			<div class="formContent">
-                    <label>Ingrese Título de la pelicula</label>
-                   <input class="inputForm" name="title" type="text" placeholder="Ingrese titulo de la pelicula"></input>
-                   <b>Dia</b>
-        	<input type="date" name="dt" placeholder="fecha"></input></div>  
-			</div>     
-			<button class="btn btn-success">Aceptar</button>    
-    	</form>
-    	<table class="table table-hover">
-        	<thead>
+        	<table class="table">
+        		<tr>
+    				<form class="registerForm" method="POST" action="/TPI-Cine/src/servlet/filterShow">
+    					<div class="formContent">
+        					<td><label>Fecha</label>
+        						<input type="date" name="dt" placeholder="fecha"></input>
+        					</td>
+        					<td><label>Ingrese Título de la pelicula</label>
+           						<input class="inputForm" name="title" type="text" placeholder="Ingrese titulo de la pelicula"></input>
+           					</td>
+           				</div>
+                  	 		<td><button class="btn btn-dark">Aceptar</button></td>
+                  	 </form>
+        		</tr>
+        	</table>
+        <table class="table table-hover">
+        	<thead class="titulo">
           		<tr>
             		<th scope="col">Fecha y Hora</th>
             		<th scope="col">Pelicula</th>
@@ -63,7 +68,6 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
         	</thead>
         	<tbody>
           		<tr>
-          			
           			<%for (Show s:shows ){ %>
           			<td><%=s.getDt()%></td>
             		<%	Movie m=new Movie();

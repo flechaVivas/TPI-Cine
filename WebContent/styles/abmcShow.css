@@ -23,6 +23,9 @@ input[type="date"] { border-radius: 8px;
     color: #90e0efff;
 
 }
+th{
+	text-align: center;
+}
 select{
     background-color: transparent;
     line-height: 28px;
@@ -67,3 +70,6 @@ select{
     cursor: auto;
     color: #caf0f8ff;
    }
+   a:link, a:visited, a:active {
+    text-decoration:none;
+}
