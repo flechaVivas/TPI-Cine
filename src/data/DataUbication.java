@@ -11,24 +11,25 @@ import entities.*;
 
 public class DataUbication {
 	
-	public LinkedList<Ubication> getTicketsWithUser(User user){
+	public LinkedList<Ubication> getTicketsWithUser(User user) throws SQLException{
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Ubication> ubications = new LinkedList<Ubication>();
 		
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement(" SELECT t.idTicket, t.operationCode, cine_tpjava.t.dateTime, t.price, ubi.row, ubi.col, s.roomNumber, s.date_time, m.title, m.image "
-																	 + " FROM ticket t "
-																	 + " inner join ubication ubi"
-																	 + "	on ubi.idTicket = t.idTicket"
-																	 + " inner join cine_tpjava.show s"
-																	 + "	on  s.idMovie = ubi.idMovie"
-																	 + "	and s.roomNumber = ubi.roomNumber"
-																	 + "	and s.date_time = ubi.show_date_time"
-																	 + " inner join movie m"
-																	 + "	on m.idMovie = s.idMovie"
-																	 + " where idUser = ? and t.retirementDate is null and s.date_time > current_timestamp();");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"SELECT t.idTicket, t.operationCode, cine_tpjava.t.dateTime, t.price, ubi.row, ubi.col, s.roomNumber, s.date_time, m.title, m.image "
+				 + " FROM ticket t "
+				 + " inner join ubication ubi"
+				 + "	on ubi.idTicket = t.idTicket"
+				 + " inner join cine_tpjava.show s"
+				 + "	on  s.idMovie = ubi.idMovie"
+				 + "	and s.roomNumber = ubi.roomNumber"
+				 + "	and s.date_time = ubi.show_date_time"
+				 + " inner join movie m"
+				 + "	on m.idMovie = s.idMovie"
+				 + " where idUser = ? and t.retirementDate is null and s.date_time > current_timestamp();");
 			stmt.setInt(1, user.getIdUser());
 			
 			rs=stmt.executeQuery();
@@ -65,7 +66,7 @@ public class DataUbication {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -73,7 +74,7 @@ public class DataUbication {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -81,7 +82,7 @@ public class DataUbication {
 	
 	}
 	
-	public Ubication GetOne(Ubication ubp){
+	public Ubication GetOne(Ubication ubp) throws SQLException{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Ubication ub = null; 
@@ -103,21 +104,21 @@ public class DataUbication {
 			}
 			
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return ub;
 	}
 	
 	//Traigo ubicaciones segun Room
-	public LinkedList<Ubication> getByRoom(int roomNumber){
+	public LinkedList<Ubication> getByRoom(int roomNumber) throws SQLException{
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Ubication> ubis = new LinkedList<Ubication>();
@@ -137,38 +138,37 @@ public class DataUbication {
 				ubis.add(u);
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return ubis;
 	}
 	
-	public void update(Ubication u) {
+	public void update(Ubication u) throws SQLException {
 		PreparedStatement stmt = null;
 		try {
-			// lo unico que se actualiza es el status, lo demas son fijos
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("UPDATE ubication set status = ?;");
 			stmt.executeUpdate();
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}		
 	}
 	
-	public void createUbication(Ubication u) {
+	public void createUbication(Ubication u) throws SQLException {
 		PreparedStatement stmt = null;
 		try{
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("INSERT INTO ubication(ubication.row,ubication.col,ubication.roomNumber,ubication.idMovie,ubication.show_date_time,ubication.idTicket) VALUES (?,?,?,?,?,?);");
@@ -183,18 +183,18 @@ public class DataUbication {
 			stmt.executeUpdate();
 			
 		}catch (SQLException e){
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
 
-	public LinkedList<Ubication> getByShow(Show s) {
+	public LinkedList<Ubication> getByShow(Show s) throws SQLException {
 		
 		
 		LinkedList<Ubication> ubics = new LinkedList<Ubication>();
@@ -229,14 +229,14 @@ public class DataUbication {
 				
 			}
 		}catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		

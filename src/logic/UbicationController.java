@@ -1,5 +1,6 @@
 package logic;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import data.DataUbication;
@@ -14,27 +15,27 @@ public class UbicationController {
 		du = new DataUbication();
 	}
 	
-	public LinkedList<Ubication> getTicketsWithUser(User User){
+	public LinkedList<Ubication> getTicketsWithUser(User User) throws SQLException{
 		return du.getTicketsWithUser(User);
 	}
 	
-	public Ubication getOne(Ubication u) {
+	public Ubication getOne(Ubication u) throws SQLException {
 		return du.GetOne(u);
 	}
 	
-	public LinkedList<Ubication> getByRoom(int roomNumber){
+	public LinkedList<Ubication> getByRoom(int roomNumber) throws SQLException{
 		return du.getByRoom(roomNumber);
 	}
 	
-	public void update(Ubication u) {
+	public void update(Ubication u) throws SQLException {
 		du.update(u);
 	}
 	
-	public void createUbication(Ubication u) {
+	public void createUbication(Ubication u) throws SQLException {
 		du.createUbication(u);
 	}
 	
-	public LinkedList<Ubication> getByShow(Show s) {
+	public LinkedList<Ubication> getByShow(Show s) throws SQLException {
 		return du.getByShow(s);
 		
 	}
