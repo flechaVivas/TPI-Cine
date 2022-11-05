@@ -30,7 +30,7 @@
 		<%if( u != null){%>		
 			<h1 class="tituloMiCuenta">Mi Cuenta</h1>
 			
-				<form class="RegisterForm" method="POST" action="/TPI-Cine/src/servlet/UpdateCuenta">
+				<form class="RegisterForm" method="POST" action="/TPI-Cine/src/servlet/ABMCUser?action=actualizar">
 					<div class="formContent">
 						<div>
 							<div class="divForm">

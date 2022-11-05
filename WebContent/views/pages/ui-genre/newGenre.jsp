@@ -16,6 +16,15 @@
 
         <!-- Body de la pagina -->
         <div class="row"> 
+
+            <% if(request.getAttribute("error")!=null){ %>
+                <div class="col-12">
+                    <div class="alert alert-danger" role="alert">
+                        <strong style="color: #660708;">Error! <%=request.getAttribute("error")%></strong>
+                    </div>
+                </div>
+                
+            <% } %>
         
         	<jsp:include page="/views/partials/menuIzq.jsp"></jsp:include>
         
