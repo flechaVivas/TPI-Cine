@@ -1,5 +1,6 @@
 package logic;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import data.DataGenre;
@@ -10,14 +11,24 @@ private DataGenre dg;
 	
 	public GenreController() {dg= new DataGenre();}
 	
-	public LinkedList<Genre> getAll() {return dg.list();}
+	public LinkedList<Genre> getAll() throws SQLException {
+		return dg.list();
+	}
 	
-	public Genre getOne(Genre g) {return dg.getOne(g);}
+	public Genre getOne(Genre g) throws SQLException {
+		return dg.getOne(g);
+	}
 	
-	public void deleteOne(Genre g) {dg.delete(g);}
+	public void deleteOne(Genre g) throws Exception {
+		dg.delete(g);
+	}
 	
-	public Genre addOne(Genre g) {return dg.createOne(g);}
+	public Genre addOne(Genre g) throws SQLException {
+		return dg.createOne(g);
+	}
 
-	public void update(Genre g){dg.update(g);}
+	public void update(Genre g) throws SQLException{
+		dg.update(g);
+	}
 
 }

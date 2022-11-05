@@ -10,7 +10,7 @@ import entities.Genre;
 
 public class DataGenre {
 	
-	public LinkedList<Genre> list(){
+	public LinkedList<Genre> list() throws SQLException{
 		
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -28,15 +28,13 @@ public class DataGenre {
 			if(rs!=null) {rs.close();}
 			if(stmt!=null) {stmt.close();}
 		}catch(SQLException ex) {
-			System.out.println("SQLException: "+ ex.getMessage());
-			System.out.println("SQLState: "+ ex.getSQLState());
-			System.out.println("VendorError"+ ex.getErrorCode());
+			throw ex;
 		
 		}
 		return gnrs;
 	}
 
-	public Genre getOne(Genre g) {
+	public Genre getOne(Genre g) throws SQLException {
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		Genre ge = null;
@@ -54,30 +52,30 @@ public class DataGenre {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return ge;
 	}
 
-	public void delete(Genre g) {
+	public void delete(Genre g) throws Exception {
 		PreparedStatement stmt=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("DELETE FROM genre WHERE idGenre=?;");
 			stmt.setInt(1, g.getIdGenre());
 			stmt.executeUpdate();
 			if(stmt!=null) {stmt.close();}
-		} catch (Exception e) {e.printStackTrace();}
+		} catch (Exception e) {throw e;}
 	}
 	
-	public Genre createOne(Genre g) {
+	public Genre createOne(Genre g) throws SQLException {
 	PreparedStatement stmt=null;
 	try {
 		stmt=DbConnector.getInstancia().getConn().prepareStatement(
@@ -99,13 +97,12 @@ public class DataGenre {
 	    
 	
 	} catch (SQLException ex) {
-		System.out.println("SQLException: "+ ex.getMessage());
-		System.out.println("SQLState: "+ ex.getSQLState());
-		System.out.println("VendorError"+ ex.getErrorCode());}
+		throw ex;
+	}
 		return g;
 	}
 
-	public void update(Genre g) {
+	public void update(Genre g) throws SQLException {
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -120,14 +117,14 @@ public class DataGenre {
 			stmt.executeUpdate();
 					
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
