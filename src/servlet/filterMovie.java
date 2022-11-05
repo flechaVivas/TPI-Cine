@@ -41,16 +41,21 @@ public class filterMovie extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Movie m = new Movie();
-		m.setTitle((String)request.getParameter("title"));
-		Genre g = new Genre();
-       	g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));                	
-       	Restriction r = new Restriction();
-       	r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
-       	MovieController ctrlMovie = new MovieController();
-       	LinkedList<Movie> movies=new LinkedList<Movie>();
-       	
-      	if(Integer.parseInt((String)request.getParameter("restriction"))!=0) {
+		
+		
+		
+		try {
+			
+			Movie m = new Movie();
+			m.setTitle((String)request.getParameter("title"));
+			Genre g = new Genre();
+	       	g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));                	
+	       	Restriction r = new Restriction();
+	       	r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
+	       	MovieController ctrlMovie = new MovieController();
+	       	LinkedList<Movie> movies=new LinkedList<Movie>();
+	       	
+	       	if(Integer.parseInt((String)request.getParameter("restriction"))!=0) {
 				if(Integer.parseInt((String)request.getParameter("genre"))!=0) {
 					if((String)request.getParameter("title")!="") {
 								//Todos los filtros
@@ -68,7 +73,7 @@ public class filterMovie extends HttpServlet {
 						movies=ctrlMovie.getByRestri(r);						
 					}
 				}
-		}else {
+	       	}else {
 				if(Integer.parseInt((String)request.getParameter("genre"))!=0) {
 					if((String)request.getParameter("title")!="") {						
 								//Genero y titulo
@@ -87,7 +92,20 @@ public class filterMovie extends HttpServlet {
 					}
 				}				
 			}
-      	request.getSession(false).setAttribute("movies",movies);
+    
+	    request.getSession(false).setAttribute("movies",movies);
       	response.sendRedirect("/TPI-Cine/views/pages/abmcMovieFiltrado.jsp");	
+	       	
+	       	
+		} catch (Exception e) {
+			request.setAttribute("error", e.getMessage());
+			request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+		}
+		
+		
+		
+		
+       	
+      	
 	}
 }

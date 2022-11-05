@@ -46,44 +46,63 @@ public class abmcShow extends HttpServlet {
 		Show s=new Show();
 		MovieRoom mr= new MovieRoom();
 		ShowController ctrlShow=new ShowController();
-		//try {
 			switch((String)request.getParameter("action")) {
 				case "new":
-					m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
-					s.setMovie(m);
-					mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
-					s.setMovieroom(mr);
-					s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
-					ctrlShow.addOne(s);
-				break;
+					
+					try {
+						m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
+						s.setMovie(m);
+						mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
+						s.setMovieroom(mr);
+						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
+						ctrlShow.addOne(s);
+						break;
+					} catch (Exception e) {
+						request.setAttribute("error", e.getMessage());
+						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+					}
+					
+					
 				case "delete":
-					m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
-					s.setMovie(m);
-					mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
-					s.setMovieroom(mr);
-					s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
-					ctrlShow.deleteOne(s);
+					
+					try {
+						m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
+						s.setMovie(m);
+						mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
+						s.setMovieroom(mr);
+						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
+						ctrlShow.deleteOne(s);
+					} catch (Exception e) {
+						request.setAttribute("error", e.getMessage());
+						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+					}
+					
 				break;
 				case "update":
-					Show sw=new Show();
-					Movie mo=new Movie();
-					MovieRoom mrm=new MovieRoom();
-					mo.setIdMovie(Integer.parseInt((String)request.getParameter("exMovie")));
-					sw.setMovie(mo);
-					mrm.setRoomNumber(Integer.parseInt((String)request.getParameter("exRoom")));
-					sw.setMovieroom(mrm);
-					sw.setDt(LocalDateTime.parse((String)request.getParameter("exdt")));
-					m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
-					s.setMovie(m);
-					mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
-					s.setMovieroom(mr);
-					s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
-					ctrlShow.editOne(s,sw);
+					try {
+						Show sw=new Show();
+						Movie mo=new Movie();
+						MovieRoom mrm=new MovieRoom();
+						mo.setIdMovie(Integer.parseInt((String)request.getParameter("exMovie")));
+						sw.setMovie(mo);
+						mrm.setRoomNumber(Integer.parseInt((String)request.getParameter("exRoom")));
+						sw.setMovieroom(mrm);
+						sw.setDt(LocalDateTime.parse((String)request.getParameter("exdt")));
+						m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
+						s.setMovie(m);
+						mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
+						s.setMovieroom(mr);
+						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
+						ctrlShow.editOne(s,sw);
+					} catch (Exception e) {
+						request.setAttribute("error", e.getMessage());
+						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+					}
+					
 			default:
 				break;
 			}
-		/*}catch(Exception e){
-			e.getMessage();}*/
+			
 		request.getRequestDispatcher("/views/pages/abmcShow.jsp").forward(request, response);
 	}
 

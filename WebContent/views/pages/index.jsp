@@ -22,11 +22,16 @@
 </head>
 <body style="background-image: url(../../assets/background/vanishing-stripes.png)">
 
-	<jsp:include page="../partials/navbar.jsp"></jsp:include>
-	
-	<jsp:include page="../partials/cartelera.jsp"></jsp:include>
-	
+	<% try{ %>
 
+		<jsp:include page="../partials/navbar.jsp"></jsp:include>
+		
+		<jsp:include page="../partials/cartelera.jsp"></jsp:include>
+	
+	<%} catch(Exception e){
+		request.setAttribute("error", e.getMessage());
+		request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+	} %>
 	
 
 </body>

@@ -110,7 +110,6 @@ public class ABMCUser extends HttpServlet {
 					break;
 				
 				
-				
 				} catch (SQLIntegrityConstraintViolationException sqli) {
 					
 					request.setAttribute("error", "El email ya ha sido ingresado!");
@@ -129,10 +128,6 @@ public class ABMCUser extends HttpServlet {
 				}
 				
 				
-				
-			
-				
-			
 			case "update":
 				
 				u.setIdUser(Integer.parseInt((String)request.getParameter("idUser")));

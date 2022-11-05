@@ -50,20 +50,20 @@ public class EntradasServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		try {
-			
-			Show s = new Show();
-			Movie m = new Movie();
-			RoomType rt = new RoomType();
-			MovieController ctrlMovie = new MovieController();
-			ShowController ctrlShow = new ShowController();
-			RoomTypeController ctrlRT = new RoomTypeController();
-			MovieRoomController ctrlMovieRoom = new MovieRoomController();
+	
+		Show s = new Show();
+		Movie m = new Movie();
+		RoomType rt = new RoomType();
+		MovieController ctrlMovie = new MovieController();
+		ShowController ctrlShow = new ShowController();
+		RoomTypeController ctrlRT = new RoomTypeController();
+		MovieRoomController ctrlMovieRoom = new MovieRoomController();
 			
 			
-			switch ((String)request.getParameter("step")) {
-			case "pelicula":
+		switch ((String)request.getParameter("step")) {
+		case "pelicula":
+			
+			try {
 				
 				if (request.getParameter("movie") != null) {
 					
@@ -81,7 +81,15 @@ public class EntradasServlet extends HttpServlet {
 				
 				break;
 				
-			case "tipoDeSala":
+			} catch (Exception e) {
+				request.setAttribute("error", e.getMessage());
+				request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+			}
+			
+			
+		case "tipoDeSala":
+			
+			try {
 				
 				s = (Show) request.getSession(false).getAttribute("show");
 				
@@ -104,8 +112,17 @@ public class EntradasServlet extends HttpServlet {
 				
 				break;
 				
-			case "diaHora":
-				
+			} catch (Exception e) {
+				request.setAttribute("error", e.getMessage());
+				request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+			}
+			
+			
+			
+			
+		case "diaHora":
+			
+			try {
 				String date_time = (String) request.getParameter("date_time");
 				
 				s = (Show)request.getSession(false).getAttribute("show");
@@ -120,8 +137,6 @@ public class EntradasServlet extends HttpServlet {
 				
 				s.setMovieroom(s_traido.getMovieroom());
 				
-//				System.out.println(s.getMovie().getTitle()+" "+s.getMovieroom().getRoomNumber()+" "+s.getDt() +" "+request.getSession(false).getAttribute("cantidad")+" "+s.getMovieroom().getRt().getDescription());
-				
 				request.getSession(false).removeAttribute("show");
 				request.getSession(false).setAttribute("show", s);
 				
@@ -130,12 +145,17 @@ public class EntradasServlet extends HttpServlet {
 				
 				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecAsiento");
 				
-				
 				break;
 				
-			case "asiento":
-				
-				ubicElegidas = (LinkedList<Ubication>)request.getSession(false).getAttribute("ubicElegidas");
+			} catch (Exception e) {
+				request.setAttribute("error", e.getMessage());
+				request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+			}
+			
+		case "asiento":
+			
+			try {
+				LinkedList<Ubication> ubicElegidas = (LinkedList<Ubication>)request.getSession(false).getAttribute("ubicElegidas");
 				
 				request.getSession(false).setAttribute
 				("cantidad", (Integer)request.getSession(false).getAttribute("cantidad") - 1);
@@ -154,8 +174,6 @@ public class EntradasServlet extends HttpServlet {
 					
 					request.getSession(false).setAttribute("ubicElegidas", ubicElegidas);
 					
-//					System.out.println(u_elegida);
-					
 					if ((Integer)request.getSession(false).getAttribute("cantidad") != 0) {
 						response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=selecAsiento");
 						
@@ -168,15 +186,17 @@ public class EntradasServlet extends HttpServlet {
 				}
 				
 				break;
-			
-			default:
-				break;
+			} catch (Exception e) {
+				request.setAttribute("error", e.getMessage());
+				request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
 			}
 			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
+		
+		default:
+			break;
 		}
+			
+			
 		
 	}
 

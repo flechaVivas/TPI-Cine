@@ -42,37 +42,44 @@ public class filterShow extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Show s= new Show();
-		ShowController ctrlShow = new ShowController();
-		Movie m= new Movie();
 		
-		m.setTitle((String)request.getParameter("title"));
-		String date=(String)request.getParameter("dt");
-		String time="T00:00";
-		if(date!="") {
-			s.setDt(LocalDateTime.parse(date+time));}
-       	LinkedList<Show>shows=new LinkedList<Show>();
-       	
-		if((String)request.getParameter("title")!="") {
-			if((String)request.getParameter("dt")!="") {
-					System.out.println("//Filtro por fecha y titulo");//Filtro por fecha y titulo
-					shows=ctrlShow.getByTityFech(s,m);					
+		try {
+			Show s= new Show();
+			ShowController ctrlShow = new ShowController();
+			Movie m= new Movie();
+			
+			m.setTitle((String)request.getParameter("title"));
+			String date=(String)request.getParameter("dt");
+			String time="T00:00";
+			if(date!="") {
+				s.setDt(LocalDateTime.parse(date+time));}
+	       	LinkedList<Show>shows=new LinkedList<Show>();
+	       	
+			if((String)request.getParameter("title")!="") {
+				if((String)request.getParameter("dt")!="") {
+						System.out.println("//Filtro por fecha y titulo");//Filtro por fecha y titulo
+						shows=ctrlShow.getByTityFech(s,m);					
+				}else{
+					System.out.println("//Filtro por titulo");//Filtro por titulo
+						shows=ctrlShow.getByTit(m);
+				}
+					
 			}else{
-				System.out.println("//Filtro por titulo");//Filtro por titulo
-					shows=ctrlShow.getByTit(m);
+				if((String)request.getParameter("dt")!=""){
+					System.out.println("//Filtro por fecha");//Filtro por fecha
+						shows=ctrlShow.getByFech(s);
+				}else{
+					System.out.println("//No filtro");//No filtro
+						shows=ctrlShow.getAll();
+				}
 			}
-				
-		}else{
-			if((String)request.getParameter("dt")!=""){
-				System.out.println("//Filtro por fecha");//Filtro por fecha
-					shows=ctrlShow.getByFech(s);
-			}else{
-				System.out.println("//No filtro");//No filtro
-					shows=ctrlShow.getAll();
-			}
+			request.getSession(false).setAttribute("shows",shows);
+			response.sendRedirect("/TPI-Cine/views/pages/abmcShowFiltrado.jsp");	
+		} catch (Exception e) {
+			request.setAttribute("error", e.getMessage());
+			request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
 		}
-		request.getSession(false).setAttribute("shows",shows);
-		response.sendRedirect("/TPI-Cine/views/pages/abmcShowFiltrado.jsp");		
+		
 	}
 }
 

@@ -48,20 +48,20 @@ public class ABMCTicket extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		try {
+		TicketController ctrlTicket = new TicketController();
+		UbicationController ctrlUbi = new UbicationController();
+		
+		User u = (User) request.getSession(false).getAttribute("usuario");
+		Show s = (Show) request.getSession(false).getAttribute("show");
+		LinkedList<Ubication> ubicElegidas = (LinkedList<Ubication>)request.getSession(false).getAttribute("ubicElegidas");
+		
+		Integer cant_entradas = (Integer)request.getSession().getAttribute("cantidad");
+		
+		switch ((String)request.getParameter("action")) {
+		
+		case "new":
 			
-			TicketController ctrlTicket = new TicketController();
-			UbicationController ctrlUbi = new UbicationController();
-			
-			User u = (User) request.getSession(false).getAttribute("usuario");
-			Show s = (Show) request.getSession(false).getAttribute("show");
-			LinkedList<Ubication> ubicElegidas = (LinkedList<Ubication>)request.getSession(false).getAttribute("ubicElegidas");
-			
-			Integer cant_entradas = (Integer)request.getSession().getAttribute("cantidad");
-			
-			switch ((String)request.getParameter("action")) {
-			
-			case "new":
+			try {
 				
 				for (Ubication ubi : ubicElegidas) {
 					
@@ -79,14 +79,22 @@ public class ABMCTicket extends HttpServlet {
 					ubi.setTicket(t);
 					ctrlUbi.createUbication(ubi);
 					
-//					System.out.println(ubi.getRow()+" "+ubi.getCol()+" "+ubi.getShow().getMovieroom()+" "+ubi.getShow().getMovie().getIdMovie()+" "+ubi.getShow().getDt()+""+ubi.getTicket().getIdTicket());
 				}
 				
 				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=informarExito");
 				
 				break;
 				
-			case "cancel":
+			} catch (Exception e) {
+				request.setAttribute("error", e.getMessage());
+				request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+			}
+			
+			
+			
+		case "cancel":
+			
+			try {
 				
 				Ticket t = new Ticket();
 				t.setIdTicket(Integer.parseInt((String)request.getParameter("idTicket")));
@@ -94,20 +102,20 @@ public class ABMCTicket extends HttpServlet {
 				
 				response.sendRedirect("/TPI-Cine/views/pages/MiCuenta.jsp");
 				
+				break;
 				
-				break;
-
-			default:
-				break;
+			} catch (Exception e) {
+				request.setAttribute("error", e.getMessage());
+				request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
 			}
 			
-			
-			
-		}finally {} 
-//		catch (Exception e) {
-//			// TODO: handle exception
-//		}
+		default:
+			break;
+		}
 		
+		
+		
+	
 		
 		
 	}

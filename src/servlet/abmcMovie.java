@@ -60,53 +60,87 @@ public class abmcMovie extends HttpServlet {
 		//try {
 			switch((String)request.getParameter("action")) {
 				case "new":
-					m.setTitle((String)request.getParameter("title"));
-					validarImagen(request,response,m);
-					m.setSynopsis((String)request.getParameter("synopsis"));
-					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
-					m.setCast((String)request.getParameter("cast"));
-					m.setDirector((String)request.getParameter("director"));
-					m.setDuration(Integer.parseInt((String)request.getParameter("duration")));
-					r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
-					m.setRestriction(ctrlRest.getOne(r));
-					g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
-					m.setGenre(ctrlGen.getOne(g));
-					ctrlMovie.addOne(m);
-					System.out.println("Titulo: "+m.getTitle());
-					System.out.println("Ruta de imagen: "+m.getImage());
-				break;
+					
+					try {
+						
+						m.setTitle((String)request.getParameter("title"));
+						validarImagen(request,response,m);
+						m.setSynopsis((String)request.getParameter("synopsis"));
+						m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
+						m.setCast((String)request.getParameter("cast"));
+						m.setDirector((String)request.getParameter("director"));
+						m.setDuration(Integer.parseInt((String)request.getParameter("duration")));
+						r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
+						m.setRestriction(ctrlRest.getOne(r));
+						g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
+						m.setGenre(ctrlGen.getOne(g));
+						ctrlMovie.addOne(m);
+						System.out.println("Titulo: "+m.getTitle());
+						System.out.println("Ruta de imagen: "+m.getImage());
+						break;
+						
+					} catch (Exception e) {
+						
+						request.setAttribute("error", e.getMessage());
+						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+						
+					}
 				
 				case "delete":
-					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-					ctrlMovie.logicDelete(m);
+					
+					try {
+						m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+						ctrlMovie.logicDelete(m);
+					} catch (Exception e) {
+						request.setAttribute("error", e.getMessage());
+						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+					}
+					
+					
 				break;
 				case "update":
-					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-					m.setTitle((String)request.getParameter("title"));					
-					m.setImage((String)request.getParameter("image"));
-					m.setSynopsis((String)request.getParameter("synopsis")); 
-					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
-					m.setCast((String)request.getParameter("cast"));
-					m.setDirector((String)request.getParameter("director"));
-					m.setDuration(Integer.parseInt((String)request.getParameter("duration")));
-					r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
-					m.setRestriction(ctrlRest.getOne(r));
-					g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
-					m.setGenre(ctrlGen.getOne(g));
-					ctrlMovie.editOne(m);
-				break;
+					
+					try {
+						m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+						m.setTitle((String)request.getParameter("title"));					
+						m.setImage((String)request.getParameter("image"));
+						m.setSynopsis((String)request.getParameter("synopsis")); 
+						m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
+						m.setCast((String)request.getParameter("cast"));
+						m.setDirector((String)request.getParameter("director"));
+						m.setDuration(Integer.parseInt((String)request.getParameter("duration")));
+						r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
+						m.setRestriction(ctrlRest.getOne(r));
+						g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
+						m.setGenre(ctrlGen.getOne(g));
+						ctrlMovie.editOne(m);
+						break;
+						
+					} catch (Exception e) {
+						request.setAttribute("error", e.getMessage());
+						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+					}
+					
 				case "undelete":
-					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-					ctrlMovie.logicUndelete(m);
-				break;
+					
+					try {
+						m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+						ctrlMovie.logicUndelete(m);
+						break;
+						
+					} catch (Exception e) {
+						request.setAttribute("error", e.getMessage());
+						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+					}
+					
 			default:
 				break;
 			}
-		request.getRequestDispatcher("/views/pages/abmcMovie.jsp").forward(request, response);	
-		/*}catch(Exception e){
-			e.getMessage();
-		}*/
+		
+			request.getRequestDispatcher("/views/pages/abmcMovie.jsp").forward(request, response);	
+
 	}
+	
 	private void validarImagen(HttpServletRequest request, HttpServletResponse response, Movie m) throws IOException{
 	try {
 		String photo="";
