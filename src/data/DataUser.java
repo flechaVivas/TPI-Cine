@@ -41,7 +41,7 @@ public class DataUser {
 				u.setRole(ctrRole.getOne(r));
 			}
 		} catch (SQLException e) {
-
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
@@ -54,7 +54,7 @@ public class DataUser {
 		return u;
 	} // getByUser
 
-	public User getById(User user) {
+	public User getById(User user) throws SQLException {
 		User u = null;
 		Role r = null;
 		RoleController ctrRole = new RoleController();
@@ -81,21 +81,21 @@ public class DataUser {
 				u.setRole(ctrRole.getOne(r));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return u;
 		
 	} // getById
 	
-	public LinkedList<User> getAll(){
+	public LinkedList<User> getAll() throws SQLException{
 
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -129,7 +129,7 @@ public class DataUser {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -137,7 +137,7 @@ public class DataUser {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
@@ -181,7 +181,7 @@ public class DataUser {
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 		
@@ -215,13 +215,13 @@ public class DataUser {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
 	} // update
 	
-	public void delete(User u) {
+	public void delete(User u) throws SQLException {
 		
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -234,14 +234,14 @@ public class DataUser {
 			stmt.executeUpdate();
 
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		
