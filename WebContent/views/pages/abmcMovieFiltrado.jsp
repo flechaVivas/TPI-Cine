@@ -40,28 +40,35 @@
 <body>
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	<main>
-		<div class="header">
-        	<div class="titulo"><h1><i>Peliculas</i></h1></div>
-        	<a class="btn btn-outline-light" href="/TPI-Cine/views/pages/newMovie.jsp">+</a>
-        	<form class="registerForm" method="POST" action="/TPI-Cine/src/servlet/filterMovie">
-                    <div class="formContent">
-                    <label>Ingrese Título de la pelicula</label>
-                   <input class="inputForm" name="title" type="text" placeholder="Ingrese titulo de la pelicula"></input>
-        			<p><label>Restriccion de edad</label>
-                                <select name="restriction">
-                                	<option value="0">none</option>
-                                	<%for(Restriction r: restrictions) {%>
-                                    <option value="<%=r.getIdRestriction()%>"><%=r.getDescription() %></option>
-                                    <%} %>
-                                </select></p>
-                                <p><select name="genre">
-                                	<option value="0">none</option>
-                                	<%for (Genre g: genres) {%>
-                                    <option value="<%=g.getIdGenre() %>"><%=g.getDescription() %></option>
-                                    <% }%>
-                              	</select></p>
-                     </div>
-                     <input type="submit" class="ButtonCreat"></input>
+		<div class="wrapper">
+        		<table class="table table-borderless">
+        			<tr>
+                    	<div class="formContent">
+                    	<form class="registerForm" method="POST" action="/TPI-Cine/src/servlet/filterMovie">
+                   			<th>Ingrese Título de la pelicula
+                   			<input class="inputForm" name="title" type="text" placeholder="..."></input></th>
+        					<th><p>Restriccion de edad
+                            <select name="restriction">
+                                <option value="0">none</option>
+                                <%for(Restriction r: restrictions) {%>
+                                <option value="<%=r.getIdRestriction()%>"><%=r.getDescription() %></option>
+                                <%} %>
+                                </select></p></th>
+                   			<th><p>Genero
+                             <select name="genre">
+                                <option value="0">none</option>
+                                <%for (Genre g: genres) {%>
+                                <option value="<%=g.getIdGenre() %>"><%=g.getDescription() %></option>
+                                <% }%>
+                              	</select></p></th>
+                     	<th><button class="btn btn-dark">Aceptar</button></th>
+             			</form>
+             			</div>
+             			<th><a class="btn btn-outline-light" href="/TPI-Cine/views/pages/newMovie.jsp">+</a></th>
+             		</tr>
+             </table>
+    		</div>
+    		<br>
              </form>
     	</div>
     <%for (Movie m: movies){ %>
