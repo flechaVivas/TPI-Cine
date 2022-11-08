@@ -13,7 +13,7 @@
 	}
 
 	MovieController ctrlMovie = new MovieController();
-	LinkedList<Movie> movies = ctrlMovie.getAll();
+	LinkedList<Movie> movies = ctrlMovie.getBillboard();
 	
 	Show s = (Show)session.getAttribute("show");
 	
