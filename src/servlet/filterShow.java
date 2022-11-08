@@ -57,19 +57,19 @@ public class filterShow extends HttpServlet {
 	       	
 			if((String)request.getParameter("title")!="") {
 				if((String)request.getParameter("dt")!="") {
-						System.out.println("//Filtro por fecha y titulo");//Filtro por fecha y titulo
+						//Filtro por fecha y titulo
 						shows=ctrlShow.getByTityFech(s,m);					
 				}else{
-					System.out.println("//Filtro por titulo");//Filtro por titulo
+						//Filtro por titulo
 						shows=ctrlShow.getByTit(m);
 				}
 					
 			}else{
 				if((String)request.getParameter("dt")!=""){
-					System.out.println("//Filtro por fecha");//Filtro por fecha
+						//Filtro por fecha
 						shows=ctrlShow.getByFech(s);
 				}else{
-					System.out.println("//No filtro");//No filtro
+						//No filtro
 						shows=ctrlShow.getAll();
 				}
 			}

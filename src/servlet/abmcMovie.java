@@ -56,86 +56,85 @@ public class abmcMovie extends HttpServlet {
 		RestrictionController ctrlRest= new RestrictionController();
 		Genre g=new Genre();
 		GenreController ctrlGen= new GenreController();
-		System.out.println("Bienvenido a servlet");
-		//try {
-			switch((String)request.getParameter("action")) {
-				case "new":
-					
-					try {
-						
-						m.setTitle((String)request.getParameter("title"));
-						validarImagen(request,response,m);
-						m.setSynopsis((String)request.getParameter("synopsis"));
-						m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
-						m.setCast((String)request.getParameter("cast"));
-						m.setDirector((String)request.getParameter("director"));
-						m.setDuration(Integer.parseInt((String)request.getParameter("duration")));
-						r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
-						m.setRestriction(ctrlRest.getOne(r));
-						g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
-						m.setGenre(ctrlGen.getOne(g));
-						ctrlMovie.addOne(m);
-						System.out.println("Titulo: "+m.getTitle());
-						System.out.println("Ruta de imagen: "+m.getImage());
-						break;
-						
-					} catch (Exception e) {
-						
-						request.setAttribute("error", e.getMessage());
-						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
-						
-					}
+
+		switch((String)request.getParameter("action")) {
+			case "new":
 				
-				case "delete":
+				try {
 					
-					try {
-						m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-						ctrlMovie.logicDelete(m);
-					} catch (Exception e) {
-						request.setAttribute("error", e.getMessage());
-						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
-					}
+					m.setTitle((String)request.getParameter("title"));
+					validarImagen(request,response,m);
+					m.setSynopsis((String)request.getParameter("synopsis"));
+					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
+					m.setCast((String)request.getParameter("cast"));
+					m.setDirector((String)request.getParameter("director"));
+					m.setDuration(Integer.parseInt((String)request.getParameter("duration")));
+					r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
+					m.setRestriction(ctrlRest.getOne(r));
+					g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
+					m.setGenre(ctrlGen.getOne(g));
+					ctrlMovie.addOne(m);
+					System.out.println("Titulo: "+m.getTitle());
+					System.out.println("Ruta de imagen: "+m.getImage());
+					break;
 					
+				} catch (Exception e) {
 					
-				break;
-				case "update":
+					request.setAttribute("error", e.getMessage());
+					request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
 					
-					try {
-						m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-						m.setTitle((String)request.getParameter("title"));					
-						m.setImage((String)request.getParameter("image"));
-						m.setSynopsis((String)request.getParameter("synopsis")); 
-						m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
-						m.setCast((String)request.getParameter("cast"));
-						m.setDirector((String)request.getParameter("director"));
-						m.setDuration(Integer.parseInt((String)request.getParameter("duration")));
-						r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
-						m.setRestriction(ctrlRest.getOne(r));
-						g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
-						m.setGenre(ctrlGen.getOne(g));
-						ctrlMovie.editOne(m);
-						break;
-						
-					} catch (Exception e) {
-						request.setAttribute("error", e.getMessage());
-						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
-					}
+				}
+			
+			case "delete":
+				
+				try {
+					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+					ctrlMovie.logicDelete(m);
+				} catch (Exception e) {
+					request.setAttribute("error", e.getMessage());
+					request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+				}
+				
+				
+			break;
+			case "update":
+				
+				try {
+					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+					m.setTitle((String)request.getParameter("title"));					
+					m.setImage((String)request.getParameter("image"));
+					m.setSynopsis((String)request.getParameter("synopsis")); 
+					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
+					m.setCast((String)request.getParameter("cast"));
+					m.setDirector((String)request.getParameter("director"));
+					m.setDuration(Integer.parseInt((String)request.getParameter("duration")));
+					r.setIdRestriction(Integer.parseInt((String)request.getParameter("restriction")));
+					m.setRestriction(ctrlRest.getOne(r));
+					g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
+					m.setGenre(ctrlGen.getOne(g));
+					ctrlMovie.editOne(m);
+					break;
 					
-				case "undelete":
+				} catch (Exception e) {
+					request.setAttribute("error", e.getMessage());
+					request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+				}
+				
+			case "undelete":
+				
+				try {
+					m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+					ctrlMovie.logicUndelete(m);
+					break;
 					
-					try {
-						m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-						ctrlMovie.logicUndelete(m);
-						break;
-						
-					} catch (Exception e) {
-						request.setAttribute("error", e.getMessage());
-						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
-					}
-					
-			default:
-				break;
-			}
+				} catch (Exception e) {
+					request.setAttribute("error", e.getMessage());
+					request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+				}
+				
+		default:
+			break;
+		}
 		
 			request.getRequestDispatcher("/views/pages/abmcMovie.jsp").forward(request, response);	
 
