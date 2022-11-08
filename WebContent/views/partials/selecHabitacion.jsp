@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="entities.Movie"%>
 <%@page import="entities.Show"%>
 <%@page import="java.util.LinkedList"%>
@@ -5,6 +6,13 @@
 <%@page import="entities.RoomType"%>
 
 	<%
+	
+		User u = (User)session.getAttribute("usuario");
+		
+		if(u == null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		} 
+	
 		Show s = (Show)session.getAttribute("show");
 	
 		Movie m = s.getMovie();

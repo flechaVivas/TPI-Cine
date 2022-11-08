@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="entities.Genre" %>
 <%@page import="entities.Restriction" %>
 <%@page import="logic.RestrictionController"%>
@@ -24,13 +25,17 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
 	<%
 	
-		if(session.getAttribute("usuario")==null){
+		User u = (User)session.getAttribute("usuario");
+		
+		if(u == null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		} else if(!u.esTaquillero() && !u.estaAutorizado()){
 			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 		}
 	%>
 	</head>
 	<body>
-	<nav class="navbar"> <%@ include file="../partials/navbar.jsp" %> </nav>
+	<jsp:include page="../partials/navbar.jsp"></jsp:include>
 		<header> 
 		
 		 </header>

@@ -1,9 +1,17 @@
+<%@page import="entities.User"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="logic.ShowController"%>
 <%@page import="entities.Show"%>
 	
 	<%
+	
+	User u = (User)session.getAttribute("usuario");
+	
+	if(u == null){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	}
+	
 
 	ShowController ctrlShow = new ShowController();
 	LinkedList<Show> shows = (LinkedList<Show>) session.getAttribute("showsDateTime");

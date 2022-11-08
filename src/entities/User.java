@@ -70,11 +70,21 @@ public class User {
 		this.role = role;
 	}
 
-	@Override
-	public String toString() {
-		return "User [idUser=" + idUser + ", surname=" + surname + ", name=" + name + ", email=" + email + ", password="
-				+ password + ", birthDate=" + birthDate + ", adress=" + adress + ", phoneNumber=" + phoneNumber
-				+ ", role=" + role + "]\n";
+	public Boolean estaAutorizado() {
+		
+		if ((this.getRole().getDescription()).equals("admin")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean esTaquillero() {
+		if((this.getRole().getDescription()).equals("taquillero")) {
+			return true;
+		} else {
+			return false;					
+		}
 	}
 	
 	

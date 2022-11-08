@@ -23,12 +23,11 @@
 
 	<%
 		User u = (User)session.getAttribute("usuario");
-	
-		if(u!=null){
-			if(u.getRole().getDescription() != "admin"){
-				session.invalidate();
-				request.getRequestDispatcher("/TPI-Cine/views/pages/login.jsp");
-			}
+		
+		if(u == null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		} else if(!u.estaAutorizado()){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 		}
 		
 		UserController ctrlUser = new UserController();

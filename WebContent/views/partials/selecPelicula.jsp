@@ -7,6 +7,10 @@
 	<%
 	
 	User u = (User)session.getAttribute("usuario");
+	
+	if(u == null){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	}
 
 	MovieController ctrlMovie = new MovieController();
 	LinkedList<Movie> movies = ctrlMovie.getAll();

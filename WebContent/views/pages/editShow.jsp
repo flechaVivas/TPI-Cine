@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Movie"%>
 <%@page import="logic.MovieController"%>
@@ -11,22 +12,31 @@
 <!DOCTYPE html>
 <html>
 <%
-ShowController ctrlShow = new ShowController();
-LinkedList<Show> shows = ctrlShow.getAll();
+	User u = (User)session.getAttribute("usuario");
+	
+	if(u == null){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	} else if(!u.esTaquillero() && !u.estaAutorizado()){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	}
 
-MovieController ctrlMovie = new MovieController();
-LinkedList<Movie> movies = ctrlMovie.getBillboard();
 
-MovieRoomController ctrlMR = new MovieRoomController();
-LinkedList<MovieRoom> movierooms = ctrlMR.list();
-Movie mo=new Movie();
-MovieRoom mrm=new MovieRoom();
-Show s=new Show();
-mo.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-s.setMovie(mo);
-mrm.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
-s.setMovieroom(mrm);
-s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
+	ShowController ctrlShow = new ShowController();
+	LinkedList<Show> shows = ctrlShow.getAll();
+	
+	MovieController ctrlMovie = new MovieController();
+	LinkedList<Movie> movies = ctrlMovie.getBillboard();
+	
+	MovieRoomController ctrlMR = new MovieRoomController();
+	LinkedList<MovieRoom> movierooms = ctrlMR.list();
+	Movie mo=new Movie();
+	MovieRoom mrm=new MovieRoom();
+	Show s=new Show();
+	mo.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+	s.setMovie(mo);
+	mrm.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
+	s.setMovieroom(mrm);
+	s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 %>
 <head>
 <meta charset="UTF-8">

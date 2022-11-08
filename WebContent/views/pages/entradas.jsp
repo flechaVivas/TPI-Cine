@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="entities.Show"%>
 <%@page import="logic.RoomTypeController"%>
 <%@page import="entities.RoomType"%>
@@ -21,10 +22,12 @@
 	
 	<%
 	
-		if(request.getSession(false).getAttribute("usuario")==null){
+		User u = (User)session.getAttribute("usuario");
+		
+		if(u == null){
 			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 		}
-	
+		
 		Show s = (Show)session.getAttribute("show");
 	
 	%>

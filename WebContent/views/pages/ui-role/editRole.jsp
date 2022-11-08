@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="entities.Role"%>
 <%@page import="logic.RoleController"%>
 <%@page import="logic.RoomTypeController"%>
@@ -14,6 +15,15 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 	<%
+	
+		User u = (User)session.getAttribute("usuario");
+		
+		if(u == null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		} else if(!u.estaAutorizado()){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		}
+	
 		Integer id = Integer.parseInt((String)request.getParameter("idRole"));
 		RoleController ctrlRole = new RoleController();
 		Role r = new Role();

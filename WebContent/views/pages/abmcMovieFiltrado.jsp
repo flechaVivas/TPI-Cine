@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Movie"%>
 <%@page import="logic.MovieController"%>
@@ -20,16 +21,21 @@
 	<link rel="stylesheet" href="../../styles/navbar.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
 
-	<%
-	if(session.getAttribute("usuario")==null){
-	response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
-		}
-MovieController ctrlMovie = new MovieController();
-GenreController ctrlGenre = new GenreController();
-LinkedList<Genre> genres = ctrlGenre.getAll();
-RestrictionController ctrlRest=new RestrictionController();
-LinkedList<Restriction> restrictions = ctrlRest.getAll();
-LinkedList<Movie> movies =(LinkedList<Movie>)request.getSession(false).getAttribute("movies");%>
+<%
+	User u = (User)session.getAttribute("usuario");
+	
+	if(u == null){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	} else if(!u.esTaquillero() && !u.estaAutorizado()){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	}
+	MovieController ctrlMovie = new MovieController();
+	GenreController ctrlGenre = new GenreController();
+	LinkedList<Genre> genres = ctrlGenre.getAll();
+	RestrictionController ctrlRest=new RestrictionController();
+	LinkedList<Restriction> restrictions = ctrlRest.getAll();
+	LinkedList<Movie> movies =(LinkedList<Movie>)request.getSession(false).getAttribute("movies");
+%>
 </head>
 <body>
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>

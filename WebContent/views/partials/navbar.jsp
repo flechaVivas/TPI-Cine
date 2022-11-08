@@ -16,15 +16,14 @@
 			</li>
 			<% if(u!=null){
 				
-				if(u.getRole().getDescription().equals("taquillero")){ %>
-				
+				if(u.esTaquillero() || u.estaAutorizado()){ %>
 			<li>
 				<a href="/TPI-Cine/views/pages/abmcShow.jsp">ADMINISTRAR FUNCIONES</a>
 			</li>
 			<li>
 				<a href="/TPI-Cine/views/pages/abmcMovie.jsp">ADMINISTRAR PELICULAS</a>
 			</li>
-			<%} if (u.getRole().getDescription().equals("admin")){ %>
+			<%} if (u.estaAutorizado()){ %>
 			<li>
 				<a href="/TPI-Cine/views/pages/adminPanel.jsp">PANEL ADMINISTRADOR</a>
 			</li>

@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Movie"%>
 <%@page import="logic.MovieController"%>
@@ -11,17 +12,22 @@
 <html>
 	<%
 	
-		if(session.getAttribute("usuario")==null){
-			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
-		}
-ShowController ctrlShow = new ShowController();
-LinkedList<Show> shows = ctrlShow.getAll();
-
-MovieController ctrlMovie = new MovieController();
-LinkedList<Movie> movies = ctrlMovie.getBillboard();
-
-MovieRoomController ctrlMR = new MovieRoomController();
-LinkedList<MovieRoom> movierooms = ctrlMR.list();
+	User u = (User)session.getAttribute("usuario");
+	
+	if(u == null){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	} else if(!u.esTaquillero() && !u.estaAutorizado()){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	}
+	
+	ShowController ctrlShow = new ShowController();
+	LinkedList<Show> shows = ctrlShow.getAll();
+	
+	MovieController ctrlMovie = new MovieController();
+	LinkedList<Movie> movies = ctrlMovie.getBillboard();
+	
+	MovieRoomController ctrlMR = new MovieRoomController();
+	LinkedList<MovieRoom> movierooms = ctrlMR.list();
 %>
 <head>
 <meta charset="UTF-8">

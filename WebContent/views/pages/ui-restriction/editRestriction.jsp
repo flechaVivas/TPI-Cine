@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="entities.Restriction"%>
 <%@page import="logic.RestrictionController"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,6 +17,15 @@
 <body>
 
 	<%
+	
+		User u = (User)session.getAttribute("usuario");
+		
+		if(u == null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		} else if(!u.estaAutorizado()){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		}
+	
 		Integer id = Integer.parseInt((String)request.getParameter("idRestriction"));
 		RestrictionController ctrlRes = new RestrictionController();
 		Restriction r = new Restriction();

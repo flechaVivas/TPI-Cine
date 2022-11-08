@@ -20,6 +20,12 @@
 
 	<%
 		User u = (User)session.getAttribute("usuario");
+		
+		if(u == null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		} else if(!u.estaAutorizado()){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		}
 	
 		RoleController ctrlRole = new RoleController();
 		LinkedList<Role> roles = ctrlRole.getAll();

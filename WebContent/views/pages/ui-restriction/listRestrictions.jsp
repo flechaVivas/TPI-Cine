@@ -13,7 +13,13 @@
 <title>Restricciones</title>
 
 	<%
-		User u = (User)request.getSession().getAttribute("usuario");
+		User u = (User)session.getAttribute("usuario");
+		
+		if(u == null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		} else if(!u.estaAutorizado()){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		}
 		
 		RestrictionController ctrlRes = new RestrictionController();
 		LinkedList<Restriction> restrictions = ctrlRes.getAll();

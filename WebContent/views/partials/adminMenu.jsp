@@ -4,6 +4,8 @@
 
 	if(u == null){
 		request.getRequestDispatcher("/views/pages/login.jsp").forward(request, response);
+	} else if(!u.estaAutorizado()){
+		request.getRequestDispatcher("/views/pages/login.jsp").forward(request, response);
 	}
 
 %>

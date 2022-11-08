@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="entities.Genre" %>
 <%@page import="entities.Restriction" %>
 <%@page import="logic.RestrictionController"%>
@@ -19,22 +20,27 @@
 	<link rel="stylesheet" href="../../styles/newMovie.css"/>
 	<%
 	
-		if(session.getAttribute("usuario")==null){
-			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
-		}
+	User u = (User)session.getAttribute("usuario");
 	
-MovieController ctrlMovie= new MovieController();
-GenreController ctrlGenre = new GenreController();
-LinkedList<Genre> genres = ctrlGenre.getAll();
-RestrictionController ctrlRest=new RestrictionController();
-LinkedList<Restriction> restrictions = ctrlRest.getAll();
-Movie m= new Movie();
-m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
-m=ctrlMovie.getbyIdMovie(m);%>
+	if(u == null){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	} else if(!u.esTaquillero() && !u.estaAutorizado()){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	}
+	
+	MovieController ctrlMovie= new MovieController();
+	GenreController ctrlGenre = new GenreController();
+	LinkedList<Genre> genres = ctrlGenre.getAll();
+	RestrictionController ctrlRest=new RestrictionController();
+	LinkedList<Restriction> restrictions = ctrlRest.getAll();
+	Movie m= new Movie();
+	m.setIdMovie(Integer.parseInt((String)request.getParameter("idM")));
+	m=ctrlMovie.getbyIdMovie(m);
+	%>
 	</head>
 	<body>
 		<header> 
-		<nav class="navbar"> <%@ include file="../partials/navbar.jsp" %> </nav>
+		<jsp:include page="../partials/navbar.jsp"></jsp:include>
 		
 		 </header>
          <main>

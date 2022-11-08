@@ -19,12 +19,19 @@
 
 </head>
 <%
+
+	User u = (User)session.getAttribute("usuario");
+	
+	if(u == null){
+		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+	}
+
 	String action = (String)request.getAttribute("action");
 	User userSession = (User)session.getAttribute("usuario");
 %>
 <body>
 	<header>
-		<%@ include file="../partials/navbar.jsp" %>
+		<jsp:include page="../partials/navbar.jsp"></jsp:include>
 	</header>
 	<main class="MiCuentaContainer">
 		<%if( u != null){%>		

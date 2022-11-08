@@ -1,3 +1,4 @@
+<%@page import="entities.User"%>
 <%@page import="logic.RoomTypeController"%>
 <%@page import="entities.RoomType"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,6 +13,15 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 	<%
+	
+		User u = (User)session.getAttribute("usuario");
+		
+		if(u == null){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		} else if(!u.estaAutorizado()){
+			response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
+		}
+	
 		Integer id = Integer.parseInt((String)request.getParameter("idRoomType"));
 		RoomTypeController ctrlRT = new RoomTypeController();
 		RoomType r = new RoomType();
