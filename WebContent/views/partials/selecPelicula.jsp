@@ -27,7 +27,7 @@
 			
 			
 			<% 
-			if((String)request.getParameter("idMovie")!=""){
+			if((String)request.getParameter("idMovie")!=null){
 				mo.setIdMovie(Integer.parseInt((String)request.getParameter("idMovie")));
 				mo=ctrlMovie.getbyIdMovie(mo);	%>
 				<select name="movie" id="movie" disabled="disabled">
