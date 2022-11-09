@@ -45,7 +45,7 @@
   		<div class="genero"><h1><%=m.getGenre().getDescription() %></h1></div>
   		<div class="titulo"><h1><b><%=m.getTitle() %></b></h1></div>
   		<div class="duracion-restriccion"><h2>Duracion: <%=m.getDuration()+"		"%> Restriccion: <%=m.getRestriction().getDescription()%></h2></div>
-  		<div class="entradas"><h3><a href="/TPI-Cine/views/pages/entradas.jsp">
+  		<div class="entradas"><h3><a href="/TPI-Cine/views/pages/entradas.jsp?idMovie=<%=m.getIdMovie() %>">
   			Ver tickets para esta pelicula
   			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ticket-perforated" viewBox="0 0 16 16">
  		 	<path d="M4 4.85v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Z"/>

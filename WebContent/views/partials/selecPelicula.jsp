@@ -16,7 +16,7 @@
 	LinkedList<Movie> movies = ctrlMovie.getBillboard();
 	
 	Show s = (Show)session.getAttribute("show");
-	
+	Movie mo= new Movie();
 	%>
 
 
@@ -27,6 +27,13 @@
 			
 			
 			<% 
+			if((String)request.getParameter("idMovie")!=""){
+				mo.setIdMovie(Integer.parseInt((String)request.getParameter("idMovie")));
+				mo=ctrlMovie.getbyIdMovie(mo);	%>
+				<select name="movie" id="movie" disabled="disabled">
+				<option value="<%=mo.getIdMovie()%>"><%=mo.getTitle()%></option>
+				</select>	
+			<%}else{
 				if(s == null){%>
 					<select name="movie" id="movie">
 					<% for (Movie m : movies){ %>
@@ -36,10 +43,13 @@
 					<%}%>
 					</select>
 				<%} else {%>
-					<select name="movie" id="movie" disabled="disabled">
-					<option value="<%=s.getMovie().getIdMovie()%>"><%=s.getMovie().getTitle()%></option> 
-					</select>
-				<% }%>
+						<select name="movie" id="movie" disabled="disabled">
+						<option value="<%=s.getMovie().getIdMovie()%>"><%=s.getMovie().getTitle()%></option>
+						</select>
+					<% }}%>
+					 
+					
+				
 				
 	  		
 		</div>
