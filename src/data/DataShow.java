@@ -176,7 +176,7 @@ public class DataShow {
 			try {
 						
 				stmt=DbConnector.getInstancia().getConn().createStatement();
-				rs=stmt.executeQuery("SELECT * FROM cine_tpjava.show;");
+				rs=stmt.executeQuery("SELECT * FROM cine_tpjava.show order by date_time;");
 				
 				while(rs.next()) {
 					Show s=new Show();
@@ -257,7 +257,8 @@ public class DataShow {
 					+ "from cine_tpjava.show s\n"
 					+ "inner join movie m\n"
 					+ "on m.idMovie=s.idMovie\n"
-					+ "where m.title like ?;"
+					+ "where m.title like ?"
+					+ "order by s.date_time;"
 			);
 			stmt.setString(1, "%"+m.getTitle()+"%");
 			rs=stmt.executeQuery();
@@ -305,7 +306,8 @@ public class DataShow {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"select * from\n" + 
 					"cine_tpjava.show s\n" + 
-					"where DATE(s.date_time)=?;"
+					"where DATE(s.date_time)=?"
+					+ "order by s.idMovie;"
 			);
 			stmt.setObject(1, s.getDt().toString());
 			rs=stmt.executeQuery();
@@ -356,7 +358,8 @@ public class DataShow {
 					+ "from cine_tpjava.show s\n"
 					+ "inner join movie m\n"
 					+ "on m.idMovie=s.idMovie \n"
-					+ "where m.title like ? and CAST(s.date_time as DATE)=?;"
+					+ "where m.title like ? and CAST(s.date_time as DATE)=?"
+					+ "order by s.idMovie, s.date_time;"
 			);
 			stmt.setString(1, "%"+m.getTitle()+"%");
 			stmt.setObject(2, s.getDt());

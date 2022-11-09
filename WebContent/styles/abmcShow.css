@@ -1,6 +1,11 @@
 @charset "ISO-8859-1";
 body{
     background-color: #2a2b38;
+    color: #90e0efff;
+
+}
+.table table-hover{
+	color: #90e0efff;
 }
 .input-group{
     flex-direction: column;
@@ -12,7 +17,7 @@ body{
     padding: 50px;
     display:flex;
     margin:auto;
-    color: #03045eff;
+    color: #90e0efff;
    }
 input[type="date"] { border-radius: 8px;
     border: 2px solid transparent;
@@ -44,7 +49,7 @@ select{
     padding: .2rem .2rem;
     outline: none;
     background-color: transparent;
-    color: #03045eff;
+    color: #90e0efff;
     transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
    }
 #boton {
