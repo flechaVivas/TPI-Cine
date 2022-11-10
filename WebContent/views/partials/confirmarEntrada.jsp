@@ -18,6 +18,8 @@
 	
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 	
+	Character c = '@';
+	
 %>
 
 
@@ -50,7 +52,7 @@
                         <td><%=s.getMovieroom().getRoomNumber()%></td>
                         <td>
                         <% for(Ubication u : ubicElegidas){ %>
-                        	<%=u.getRow()+"-"+u.getCol()%>
+                        	<%=Character.toString(c+u.getRow())+"-"+u.getCol()%>
                         <%}%>
                         </td>
                         <td><%=s.getDt().format(formatter)%></td>
