@@ -56,7 +56,7 @@ LinkedList<Show> shows = (LinkedList<Show>)request.getSession(false).getAttribut
         						<input type="date" name="dt" placeholder="fecha"></input>
         					</td>
         					<td><label>Ingrese Título de la pelicula</label>
-           						<input class="inputForm" name="title" type="text" placeholder="Ingrese titulo de la pelicula"></input>
+           						<input class="inputForm" name="title" type="text" style="background-color:#0077b6"></input>
            					</td>
            				</div>
                   	 		<td><button class="btn btn-dark">Aceptar</button></td>

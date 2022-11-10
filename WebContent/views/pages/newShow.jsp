@@ -51,20 +51,20 @@
 		<div class="input-group">
     	<form name="showForm" method="post" action="/TPI-Cine/src/servlet/abmcShow?action=new">
         	<p><b>Película:</b>
-        	<select name="movie" required>
+        	<select name="movie" required >
         	<%for(Movie m: movies) {%>
-                <option value="<%=m.getIdMovie()%>"><%=m.getTitle() %></option>
+                <option style="background-color:#0077b6" value="<%=m.getIdMovie()%>"><%=m.getTitle() %></option>
             <%} %>
         	</select>
         	<b>Dia y horario:</b>
-        	<input type="datetime-local" name="dt" placeholder="fecha y hora" required>
+        	<input type="datetime-local" name="dt" placeholder="fecha y hora" required style="background-color:#0077b6">
         	<b>Sala:</b> 
         	<select name="room" required>
             <%for(MovieRoom mr: movierooms) {%>
-                <option value="<%=mr.getRoomNumber()%>"><%=mr.getRoomNumber() %></option>
+                <option style="background-color:#0077b6" value="<%=mr.getRoomNumber()%>"><%=mr.getRoomNumber() %></option>
             <%} %>
         	</select>                  
-        	<input type="submit" value="Crear funcion"></p>
+        	<button class="btn btn-dark">Crear función</button></p>
     	</form>
     	</div>
 	</main>

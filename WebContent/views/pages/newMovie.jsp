@@ -83,21 +83,21 @@ LinkedList<Restriction> restrictions = ctrlRest.getAll();%>
                             <div class="divForm">
                             
                                 <p>Restriccion de edad
-                                <select name="restriction" required>
+                                <select name="restriction" required style="background-color:#0077b6">
                                 	<%for(Restriction r: restrictions) {%>
                                     <option value="<%=r.getIdRestriction()%>"><%=r.getDescription() %></option>
                                     <%} %>
                                 </select></p>
                                 <p>Genero
-                                <select name="genre" required>
+                                <select style="background-color:#0077b6" name="genre" required>
                                 	<%for (Genre g: genres) {%>
                                     <option value="<%=g.getIdGenre() %>"><%=g.getDescription() %></option>
                                     <%}%>
                                 </select></p> 
                             </div>
-                        </div>
-                    </div>
-                    <input type="submit" name="new"  value="new">   
+                            <button class="btn btn-dark">Aceptar</button>
+                        </div>                       
+                    </div>   
                 </form> 
             </div>
         </main>

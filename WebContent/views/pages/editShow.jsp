@@ -70,23 +70,23 @@
         	<select name="movie" required>
         	<%for(Movie m: movies) {
         		if(m.getIdMovie()==s.getMovie().getIdMovie()){%>
-                <option value="<%=m.getIdMovie()%>" selected><%=m.getTitle() %></option>
+                <option  style="background-color:#2a2b38" value="<%=m.getIdMovie()%>" selected><%=m.getTitle() %></option>
             <%}else{%>
-            	<option value="<%=m.getIdMovie()%>"><%=m.getTitle() %></option>
+            	<option style="background-color:#0077b6" value="<%=m.getIdMovie()%>"><%=m.getTitle() %></option>
             <%}} %>
         	</select>
         	<b>Dia y horario:</b>
-        	<input type="datetime-local" name="dt" value="<%=s.getDt()%>" required>
+        	<input style="background-color:#0077b6" type="datetime-local" name="dt" value="<%=s.getDt()%>" required>
         	<b>Sala:</b> 
         	<select name="room" required>
             <%for(MovieRoom mr: movierooms) {
             	if(mr.getRoomNumber()==s.getMovieroom().getRoomNumber()){%>
-                <option value="<%=mr.getRoomNumber()%>" selected><%=mr.getRoomNumber() %></option>
+                <option style="background-color:#2a2b38" value="<%=mr.getRoomNumber()%>" selected><%=mr.getRoomNumber() %></option>
                 <%}else{%>
-                <option value="<%=mr.getRoomNumber()%>"><%=mr.getRoomNumber() %></option>
+                <option style="background-color:#0077b6" value="<%=mr.getRoomNumber()%>"><%=mr.getRoomNumber() %></option>
             <%}} %>
         	</select>                  
-        	<input type="submit" value="Modificar funcion"></p>
+        	<button class="btn btn-dark">Modificar funcion</button></p>
     	</form>
     	</div>
 	</main>

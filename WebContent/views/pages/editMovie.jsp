@@ -88,32 +88,30 @@
                             </div>
                             <div class="divForm">                            
                                 <p>Restriccion de edad
-                                <select name="restriction" required>
+                                <select style="background-color:#0077b6" name="restriction" required>
                                 	<%for(Restriction r: restrictions) {
                                 	if(r.getIdRestriction()==m.getRestriction().getIdRestriction()){%>
-                                    	<option value="<%=r.getIdRestriction()%>" selected> <%=r.getDescription() %> </option>
+                                    	<option style="background-color:#2a2b38" value="<%=r.getIdRestriction()%>" selected> <%=r.getDescription() %> </option>
                                     <%} else {%>
                                     	<option value="<%=r.getIdRestriction()%>"> <%=r.getDescription() %> </option>
                                     	<%}
                                 	}%>
                                 </select></p>
-                                <p><select name="genre" required>
+                                <p><select style="background-color:#0077b6" name="genre" required>
                                 	<%for (Genre g: genres) {
                                 	if(g.getIdGenre()==m.getGenre().getIdGenre()){%>
-                                    	<option value="<%=g.getIdGenre()%>" selected> <%=g.getDescription() %> </option>
+                                    	<option style="background-color:#2a2b38" value="<%=g.getIdGenre()%>" selected> <%=g.getDescription() %> </option>
                                     <%} else {%>
                                     <option value="<%=g.getIdGenre() %>"><%=g.getDescription() %></option>
                                     <% }
                                 	}%>
                                 </select></p>
+                                <button class="btn btn-dark">Modificar pelicula</button>
                             </div>
+                            
                         </div>
                     </div>
-                    <div class="buttonSend">
-                          <button type="submit" class="ButtonCreat">Modificar pelicula</button>
-                    </div>
-                </form>
-                
+                </form>                
             </div>
         </main>
         

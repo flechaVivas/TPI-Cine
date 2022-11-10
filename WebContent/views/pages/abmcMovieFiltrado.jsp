@@ -51,16 +51,16 @@
                     	<div class="formContent">
                     	<form class="registerForm" method="POST" action="/TPI-Cine/src/servlet/filterMovie">
                    			<th>Ingrese Título de la pelicula
-                   			<input class="inputForm" name="title" type="text" placeholder="..."></input></th>
+                   			<input style="background-color:#0077b6" class="inputForm" name="title" type="text" placeholder="..."></input></th>
         					<th><p>Restriccion de edad
-                            <select name="restriction">
+                            <select name="restriction" style="background-color:#0077b6">
                                 <option value="0">none</option>
                                 <%for(Restriction r: restrictions) {%>
                                 <option value="<%=r.getIdRestriction()%>"><%=r.getDescription() %></option>
                                 <%} %>
                                 </select></p></th>
                    			<th><p>Genero
-                             <select name="genre">
+                             <select name="genre" style="background-color:#0077b6">
                                 <option value="0">none</option>
                                 <%for (Genre g: genres) {%>
                                 <option value="<%=g.getIdGenre() %>"><%=g.getDescription() %></option>
