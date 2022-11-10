@@ -25,16 +25,7 @@
 		<div class="col-md-10">
 			<label>Seleccione una <strong>película</strong></label>    
 			
-			
-			<% 
-			if((String)request.getParameter("idMovie")!=null){
-				mo.setIdMovie(Integer.parseInt((String)request.getParameter("idMovie")));
-				mo=ctrlMovie.getbyIdMovie(mo);	%>
-				<select name="movie" id="movie" disabled="disabled">
-				<option value="<%=mo.getIdMovie()%>"><%=mo.getTitle()%></option>
-				</select>	
-			<%}else{
-				if(s == null){%>
+				<%if(s == null){%>
 					<select name="movie" id="movie">
 					<% for (Movie m : movies){ %>
 						
@@ -46,12 +37,7 @@
 						<select name="movie" id="movie" disabled="disabled">
 						<option value="<%=s.getMovie().getIdMovie()%>"><%=s.getMovie().getTitle()%></option>
 						</select>
-					<% }}%>
-					 
-					
-				
-				
-	  		
+					<% }%>
 		</div>
 		<%if(s == null){ %>
 			<div class="col-md-2">
