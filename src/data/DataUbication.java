@@ -322,4 +322,75 @@ public class DataUbication {
 		return ub;
 		
 	}
+	
+	public LinkedList<Ubication> getTicketsWithUserInac(User user) throws SQLException{
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Ubication> ubications = new LinkedList<Ubication>();
+		
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"SELECT t.idTicket, t.operationCode, cine_tpjava.t.dateTime, t.price, ubi.row, ubi.col, s.roomNumber, s.date_time, m.title, m.image "
+				 + " FROM ticket t "
+				 + " inner join ubication ubi"
+				 + "	on ubi.idTicket = t.idTicket"
+				 + " inner join cine_tpjava.show s"
+				 + "	on  s.idMovie = ubi.idMovie"
+				 + "	and s.roomNumber = ubi.roomNumber"
+				 + "	and s.date_time = ubi.show_date_time"
+				 + " inner join movie m"
+				 + "	on m.idMovie = s.idMovie"
+				 + " where idUser = ? and t.retirementDate is null and s.date_time < current_timestamp();");
+			stmt.setInt(1, user.getIdUser());
+			
+			rs=stmt.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					Ubication u = new Ubication();
+					Ticket t = new Ticket();
+					Show s = new Show();
+					
+					u.setRow(rs.getInt("row"));
+					u.setCol(rs.getInt("col"));
+					
+					t.setIdTicket(rs.getInt("idTicket"));
+					t.setOperationCode(rs.getString("operationCode"));
+					t.setDateTime(rs.getObject("dateTime", LocalDateTime.class));
+					t.setPrice(rs.getBigDecimal("price"));
+					u.setTicket(t);
+					
+					s.setDt(rs.getObject("date_time", LocalDateTime.class));
+					
+					MovieRoom mr = new MovieRoom();
+					mr.setRoomNumber(rs.getInt("roomNumber"));
+					s.setMovieroom(mr);
+					
+					Movie m = new Movie();
+					m.setTitle(rs.getString("title"));
+					m.setImage(rs.getString("image"));
+					s.setMovie(m);
+					
+					u.setShow(s);
+
+					ubications.add(u);
+				}
+			}
+			
+		} catch (SQLException e) {
+			throw e;
+			
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		
+		return ubications;
+	
+	}
 }

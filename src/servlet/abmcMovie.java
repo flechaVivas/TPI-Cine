@@ -26,7 +26,8 @@ import logic.RestrictionController;
 @MultipartConfig
 @WebServlet({ "/src/servlet/abmcMovie", "/src/servlet/abmcMOVIE", "/src/servlet/ABMCMovie", "/src/servlet/ABMCmovie" })
 public class abmcMovie extends HttpServlet {
-	private String pathFiles="D:\\Facultad\\Java\\Programas\\TPI-Cine\\WebContent\\assets\\img";
+	
+	private String pathFiles="../TPI-Cine/WebContent/assets/img";
 	private File uploads = new File(pathFiles);
 	private String[] extens = {".png",".jpg",".jpeg"};		//Variables para manejo de imagen
 	private static final long serialVersionUID = 1L;
@@ -73,7 +74,7 @@ public class abmcMovie extends HttpServlet {
 					m.setRestriction(ctrlRest.getOne(r));
 					g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
 					m.setGenre(ctrlGen.getOne(g));
-					ctrlMovie.addOne(m);
+					//ctrlMovie.addOne(m);
 					System.out.println("Titulo: "+m.getTitle());
 					System.out.println("Ruta de imagen: "+m.getImage());
 					break;
@@ -141,44 +142,45 @@ public class abmcMovie extends HttpServlet {
 	}
 	
 	private void validarImagen(HttpServletRequest request, HttpServletResponse response, Movie m) throws IOException{
-	try {
-		String photo="";
-		Part part=request.getPart("image");
-		if (part!=null) {
-		if(isExtension(part.getSubmittedFileName(), extens)) {
-			photo=saveFile(part,uploads);}//Asignamos la ruta absoluta a la variable photo	
-			}
-		m.setImage(photo);
-		} catch (Exception e) {
-		e.printStackTrace();
-		}		
-	}
-	
-	
-	private String saveFile(Part part, File pathUploads) {
-		String pathAbsolute="";
 		try {
-			Path path=Paths.get(part.getSubmittedFileName());
-			String fileName=path.getFileName().toString();		//nombre de archivo
-			InputStream input=part.getInputStream();			//archivo
-			
-			if(input!=null) {
-				File file=new File(pathUploads, fileName);
-				pathAbsolute=file.getAbsolutePath();
-				Files.copy(input, file.toPath());		//Se guarda el archivo en la carpeta de archivos
-			}
-		} catch (Exception e) {
+			String photo="";
+			Part part=request.getPart("image");
+			if (part!=null) {
+			if(isExtension(part.getSubmittedFileName(), extens)) {
+				photo=saveFile(part,uploads);}//Asignamos la ruta absoluta a la variable photo	
+				}
+			System.out.println("lo que se guarda en la bd es: "+photo);
+			m.setImage(photo);
+			} catch (Exception e) {
 			e.printStackTrace();
+			}		
 		}
-		return pathAbsolute;		//Retorna la ruta Absoluta
-	}
-	
-	
-	private boolean isExtension(String fileName,String[] extensions) {	//Validacion formato de archivo
-		for (String et : extensions) {
-			if(fileName.toLowerCase().endsWith(et)) {return true;}
-		}return false;
-	}
+		
+		
+		private String saveFile(Part part, File pathUploads) {
+			String pathAbsolute="";
+			try {
+				Path path=Paths.get(part.getSubmittedFileName());
+				String fileName=path.getFileName().toString();		//nombre de archivo
+				InputStream input=part.getInputStream();			//archivo
+				
+				if(input!=null) {
+					File file=new File(pathUploads, fileName);
+					pathAbsolute=file.getAbsolutePath();
+					Files.copy(input, file.toPath());		//Se guarda el archivo en la carpeta de archivos
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return pathAbsolute;		//Retorna la ruta Absoluta
+		}
+		
+		
+		private boolean isExtension(String fileName,String[] extensions) {	//Validacion formato de archivo
+			for (String et : extensions) {
+				if(fileName.toLowerCase().endsWith(et)) {return true;}
+			}return false;
+		}
 
 }
 

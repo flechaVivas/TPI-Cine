@@ -92,9 +92,10 @@
 			<div class="containerEntradas">
 				<%
 				UbicationController ctrlUbication = new UbicationController();
-				LinkedList<Ubication> UbicationsUser = ctrlUbication.getTicketsWithUser(userSession);
-				if(UbicationsUser.size() > 0){ %>
-					<%for(Ubication ubi: UbicationsUser){ %>
+				LinkedList<Ubication> UbicationsUserAct = ctrlUbication.getTicketsWithUser(userSession);
+				LinkedList<Ubication> UbicationsUserInac = ctrlUbication.getTicketsWithUserInac(userSession);
+				if(UbicationsUserAct.size() > 0){ %>
+					<%for(Ubication ubi: UbicationsUserAct){ %>
 						<div class="ticket">
 							<% 
 								Show s = ubi.getShow();
@@ -116,11 +117,39 @@
 							<a href="/TPI-Cine/src/servlet/ABMCTicket?action=cancel&idTicket=<%=ubi.getTicket().getIdTicket()%>" type="submit" class="btn btn-danger"></a>
 						</div>
 					<%}
-				}else{%>
+					}else{%>
 					<div>
 						<h3>No tiene tickets activos</h3>
 					</div>
-				<%} %> 
+				<%} %>
+				<h1>Mis Tickets Caducados</h1>
+				<% if(UbicationsUserInac.size() > 0){ %>
+					<%for(Ubication ubi: UbicationsUserInac){ %>
+						<div class="ticket">
+							<% 
+								Show s = ubi.getShow();
+								Ticket t = ubi.getTicket();
+								Movie m = s.getMovie();
+								MovieRoom mr = s.getMovieroom();
+							%>
+							<div class="ContectTitle">
+								<img src="<%=m.getImage()%>" alt="<%=m.getTitle()%>">
+								<h4><%=m.getTitle()%> </h4>
+							</div>
+							<div class="Information">
+								<label class="dateShow">Fecha: <%=s.getDt()%></label>
+								<label class="row">Fila: <%=Character.toString(c+ubi.getRow())%></label>
+								<label class="col">Asiento: <%=ubi.getCol()%></label>
+								<label class="roomNumber">Sala: <%=mr.getRoomNumber()%></label>
+								<label class="price">Precio: <%=t.getPrice()%></label>
+							</div>
+						</div>
+					<%}
+					}else{%>
+						<div>
+							<h3>No tiene tickets caducados</h3>
+						</div>
+					<%} %>  
 		<%request.removeAttribute("validate"); 
 		} else { %>
 			<div class = "cartelDeInicioSesion">
