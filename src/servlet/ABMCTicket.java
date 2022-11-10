@@ -79,6 +79,8 @@ public class ABMCTicket extends HttpServlet {
 					ubi.setTicket(t);
 					ctrlUbi.createUbication(ubi);
 					
+					ctrlTicket.envioEmail(t);
+					
 				}
 				
 				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=informarExito");
