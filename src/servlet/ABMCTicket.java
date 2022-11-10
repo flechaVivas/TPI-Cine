@@ -100,6 +100,11 @@ public class ABMCTicket extends HttpServlet {
 				t.setIdTicket(Integer.parseInt((String)request.getParameter("idTicket")));
 				ctrlTicket.cancelTicket(t);
 				
+				Ubication ubi = new Ubication();
+				ubi.setTicket(t);
+				ubi = ctrlUbi.getByTicket(ubi);
+				ctrlUbi.delete(ubi);
+				
 				response.sendRedirect("/TPI-Cine/views/pages/MiCuenta.jsp");
 				
 				break;
