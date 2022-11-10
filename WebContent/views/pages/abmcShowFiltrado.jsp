@@ -1,3 +1,4 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="entities.User"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Movie"%>
@@ -29,15 +30,18 @@
 	} else if(!u.esTaquillero() && !u.estaAutorizado()){
 		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 	}
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+	
 	%>
-<%
-MovieRoomController ctrlMR = new MovieRoomController();
-LinkedList<MovieRoom> movierooms = ctrlMR.list();
-MovieController ctrlMovie = new MovieController();
-LinkedList<Movie> movies = ctrlMovie.getAll();
-ShowController ctrlShow = new ShowController();
-LinkedList<Show> shows = (LinkedList<Show>)request.getSession(false).getAttribute("shows");;
-%>
+	<%
+	MovieRoomController ctrlMR = new MovieRoomController();
+	LinkedList<MovieRoom> movierooms = ctrlMR.list();
+	MovieController ctrlMovie = new MovieController();
+	LinkedList<Movie> movies = ctrlMovie.getAll();
+	ShowController ctrlShow = new ShowController();
+	LinkedList<Show> shows = (LinkedList<Show>)request.getSession(false).getAttribute("shows");;
+	%>
 </head>
 <body>
 	<jsp:include page="../partials/navbar.jsp"></jsp:include>
@@ -77,7 +81,7 @@ LinkedList<Show> shows = (LinkedList<Show>)request.getSession(false).getAttribut
           		<tr>
           			
           			<%for (Show s:shows ){ %>
-          			<td><%=s.getDt()%></td>
+          			<td><%=s.getDt().format(formatter)%></td>
             		<%	Movie m=new Movie();
             			m.setIdMovie(s.getMovie().getIdMovie());
             			s.setMovie(ctrlMovie.getbyIdMovie(m));

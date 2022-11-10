@@ -1,3 +1,4 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="entities.User"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Movie"%>
@@ -30,6 +31,9 @@
 	} else if(!u.esTaquillero() && !u.estaAutorizado()){
 		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 	}
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+	
 	%>
 <%
 ShowController ctrlShow = new ShowController();
@@ -79,7 +83,7 @@ LinkedList<MovieRoom> movierooms = ctrlMR.list();
         	<tbody>
           		<tr>
           			<%for (Show s:shows ){ %>
-          			<td><%=s.getDt()%></td>
+          			<td><%=s.getDt().format(formatter)%></td>
             		<%	Movie m=new Movie();
             			m.setIdMovie(s.getMovie().getIdMovie());
             			s.setMovie(ctrlMovie.getbyIdMovie(m));
