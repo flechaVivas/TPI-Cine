@@ -35,9 +35,19 @@ public class UbicationController {
 		du.createUbication(u);
 	}
 	
+	public void delete(Ubication u) throws SQLException {
+		du.delete(u);
+	}
+	
 	public LinkedList<Ubication> getByShow(Show s) throws SQLException {
 		return du.getByShow(s);
 		
 	}
+
+	public Ubication getByTicket(Ubication u) throws SQLException {
+		return du.getByTicket(u);
+	}
+	
+	
 	
 }

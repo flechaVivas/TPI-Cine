@@ -193,6 +193,37 @@ public class DataUbication {
 			}
 		}
 	}
+	
+	public void delete(Ubication u) throws SQLException {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"DELETE FROM cine_tpjava.ubication WHERE (ubication.row=?) and (ubication.col=?) and (ubication.roomNumber=?) and (ubication.idMovie=?) and (ubication.show_date_time=?)");
+			stmt.setInt(1, u.getRow());
+			stmt.setInt(2, u.getCol());
+			stmt.setInt(3, u.getShow().getMovieroom().getRoomNumber());
+			stmt.setInt(4, u.getShow().getMovie().getIdMovie());
+			stmt.setObject(5, u.getShow().getDt());
+			
+			stmt.executeUpdate();
+
+		} catch(SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		
+	} // delete
+	
 
 	public LinkedList<Ubication> getByShow(Show s) throws SQLException {
 		
@@ -205,12 +236,16 @@ public class DataUbication {
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"select u.row, u.col, u.idTicket\n" + 
-					"    from ubication u\n" + 
-					"    inner join cine_tpjava.show s\n" + 
-					"		on s.roomNumber=u.roomNumber\n" + 
-					"        and s.idMovie=u.idMovie\n" + 
-					"        and s.date_time=u.show_date_time\n" + 
-					"	where s.idMovie=? and s.roomNumber=?;");
+					"from ubication u\n" + 
+					"inner join cine_tpjava.show s\n" + 
+					"	on s.roomNumber=u.roomNumber\n" + 
+					"	and s.idMovie=u.idMovie \n" + 
+					"	and s.date_time=u.show_date_time\n" + 
+					"inner join ticket t\n" + 
+					"	on t.idTicket=u.idTicket\n" + 
+					"where s.idMovie=?\n" + 
+					"and s.roomNumber=?\n" + 
+					"and t.retirementDate is null;");
 			
 			stmt.setInt(1, s.getMovie().getIdMovie());
 			stmt.setInt(2, s.getMovieroom().getRoomNumber());
@@ -241,5 +276,50 @@ public class DataUbication {
 		}
 		
 		return ubics;
+	}
+
+	public Ubication getByTicket(Ubication u) throws SQLException {
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		Show s = new Show();
+		Ticket t = new Ticket();
+		Ubication ub = new Ubication(); 
+		Movie m = new Movie();
+		MovieRoom mr = new MovieRoom();
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM ubication WHERE idTicket=?;");
+			stmt.setInt(1, u.getTicket().getIdTicket());
+			
+			rs = stmt.executeQuery();
+			
+			if(rs != null && rs.next()) {
+				
+				ub.setRow(rs.getInt("row"));
+				ub.setCol(rs.getInt("col"));
+				mr.setRoomNumber(rs.getInt("roomNumber"));
+				m.setIdMovie(rs.getInt("idMovie"));
+				s.setDt(rs.getObject("show_date_time", LocalDateTime.class));
+				s.setMovieroom(mr);
+				s.setMovie(m);
+				t.setIdTicket(rs.getInt("idTicket"));
+				ub.setShow(s);
+				ub.setTicket(t);
+			}
+			
+		}catch (SQLException e) {
+			throw e;
+		}finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		return ub;
+		
 	}
 }
