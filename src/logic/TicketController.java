@@ -2,6 +2,7 @@ package logic;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.Properties;
 
@@ -75,6 +76,8 @@ public class TicketController {
 		String to = u.getEmail();
 		String asunto = "Tus Tickets";
 		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+		
 		 try {
 			 MimeMessage message = new MimeMessage(session);
 			 message.setFrom(new InternetAddress(from));
@@ -99,7 +102,7 @@ public class TicketController {
 			 		"                                </tr>\n" + 
 			 		"                                <tr>\n" + 
 			 		"                                    <td style=\"padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;\">\n" + 
-			 		"                                       Gracias por utilizar nuestro sistema de tickets, a continuación se muestra el ticket que has generado.\n" + 
+			 		"                                       Gracias por utilizar nuestro sistema de tickets, a continuacion se muestra el ticket que ha generado.\n" + 
 			 		"                                    </td>\n" + 
 			 		"                                </tr>\n" + 
 			 		"                                <tr>\n" + 
@@ -114,7 +117,7 @@ public class TicketController {
 			 		"                                </tr>\n" + 
 			 		"                                <tr>\n" + 
 			 		"                                    <td>\n" + 
-			 		"                                        Fecha y Hora: <b>"+s.getDt()+"</b>\n" + 
+			 		"                                        Fecha y Hora: <b>"+s.getDt().format(formatter)+"</b>\n" + 
 			 		"                                    </td>\n" + 
 			 		"                                </tr>\n" + 
 			 		"                                <tr>\n" + 
@@ -135,7 +138,7 @@ public class TicketController {
 			 		"                                <tr>\n" + 
 			 		"                                    <td>\n" + 
 			 		"                                        <br>\n" + 
-			 		"                                        <p>Con el/los codigo/s de operacion podrá abonar y retirar sus tickets en boleteria</p>\n" + 
+			 		"                                        <p>Con el/los codigo/s de operacion podra abonar y retirar sus tickets en boleteria</p>\n" + 
 			 		"                                    </td>\n" + 
 			 		"                                </tr>\n" + 
 			 		"                                <tr>\n" + 
@@ -166,7 +169,7 @@ public class TicketController {
 
 	private BigDecimal printMontoTotal(LinkedList<Ticket> tickets) {
 		
-		BigDecimal total = new BigDecimal(0);
+		BigDecimal total = BigDecimal.ZERO;
 		
 		for (Ticket t : tickets) {
 			total.add(t.getPrice());
@@ -181,7 +184,7 @@ public class TicketController {
 		String ubics = "";
 		
 		for (Ubication ub : ubicElegidas) {
-			ubics += Character.toString(c+ub.getRow()) + ub.getCol();
+			ubics += Character.toString(c+ub.getRow()) + ub.getCol()+"  ";
 		}
 		
 		return ubics;
@@ -192,7 +195,7 @@ public class TicketController {
 		String codigos = "";
 		
 		for (Ticket t : tickets) {
-			codigos += t.getOperationCode();
+			codigos += t.getOperationCode()+"  ";
 		}
 		
 		return codigos;
