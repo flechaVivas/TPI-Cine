@@ -90,7 +90,7 @@ public class TicketController {
 			 tr.connect(from, passwordFrom);
 			 tr.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
 			 tr.close();
-			 System.out.println("Mail sent successfully!!!");
+			 
 		} catch (MessagingException e) {
 			throw e;
 		}
