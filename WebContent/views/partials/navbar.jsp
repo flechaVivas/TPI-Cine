@@ -45,10 +45,11 @@
      <%} else{%>
      
      <div id="login_link" class="user-menu">
-       	<div class="navbar-account">
-           	<span id="ctl00_lblLogin"><a href="/TPI-Cine/views/pages/MiCuenta.jsp"><%=u.getName()+" "+u.getSurname()%> </a></span> 
-           	<i class="fa-duotone fa-user"></i>
-      	</div>
+     	<label>Bienvenido <%=u.getName()+ " "+ u.getSurname()%>!!</label>
+      	<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+			 <a type="button" class="btn btn-primary" href="/TPI-Cine/views/pages/MiCuenta.jsp">Mi Cuenta</a>
+  			 <a type="button" class="btn btn-primary" href="/TPI-Cine/src/cerrarSesion">Cerrar Sesión</a>
+		</div>
     </div>
      
      <%} %>

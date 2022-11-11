@@ -20,7 +20,21 @@
 .containerEntradas{
 	display: flex;
 	flex-direction: column;
-	align-content: center;
+	align-Items: center;
+}
+
+.btn-cancelar-entrada{
+	display: flex;
+    padding: 3px;
+    background-color: #d9534f;
+    border-color: #000000;
+    height: 30px;
+    align-self: flex-end;
+    width: 120px;
+    border-radius: 8px;
+    justify-content: center;
+    text-decoration: none;
+    color: #000000;
 }
 
 

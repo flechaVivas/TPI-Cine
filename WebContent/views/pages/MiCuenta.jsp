@@ -103,18 +103,19 @@
 								Movie m = s.getMovie();
 								MovieRoom mr = s.getMovieroom();
 							%>
+							
 							<div class="ContectTitle">
 								<img src="<%=m.getImage()%>" alt="<%=m.getTitle()%>">
 								<h4><%=m.getTitle()%> </h4>
 							</div>
 							<div class="Information">
 								<label class="dateShow">Fecha: <%=s.getDt()%></label>
-								<label class="row">Fila: <%=Character.toString(c+ubi.getRow())%></label>
-								<label class="col">Asiento: <%=ubi.getCol()%></label>
 								<label class="roomNumber">Sala: <%=mr.getRoomNumber()%></label>
+								<label class="row">Fila:<%=Character.toString(c+ubi.getRow()) %> </label>
+								<label class="col">Asiento: <%=ubi.getCol()%></label>
 								<label class="price">Precio: <%=t.getPrice()%></label>
 							</div>
-							<a href="/TPI-Cine/src/servlet/ABMCTicket?action=cancel&idTicket=<%=ubi.getTicket().getIdTicket()%>" type="submit" class="btn btn-danger"></a>
+							<a href="/TPI-Cine/src/servlet/ABMCTicket?action=cancel&idTicket=<%=ubi.getTicket().getIdTicket()%>" type="submit" class="btn-cancelar-entrada">Cancelar Ticket</a>
 						</div>
 					<%}
 					}else{%>
@@ -132,6 +133,7 @@
 								Movie m = s.getMovie();
 								MovieRoom mr = s.getMovieroom();
 							%>
+							
 							<div class="ContectTitle">
 								<img src="<%=m.getImage()%>" alt="<%=m.getTitle()%>">
 								<h4><%=m.getTitle()%> </h4>
@@ -163,6 +165,7 @@
 	</main>
 
 	<footer>
+	
 	</footer>
 </body>
 </html>
