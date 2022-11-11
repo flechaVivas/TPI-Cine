@@ -63,6 +63,8 @@ public class ABMCTicket extends HttpServlet {
 			
 			try {
 				
+				LinkedList<Ticket> ticktes = new LinkedList<Ticket>();
+				
 				for (Ubication ubi : ubicElegidas) {
 					
 					Ticket t = new Ticket();
@@ -79,9 +81,11 @@ public class ABMCTicket extends HttpServlet {
 					ubi.setTicket(t);
 					ctrlUbi.createUbication(ubi);
 					
-					ctrlTicket.envioEmail(t);
+					ticktes.add(t);
 					
 				}
+				
+				ctrlTicket.envioEmail(ticktes,u,s,ubicElegidas);
 				
 				response.sendRedirect("/TPI-Cine/views/pages/entradas.jsp?step=informarExito");
 				
