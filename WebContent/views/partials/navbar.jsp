@@ -45,10 +45,11 @@
      <%} else{%>
      
      <div id="login_link" class="user-menu">
-     	<label>Bienvenido <%=u.getName()+ " "+ u.getSurname()%>!!</label>
+     	<label><%=u.getName()+" "+ u.getSurname()%>   <i class="fa-solid fa-user"></i></label>
+     	
       	<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-			 <a type="button" class="btn btn-primary" href="/TPI-Cine/views/pages/MiCuenta.jsp">Mi Cuenta</a>
-  			 <a type="button" class="btn btn-primary" href="/TPI-Cine/src/cerrarSesion">Cerrar Sesión</a>
+			 <a type="button" class="btn" href="/TPI-Cine/views/pages/MiCuenta.jsp" style="color:white;">Mi Cuenta</a>
+  			 <a type="button" class="btn" href="/TPI-Cine/src/cerrarSesion" style="color:red;">Cerrar Sesión</a>
 		</div>
     </div>
      
