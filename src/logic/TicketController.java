@@ -132,7 +132,7 @@ public class TicketController {
 			 		"                                </tr>\n" + 
 			 		"                                <tr>\n" + 
 			 		"                                    <td>\n" + 
-			 		"                                        Monto Total: <b>"+printMontoTotal(tickets)+"</b>\n" + 
+			 		"                                        Monto Total: <b>$"+printMontoTotal(tickets)+"</b>\n" + 
 			 		"                                    </td>\n" + 
 			 		"                                </tr>\n" + 
 			 		"                                <tr>\n" + 
@@ -172,7 +172,7 @@ public class TicketController {
 		BigDecimal total = BigDecimal.ZERO;
 		
 		for (Ticket t : tickets) {
-			total.add(t.getPrice());
+			total = total.add(t.getPrice());
 		}
 		
 		return total;
