@@ -77,12 +77,12 @@
 			                </thead>
 							<tbody>
 								<tr>
-			                		<td><input type="number"  name="idUser" value="<%=t.getIdTicket()%>" readonly="" class="form-control"></td>
-			                    	<td><input type="text" name="name"  	value="<%=t.getOperationCode()%>" class="form-control" required></td>
-			                    	<td><input type="datetime-local" name="surname"  value="<%=t.getDateTime()%>"	class="form-control" required></td>
-									<td><input type="number" name="birthDate"  	value="<%=t.getPrice()%>" class="form-control" required></td>
-			                    	<td><input type="text" name="adress" 	value="<%=t.getUser().getIdUser()%>"	class="form-control" required></td>
-									<td><input type="date" name="phoneNumber" value="<%=t.getRetirementDate()%>"	class="form-control" required></td>
+			                		<td><input type="number"  name="idTicket" value="<%=t.getIdTicket()%>" readonly="" class="form-control"></td>
+			                    	<td><input type="text" name="opcode"  	value="<%=t.getOperationCode()%>" class="form-control" required></td>
+			                    	<td><input type="datetime-local" name="datetime"  value="<%=t.getDateTime()%>"	class="form-control" required></td>
+									<td><input type="number" name="price"  	value="<%=t.getPrice()%>" class="form-control" required></td>
+			                    	<td><input type="text" name="idUser" 	value="<%=t.getUser().getIdUser()%>"	class="form-control" required></td>
+									<td><input type="datetime-local" name="canceldate" value="<%=t.getRetirementDate()%>"	class="form-control"></td>
 			                    	<td>
 										<button class="btn btn-warning" type="submit">Confirmar</button>
 			               			</td>

@@ -65,14 +65,14 @@
 	                    		    <td>Fecha Cancelacion</td>
 	                            </tr>
 	                            <tr>
-			                    	<td><input type="text" name="name"  class="form-control" required></td>
-			                    	<td><input type="datetime-local" name="surname"  class="form-control" required></td>
-			                    	<td><input type="number" name="birthDate"  class="form-control" required></td>
-			                    	<td><input type="number" name="adress" class="form-control" required></td>
-			                    	<td><input type="date" name="phoneNumber" class="form-control" required></td>
+			                    	<td><input type="text" name="opcode"  class="form-control" required></td>
+			                    	<td><input type="datetime-local" name="datetime"  class="form-control" required></td>
+			                    	<td><input type="number" name="price"  class="form-control" required></td>
+			                    	<td><input type="number" name="idUser" class="form-control" required></td>
+			                    	<td><input type="date" name="canceldate" class="form-control" required></td>
 	                            </tr>
                         	</table>
-                        	<a href="/TPI-Cine/views/pages/ui-user/listUsers.jsp" class="btn">Volver a Usuarios</a>
+                        	<a href="/TPI-Cine/views/pages/ui-user/listUsers.jsp" class="btn">Volver a Tickets</a>
                     	</div>
                     </div>
                 </form>

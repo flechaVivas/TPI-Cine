@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
@@ -52,12 +53,37 @@ public class ABMCTicket extends HttpServlet {
 		UbicationController ctrlUbi = new UbicationController();
 		
 		User u = (User) request.getSession(false).getAttribute("usuario");
+		User user = new User();
 		Show s = (Show) request.getSession(false).getAttribute("show");
 		LinkedList<Ubication> ubicElegidas = (LinkedList<Ubication>)request.getSession(false).getAttribute("ubicElegidas");
+		Ticket t = new Ticket();
 		
 		Integer cant_entradas = (Integer)request.getSession().getAttribute("cantidad");
 		
 		switch ((String)request.getParameter("action")) {
+		
+		case "update":
+			try {
+				
+				t.setOperationCode((String)request.getParameter("opcode"));
+				t.setDateTime(LocalDateTime.parse((String)request.getParameter("datetime")));
+				BigDecimal price = new BigDecimal(Integer.parseInt(request.getParameter("price")));
+				t.setPrice(price);
+				user.setIdUser(Integer.parseInt(request.getParameter("idUser")));
+				t.setUser(user);
+				t.setRetirementDate(LocalDateTime.parse((String)request.getParameter("canceldate")));
+				
+				ctrlTicket.update(t);
+				
+				response.sendRedirect("/TPI-Cine/views/pages/ui-ticket/listTickets.jsp");
+				
+				break;
+				
+			} catch (Exception e) {
+				request.setAttribute("error", e.getMessage());
+				request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+			}
+		
 		
 		case "new":
 			
@@ -66,8 +92,6 @@ public class ABMCTicket extends HttpServlet {
 				LinkedList<Ticket> ticktes = new LinkedList<Ticket>();
 				
 				for (Ubication ubi : ubicElegidas) {
-					
-					Ticket t = new Ticket();
 					
 					Integer op = Integer.parseInt(ctrlTicket.getLastTicket().getOperationCode());
 					op = op + 1;
@@ -102,7 +126,6 @@ public class ABMCTicket extends HttpServlet {
 			
 			try {
 				
-				Ticket t = new Ticket();
 				t.setIdTicket(Integer.parseInt((String)request.getParameter("idTicket")));
 				ctrlTicket.cancelTicket(t);
 				

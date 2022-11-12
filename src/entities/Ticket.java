@@ -42,14 +42,15 @@ public class Ticket {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	public Ticket() {}
 	public LocalDateTime getRetirementDate() {
 		return retirementDate;
 	}
 	public void setRetirementDate(LocalDateTime retirementDate) {
 		this.retirementDate = retirementDate;
 	}
+	
+	public Ticket() {}
+	
 	
 	
 	

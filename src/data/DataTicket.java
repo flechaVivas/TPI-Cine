@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
@@ -35,6 +36,7 @@ public class DataTicket {
 				t.setOperationCode(rs.getString("operationCode"));
 				t.setDateTime(rs.getObject("dateTime", LocalDateTime.class));
 				t.setPrice(rs.getBigDecimal("price"));
+				t.setRetirementDate(rs.getObject("retirementDate", LocalDateTime.class));
 				
 			}
 			
@@ -73,6 +75,7 @@ public class DataTicket {
 					t.setOperationCode(rs.getString("operationCode"));
 					t.setDateTime(rs.getObject("dateTime", LocalDateTime.class));
 					t.setPrice(rs.getBigDecimal("price"));
+					t.setRetirementDate(rs.getObject("retirementDate", LocalDateTime.class));
 					
 					tickets.add(t);
 				}
