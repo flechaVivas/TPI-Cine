@@ -32,7 +32,7 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y sac
 |:-|-:|-:|:-|
 |ABMC|todos|todos|
 |CU "Complejo"(nivel resumen)|1|2|Book Tickets (crear funcion, reservar entrada y cancelar entrada)|
-|Listado complejo|1|2|Shows by movie/date, Active Tickets|
+|Listado complejo|1|2|Shows by movie/date/roomType, Active/Expired Tickets|
 |Nivel de acceso|2|2|Admin, Ticket Clerk, Client|
 |Manejo de errores|obligatorio|obligatorio|no requiere detalle|
 |requerimiento extra obligatorio (**)|0|1|Envío de mail y manejo de archivos|
