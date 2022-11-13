@@ -19,6 +19,7 @@
 	} else if(!u.esTaquillero() && !u.estaAutorizado()){
 		response.sendRedirect("/TPI-Cine/views/pages/login.jsp");
 	}
+	
 
 
 	ShowController ctrlShow = new ShowController();
