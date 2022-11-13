@@ -12,6 +12,8 @@ import entities.MovieRoom;
 
 import entities.RoomType;
 import entities.Show;
+import entities.Ticket;
+import entities.User;
 
 public class DataShow {
 
@@ -23,17 +25,24 @@ public class DataShow {
 		MovieRoom mr=new MovieRoom();
 		Movie mo=new Movie();
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM show WHERE idMovie=? and roomNumber=? and date_time=?;");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("SELECT * FROM cine_tpjava.show WHERE idMovie=? and roomNumber=? and date_time=?;");
 			stmt.setInt(1, s.getMovie().getIdMovie());
 			stmt.setInt(2, s.getMovieroom().getRoomNumber());
-			stmt.setString(3, s.getDt().toString());
+			stmt.setObject(3, s.getDt());
+			
 			rs=stmt.executeQuery();
 			
-			mo.setIdMovie(rs.getInt("idMovie"));
-			mr.setRoomNumber(rs.getInt("roomNumber"));
-			sw.setDt(rs.getObject("Dt",LocalDateTime.class));
-			sw.setMovie(mo);
-			sw.setMovieroom(mr);
+			if (rs != null && rs.next()) {
+				
+				mo.setIdMovie(rs.getInt("idMovie"));
+				mr.setRoomNumber(rs.getInt("roomNumber"));
+				sw.setDt(rs.getObject("date_time",LocalDateTime.class));
+				sw.setMovie(mo);
+				sw.setMovieroom(mr);
+				
+			}
+			
+			
 		}catch (SQLException e) {
 			throw e;
 		} finally {
