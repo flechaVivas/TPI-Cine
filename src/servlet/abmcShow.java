@@ -56,6 +56,27 @@ public class abmcShow extends HttpServlet {
 						s.setMovieroom(mr);
 						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 						ctrlShow.addOne(s);
+						
+						request.getRequestDispatcher("/views/pages/abmcShow.jsp").forward(request, response);
+						
+						break;
+					} catch (Exception e) {
+						request.setAttribute("error", e.getMessage());
+						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+					}
+					
+				case "admin_new":
+					
+					try {
+						m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
+						s.setMovie(m);
+						mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
+						s.setMovieroom(mr);
+						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
+						ctrlShow.addOne(s);
+						
+						request.getRequestDispatcher("/views/pages/ui-show/listShows.jsp").forward(request, response);
+
 						break;
 					} catch (Exception e) {
 						request.setAttribute("error", e.getMessage());
@@ -72,6 +93,9 @@ public class abmcShow extends HttpServlet {
 						s.setMovieroom(mr);
 						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 						ctrlShow.deleteOne(s);
+						
+						request.getRequestDispatcher("/views/pages/abmcShow.jsp").forward(request, response);
+						
 					} catch (Exception e) {
 						request.setAttribute("error", e.getMessage());
 						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
@@ -94,6 +118,33 @@ public class abmcShow extends HttpServlet {
 						s.setMovieroom(mr);
 						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 						ctrlShow.editOne(s,sw);
+						
+						request.getRequestDispatcher("/views/pages/abmcShow.jsp").forward(request, response);
+						
+					} catch (Exception e) {
+						request.setAttribute("error", e.getMessage());
+						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+					}
+					
+				case "admin_update":
+					try {
+						Show sw=new Show();
+						Movie mo=new Movie();
+						MovieRoom mrm=new MovieRoom();
+						mo.setIdMovie(Integer.parseInt((String)request.getParameter("exMovie")));
+						sw.setMovie(mo);
+						mrm.setRoomNumber(Integer.parseInt((String)request.getParameter("exRoom")));
+						sw.setMovieroom(mrm);
+						sw.setDt(LocalDateTime.parse((String)request.getParameter("exdt")));
+						m.setIdMovie(Integer.parseInt((String)request.getParameter("movie")));
+						s.setMovie(m);
+						mr.setRoomNumber(Integer.parseInt((String)request.getParameter("room")));
+						s.setMovieroom(mr);
+						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
+						ctrlShow.editOne(s,sw);
+						
+						request.getRequestDispatcher("/views/pages/ui-show/listShows.jsp").forward(request, response);
+						
 					} catch (Exception e) {
 						request.setAttribute("error", e.getMessage());
 						request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
@@ -103,7 +154,7 @@ public class abmcShow extends HttpServlet {
 				break;
 			}
 			
-		request.getRequestDispatcher("/views/pages/abmcShow.jsp").forward(request, response);
+		
 	}
 
 }
