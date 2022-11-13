@@ -74,9 +74,9 @@ public class abmcMovie extends HttpServlet {
 					m.setRestriction(ctrlRest.getOne(r));
 					g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
 					m.setGenre(ctrlGen.getOne(g));
-					//ctrlMovie.addOne(m);
-					System.out.println("Titulo: "+m.getTitle());
-					System.out.println("Ruta de imagen: "+m.getImage());
+					ctrlMovie.addOne(m);
+//					System.out.println("Titulo: "+m.getTitle());
+//					System.out.println("Ruta de imagen: "+m.getImage());
 					break;
 					
 				} catch (Exception e) {
@@ -137,8 +137,10 @@ public class abmcMovie extends HttpServlet {
 			break;
 		}
 		
-			request.getRequestDispatcher("/views/pages/abmcMovie.jsp").forward(request, response);	
+//			request.getRequestDispatcher("/views/pages/abmcMovie.jsp").forward(request, response);	
 
+			response.sendRedirect("/TPI-Cine/views/pages/abmcMovie.jsp");
+		
 	}
 	
 	private void validarImagen(HttpServletRequest request, HttpServletResponse response, Movie m) throws IOException{

@@ -57,7 +57,7 @@ public class abmcShow extends HttpServlet {
 						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 						ctrlShow.addOne(s);
 						
-						request.getRequestDispatcher("/views/pages/abmcShow.jsp").forward(request, response);
+						response.sendRedirect("/TPI-Cine/views/pages/abmcShow.jsp");
 						
 						break;
 					} catch (Exception e) {
@@ -75,7 +75,7 @@ public class abmcShow extends HttpServlet {
 						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 						ctrlShow.addOne(s);
 						
-						request.getRequestDispatcher("/views/pages/ui-show/listShows.jsp").forward(request, response);
+						response.sendRedirect("/TPI-Cine/views/pages/ui-show/listShows.jsp");
 
 						break;
 					} catch (Exception e) {
@@ -94,7 +94,7 @@ public class abmcShow extends HttpServlet {
 						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 						ctrlShow.deleteOne(s);
 						
-						request.getRequestDispatcher("/views/pages/abmcShow.jsp").forward(request, response);
+						response.sendRedirect("/TPI-Cine/views/pages/abmcShow.jsp");
 						
 					} catch (Exception e) {
 						request.setAttribute("error", e.getMessage());
@@ -143,7 +143,7 @@ public class abmcShow extends HttpServlet {
 						s.setDt(LocalDateTime.parse((String)request.getParameter("dt")));
 						ctrlShow.editOne(s,sw);
 						
-						request.getRequestDispatcher("/views/pages/ui-show/listShows.jsp").forward(request, response);
+						response.sendRedirect("/TPI-Cine/views/pages/ui-show/listShows.jsp");
 						
 					} catch (Exception e) {
 						request.setAttribute("error", e.getMessage());

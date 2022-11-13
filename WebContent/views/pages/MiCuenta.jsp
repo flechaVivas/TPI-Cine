@@ -143,9 +143,9 @@
 							</div>
 							<div class="Information">
 								<label class="dateShow">Fecha: <%=s.getDt().format(formatter)%></label>
+								<label class="roomNumber">Sala: <%=mr.getRoomNumber()%></label>
 								<label class="row">Fila: <%=Character.toString(c+ubi.getRow())%></label>
 								<label class="col">Asiento: <%=ubi.getCol()%></label>
-								<label class="roomNumber">Sala: <%=mr.getRoomNumber()%></label>
 								<label class="price">Precio: <%=t.getPrice()%></label>
 							</div>
 						</div>
