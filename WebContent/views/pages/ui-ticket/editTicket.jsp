@@ -77,7 +77,7 @@
 			                </thead>
 							<tbody>
 								<tr>
-			                		<td><input type="number"  name="idTicket" value="<%=t.getIdTicket()%>" readonly="" class="form-control"></td>
+			                		<td><input type="text"  name="idTicket" value="<%=t.getIdTicket()%>" readonly="" class="form-control"></td>
 			                    	<td><input type="text" name="opcode"  	value="<%=t.getOperationCode()%>" class="form-control" required></td>
 			                    	<td><input type="datetime-local" name="datetime"  value="<%=t.getDateTime()%>"	class="form-control" required></td>
 									<td><input type="number" name="price"  	value="<%=t.getPrice()%>" class="form-control" required></td>

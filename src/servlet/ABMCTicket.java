@@ -58,11 +58,12 @@ public class ABMCTicket extends HttpServlet {
 		LinkedList<Ubication> ubicElegidas = (LinkedList<Ubication>)request.getSession(false).getAttribute("ubicElegidas");
 		Ticket t = new Ticket();
 		
-		Integer cant_entradas = (Integer)request.getSession().getAttribute("cantidad");
 		
 		switch ((String)request.getParameter("action")) {
 		
-		case "update":
+		
+		case "newA":
+			
 			try {
 				
 				t.setOperationCode((String)request.getParameter("opcode"));
@@ -71,7 +72,37 @@ public class ABMCTicket extends HttpServlet {
 				t.setPrice(price);
 				user.setIdUser(Integer.parseInt(request.getParameter("idUser")));
 				t.setUser(user);
-				t.setRetirementDate(LocalDateTime.parse((String)request.getParameter("canceldate")));
+				if ((String)request.getParameter("canceldate") != "") {
+					t.setRetirementDate(LocalDateTime.parse((String)request.getParameter("canceldate")));
+				}
+				
+				ctrlTicket.add(t);
+				
+				response.sendRedirect("/TPI-Cine/views/pages/ui-ticket/listTickets.jsp");
+				
+				break;
+				
+			} catch (Exception e) {
+				request.setAttribute("error", e.getMessage());
+				request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+			}
+		
+		
+		
+		
+		case "update":
+			try {
+				
+				t.setIdTicket(Integer.parseInt((String)request.getParameter("idTicket")));
+				t.setOperationCode((String)request.getParameter("opcode"));
+				t.setDateTime(LocalDateTime.parse((String)request.getParameter("datetime")));
+				BigDecimal price = new BigDecimal(Integer.parseInt(request.getParameter("price")));
+				t.setPrice(price);
+				user.setIdUser(Integer.parseInt(request.getParameter("idUser")));
+				t.setUser(user);
+				if ((String)request.getParameter("canceldate") != "") {
+					t.setRetirementDate(LocalDateTime.parse((String)request.getParameter("canceldate")));
+				}
 				
 				ctrlTicket.update(t);
 				
@@ -83,6 +114,23 @@ public class ABMCTicket extends HttpServlet {
 				request.setAttribute("error", e.getMessage());
 				request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
 			}
+		
+		case "delete":
+			
+			try {
+				t.setIdTicket(Integer.parseInt((String)request.getParameter("idTicket")));
+				ctrlTicket.delete(t);
+				
+				response.sendRedirect("/TPI-Cine/views/pages/ui-ticket/listTickets.jsp");
+
+				
+			} catch (Exception e) {
+				request.setAttribute("error", e.getMessage());
+				request.getRequestDispatcher("/views/pages/error.jsp").forward(request, response);
+			}
+			
+			
+			break;
 		
 		
 		case "new":

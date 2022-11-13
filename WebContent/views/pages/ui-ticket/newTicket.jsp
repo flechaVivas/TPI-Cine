@@ -48,7 +48,7 @@
                 <h2>PANEL ADMINISTRADOR</h2>
                 <h4>Tickets</h4>  
 
-                <form action="/TPI-Cine/src/servlet/ABMCTicket?action=new" method="post">
+                <form action="/TPI-Cine/src/servlet/ABMCTicket?action=newA" method="post">
                 
                 	<div class="col-12 col-sm-12 col-lg-12">
                 
@@ -69,7 +69,8 @@
 			                    	<td><input type="datetime-local" name="datetime"  class="form-control" required></td>
 			                    	<td><input type="number" name="price"  class="form-control" required></td>
 			                    	<td><input type="number" name="idUser" class="form-control" required></td>
-			                    	<td><input type="date" name="canceldate" class="form-control" required></td>
+			                    	<td><input type="datetime-local" name="canceldate" class="form-control"></td>
+			                    	<td> <button class="btn btn-success">Aceptar</button> </td>
 	                            </tr>
                         	</table>
                         	<a href="/TPI-Cine/views/pages/ui-user/listUsers.jsp" class="btn">Volver a Tickets</a>

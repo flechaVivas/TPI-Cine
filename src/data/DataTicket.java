@@ -107,12 +107,13 @@ public class DataTicket {
 		
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"INSERT INTO ticket(idUser, operationCode, dateTime, price) VALUES(?,?,?,?);",
+					"INSERT INTO ticket(idUser, operationCode, dateTime, price, retirementDate) VALUES(?,?,?,?,?);",
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, t.getUser().getIdUser());
 			stmt.setString(2, t.getOperationCode());
 			stmt.setObject(3, t.getDateTime());
 			stmt.setObject(4, t.getPrice());
+			stmt.setObject(5, t.getRetirementDate());
 			
 			stmt.executeUpdate();
 			
@@ -143,12 +144,13 @@ public class DataTicket {
 		try {
 			
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"UPDATE ticket SET idUser=?, operationCode=?, dateTime=?, price=? WHERE idTicket=?;");
+					"UPDATE ticket SET idUser=?, operationCode=?, dateTime=?, price=?, retirementDate=? WHERE idTicket=?;");
 			stmt.setInt(1, t.getUser().getIdUser());
 			stmt.setString(2, t.getOperationCode());
 			stmt.setObject(3, t.getDateTime());
 			stmt.setObject(4, t.getPrice());
-			stmt.setInt(5, t.getIdTicket());
+			stmt.setObject(5, t.getRetirementDate());
+			stmt.setInt(6, t.getIdTicket());
 			
 			stmt.executeUpdate();
 			
