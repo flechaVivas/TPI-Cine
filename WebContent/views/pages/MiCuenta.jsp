@@ -1,3 +1,4 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="entities.*"%>
@@ -30,6 +31,8 @@
 	User userSession = (User)session.getAttribute("usuario");
 	
 	Character c = '@';
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
 %>
 <body>
 	<header>
@@ -106,10 +109,10 @@
 							
 							<div class="ContectTitle">
 								<img src="<%=m.getImage()%>" alt="<%=m.getTitle()%>">
-								<h4><%=m.getTitle()%> </h4>
+								<h4 style="color: white"><%=m.getTitle()%> </h4>
 							</div>
 							<div class="Information">
-								<label class="dateShow">Fecha: <%=s.getDt()%></label>
+								<label class="dateShow">Fecha: <%=s.getDt().format(formatter)%></label>
 								<label class="roomNumber">Sala: <%=mr.getRoomNumber()%></label>
 								<label class="row">Fila:<%=Character.toString(c+ubi.getRow()) %> </label>
 								<label class="col">Asiento: <%=ubi.getCol()%></label>
@@ -136,10 +139,10 @@
 							
 							<div class="ContectTitle">
 								<img src="<%=m.getImage()%>" alt="<%=m.getTitle()%>">
-								<h4><%=m.getTitle()%> </h4>
+								<h4 style="color: white"><%=m.getTitle()%> </h4>
 							</div>
 							<div class="Information">
-								<label class="dateShow">Fecha: <%=s.getDt()%></label>
+								<label class="dateShow">Fecha: <%=s.getDt().format(formatter)%></label>
 								<label class="row">Fila: <%=Character.toString(c+ubi.getRow())%></label>
 								<label class="col">Asiento: <%=ubi.getCol()%></label>
 								<label class="roomNumber">Sala: <%=mr.getRoomNumber()%></label>
