@@ -99,7 +99,7 @@
 			         </div>
 			      </div>
 	    		</form>	
-				<a href="/TPI-Cine/views/pages/ui-ticket/listTickets.jsp" class="btn">Volver a Tickets</a>
+				<a href="/TPI-Cine/views/pages/ui-show/listShows.jsp" class="btn">Volver a Funciones</a>
 			</div>
 		</div>
 	</div>
