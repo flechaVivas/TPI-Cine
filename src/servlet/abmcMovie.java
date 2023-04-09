@@ -27,7 +27,7 @@ import logic.RestrictionController;
 @WebServlet({ "/src/servlet/abmcMovie", "/src/servlet/abmcMOVIE", "/src/servlet/ABMCMovie", "/src/servlet/ABMCmovie" })
 public class abmcMovie extends HttpServlet {
 	
-	private String pathFiles="../TPI-Cine/WebContent/assets/img";
+	private String pathFiles="/TPI-Cine/assets/img";
 	private File uploads = new File(pathFiles);
 	private String[] extens = {".png",".jpg",".jpeg"};		//Variables para manejo de imagen
 	private static final long serialVersionUID = 1L;
@@ -150,7 +150,7 @@ public class abmcMovie extends HttpServlet {
 			if (part!=null) {
 			if(isExtension(part.getSubmittedFileName(), extens)) {
 				photo=saveFile(part,uploads);}//Asignamos la ruta absoluta a la variable photo	
-				}
+			}
 			System.out.println("lo que se guarda en la bd es: "+photo);
 			m.setImage(photo);
 			} catch (Exception e) {
@@ -167,8 +167,13 @@ public class abmcMovie extends HttpServlet {
 				InputStream input=part.getInputStream();			//archivo
 				
 				if(input!=null) {
+					
+					if(!pathUploads.exists()) {      // Verificar si el directorio de subida existe
+		                pathUploads.mkdirs();       // Crear el directorio de subida si no existe
+		            }
+					
 					File file=new File(pathUploads, fileName);
-					pathAbsolute=file.getAbsolutePath();
+					pathAbsolute=file.getCanonicalPath();
 					Files.copy(input, file.toPath());		//Se guarda el archivo en la carpeta de archivos
 				}
 			} catch (Exception e) {
