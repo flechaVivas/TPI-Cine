@@ -1,7 +1,19 @@
 package servlet;
 
-import java.io.File;
+import java.io.*;
+import java.net.*;
+import java.util.Base64;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
+import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,6 +28,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.json.*;
+
+import com.mysql.cj.xdevapi.JsonParser;
+
 import entities.Movie;
 import logic.MovieController;
 import entities.Genre;
@@ -27,10 +43,9 @@ import logic.RestrictionController;
 @WebServlet({ "/src/servlet/abmcMovie", "/src/servlet/abmcMOVIE", "/src/servlet/ABMCMovie", "/src/servlet/ABMCmovie" })
 public class abmcMovie extends HttpServlet {
 	
-	private String pathFiles="/TPI-Cine/assets/img";
-	private File uploads = new File(pathFiles);
-	private String[] extens = {".png",".jpg",".jpeg"};		//Variables para manejo de imagen
 	private static final long serialVersionUID = 1L;
+	
+	private static final String IMGUR_CLIENT_ID = "483f3e733f20833";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -64,7 +79,12 @@ public class abmcMovie extends HttpServlet {
 				try {
 					
 					m.setTitle((String)request.getParameter("title"));
-					validarImagen(request,response,m);
+					
+					String imageBase64 = obtenerImagenBase64(request.getPart("image"));
+					String imageUrl = subirImagenAImgur(imageBase64);
+					
+					m.setImage(imageUrl);
+					
 					m.setSynopsis((String)request.getParameter("synopsis"));
 					m.setReleaseDate(LocalDate.parse((String)request.getParameter("releaseDate")));
 					m.setCast((String)request.getParameter("cast"));
@@ -143,51 +163,51 @@ public class abmcMovie extends HttpServlet {
 		
 	}
 	
-	private void validarImagen(HttpServletRequest request, HttpServletResponse response, Movie m) throws IOException{
-		try {
-			String photo="";
-			Part part=request.getPart("image");
-			if (part!=null) {
-			if(isExtension(part.getSubmittedFileName(), extens)) {
-				photo=saveFile(part,uploads);}//Asignamos la ruta absoluta a la variable photo	
-			}
-			System.out.println("lo que se guarda en la bd es: "+photo);
-			m.setImage(photo);
-			} catch (Exception e) {
-			e.printStackTrace();
-			}		
-		}
-		
-		
-		private String saveFile(Part part, File pathUploads) {
-			String pathAbsolute="";
-			try {
-				Path path=Paths.get(part.getSubmittedFileName());
-				String fileName=path.getFileName().toString();		//nombre de archivo
-				InputStream input=part.getInputStream();			//archivo
-				
-				if(input!=null) {
-					
-					if(!pathUploads.exists()) {      // Verificar si el directorio de subida existe
-		                pathUploads.mkdirs();       // Crear el directorio de subida si no existe
-		            }
-					
-					File file=new File(pathUploads, fileName);
-					pathAbsolute=file.getCanonicalPath();
-					Files.copy(input, file.toPath());		//Se guarda el archivo en la carpeta de archivos
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return pathAbsolute;		//Retorna la ruta Absoluta
-		}
-		
-		
-		private boolean isExtension(String fileName,String[] extensions) {	//Validacion formato de archivo
-			for (String et : extensions) {
-				if(fileName.toLowerCase().endsWith(et)) {return true;}
-			}return false;
-		}
+	
+    private String obtenerImagenBase64(Part imagenPart) throws IOException {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[4096];
+        int bytesRead = -1;
+        try (InputStream inputStream = imagenPart.getInputStream()) {
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+        }
+        byte[] imageBytes = outputStream.toByteArray();
+        return Base64.getEncoder().encodeToString(imageBytes);
+    }
+    
+    private String subirImagenAImgur(String imageBase64) throws IOException, JSONException {
+        URL url = new URL("https://api.imgur.com/3/image");
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setDoOutput(true);
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Authorization", "Client-ID " + IMGUR_CLIENT_ID);
+        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+
+        String data = URLEncoder.encode("image", "UTF-8") + "=" + URLEncoder.encode(imageBase64, "UTF-8");
+
+        OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+        wr.write(data);
+        wr.flush();
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = rd.readLine()) != null) {
+            sb.append(line);
+        }
+        rd.close();
+
+        String json = sb.toString();
+        JSONObject jsonObject = new JSONObject(json);
+        String imageUrl = jsonObject.getJSONObject("data").getString("link");
+        return imageUrl;
+    }
+
+
+	
+	
 
 }
 
