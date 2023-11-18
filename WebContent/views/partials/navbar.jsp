@@ -45,7 +45,7 @@
      <%} else{%>
      
      <div id="login_link" class="user-menu">
-     	<label><%=u.getName()+" "+ u.getSurname()%>   <i class="fa-solid fa-user"></i></label>
+     	<label><%=u.getName()+" "+ u.getSurname()%><i class="fa-solid fa-user"></i></label>
      	
       	<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 			 <a type="button" class="btn" href="/TPI-Cine/views/pages/MiCuenta.jsp" style="color:white;">Mi Cuenta</a>

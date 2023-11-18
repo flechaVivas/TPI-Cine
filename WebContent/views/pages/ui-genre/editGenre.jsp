@@ -54,7 +54,7 @@
 	    	<!-- Content Column -->
 			<div class="col-10 ">
 	        	<h2>PANEL ADMINISTRADOR</h2>
-	        	<h4>Generos</h4>
+	        	<h4>Géneros</h4>
 				
 				<form action="/TPI-Cine/src/servlet/ABMCGenre?action=update&idGenre=<%=g.getIdGenre()%>" method="post">
 				
