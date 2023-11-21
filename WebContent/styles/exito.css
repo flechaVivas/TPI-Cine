@@ -1,0 +1,27 @@
+
+/* Estilos para la clase 'container' */
+.container {
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Estilos para los elementos 'h1', 'h2', 'h3', 'h4' */
+h1 {
+    font-size: 2.5em;
+    color: #333; /* Color del texto */
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #666; /* Color del texto */
+}
+
+h3 {
+    font-size: 1.5em;
+    color: #888; /* Color del texto */
+}
+
+h4 {
+    font-size: 1.2em;
+    color: #555; /* Color del texto */
+}

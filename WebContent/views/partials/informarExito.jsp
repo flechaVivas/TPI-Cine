@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="../../styles/exito.css">
+
 <div class="container">
 	<div class="row">
 	    <div class="col-12 justify-content-center">
