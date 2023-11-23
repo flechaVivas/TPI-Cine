@@ -46,7 +46,7 @@
         <div class="movie-info">
             <h1 class="genre"><%=m.getGenre().getDescription() %></h1>
             <h1 class="title"><b><%=m.getTitle() %></b></h1>
-            <h2 class="details">Duración: <%=m.getDuration()%> | Restricción: <%=m.getRestriction().getDescription()%></h2>
+            <h2 class="details">Duración: <%=m.getDuration()%>m | Restricción: <%=m.getRestriction().getDescription()%></h2>
             <p class="synopsis"><%=m.getSynopsis()%></p>
             <div class="tickets">
                 <h3>
