@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entities.Movie;
-import entities.MovieRoom;
 import entities.RoomType;
 import entities.Show;
 import entities.Ubication;

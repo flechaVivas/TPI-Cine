@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.DateTimeException;
 import java.time.LocalDate;

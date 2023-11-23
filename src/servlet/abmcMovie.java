@@ -1,7 +1,5 @@
 package servlet;
 
-import java.io.*;
-import java.net.*;
 import java.util.Base64;
 
 import java.io.BufferedReader;
@@ -13,11 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import java.io.File;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 
 import javax.servlet.ServletException;
@@ -29,8 +23,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 import org.json.*;
-
-import com.mysql.cj.xdevapi.JsonParser;
 
 import entities.Movie;
 import logic.MovieController;
@@ -82,7 +74,6 @@ public class abmcMovie extends HttpServlet {
 					
 					String imageBase64 = obtenerImagenBase64(request.getPart("image"));
 					String imageUrl = subirImagenAImgur(imageBase64);
-					
 					m.setImage(imageUrl);
 					
 					m.setSynopsis((String)request.getParameter("synopsis"));
@@ -95,8 +86,6 @@ public class abmcMovie extends HttpServlet {
 					g.setIdGenre(Integer.parseInt((String)request.getParameter("genre")));
 					m.setGenre(ctrlGen.getOne(g));
 					ctrlMovie.addOne(m);
-//					System.out.println("Titulo: "+m.getTitle());
-//					System.out.println("Ruta de imagen: "+m.getImage());
 					break;
 					
 				} catch (Exception e) {
@@ -157,8 +146,6 @@ public class abmcMovie extends HttpServlet {
 			break;
 		}
 		
-//			request.getRequestDispatcher("/views/pages/abmcMovie.jsp").forward(request, response);	
-
 			response.sendRedirect("/TPI-Cine/views/pages/abmcMovie.jsp");
 		
 	}

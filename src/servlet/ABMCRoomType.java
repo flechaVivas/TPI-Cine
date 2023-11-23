@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Genre;
 import entities.RoomType;
-import logic.GenreController;
 import logic.RoomTypeController;
 
 /**

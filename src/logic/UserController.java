@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-import javax.naming.AuthenticationException;
-
 import data.DataUser;
 import entities.*;
 
