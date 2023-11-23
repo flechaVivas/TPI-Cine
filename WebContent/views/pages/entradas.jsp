@@ -19,7 +19,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./styles/styles.css">
 	<link rel="stylesheet" href="../../styles/navbar.css">
-	
+	<link rel="icon" href="../../assets/favicon/orfeos.png" type="image/x-icon">
 	<%
 	
 		User u = (User)session.getAttribute("usuario");
