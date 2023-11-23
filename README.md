@@ -48,7 +48,8 @@ Desde que el usuario se loguea en la aplicación, selecciona una película y sac
 |Envio de emails|Al enviar tickets al cliente.|
 
 ## Modelo de Datos
-![DER-CINE(RE CONTRA DEFINITIVO)](https://user-images.githubusercontent.com/78052165/192290721-92f9b8ae-78e2-447c-96af-52720206bbc4.png)
+![Modelo de Datos](https://github.com/flechaVivas/TPI-Cine/assets/83438929/10faa426-0565-4f00-a646-73fb6da12910)
+
 
 
 
