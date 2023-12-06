@@ -1,6 +1,8 @@
 <%@page import="entities.Role"%>
 <%@page import="entities.User"%>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <%
 	User u = (User)session.getAttribute("usuario");
 %>
@@ -38,14 +40,19 @@
        	<div class="navbar-account">
        		
            	<span id="ctl00_lblLogin"><a href="/TPI-Cine/views/pages/login.jsp"> Inicia Sesión! </a></span> 
-           	<i class="fa-solid fa-user"></i>
-          	</div>
-      	</div>
+           	<i class="fa fa-user" aria-hidden="true"></i>
+           	
+         </div>
+   	</div>
       	
      <%} else{%>
      
      <div id="login_link" class="user-menu">
-     	<label><%=u.getName()+" "+ u.getSurname()%>           <i class="fa-solid fa-user"></i></label>
+     	<div class="navbar-account">
+     		<label><%=u.getName()+" "+ u.getSurname()%></label>
+     		<i class="fa fa-user" aria-hidden="true"></i>
+     	</div>
+     	
      	
       	<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 			 <a type="button" class="btn" href="/TPI-Cine/views/pages/MiCuenta.jsp" style="color:white;">Mi Cuenta</a>
